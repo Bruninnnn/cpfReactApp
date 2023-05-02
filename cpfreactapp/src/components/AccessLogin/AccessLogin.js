@@ -1,4 +1,4 @@
-import styles from './AccessLogin/module.index.css';
+import './AccessLogin/module.index.css';
 
 function AccessLogin() {
     return (
