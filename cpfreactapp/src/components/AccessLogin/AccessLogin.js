@@ -1,3 +1,5 @@
+import styles from './AccessLogin/module.index.css';
+
 function AccessLogin() {
     return (
         <div className="main-login">
