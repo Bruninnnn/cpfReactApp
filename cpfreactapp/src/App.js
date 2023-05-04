@@ -1,5 +1,7 @@
-import "./App.css";
+import AccessLogin from "./components/AccessLogin/AccessLogin";
 
-function App() {}
+function App() {
+  return <AccessLogin></AccessLogin>;
+}
 
 export default App;
