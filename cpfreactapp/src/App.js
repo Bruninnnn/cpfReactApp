@@ -1,7 +1,7 @@
-import AccessLogin from "./components/AccessLogin/AccessLogin";
+import Home from "./components/Home/Home";
 
 function App() {
-  return <AccessLogin></AccessLogin>;
+  return <Home></Home>;
 }
 
 export default App;
