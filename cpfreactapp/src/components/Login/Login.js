@@ -3,9 +3,7 @@ import React from "react";
 import styles from "./Form.module.css";
 
 function Login() {
-  return (
-    
-  );
+  return ();
 }
 
 export default Login;

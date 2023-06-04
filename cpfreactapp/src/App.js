@@ -1,7 +1,7 @@
-import Form from "./components/Form/Form";
+import Home from "./components/Home/Home";
 
 function App() {
-  return <Form></Form>;
+  return <Home></Home>;
 }
 
 export default App;

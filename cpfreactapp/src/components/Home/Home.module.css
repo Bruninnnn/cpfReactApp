@@ -75,7 +75,7 @@ small {
     margin-top: 0.6rem;
 }
 
-.side-nav {
+.side_nav {
     width: 7rem;
     height: 100%;
     position: fixed;
@@ -181,39 +181,40 @@ ul:hover li:hover {
     transition: ease-in 200ms;
 }
 
-.side-nav:hover{
+.side_nav:hover{
     width: 14rem;
 }
 
-.side-nav:hover .menu > h2 {
+.side_nav:hover .menu > h2 {
     opacity: 1;
 }
 
-.side-nav:hover .menu {
+.side_nav:hover .menu {
     border-bottom: 2px solid #1E1E24;
 }
 
-.side-nav:hover .search-box {
+.side_nav:hover .search-box {
     flex-direction: row;
 }
 
-.side-nav:hover .search-box > input {
+.side_nav:hover .search-box > input {
     opacity: 1;
 }
 
-.side-nav:hover .search-box span {
+.side_nav:hover .search-box span {
     display: block;
     padding: 6px;
     background-color: #1E1E24;
 }
 
-.side-nav:hover ul li p {
+.side_nav:hover ul li p {
     display: block;
 }
 
-.side-nav:hover ul li span {
+.side_nav:hover ul li span {
     margin-right: 10px;
 }
+
 
 /*Centro da Tela*/
 
@@ -234,7 +235,7 @@ main .balances > div {
     width: 15vw;
     height: 20vh;
     border-radius: 10%;
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
     border: 1px solid #1e1e1e;
     box-shadow: 0px 0px 20px #1E1E24;
     transition: all 300ms ease;
@@ -244,19 +245,21 @@ main .balances > div:hover {
     box-shadow: none;
 }
 
-main .balances > div span {
+main .balances > div span svg {
     background: #1E1E24;
-    padding: 0.5rem;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    margin-bottom: 0.6rem;
+    padding: 0.6rem;
+    border-radius: 100%;
+    font-size: 1.4rem;
+    width: 20%;
+    height: 40%;
+    margin-bottom: 0.4rem;
 }
 
-main .balances > div.receipt span {
+main .balances > div.receipt span svg {
     background: #0A5C5A;
 }
 
-main .balances > div.cost span {
+main .balances > div.cost span svg{
     background: #3C1F2D;
 }
 
@@ -264,6 +267,7 @@ main .balances > div h3 {
     padding-left: 0.5rem;
     padding-bottom: 0.2rem;
     font-size: 1rem;
+    margin-top: 0.1rem;
 }
 
 main .balances > div h1 {
@@ -272,15 +276,15 @@ main .balances > div h1 {
 
 /* Tables */
 
-main .recent-orders {
+main .recent_orders {
     margin-top: 3rem;
 }
 
-main .recent-orders h2 {
+main .recent_orders h2 {
     margin-bottom: 0.6rem;
 }
 
-main .recent-orders table {
+main .recent_orders table {
     background-color: #131316;
     width: 86%;
     border-radius: 0.8rem;
@@ -291,12 +295,12 @@ main .recent-orders table {
     transition: all 300ms ease;
 }
 
-main .recent-orders th {
+main .recent_orders th {
     font-size: 1rem;
     letter-spacing: 2px;
 }
 
-main .recent-orders table:hover {
+main .recent_orders table:hover {
     box-shadow: none;
 }
 
@@ -305,4 +309,49 @@ main table tbody td {
     height: 3rem;
     padding: 0.6rem;
     border-bottom: 2px solid #1E1E24;
+}
+
+.keyboardUp > svg{
+    color: #0A5C5A;
+    filter: url(#inset-shadow);
+}
+
+.keyboardDown {
+    color: #3C1F2D;
+}
+
+/* - Dialog - */
+
+.dialogTitle {
+    background-color: #131316;
+    border-bottom: 1px solid #1e1e1e;
+    color: #ffffff;
+}
+
+.dialogContent {
+    background-color: #131316;
+    color: #ffffff;
+}
+
+.dialogActions {
+    display: flex;
+    justify-content: flex-end;
+    background-color: #131316;
+    border-top: 1px solid #1e1e1e;
+}
+
+.dialogButtonConcluded, .dialogButtonClose{
+    color: #ffffff;
+}
+
+.dialogButtonConcluded:hover {
+    color: #0A5C5A;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.dialogButtonClose:hover {
+    color: #3C1F2D;
+    font-size: 0.875rem;
+    font-weight: 500;
 }
