@@ -6,6 +6,7 @@ function FormRegister() {
         <div className={stylesregister.body}>
             <div className={stylesregister.container}>
                 <div className={stylesregister.form_image}>
+                    
                 </div>
                 <div className={stylesregister.form}>
                     <form action="#">
