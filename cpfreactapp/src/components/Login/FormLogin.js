@@ -1,13 +1,13 @@
 import React from "react";
 import styleslogin from "./Login.module.css";
 import Home from "../Home/Home";
-import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
+//import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
+// <img src={ReactLogo} alt=""> </img>
 
 function FormLogin() {
   return (
     <div className={styleslogin.container}>
       <div className={styleslogin.form_image}>
-        <img src={ReactLogo} alt=""> </img>  
       </div>
       <div className={styleslogin.form}>
         <form action="#">
