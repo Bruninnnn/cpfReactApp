@@ -94,7 +94,7 @@ function Home() {
           <DialogContent className={styles.dialogContent}>
             <ModalComponent />
           </DialogContent>
-          <DialogActions className={styles.dialogActions}>
+          <DialogActions style={{justifyContent: "space-between"}} className={styles.dialogActions}>
             <Button className={styles.dialogButtonConcluded}>
               Concluido
             </Button>

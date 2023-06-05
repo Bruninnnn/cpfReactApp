@@ -249,9 +249,8 @@ main .balances > div span svg {
     background: #1E1E24;
     padding: 0.6rem;
     border-radius: 100%;
-    font-size: 1.4rem;
     width: 20%;
-    height: 40%;
+    height: 38%;
     margin-bottom: 0.4rem;
 }
 
@@ -261,6 +260,9 @@ main .balances > div.receipt span svg {
 
 main .balances > div.cost span svg{
     background: #3C1F2D;
+    justify-content: center;
+    text-align: center;
+    
 }
 
 main .balances > div h3 {
@@ -320,7 +322,7 @@ main table tbody td {
     color: #3C1F2D;
 }
 
-/* - Dialog - */
+/* - Dialog/Modal - */
 
 .dialogTitle {
     background-color: #131316;
@@ -340,7 +342,7 @@ main table tbody td {
     border-top: 1px solid #1e1e1e;
 }
 
-.dialogButtonConcluded, .dialogButtonClose{
+.dialogActions > button{
     color: #ffffff;
 }
 
