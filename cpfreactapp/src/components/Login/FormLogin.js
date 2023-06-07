@@ -1,16 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import styleslogin from "./Login.module.css";
+import validation from "./Validation";
 import Home from "../Home/Home";
 //import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
 // <img src={ReactLogo} alt=""> </img>
 
 function FormLogin() {
+  const [values, setValues] = useState ({
+    email: '',
+    password: ''
+})
+
+const [errors, setErrors] = useState({})
+
+function handleChange(e) {
+  setValues({...values, [e.target.email]: e.target.value})
+}
+
+/*useEffect(() => {
+  if (Object.keys(errors).length === 0 &&  (values.email !== "" && values.password !== "")) {
+    alert("teste");
+  }
+}, [errors])*/
+
+function handleSubmit(e) {
+  e.preventDefault();
+  setErrors(validation(values));
+}
+
   return (
     <div className={styleslogin.container}>
       <div className={styleslogin.form_image}>
       </div>
       <div className={styleslogin.form}>
-        <form action="#">
+        <form onSubmit={handleSubmit}>
           <div className={styleslogin.form_header}>
             <div className={styleslogin.title}>
               <h1>LOGIN</h1>
@@ -30,7 +53,7 @@ function FormLogin() {
           </div>
 
           <div className={styleslogin.continue_button}>
-            <button><a href="login.html">Continuar</a></button>
+            <button>Continuar</button>
           </div>
           <br></br>
             <div className={styleslogin.textfield_remember}>
@@ -48,3 +71,8 @@ function FormLogin() {
 }
 
 export default FormLogin;
+
+
+function ValidateLogin() {
+  
+}
