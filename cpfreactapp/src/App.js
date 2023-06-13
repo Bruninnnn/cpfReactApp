@@ -1,8 +1,8 @@
-import FormRegister from "./components/Register/FormRegister";
+import RegisterForm from "./components/Register/RegisterForm";
 
 function App() {
   /* return<FormLogin></FormLogin>; */
-  return <FormRegister></FormRegister>;
+  return <RegisterForm></RegisterForm>;
   //return <Home></Home>;
 }
 
