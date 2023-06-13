@@ -1,11 +1,8 @@
-import { Login } from "@mui/icons-material";
-import Home from "./components/Home/Home";
-import FormLogin from "./components/Login/FormLogin";
-import FormRegister from "./components/Register/FormRegister";
+import RegisterForm from "./components/Register/RegisterForm";
 
 function App() {
-  return<FormLogin></FormLogin>;
-  //return <FormRegister></FormRegister>;
+  /* return<FormLogin></FormLogin>; */
+  return <RegisterForm></RegisterForm>;
   //return <Home></Home>;
 }
 
