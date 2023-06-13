@@ -18,7 +18,7 @@ body{
 }
 
 .container{
-    width: 80%;
+    width: 100%;
     height: 80vh;
     display: flex;
     /*box-shadow: 5px 5px 10px rgba(0, 204, 255, 0.212);*/
@@ -29,12 +29,13 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #151516d7;
+    background-color: #131316;
     padding: 1rem;
 }
 
 .form_image img{
-    width: 31rem;
+    width: 60vw;
+    height: 65vh;
 }
 
 .form{
@@ -58,6 +59,7 @@ body{
 
 .title > h1 {
     margin-top: 0rem;
+    margin-left: -0.2rem;
 }
 
 .login_button{
@@ -105,16 +107,18 @@ body{
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 10px;
-    box-shadow: 2px 2px 9px #0000001c;
-    color: #09090b;
+    box-shadow: 2px 2px 2px 4px rgba(17, 17, 17, 0.486);
+    color: #ffffff;
+    background-color: #1E1E24;
 }
 
 .input_box input:hover{
-    background-color: #eeeeee75;
+    background-color: #1E1E24;
 }
 
 .input_box input:focus-visible{
-    outline: 1px solid #6c63ff;
+    outline: 1px solid #0A5C5A;
+    box-shadow: 2px 2px 9px rgba(31, 31, 31, 0.637);
 }
 
 .input_box label,
@@ -125,7 +129,7 @@ body{
 }
 
 .input_box input::placeholder{
-    color: #000000be;
+    color: #ffffffb9;
 }
 
 .gender-group{
@@ -160,7 +164,6 @@ body{
     cursor: pointer;
 }
 
-
 .continue_button button a{
     text-decoration: none;
     font-size: 0.93rem;
@@ -169,11 +172,20 @@ body{
 }
 
 .textfield_remember{
-    height: 2%;
+    height: 5%;
+}
+
+.textfield_remember > span{
+    color: #09090b;
+}
+
+a {
+    color: #0A5C5A;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 1330px){
-   /* .form_image{
+    /* .form_image{
         display: none;
     }*/
     .container{

@@ -16,6 +16,7 @@ import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
 import React, { useState } from "react";
 import styles from "./Home.module.css";
 import ModalComponent from "./ModalComponent";
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [open, setOpen] = useState(false);
@@ -43,10 +44,12 @@ function Home() {
           </ul>
           <ul>
             <li>
+              <Link to="/">
               <span>
                 <ExitToAppOutlinedIcon />
               </span>
               <p>Sair</p>
+              </Link>
             </li>
           </ul>
         </div>

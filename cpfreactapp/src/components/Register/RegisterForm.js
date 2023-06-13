@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import stylesregister from "./Register.module.css";
+import { Link } from 'react-router-dom';
+import log from '../images/log.svg';
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -41,7 +43,9 @@ function RegisterForm() {
   return (
     <div className={stylesregister.body}>
       <div className={stylesregister.container}>
-        <div className={stylesregister.form_image}></div>
+        <div className={stylesregister.form_image}>
+        <img src={log} alt="" />
+        </div>
         <div className={stylesregister.form}>
           <form action="#">
             <div className={stylesregister.form_header}>
@@ -50,7 +54,7 @@ function RegisterForm() {
               </div>
               <div className={stylesregister.login_button}>
                 <button>
-                  <a href="control.html">Entrar</a>
+                <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
@@ -142,7 +146,7 @@ function RegisterForm() {
                   type="text"
                   id="complement"
                   name="rua"
-                  placeholder="Informe um complemento"
+                  placeholder="Informe o complemento"
                   required
                 />
               </div>
@@ -159,8 +163,8 @@ function RegisterForm() {
               </div>
 
               <div className={stylesregister.continue_button}>
-                <button>
-                  <a href="login.html">Continuar</a>
+                <button /*onClick={/*sistema cadastro}*/> 
+                  <Link to="/">Concluir</Link>
                 </button>
               </div>
             </div>

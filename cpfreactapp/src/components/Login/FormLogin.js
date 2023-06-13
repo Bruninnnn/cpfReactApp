@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import styleslogin from "./Login.module.css";
 import validation from "./Validation";
 import Home from "../Home/Home";
+import login from '../images/login.svg';
+
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
+import { Link } from 'react-router-dom';
 //import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
 // <img src={ReactLogo} alt=""> </img>
 
@@ -23,6 +29,8 @@ function handleChange(e) {
   }
 }, [errors])*/
 
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 function handleSubmit(e) {
   e.preventDefault();
   setErrors(validation(values));
@@ -31,15 +39,13 @@ function handleSubmit(e) {
   return (
     <div className={styleslogin.container}>
       <div className={styleslogin.form_image}>
+        <img src={login} alt="" />
       </div>
       <div className={styleslogin.form}>
         <form onSubmit={handleSubmit}>
           <div className={styleslogin.form_header}>
             <div className={styleslogin.title}>
               <h1>LOGIN</h1>
-            </div>
-            <div className={styleslogin.login_button}>
-              <button></button>
             </div>
           </div>
           <div className={styleslogin.input_box}>
@@ -53,16 +59,21 @@ function handleSubmit(e) {
           </div>
 
           <div className={styleslogin.continue_button}>
-            <button>Continuar</button>
+            <button>Acessar</button>
           </div>
           <br></br>
             <div className={styleslogin.textfield_remember}>
-              <input type="checkbox" id="lembrar" />
-              <span>Relembrar Senha</span>
+            <FormControlLabel
+              value="start"
+              control={<Checkbox {...label} size="small" />}
+              label="Relembrar Senha"
+              labelPlacement="center"
+            />
             </div>
             <br></br>
+            <br></br>
               <div className={styleslogin.textfield_createcount}>
-                <p>Ainda não tem conta? <a href="cadastro.html">Criar Conta</a></p>
+                <p>Ainda não tem conta? <Link to="/register">Criar Conta</Link></p>
               </div>
         </form>
       </div>
