@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import log from "../images/log.svg";
 import stylesregister from "./Register.module.css";
+
+import log from "../images/log.svg";
+
+import { Link } from "react-router-dom";
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");

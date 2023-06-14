@@ -219,7 +219,8 @@ ul:hover li:hover {
 /*Centro da Tela*/
 
 main {
-    margin-top: 1.4rem;
+    margin-top: 3rem;
+    width: 75vw;
 }
 
 main .balances {
@@ -288,7 +289,7 @@ main .recent_orders h2 {
 
 main .recent_orders table {
     background-color: #131316;
-    width: 86%;
+    width: 66vw;
     border-radius: 0.8rem;
     border: 1px solid #1e1e1e;
     padding: 0.6rem;
@@ -344,16 +345,4 @@ main table tbody td {
 
 .dialogActions > button{
     color: #ffffff;
-}
-
-.dialogButtonConcluded:hover {
-    color: #0A5C5A;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-
-.dialogButtonClose:hover {
-    color: #3C1F2D;
-    font-size: 0.875rem;
-    font-weight: 500;
 }

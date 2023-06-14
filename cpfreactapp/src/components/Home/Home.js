@@ -16,6 +16,7 @@ import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
 import React, { useState } from "react";
 import styles from "./Home.module.css";
 import ModalComponent from "./ModalComponent";
+
 import { Link } from 'react-router-dom';
 
 function Home() {

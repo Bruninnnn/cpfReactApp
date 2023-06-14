@@ -99,7 +99,6 @@ body{
     flex-direction: column;
     margin-bottom: -0.5rem;
     margin: -1%;
-
 }
 
 .input_box input{
@@ -111,8 +110,7 @@ body{
     color: #ffffff;
     background-color: #1E1E24;
 }
-
-.input_box input:hover{
+.input_box  input:hover{
     background-color: #1E1E24;
 }
 
