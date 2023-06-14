@@ -1,28 +1,62 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import log from "../images/log.svg";
 import stylesregister from "./Register.module.css";
-import { Link } from 'react-router-dom';
-import log from '../images/log.svg';
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
+  const [birthDate, setBirthDate] = useState("");
+  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [zipCode, setZipCode] = useState("");
+  const [street, setStreet] = useState("");
+  const [numHouse, setNumHouse] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
 
-  const handleChangeName = (event) => {
-    setFullName(event.target.value);
-  };
+  const handleChangeName = (event) => setFullName(event.target.value);
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-    sendRequest();
-  };
+  const handleChangeBirthDate = (event) => setBirthDate(event.target.value);
 
-  function sendRequest() {
+  const handleChangeGender = (event) => setGender(event.target.value);
+
+  const handleChangeEmail = (event) => setEmail(event.target.value);
+
+  const handleChangePassword = (event) => setPassword(event.target.value);
+
+  const handleChangeZipCode = (event) => setZipCode(event.target.value);
+
+  const handleChangeStreet = (event) => setStreet(event.target.value);
+
+  const handleChangeNumberHouse = (event) => setNumHouse(event.target.value);
+
+  const handleChangeNeighborhood = (event) =>
+    setNeighborhood(event.target.value);
+
+  const handleChangeCity = (event) => setCity(event.target.value);
+
+  const handleChangeState = (event) => setState(event.target.value);
+
+  async function sendRequest() {
+    console.log("Entrou");
+
     const userRegister = {
       fullNamme: fullName,
+      gender: gender,
+      birthDate: birthDate,
       email: email,
+      password: password,
+      zipCode: zipCode,
+      street: street,
+      numHouse: numHouse,
+      neighborhood: neighborhood,
+      state: state,
+      city: city,
     };
 
-    fetch("http://localhost:3000/user/registerUser", {
+    await fetch("http://localhost:8080/user/registerUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,15 +70,13 @@ function RegisterForm() {
       .catch((error) => {
         console.error("Erro na solicitação:", error);
       });
-
-    console.log(userRegister);
   }
 
   return (
     <div className={stylesregister.body}>
       <div className={stylesregister.container}>
         <div className={stylesregister.form_image}>
-        <img src={log} alt="" />
+          <img src={log} alt="" />
         </div>
         <div className={stylesregister.form}>
           <form action="#">
@@ -54,7 +86,7 @@ function RegisterForm() {
               </div>
               <div className={stylesregister.login_button}>
                 <button>
-                <Link to="/">Voltar para Login</Link>
+                  <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
@@ -69,6 +101,32 @@ function RegisterForm() {
                   required
                   value={fullName}
                   onChange={handleChangeName}
+                />
+              </div>
+
+              <div className={stylesregister.input_box}>
+                <label htmlFor="gender">Genêro</label>
+                <select
+                  id="gender"
+                  name="gender"
+                  required
+                  onChange={handleChangeGender}
+                >
+                  <option value="op0">Masculino</option>
+                  <option value="op1">Feminino</option>
+                </select>
+              </div>
+
+              <div className={stylesregister.input_box}>
+                <label htmlFor="birthDate">Data de Nascimento</label>
+                <input
+                  type="date"
+                  id="birthDate"
+                  name="birthDate"
+                  placeholder="Data de Nascimento"
+                  required
+                  value={birthDate}
+                  onChange={handleChangeBirthDate}
                 />
               </div>
 
@@ -93,6 +151,7 @@ function RegisterForm() {
                   name="password"
                   placeholder="Informe sua senha"
                   required
+                  onChange={handleChangePassword}
                 />
               </div>
 
@@ -104,6 +163,7 @@ function RegisterForm() {
                   name="cep"
                   placeholder="xxxxx-xxx"
                   required
+                  onChange={handleChangeZipCode}
                 />
               </div>
 
@@ -115,6 +175,7 @@ function RegisterForm() {
                   name="street"
                   placeholder="Informe sua rua"
                   required
+                  onChange={handleChangeStreet}
                 />
               </div>
 
@@ -126,6 +187,7 @@ function RegisterForm() {
                   name="number"
                   placeholder="Informe seu número"
                   required
+                  onChange={handleChangeNumberHouse}
                 />
               </div>
 
@@ -133,21 +195,23 @@ function RegisterForm() {
                 <label htmlFor="">Bairro</label>
                 <input
                   type="text"
-                  id="rua"
-                  name="rua"
+                  id="neighborhood"
+                  name="neighborhood"
                   placeholder="Informe seu bairro"
                   required
+                  onChange={handleChangeNeighborhood}
                 />
               </div>
 
               <div className={stylesregister.input_box}>
-                <label htmlFor="">Complemento</label>
+                <label htmlFor="">Estado</label>
                 <input
                   type="text"
-                  id="complement"
-                  name="rua"
-                  placeholder="Informe o complemento"
+                  id="state"
+                  name="state"
+                  placeholder="Informe o seu estado"
                   required
+                  onChange={handleChangeState}
                 />
               </div>
 
@@ -159,11 +223,12 @@ function RegisterForm() {
                   name="city"
                   placeholder="Informe sua cidade"
                   required
+                  onChange={handleChangeCity}
                 />
               </div>
 
               <div className={stylesregister.continue_button}>
-                <button /*onClick={/*sistema cadastro}*/> 
+                <button onClick={sendRequest}>
                   <Link to="/">Concluir</Link>
                 </button>
               </div>
