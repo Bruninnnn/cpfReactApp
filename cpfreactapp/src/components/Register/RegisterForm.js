@@ -17,6 +17,7 @@ function RegisterForm() {
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
 
   const handleChangeName = (event) => setFullName(event.target.value);
 
@@ -41,11 +42,13 @@ function RegisterForm() {
 
   const handleChangeState = (event) => setState(event.target.value);
 
+  const handleChangeCountry = (event) => setCountry(event.target.value);
+
   async function sendRequest() {
     console.log("Entrou");
 
     const userRegister = {
-      fullNamme: fullName,
+      fullName: fullName,
       gender: gender,
       birthDate: birthDate,
       email: email,
@@ -55,16 +58,24 @@ function RegisterForm() {
       numHouse: numHouse,
       neighborhood: neighborhood,
       state: state,
+      country: country,
       city: city,
     };
 
-    await fetch("http://localhost:8080/user/registerUser", {
+    console.log(userRegister);
+
+    const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userRegister),
-    })
+    };
+
+    const response = await fetch(
+      "http://192.168.0.105:8080/user/registerUser",
+      options
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log("Resposta do servidor:", data);
@@ -72,6 +83,9 @@ function RegisterForm() {
       .catch((error) => {
         console.error("Erro na solicitação:", error);
       });
+
+    console.log("terminou");
+    console.log(response);
   }
 
   return (
@@ -182,11 +196,11 @@ function RegisterForm() {
               </div>
 
               <div className={stylesregister.input_box}>
-                <label htmlFor="">Número</label>
+                <label htmlFor="numHouse">Número</label>
                 <input
                   type="number"
                   id="number"
-                  name="number"
+                  name="numHouse"
                   placeholder="Informe seu número"
                   required
                   onChange={handleChangeNumberHouse}
@@ -194,7 +208,7 @@ function RegisterForm() {
               </div>
 
               <div className={stylesregister.input_box}>
-                <label htmlFor="">Bairro</label>
+                <label htmlFor="neighborhood">Bairro</label>
                 <input
                   type="text"
                   id="neighborhood"
@@ -202,18 +216,6 @@ function RegisterForm() {
                   placeholder="Informe seu bairro"
                   required
                   onChange={handleChangeNeighborhood}
-                />
-              </div>
-
-              <div className={stylesregister.input_box}>
-                <label htmlFor="">Estado</label>
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  placeholder="Informe o seu estado"
-                  required
-                  onChange={handleChangeState}
                 />
               </div>
 
@@ -229,9 +231,35 @@ function RegisterForm() {
                 />
               </div>
 
+              <div className={stylesregister.input_box}>
+                <label htmlFor="state">Estado</label>
+                <input
+                  type="text"
+                  id="state"
+                  name="state"
+                  placeholder="Informe o seu estado"
+                  required
+                  onChange={handleChangeState}
+                />
+              </div>
+
+              <div className={stylesregister.input_box}>
+                <label htmlFor="country">País</label>
+                <input
+                  type="text"
+                  id="country"
+                  name="country"
+                  placeholder="Informe seu país"
+                  required
+                  onChange={handleChangeCountry}
+                />
+              </div>
+
               <div className={stylesregister.continue_button}>
                 <button onClick={sendRequest}>
-                  <Link to="/">Concluir</Link>
+                  {" "}
+                  Concluir
+                  {/* <Link to="/">Concluir</Link> */}
                 </button>
               </div>
             </div>
