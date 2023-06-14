@@ -39,7 +39,12 @@ function Modal({ open, setOpen }) {
           <div className={stylesmodal.textfield}>
             <label for="category">Categoria</label>
             <div className={stylesmodal.textfield_category}>
-              <select className={stylesmodal.category} id="category" required>
+              <select 
+                id="category" 
+                name="category"
+                required
+                onChange
+                >
                 <option disabled selected>
                   Selecione...
                 </option>

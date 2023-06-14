@@ -140,8 +140,9 @@ input[type="date"]{
     color: #ffffff;
     background-color: #1E1E24;
 }
-.input_box select:hover, input:hover{
-    background-color: #1E1E24;
+.input_box select:focus-visible{
+    background-color: blueviolet;
+    outline: invert 5px solid blueviolet;
 }
 
 .input_box select:focus-visible, input:focus-visible{
