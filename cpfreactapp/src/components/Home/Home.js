@@ -21,6 +21,7 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
+import CreateIcon from "@mui/icons-material/Create";
 
 import { Link } from "react-router-dom";
 
@@ -30,9 +31,9 @@ function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [rows, setRows] = useState([
-    { amount: "135,57", description: "teste", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon />},
-    { amount: "5523,39", description: "Salário", category: "Contas", type: <KeyboardArrowUpOutlinedIcon />},
-    { amount: "1423,94", description: "Mercado", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon />}
+    { amount: "135,57", description: "teste", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />},
+    { amount: "5523,39", description: "Salário", category: "Contas", type: <KeyboardArrowUpOutlinedIcon style={{fill: '#0a5c5a'}} />},
+    { amount: "1423,94", description: "Mercado", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />}
   ]);
 
   const handleDeleteRow = (targetIndex) => {
@@ -130,7 +131,10 @@ function Home() {
             </Button>
           </DialogActions>
         </Dialog>
-
+        <CreateIcon
+                      onClick={() => setModalOpen(true)}
+                      style={{ cursor: "pointer", fontSize: "large" }}
+                    />
         <Table rows={rows} deleteRow={handleDeleteRow}/>
 
         {modalOpen && (

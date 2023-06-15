@@ -254,15 +254,14 @@ function RegisterForm() {
                   onChange={handleChangeCountry}
                 />
               </div>
-
-              <div className={stylesregister.continue_button}>
+            </div>
+            <div className={stylesregister.continue_button}>
                 <button onClick={sendRequest}>
                   {" "}
                   Concluir
                   {/* <Link to="/">Concluir</Link> */}
                 </button>
               </div>
-            </div>
           </form>
         </div>
       </div>
