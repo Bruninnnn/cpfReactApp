@@ -1,3 +1,7 @@
+import React, { useState } from "react";
+import styles from "./Home.module.css";
+
+import ModalComponent from "./ModalComponent";
 import {
   Button,
   Dialog,
@@ -5,6 +9,10 @@ import {
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
+
+import { ModalEdit } from "./ModalEdit";
+import { Table } from "./Table";
+
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
@@ -13,14 +21,24 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
-import React, { useState } from "react";
-import styles from "./Home.module.css";
-import ModalComponent from "./ModalComponent";
+import CreateIcon from "@mui/icons-material/Create";
 
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Home() {
+  /* Const para funcionalidade de Abrir as Modals */
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const [rows, setRows] = useState([
+    { amount: "135,57", description: "teste", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />},
+    { amount: "5523,39", description: "Salário", category: "Contas", type: <KeyboardArrowUpOutlinedIcon style={{fill: '#0a5c5a'}} />},
+    { amount: "1423,94", description: "Mercado", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />}
+  ]);
+
+  const handleDeleteRow = (targetIndex) => {
+    setRows(rows.filter((_, idx) => idx !== targetIndex));
+  };
 
   console.log(open);
   return (
@@ -46,10 +64,10 @@ function Home() {
           <ul>
             <li>
               <Link to="/">
-              <span>
-                <ExitToAppOutlinedIcon />
-              </span>
-              <p>Sair</p>
+                <span>
+                  <ExitToAppOutlinedIcon />
+                </span>
+                <p>Sair</p>
               </Link>
             </li>
           </ul>
@@ -98,60 +116,34 @@ function Home() {
           <DialogContent className={styles.dialogContent}>
             <ModalComponent />
           </DialogContent>
-          <DialogActions style={{justifyContent: "space-between"}} className={styles.dialogActions}>
-            <Button onClick = {() => ""}className={styles.dialogButtonConcluded}>
+          <DialogActions
+            style={{ justifyContent: "space-between" }}
+            className={styles.dialogActions}
+          >
+            <Button onClick={() => ""} className={styles.dialogButtonConcluded}>
               Concluido
             </Button>
-            <Button onClick={() => setOpen(false)} className={styles.dialogButtonClose}>
+            <Button
+              onClick={() => setOpen(false)}
+              className={styles.dialogButtonClose}
+            >
               Fechar
             </Button>
           </DialogActions>
         </Dialog>
-        <div className={styles.recent_orders}>
-          <h2>Extrato</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Valor</th>
-                <th>Descrição</th>
-                <th>Categoria</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>R$ 32,75</td>
-                <td>Almoço</td>
-                <td>Alimentação</td>
-                <td>
-                  <span className={styles.keyboardDown}>
-                    <KeyboardArrowDownOutlinedIcon />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>R$ 875,90</td>
-                <td>Dividas</td>
-                <td>Outros</td>
-                <td>
-                  <span className={styles.keyboardDown}>
-                    <KeyboardArrowDownOutlinedIcon />
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>R$ 1500,45</td>
-                <td>Salário</td>
-                <td>Outros</td>
-                <td>
-                  <span className={styles.keyboardUp}>
-                    <KeyboardArrowUpOutlinedIcon/>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <CreateIcon
+                      onClick={() => setModalOpen(true)}
+                      style={{ cursor: "pointer", fontSize: "large" }}
+                    />
+        <Table rows={rows} deleteRow={handleDeleteRow}/>
+
+        {modalOpen && (
+          <ModalEdit
+            closeModal={() => {
+              setModalOpen(false);
+            }}
+          />
+        )}
       </main>
     </div>
   );
