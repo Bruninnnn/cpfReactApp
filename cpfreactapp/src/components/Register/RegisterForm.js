@@ -13,7 +13,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [street, setStreet] = useState("");
-  const [numHouse, setNumHouse] = useState("");
+  const [numberHouse, setNumHouse] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -44,48 +44,75 @@ function RegisterForm() {
 
   const handleChangeCountry = (event) => setCountry(event.target.value);
 
-  async function sendRequest() {
-    console.log("Entrou");
+  function sendRequest() {
+    const address = async function addressRequest() {
+      console.log("ENTROU NESSE CARALHO");
+      const addressObject = {
+        city: city,
+        country: country,
+        numberHouse: numberHouse,
+        state: state,
+        street: street,
+        zipCode: zipCode,
+        neighborhood: neighborhood,
+      };
 
-    const userRegister = {
-      fullName: fullName,
-      gender: gender,
-      birthDate: birthDate,
-      email: email,
-      password: password,
-      zipCode: zipCode,
-      street: street,
-      numHouse: numHouse,
-      neighborhood: neighborhood,
-      state: state,
-      country: country,
-      city: city,
+      const optionsAddress = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addressObject),
+      };
+
+      const responseAddress = await fetch(
+        "http://10.10.30.170:8080/address/registerAddress",
+        optionsAddress
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Resposta do servidor:", data);
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação:", error);
+        });
+      console.log("Address RETURN");
+      return responseAddress;
     };
 
-    console.log(userRegister);
+    const userObject = async function requestUser() {
+      const user = {
+        fullName: fullName,
+        gender: gender === "Masculino" ? "MALE" : "FEMALE",
+        birthDate: birthDate,
+        email: email,
+        password: password,
+        address: address,
+      };
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userRegister),
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      };
+
+      const response = await fetch(
+        "http://10.10.30.170:8080/user/registerUser",
+        options
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Resposta do servidor:", data);
+        })
+        .catch((error) => {
+          console.error("Erro na solicitação:", error);
+        });
+      console.log("Address RETURN");
+      return response;
     };
-
-    const response = await fetch(
-      "http://192.168.0.105:8080/user/registerUser",
-      options
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Resposta do servidor:", data);
-      })
-      .catch((error) => {
-        console.error("Erro na solicitação:", error);
-      });
-
-    console.log("terminou");
-    console.log(response);
+    return userObject;
   }
 
   return (
@@ -196,11 +223,11 @@ function RegisterForm() {
               </div>
 
               <div className={stylesregister.input_box}>
-                <label htmlFor="numHouse">Número</label>
+                <label htmlFor="numberHouse">Número</label>
                 <input
                   type="number"
                   id="number"
-                  name="numHouse"
+                  name="numberHouse"
                   placeholder="Informe seu número"
                   required
                   onChange={handleChangeNumberHouse}

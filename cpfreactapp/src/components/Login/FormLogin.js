@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import login from "../images/login.svg";
 import styleslogin from "./Login.module.css";
 import validation from "./Validation";
@@ -7,6 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { Link } from "react-router-dom";
+import { Context } from "../../Context";
 //import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
 // <img src={ReactLogo} alt=""> </img>
 
@@ -28,11 +29,16 @@ function FormLogin() {
   }
 }, [errors])*/
 
+  const { user, setUser } = useContext(Context);
+
+  console.log(user);
+
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   function handleSubmit(e) {
     e.preventDefault();
     setErrors(validation(values));
+    setUser();
   }
 
   return (
