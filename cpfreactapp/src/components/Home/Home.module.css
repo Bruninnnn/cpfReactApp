@@ -319,8 +319,16 @@ main table tbody td {
     filter: url(#inset-shadow);
 }
 
-.keyboardDown {
-    color: #3C1F2D;
+.actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.keyboardDown > svg {
+    color: #750a0a;
 }
 
 /* - Dialog/Modal - */

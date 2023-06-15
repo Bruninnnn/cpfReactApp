@@ -84,7 +84,7 @@ function FormLogin() {
           <br></br>
           <div className={styleslogin.textfield_createcount}>
             <p>
-              Ainda não tem conta? <Link to="/register"> Criar Conta</Link>
+              Ainda não tem conta? <Link className={styleslogin.hiperlink} to="/register"> Criar Conta</Link>
             </p>
           </div>
         </form>
