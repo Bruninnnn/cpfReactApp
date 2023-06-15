@@ -8,12 +8,7 @@ function Modal({ open, setOpen }) {
         <div className={stylesmodal.main_imputs}>
           <div className={stylesmodal.textfield}>
             <label for="value">Valor:</label>
-            <input 
-              type="text" 
-              placeholder="0,00" 
-              id="amount" 
-              required 
-            />
+            <input type="text" placeholder="0,00" id="amount" required />
           </div>
           <div className={stylesmodal.textfield}>
             <label for="description">Descrição:</label>
@@ -25,21 +20,9 @@ function Modal({ open, setOpen }) {
             />
           </div>
           <div className={stylesmodal.textfield}>
-            <label for="type">Tipo:</label>
-            <div className={stylesmodal.textfield_type}>
-              <select className={stylesmodal.type} id="type" required>
-                <option value="" disabled selected>
-                  Selecione...
-                </option>
-                <option value="1">Entrada</option>
-                <option value="2">Saída</option>
-              </select>
-            </div>
-          </div>
-          <div className={stylesmodal.textfield}>
             <label for="category">Categoria</label>
             <div className={stylesmodal.textfield_category}>
-              <select className={stylesmodal.category} id="category" required>
+              <select name="category" required>
                 <option disabled selected>
                   Selecione...
                 </option>
@@ -50,6 +33,18 @@ function Modal({ open, setOpen }) {
                 <option value="5">Lazer</option>
                 <option value="6">Transporte</option>
                 <option value="7">Outros</option>
+              </select>
+            </div>
+          </div>
+          <div className={stylesmodal.textfield}>
+            <label for="type">Tipo:</label>
+            <div className={stylesmodal.textfield_type}>
+              <select name="type" required>
+                <option value="" disabled selected>
+                  Selecione...
+                </option>
+                <option value="KeyboardArrowUpOutlinedIcon">Entrada</option>
+                <option value="KeyboardArrowDownOutlinedIcon">Saída</option>
               </select>
             </div>
           </div>

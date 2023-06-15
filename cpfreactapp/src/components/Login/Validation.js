@@ -1,6 +1,7 @@
 const Validation = (values) => {
     let errors = {}
 
+    
     if (!values.email) {
         errors.email = alert('É necessário informar um Email')
     } 
