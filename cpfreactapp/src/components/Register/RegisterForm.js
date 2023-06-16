@@ -44,8 +44,8 @@ function RegisterForm() {
 
   const handleChangeCountry = (event) => setCountry(event.target.value);
 
-  function sendRequest() {
-    const address = async function addressRequest() {
+  async function sendRequest() {
+    /* const address = async function addressRequest() {
       console.log("ENTROU NESSE CARALHO");
       const addressObject = {
         city: city,
@@ -79,7 +79,19 @@ function RegisterForm() {
       console.log("Address RETURN");
       return responseAddress;
     };
+ */
 
+    const address = {
+      id: 3,
+      city: "Blumenau",
+      numberHouse: "292",
+      state: "Santa Catarina",
+      street: "Gregório Link",
+      zipCode: "89072050",
+    };
+
+    /*   const json = JSON.stringify(address);
+     */
     const userObject = async function requestUser() {
       const user = {
         fullName: fullName,
@@ -283,12 +295,12 @@ function RegisterForm() {
               </div>
             </div>
             <div className={stylesregister.continue_button}>
-                <button onClick={sendRequest}>
-                  {" "}
-                  Concluir
-                  {/* <Link to="/">Concluir</Link> */}
-                </button>
-              </div>
+              <button onClick={sendRequest}>
+                {" "}
+                Concluir
+                {/* <Link to="/">Concluir</Link> */}
+              </button>
+            </div>
           </form>
         </div>
       </div>

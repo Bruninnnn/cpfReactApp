@@ -2,7 +2,7 @@ import React from "react";
 
 import stylesmodaledit from "./ModalEdit.module.css";
 
-export const ModalEdit = ({ closeModal }) => {
+export const ModalEdit = ({ closeModal, on }) => {
   return (
     <div className={stylesmodaledit.modal_container}>
       <div className={stylesmodaledit.modal}>

@@ -31,14 +31,33 @@ function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const [rows, setRows] = useState([
-    { amount: "135,57", description: "teste", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />},
-    { amount: "5523,39", description: "Salário", category: "Contas", type: <KeyboardArrowUpOutlinedIcon style={{fill: '#0a5c5a'}} />},
-    { amount: "1423,94", description: "Mercado", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />}
+    {
+      amount: "135,57",
+      description: "teste",
+      category: "Alimentação",
+      type: <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />,
+    },
+    {
+      amount: "5523,39",
+      description: "Salário",
+      category: "Contas",
+      type: <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} />,
+    },
+    {
+      amount: "1423,94",
+      description: "Mercado",
+      category: "Alimentação",
+      type: <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />,
+    },
   ]);
 
   const handleDeleteRow = (targetIndex) => {
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
+
+  const handleSubmit = (newRow) => {
+    setRows([...rows, newRow])
+  }
 
   console.log(open);
   return (
@@ -131,19 +150,9 @@ function Home() {
             </Button>
           </DialogActions>
         </Dialog>
-        <CreateIcon
-                      onClick={() => setModalOpen(true)}
-                      style={{ cursor: "pointer", fontSize: "large" }}
-                    />
-        <Table rows={rows} deleteRow={handleDeleteRow}/>
 
-        {modalOpen && (
-          <ModalEdit
-            closeModal={() => {
-              setModalOpen(false);
-            }}
-          />
-        )}
+        <Table rows={rows} deleteRow={handleDeleteRow} />
+
       </main>
     </div>
   );
