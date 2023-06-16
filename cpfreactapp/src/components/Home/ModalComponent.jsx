@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import stylesmodal from "./ModalComponent.module.css";
 
 export const ModalComponent = ({ closeAddModal, onSubmit }) => {
-
   const [formState, setFormState] = useState({
     amount: "",
     description: "",
@@ -14,16 +13,16 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
   const handleChange = (e) => {
     setFormState({
       ...formState,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit(formState)
+    onSubmit(formState);
 
-    console.log(formState)
+    console.log(formState);
 
     closeAddModal(false);
   };
@@ -31,6 +30,9 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
   return (
     <div className={stylesmodal.modal_container}>
       <div className={stylesmodal.modal}>
+      <div className={stylesmodal.title}>
+          <h2>Cadastro</h2>
+        </div>
         <form className={stylesmodal.center_imputs}>
           <div className={stylesmodal.main_imputs}>
             <div className={stylesmodal.textfield}>
@@ -91,8 +93,12 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
                   <option value="" disabled selected>
                     Selecione...
                   </option>
-                  <option value="<KeyboardArrowUpOutlinedIcon />">Entrada</option>
-                  <option value="<KeyboardArrowDownOutlinedIcon />">Saída</option>
+                  <option value="<KeyboardArrowUpOutlinedIcon />">
+                    Entrada
+                  </option>
+                  <option value="<KeyboardArrowDownOutlinedIcon />">
+                    Saída
+                  </option>
                 </select>
               </div>
             </div>
@@ -106,13 +112,15 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
             <button
               type="submit"
               className={stylesmodal.btn_submit}
-              onClick={handleSubmit}>
+              onClick={handleSubmit}
+            >
+              Cadastrar
             </button>
           </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default ModalComponent; 
+export default ModalComponent;

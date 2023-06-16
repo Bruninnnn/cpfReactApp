@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Home.module.css";
 
-import ModalComponent from "./ModalComponent";
+import { ModalComponent } from "./ModalComponent";
 import { Table } from "./Table";
 
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
@@ -12,13 +12,14 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
-import CreateIcon from "@mui/icons-material/Create";
 
 import { Link } from "react-router-dom";
+import { ModalEdit } from "./ModalEdit";
 
 function Home() {
   /* Const para funcionalidade de Abrir as Modals */
   const [modalAddOpen, setModalAddOpen] = useState(false);
+  const [modalEditOpen, setModalEditOpen] = useState(false);
 
   const [rows, setRows] = useState([
     {
@@ -41,15 +42,29 @@ function Home() {
     },
   ]);
 
+  const [rowToEdit, setRowToEdit] = useState(null);
+
   const handleDeleteRow = (targetIndex) => {
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
 
-  const handleSubmit = (newRow) => {
-    setRows([...rows, newRow])
-  }
+  const handleEditRow = (idx) => {
+    setRowToEdit(idx);
 
-   
+    setModalEditOpen(true);
+  };
+
+  const handleSubmit = (newRow) => {
+    rowToEdit === null
+      ? setRows([...rows, newRow])
+      : setRows(
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow;
+
+            return newRow;
+          })
+        );
+  };
 
   return (
     <div className={styles.container}>
@@ -93,7 +108,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Receita</h3>
-                <h1>0,00</h1>
+                <h1>{/*receipt*/}</h1>
               </div>
             </div>
           </div>
@@ -104,7 +119,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Saldo</h3>
-                <h1>0,00</h1>
+                <h1>{/*balance*/}</h1>
               </div>
             </div>
           </div>
@@ -115,7 +130,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Despesas</h3>
-                <h1>0,00</h1>
+                <h1>{/*cost*/}</h1>
               </div>
             </div>
           </div>
@@ -125,13 +140,29 @@ function Home() {
           <ModalComponent
             closeAddModal={() => {
               setModalAddOpen(false);
+              setRowToEdit(null);
             }}
             onSubmit={handleSubmit}
+            defaultValue={rowToEdit !== null && rows[rowToEdit]}
           />
         )}
 
-        <Table rows={rows} deleteRow={handleDeleteRow} />
+        {modalEditOpen && (
+          <ModalEdit
+            closeEditModal={() => {
+              setModalEditOpen(false);
+              setRowToEdit(null);
+            }}
+            onSubmit={handleSubmit}
+            defaultValue={rowToEdit !== null && rows[rowToEdit]}
+          />
+        )}
 
+        <Table
+          rows={rows}
+          deleteRow={handleDeleteRow}
+          editRow={handleEditRow}
+        />
       </main>
     </div>
   );

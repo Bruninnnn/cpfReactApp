@@ -1,15 +1,11 @@
-import { React, useState } from "react";
+import { React } from "react";
 
 import stylestable from "./Table.module.css";
-
-import { ModalEdit } from "./ModalEdit";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CreateIcon from "@mui/icons-material/Create";
 
-export const Table = ({ rows, deleteRow }) => {
-  const [modalOpen, setModalOpen] = useState(false);
-
+export const Table = ({ rows, deleteRow, editRow }) => {
   return (
     <div className={stylestable.recent_orders}>
       <h2>Extrato</h2>
@@ -38,16 +34,9 @@ export const Table = ({ rows, deleteRow }) => {
                       style={{ cursor: "pointer", fill: "#750a0a" }}
                     />
                     <CreateIcon
-                      onClick={() => setModalOpen(true)}
+                      onClick={() => editRow(idx)}
                       style={{ cursor: "pointer", fontSize: "large" }}
                     />
-                    {modalOpen && (
-                      <ModalEdit
-                        closeModal={() => {
-                          setModalOpen(false);
-                        }}
-                      />
-                    )}
                   </span>
                 </td>
               </tr>
