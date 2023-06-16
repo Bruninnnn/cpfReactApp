@@ -140,10 +140,8 @@ function Home() {
           <ModalComponent
             closeAddModal={() => {
               setModalAddOpen(false);
-              setRowToEdit(null);
             }}
             onSubmit={handleSubmit}
-            defaultValue={rowToEdit !== null && rows[rowToEdit]}
           />
         )}
 

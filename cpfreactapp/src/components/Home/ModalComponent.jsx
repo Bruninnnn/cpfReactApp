@@ -2,13 +2,18 @@ import React, { useState } from "react";
 
 import stylesmodal from "./ModalComponent.module.css";
 
-export const ModalComponent = ({ closeAddModal, onSubmit }) => {
-  const [formState, setFormState] = useState({
-    amount: "",
-    description: "",
-    category: "",
-    type: "",
-  });
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+
+export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
+  const [formState, setFormState] = useState(
+    {
+      amount: "",
+      description: "",
+      category: "",
+      type: "",
+    }
+  );
 
   const handleChange = (e) => {
     setFormState({
@@ -30,7 +35,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
   return (
     <div className={stylesmodal.modal_container}>
       <div className={stylesmodal.modal}>
-      <div className={stylesmodal.title}>
+        <div className={stylesmodal.title}>
           <h2>Cadastro</h2>
         </div>
         <form className={stylesmodal.center_imputs}>
@@ -93,10 +98,10 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
                   <option value="" disabled selected>
                     Selecione...
                   </option>
-                  <option value="<KeyboardArrowUpOutlinedIcon />">
+                  <option value="Entrada">
                     Entrada
                   </option>
-                  <option value="<KeyboardArrowDownOutlinedIcon />">
+                  <option value="Saida">
                     Saída
                   </option>
                 </select>
@@ -122,5 +127,3 @@ export const ModalComponent = ({ closeAddModal, onSubmit }) => {
     </div>
   );
 };
-
-export default ModalComponent;

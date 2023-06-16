@@ -4,6 +4,9 @@ import stylestable from "./Table.module.css";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CreateIcon from "@mui/icons-material/Create";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+
 
 export const Table = ({ rows, deleteRow, editRow }) => {
   return (
@@ -26,7 +29,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                 <td>{row.amount}</td>
                 <td>{row.description}</td>
                 <td>{row.category}</td>
-                <td>{row.type}</td>
+                <td>{row.type === "Entrada" ? <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} /> : <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />}</td>
                 <td>
                   <span className={stylestable.actions}>
                     <DeleteForeverIcon

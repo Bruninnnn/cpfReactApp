@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 
 import stylesmodaledit from "./ModalEdit.module.css";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 
 export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
-  const [formState, setFormState] = useState({
-    amount: "",
-    description: "",
-    category: "",
-    type: "",
-  });
+  const [formState, setFormState] = useState(
+    defaultValue || {
+      amount: "",
+      description: "",
+      category: "",
+      type: "",
+    }
+  );
 
   const handleChangeEdit = (e) => {
     setFormState({
@@ -67,7 +71,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                   onChange={handleChangeEdit}
                   required
                 >
-                  <option value= "" disabled selected>
+                  <option value="" disabled selected>
                     Selecione...
                   </option>
                   <option value="Alimentação">Alimentação</option>
@@ -93,10 +97,10 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                   <option value="" disabled selected>
                     Selecione...
                   </option>
-                  <option value="<KeyboardArrowUpOutlinedIcon />">
+                  <option value="Entrada">
                     Entrada
                   </option>
-                  <option value="<KeyboardArrowDownOutlinedIcon />">
+                  <option value="Saida">
                     Saída
                   </option>
                 </select>
