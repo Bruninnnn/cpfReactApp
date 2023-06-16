@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import styles from "./Home.module.css";
 
 import ModalComponent from "./ModalComponent";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@material-ui/core";
-
-import { ModalEdit } from "./ModalEdit";
 import { Table } from "./Table";
 
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
@@ -27,8 +18,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   /* Const para funcionalidade de Abrir as Modals */
-  const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalAddOpen, setModalAddOpen] = useState(false);
 
   const [rows, setRows] = useState([
     {
@@ -59,7 +49,8 @@ function Home() {
     setRows([...rows, newRow])
   }
 
-  console.log(open);
+   
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -72,7 +63,7 @@ function Home() {
           </div>
           <ul>
             <li>
-              <button onClick={() => setOpen(true)}>
+              <button onClick={() => setModalAddOpen(true)}>
                 <span>
                   <AddCircleOutlineOutlinedIcon />
                 </span>
@@ -129,27 +120,15 @@ function Home() {
             </div>
           </div>
         </div>
-        {/* {open && <ModalComponent open={open} setOpenModal={setOpen} />} */}
-        <Dialog open={open} onClose={() => setOpen(false)}>
-          <DialogTitle className={styles.dialogTitle}>Registro</DialogTitle>
-          <DialogContent className={styles.dialogContent}>
-            <ModalComponent />
-          </DialogContent>
-          <DialogActions
-            style={{ justifyContent: "space-between" }}
-            className={styles.dialogActions}
-          >
-            <Button onClick={() => ""} className={styles.dialogButtonConcluded}>
-              Concluido
-            </Button>
-            <Button
-              onClick={() => setOpen(false)}
-              className={styles.dialogButtonClose}
-            >
-              Fechar
-            </Button>
-          </DialogActions>
-        </Dialog>
+
+        {modalAddOpen && (
+          <ModalComponent
+            closeAddModal={() => {
+              setModalAddOpen(false);
+            }}
+            onSubmit={handleSubmit}
+          />
+        )}
 
         <Table rows={rows} deleteRow={handleDeleteRow} />
 
