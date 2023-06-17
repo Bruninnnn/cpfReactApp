@@ -45,86 +45,51 @@ function RegisterForm() {
   const handleChangeCountry = (event) => setCountry(event.target.value);
 
   async function sendRequest() {
-    /* const address = async function addressRequest() {
-      console.log("ENTROU NESSE CARALHO");
-      const addressObject = {
-        city: city,
-        country: country,
-        numberHouse: numberHouse,
-        state: state,
-        street: street,
-        zipCode: zipCode,
-        neighborhood: neighborhood,
-      };
-
-      const optionsAddress = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(addressObject),
-      };
-
-      const responseAddress = await fetch(
-        "http://10.10.30.170:8080/address/registerAddress",
-        optionsAddress
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Resposta do servidor:", data);
-        })
-        .catch((error) => {
-          console.error("Erro na solicitação:", error);
-        });
-      console.log("Address RETURN");
-      return responseAddress;
-    };
- */
-
     const address = {
-      id: 3,
-      city: "Blumenau",
-      numberHouse: "292",
-      state: "Santa Catarina",
-      street: "Gregório Link",
-      zipCode: "89072050",
+      city: city,
+      numberHouse: numberHouse,
+      neighborhood: neighborhood,
+      state: state,
+      street: street,
+      zipCode: zipCode,
+      country: country,
     };
 
-    /*   const json = JSON.stringify(address);
-     */
-    const userObject = async function requestUser() {
-      const user = {
-        fullName: fullName,
-        gender: gender === "Masculino" ? "MALE" : "FEMALE",
-        birthDate: birthDate,
-        email: email,
-        password: password,
-        address: address,
-      };
-
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      };
-
-      const response = await fetch(
-        "http://10.10.30.170:8080/user/registerUser",
-        options
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Resposta do servidor:", data);
-        })
-        .catch((error) => {
-          console.error("Erro na solicitação:", error);
-        });
-      console.log("Address RETURN");
-      return response;
+    const user = {
+      name: fullName,
+      gender: gender === "Masculino" ? "MALE" : "FEMALE",
+      birthDate: birthDate,
+      email: email,
+      password: password,
+      address: address,
     };
+
+    const userObject = requestUser(user);
     return userObject;
+  }
+
+  async function requestUser(user) {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    };
+
+    const response = await fetch(
+      "http://192.168.0.103:8080/user/registerUser",
+      options
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Resposta do servidor:", data);
+      })
+      .catch((error) => {
+        console.error("Erro na solicitação:", error);
+      });
+
+    return response;
   }
 
   return (
