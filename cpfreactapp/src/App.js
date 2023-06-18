@@ -1,13 +1,15 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Home from "./components/Home/Home";
 import Login from "./components/Login/FormLogin";
 import Register from "./components/Register/RegisterForm";
-import { UserProvider } from "./Context";
+import { ContextProvider } from "./Context";
 
 function App() {
   return (
-    <UserProvider>
+    <ContextProvider>
+      {" "}
+      {/* Envolve todo o aplicativo com o ContextProvider */}
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -15,7 +17,7 @@ function App() {
           <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
-    </UserProvider>
+    </ContextProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./Home.module.css";
 
 import { ModalComponent } from "./ModalComponent";
@@ -13,13 +13,16 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../../Context";
 import { ModalEdit } from "./ModalEdit";
 
 function Home() {
   /* Const para funcionalidade de Abrir as Modals */
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
+  const { userContext, setContext } = useContext(Context);
+  console.log(userContext);
 
   const [rows, setRows] = useState([
     {
@@ -47,6 +50,8 @@ function Home() {
   const handleDeleteRow = (targetIndex) => {
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
+
+  const navigate = useNavigate();
 
   const handleEditRow = (idx) => {
     setRowToEdit(idx);
@@ -89,7 +94,12 @@ function Home() {
           <ul>
             <li>
               <Link to="/">
-                <span>
+                <span
+                  onClick={() => {
+                    setContext(null);
+                    navigate("/");
+                  }}
+                >
                   <ExitToAppOutlinedIcon />
                 </span>
                 <p>Sair</p>

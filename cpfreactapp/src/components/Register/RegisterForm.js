@@ -3,7 +3,7 @@ import stylesregister from "./Register.module.css";
 
 import log from "../images/log.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -44,6 +44,8 @@ function RegisterForm() {
 
   const handleChangeCountry = (event) => setCountry(event.target.value);
 
+  const navigate = useNavigate();
+
   async function sendRequest() {
     const address = {
       city: city,
@@ -64,7 +66,8 @@ function RegisterForm() {
       address: address,
     };
 
-    const userObject = requestUser(user);
+    const userObject = await requestUser(user);
+    navigate("/");
     return userObject;
   }
 
@@ -260,11 +263,7 @@ function RegisterForm() {
               </div>
             </div>
             <div className={stylesregister.continue_button}>
-              <button onClick={sendRequest}>
-                {" "}
-                Concluir
-                {/* <Link to="/">Concluir</Link> */}
-              </button>
+              <button onClick={sendRequest}></button>
             </div>
           </form>
         </div>
