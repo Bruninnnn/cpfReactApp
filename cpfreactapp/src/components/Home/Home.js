@@ -29,19 +29,19 @@ function Home() {
       amount: "135,57",
       description: "teste",
       category: "Alimentação",
-      type: <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />,
+      type: "Saida",
     },
     {
       amount: "5523,39",
       description: "Salário",
       category: "Contas",
-      type: <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} />,
+      type: "Entrada",
     },
     {
       amount: "1423,94",
       description: "Mercado",
       category: "Alimentação",
-      type: <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />,
+      type: "Saida",
     },
   ]);
 
@@ -70,6 +70,10 @@ function Home() {
           })
         );
   };
+
+  const [receipt, setReceipt] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [cost, setCost] = useState(0);
 
   return (
     <div className={styles.container}>
@@ -118,7 +122,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Receita</h3>
-                <h1>{/*receipt*/}</h1>
+                <h1>{receipt}</h1>
               </div>
             </div>
           </div>
@@ -129,7 +133,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Saldo</h3>
-                <h1>{/*balance*/}</h1>
+                <h1>{balance}</h1>
               </div>
             </div>
           </div>
@@ -140,7 +144,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Despesas</h3>
-                <h1>{/*cost*/}</h1>
+                <h1>{cost}</h1>
               </div>
             </div>
           </div>
