@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
 import stylesmodaledit from "./ModalEdit.module.css";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import { format } from "date-fns";
 
-export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
+export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext }) => {
+  const user = userContext;
+
   const [formState, setFormState] = useState(
     defaultValue || {
       amount: "",
@@ -21,12 +22,45 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
     });
   };
 
-  const handleSubmitEdit = (e) => {
+  async function updateRegister(){
+    try {
+      const currentDate = new Date();
+      const formattedDate = format(currentDate, 'yyyy-MM-dd');
+  
+      const newRegister = {
+        id: formState.id,
+        registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(2),
+        description: formState.description,
+        regGroupType: formState.category,
+        registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
+        balance: 0,
+        user: user,
+        registerDate: formattedDate,
+      };
+  
+      const options = {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newRegister),
+      };
+  
+      const response = await fetch(`http://192.168.0.103:8080/register/update`, options);
+      const data = await response.json();
+      /* console.log('Resposta do servidor:', data); */
+      return data;
+    } catch (error) {
+      console.error('Erro na solicitação:', error);
+      throw error;
+    }
+  } 
+
+  const  handleSubmitEdit = async (e) => {
     e.preventDefault();
 
-    onSubmit(formState);
-
-    console.log(formState);
+    const newRegister = await updateRegister();
+    onSubmit(newRegister);
 
     closeEditModal(false);
   };
@@ -40,7 +74,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         <form>
           <div className={stylesmodaledit.main_imputs}>
             <div className={stylesmodaledit.textfield}>
-              <label for="value">Valor:</label>
+              <label htmlFor="value">Valor:</label>
               <input
                 type="text"
                 placeholder="0,00"
@@ -51,7 +85,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
               />
             </div>
             <div className={stylesmodaledit.textfield}>
-              <label for="description">Descrição:</label>
+              <label htmlFor="description">Descrição:</label>
               <input
                 type="text"
                 placeholder="Descrição"
@@ -62,7 +96,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
               />
             </div>
             <div className={stylesmodaledit.textfield}>
-              <label for="category">Categoria</label>
+              <label htmlFor="category">Categoria</label>
               <div className={stylesmodaledit.textfield_category}>
                 <select
                   name="category"
@@ -85,7 +119,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
               </div>
             </div>
             <div className={stylesmodaledit.textfield}>
-              <label for="type">Tipo:</label>
+              <label htmlFor="type">Tipo:</label>
               <div className={stylesmodaledit.textfield_type}>
                 <select
                   name="type"

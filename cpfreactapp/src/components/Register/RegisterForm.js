@@ -67,7 +67,6 @@ function RegisterForm() {
     };
 
     const userObject = await requestUser(user);
-    navigate("/");
     return userObject;
   }
 
@@ -263,7 +262,14 @@ function RegisterForm() {
               </div>
             </div>
             <div className={stylesregister.continue_button}>
-              <button onClick={sendRequest}></button>
+              <button
+                onClick={() => {
+                  sendRequest();
+                  navigate("/");
+                }}
+              >
+                Cadastrar
+              </button>
             </div>
           </form>
         </div>

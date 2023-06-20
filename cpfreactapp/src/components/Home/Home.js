@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Home.module.css";
 
 import { ModalComponent } from "./ModalComponent";
@@ -20,32 +20,47 @@ function Home() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const { userContext, setContext } = useContext(Context);
-  console.log(userContext);
+  const redirect = useNavigate();
 
-  const [rows, setRows] = useState([
-    {
-      amount: "135,57",
-      description: "teste",
-      category: "Alimentação",
-      type: "Saida",
-    },
-    {
-      amount: "5523,39",
-      description: "Salário",
-      category: "Contas",
-      type: "Entrada",
-    },
-    {
-      amount: "1423,94",
-      description: "Mercado",
-      category: "Alimentação",
-      type: "Saida",
-    },
-  ]);
+  function enter(userContext) {
+    if (!userContext) {
+      redirect("/");
+    }
+  }
+  {
+    enter(userContext);
+  }
+
+  const [rows, setRows] = useState([]);
 
   const [rowToEdit, setRowToEdit] = useState(null);
 
-  const handleDeleteRow = (targetIndex) => {
+  async function deleteRow(row) {
+    const register = row;
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(register),
+      };
+
+      const response = await fetch(
+        `http://192.168.0.103:8080/register/delete`,
+        options
+      );
+      const data = await response.json();
+      console.log("Resposta do servidor:", data);
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+      throw error;
+    }
+  }
+
+  const handleDeleteRow = async (targetIndex) => {
+    const row = rows[targetIndex];
+    await deleteRow(row);
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
 
@@ -69,9 +84,77 @@ function Home() {
         );
   };
 
-  const [receipt, setReceipt] = useState(0);
-  const [balance, setBalance] = useState(0);
-  const [cost, setCost] = useState(0);
+  const [receipt, setReceipt] = useState();
+  const [balance, setBalance] = useState();
+  const [cost, setCost] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = userContext?.id;
+
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await fetch(
+          `http://192.168.0.103:8080/register/registers?userId=${userId}`,
+          options
+        );
+        const responseData = await response.json();
+        console.log("Resposta do servidor:", responseData);
+        setRows(responseData);
+      } catch (error) {
+        console.error("Erro na solicitação:", error);
+        // Restante do código para lidar com o erro
+      }
+    };
+
+    fetchData();
+  }, [userContext?.id]);
+
+  useEffect(() => {
+    const receiptSum = rows.reduce((total, obj) => {
+      if (obj.registerType === "INCOME") {
+        return total + obj.registerValue;
+      }
+      return total;
+    }, 0);
+
+    const costSum = rows.reduce((total, obj) => {
+      if (obj.registerType === "COST") {
+        return total + obj.registerValue;
+      }
+      return total;
+    }, 0);
+
+    const balanceValue = receiptSum - costSum;
+
+    setReceipt(
+      receiptSum.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+    setCost(
+      costSum.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+    setBalance(
+      balanceValue.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+  }, [rows]);
 
   return (
     <div className={styles.container}>
@@ -154,6 +237,7 @@ function Home() {
               setModalAddOpen(false);
             }}
             onSubmit={handleSubmit}
+            userContext={userContext}
           />
         )}
 
@@ -165,6 +249,7 @@ function Home() {
             }}
             onSubmit={handleSubmit}
             defaultValue={rowToEdit !== null && rows[rowToEdit]}
+            userContext={userContext}
           />
         )}
 

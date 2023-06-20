@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-
 import stylesmodal from "./ModalComponent.module.css";
+import { format } from 'date-fns';
 
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
 
-export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
+  const user = userContext;
   const [formState, setFormState] = useState(
     {
       amount: "",
@@ -22,12 +21,46 @@ export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  async function sendRequest() {
+    try {
+      const currentDate = new Date();
+      const formattedDate = format(currentDate, 'yyyy-MM-dd');
+      const register = {
+        registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(2),
+        description: formState.description,
+        regGroupType: formState.category,
+        registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
+        balance: 0,
+        user: user,
+        registerDate: formattedDate,
+      };
+  
+      const typeUrl = formState.type === 'Entrada' ? 'income' : 'cost';
+  
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(register),
+      };
+  
+      const response = await fetch(`http://192.168.0.103:8080/register/${typeUrl}`, options);
+      const data = await response.json();
+      console.log('Resposta do servidor:', data);
+      return data;
+    } catch (error) {
+      console.error('Erro na solicitação:', error);
+      throw error;
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    onSubmit(formState);
-
-    console.log(formState);
+    const info = await sendRequest();
+    console.log(info);
+    onSubmit(info);
 
     closeAddModal(false);
   };
@@ -41,7 +74,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
         <form className={stylesmodal.center_imputs}>
           <div className={stylesmodal.main_imputs}>
             <div className={stylesmodal.textfield}>
-              <label for="value">Valor:</label>
+              <label htmlFor="value">Valor:</label>
               <input
                 type="text"
                 placeholder="0,00"
@@ -52,7 +85,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
               />
             </div>
             <div className={stylesmodal.textfield}>
-              <label for="description">Descrição:</label>
+              <label htmlFor="description">Descrição:</label>
               <input
                 type="text"
                 placeholder="Descrição"
@@ -63,7 +96,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
               />
             </div>
             <div className={stylesmodal.textfield}>
-              <label for="category">Categoria</label>
+              <label htmlFor="category">Categoria</label>
               <div className={stylesmodal.textfield_category}>
                 <select
                   name="category"
@@ -86,7 +119,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, defaultValue }) => {
               </div>
             </div>
             <div className={stylesmodal.textfield}>
-              <label for="type">Tipo:</label>
+              <label htmlFor="type">Tipo:</label>
               <div className={stylesmodal.textfield_type}>
                 <select
                   name="type"

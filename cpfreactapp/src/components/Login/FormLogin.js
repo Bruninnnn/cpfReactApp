@@ -69,11 +69,6 @@ function FormLogin() {
     }
   }
 
-  useEffect(() => {
-    console.log(userContext, "contextUseEffect");
-  }, [userContext]);
-
-  console.log(userContext);
   return (
     <div className={styleslogin.container}>
       <div className={styleslogin.form_image}>

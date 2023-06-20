@@ -26,10 +26,10 @@ export const Table = ({ rows, deleteRow, editRow }) => {
           {rows.map((row, idx) => {
             return (
               <tr key={idx}>
-                <td>{row.amount}</td>
+                <td>{row.registerValue}</td>
                 <td>{row.description}</td>
-                <td>{row.category}</td>
-                <td>{row.type === "Entrada" ? <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} /> : <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />}</td>
+                <td>{row.regGroupType}</td>
+                <td>{row.registerType === "INCOME" ? <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} /> : <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />}</td>
                 <td>
                   <span className={stylestable.actions}>
                     <DeleteForeverIcon
