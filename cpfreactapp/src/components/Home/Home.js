@@ -47,7 +47,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://192.168.0.103:8080/register/delete`,
+        `http://172.17.112.1:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -101,7 +101,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://192.168.0.103:8080/register/registers?userId=${userId}`,
+          `http://172.17.112.1:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -188,6 +188,14 @@ function Home() {
                   <ExitToAppOutlinedIcon />
                 </span>
                 <p>Sair</p>
+              </Link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link to="/aboutTech">
+                <span></span>
+                <p>Sobre a Tecnologia</p>
               </Link>
             </li>
           </ul>

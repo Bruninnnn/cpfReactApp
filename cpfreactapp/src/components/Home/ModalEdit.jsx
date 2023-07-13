@@ -46,7 +46,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext 
         body: JSON.stringify(newRegister),
       };
   
-      const response = await fetch(`http://192.168.0.103:8080/register/update`, options);
+      const response = await fetch(`http://172.17.112.1:8080/register/update`, options);
       const data = await response.json();
       /* console.log('Resposta do servidor:', data); */
       return data;

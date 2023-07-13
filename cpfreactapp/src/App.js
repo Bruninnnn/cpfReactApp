@@ -4,17 +4,17 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/FormLogin";
 import Register from "./components/Register/RegisterForm";
 import { ContextProvider } from "./Context";
+import AboutTech from "./components/About/AboutTech";
 
 function App() {
   return (
     <ContextProvider>
-      {" "}
-      {/* Envolve todo o aplicativo com o ContextProvider */}
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/aboutTech" element={<AboutTech />} />
         </Routes>
       </Router>
     </ContextProvider>

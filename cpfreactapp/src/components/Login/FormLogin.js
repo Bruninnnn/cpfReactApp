@@ -39,7 +39,7 @@ function FormLogin() {
 
   async function requestUser() {
     const urlTemplate =
-      "http://192.168.0.103:8080/user/findUser?email=${email}&password=${password}";
+      "http://172.17.112.1:8080/user/findUser?email=${email}&password=${password}";
     const url = urlTemplate
       .replace("${email}", encodeURIComponent(email))
       .replace("${password}", encodeURIComponent(password));
@@ -66,6 +66,8 @@ function FormLogin() {
     if (user !== null) {
       setContextFunction(user);
       navigate("/home");
+    }else {
+      alert("Usuário Incorreto! Tente novamente.");
     }
   }
 
