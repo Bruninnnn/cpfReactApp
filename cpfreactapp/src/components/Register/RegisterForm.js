@@ -3,7 +3,7 @@ import stylesregister from "./Register.module.css";
 
 import log from "../images/log.svg";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -13,7 +13,7 @@ function RegisterForm() {
   const [password, setPassword] = useState("");
   const [zipCode, setZipCode] = useState("");
   const [street, setStreet] = useState("");
-  const [numHouse, setNumHouse] = useState("");
+  const [numberHouse, setNumHouse] = useState("");
   const [neighborhood, setNeighborhood] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
@@ -44,36 +44,43 @@ function RegisterForm() {
 
   const handleChangeCountry = (event) => setCountry(event.target.value);
 
-  async function sendRequest() {
-    console.log("Entrou");
+  const navigate = useNavigate();
 
-    const userRegister = {
-      fullName: fullName,
-      gender: gender,
+  async function sendRequest() {
+    const address = {
+      city: city,
+      numberHouse: numberHouse,
+      neighborhood: neighborhood,
+      state: state,
+      street: street,
+      zipCode: zipCode,
+      country: country,
+    };
+
+    const user = {
+      name: fullName,
+      gender: gender === "Masculino" ? "MALE" : "FEMALE",
       birthDate: birthDate,
       email: email,
       password: password,
-      zipCode: zipCode,
-      street: street,
-      numHouse: numHouse,
-      neighborhood: neighborhood,
-      state: state,
-      country: country,
-      city: city,
+      address: address,
     };
 
-    console.log(userRegister);
+    const userObject = await requestUser(user);
+    return userObject;
+  }
 
+  async function requestUser(user) {
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userRegister),
+      body: JSON.stringify(user),
     };
 
     const response = await fetch(
-      "http://192.168.0.105:8080/user/registerUser",
+      "http://192.168.0.107:8080/user/registerUser",
       options
     )
       .then((response) => response.json())
@@ -84,8 +91,7 @@ function RegisterForm() {
         console.error("Erro na solicitação:", error);
       });
 
-    console.log("terminou");
-    console.log(response);
+    return response;
   }
 
   return (
@@ -196,11 +202,11 @@ function RegisterForm() {
               </div>
 
               <div className={stylesregister.input_box}>
-                <label htmlFor="numHouse">Número</label>
+                <label htmlFor="numberHouse">Número</label>
                 <input
                   type="number"
                   id="number"
-                  name="numHouse"
+                  name="numberHouse"
                   placeholder="Informe seu número"
                   required
                   onChange={handleChangeNumberHouse}
@@ -256,12 +262,15 @@ function RegisterForm() {
               </div>
             </div>
             <div className={stylesregister.continue_button}>
-                <button onClick={sendRequest}>
-                  {" "}
-                  Concluir
-                  {/* <Link to="/">Concluir</Link> */}
-                </button>
-              </div>
+              <button
+                onClick={() => {
+                  sendRequest();
+                  navigate("/");
+                }}
+              >
+                Cadastrar
+              </button>
+            </div>
           </form>
         </div>
       </div>

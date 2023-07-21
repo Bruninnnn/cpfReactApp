@@ -1,46 +1,156 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./Home.module.css";
 
-import ModalComponent from "./ModalComponent";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from "@material-ui/core";
-
-import { ModalEdit } from "./ModalEdit";
+import { ModalComponent } from "./ModalComponent";
 import { Table } from "./Table";
 
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
-import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
-import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
-import CreateIcon from "@mui/icons-material/Create";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../../Context";
+import { ModalEdit } from "./ModalEdit";
 
 function Home() {
-  /* Const para funcionalidade de Abrir as Modals */
-  const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalAddOpen, setModalAddOpen] = useState(false);
+  const [modalEditOpen, setModalEditOpen] = useState(false);
+  const { userContext, setContext } = useContext(Context);
+  const redirect = useNavigate();
 
-  const [rows, setRows] = useState([
-    { amount: "135,57", description: "teste", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />},
-    { amount: "5523,39", description: "Salário", category: "Contas", type: <KeyboardArrowUpOutlinedIcon style={{fill: '#0a5c5a'}} />},
-    { amount: "1423,94", description: "Mercado", category: "Alimentação", type: <KeyboardArrowDownOutlinedIcon style={{fill: '#5A2036'}} />}
-  ]);
+  function enter(userContext) {
+    if (!userContext) {
+      redirect("/");
+    }
+  }
+  {
+    enter(userContext);
+  }
+  const [rows, setRows] = useState([]);
 
-  const handleDeleteRow = (targetIndex) => {
+  const [rowToEdit, setRowToEdit] = useState(null);
+
+  async function deleteRow(row) {
+    const register = row;
+    try {
+      const options = {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(register),
+      };
+
+      const response = await fetch(
+        `http://192.168.0.107:8080/register/delete`,
+        options
+      );
+      const data = await response.json();
+      console.log("Resposta do servidor:", data);
+    } catch (error) {
+      console.error("Erro na solicitação:", error);
+      throw error;
+    }
+  }
+
+  const handleDeleteRow = async (targetIndex) => {
+    const row = rows[targetIndex];
+    await deleteRow(row);
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
 
-  console.log(open);
+  const navigate = useNavigate();
+
+  const handleEditRow = (idx) => {
+    setRowToEdit(idx);
+    setModalEditOpen(true);
+  };
+
+  const handleSubmit = (newRow) => {
+    rowToEdit === null
+      ? setRows([...rows, newRow])
+      : setRows(
+        rows.map((currRow, idx) => {
+          if (idx !== rowToEdit) return currRow;
+
+          return newRow;
+        })
+      );
+  };
+
+  const [receipt, setReceipt] = useState();
+  const [balance, setBalance] = useState();
+  const [cost, setCost] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = userContext?.id;
+
+        const options = {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        };
+
+        const response = await fetch(
+          `http://192.168.0.107:8080/register/registers?userId=${userId}`,
+          options
+        );
+        const responseData = await response.json();
+        setRows(responseData);
+      } catch (error) {
+        console.error("Erro na solicitação:", error);
+      }
+    };
+
+    fetchData();
+  }, [userContext?.id]);
+
+  useEffect(() => {
+    const receiptSum = rows.reduce((total, obj) => {
+      if (obj.registerType === "INCOME") {
+        return total + obj.registerValue;
+      }
+      return total;
+    }, 0);
+
+    const costSum = rows.reduce((total, obj) => {
+      if (obj.registerType === "COST") {
+        return total + obj.registerValue;
+      }
+      return total;
+    }, 0);
+
+    const balanceValue = receiptSum - costSum;
+
+    setReceipt(
+      receiptSum.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+    setCost(
+      costSum.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+    setBalance(
+      balanceValue.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      })
+    );
+  }, [rows]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -53,7 +163,7 @@ function Home() {
           </div>
           <ul>
             <li>
-              <button onClick={() => setOpen(true)}>
+              <button onClick={() => setModalAddOpen(true)}>
                 <span>
                   <AddCircleOutlineOutlinedIcon />
                 </span>
@@ -64,10 +174,23 @@ function Home() {
           <ul>
             <li>
               <Link to="/">
-                <span>
+                <span
+                  onClick={() => {
+                    setContext(null);
+                    navigate("/");
+                  }}
+                >
                   <ExitToAppOutlinedIcon />
                 </span>
                 <p>Sair</p>
+              </Link>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link to="/aboutTech">
+                <span></span>
+                <p>Sobre a Tecnologia</p>
               </Link>
             </li>
           </ul>
@@ -83,7 +206,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Receita</h3>
-                <h1>0,00</h1>
+                <h1>{receipt}</h1>
               </div>
             </div>
           </div>
@@ -94,7 +217,7 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Saldo</h3>
-                <h1>0,00</h1>
+                <h1>{balance}</h1>
               </div>
             </div>
           </div>
@@ -105,45 +228,36 @@ function Home() {
             <div className={styles.middle}>
               <div className={styles.left}>
                 <h3>Despesas</h3>
-                <h1>0,00</h1>
+                <h1>{cost}</h1>
               </div>
             </div>
           </div>
         </div>
-        {/* {open && <ModalComponent open={open} setOpenModal={setOpen} />} */}
-        <Dialog open={open} onClose={() => setOpen(false)}>
-          <DialogTitle className={styles.dialogTitle}>Registro</DialogTitle>
-          <DialogContent className={styles.dialogContent}>
-            <ModalComponent />
-          </DialogContent>
-          <DialogActions
-            style={{ justifyContent: "space-between" }}
-            className={styles.dialogActions}
-          >
-            <Button onClick={() => ""} className={styles.dialogButtonConcluded}>
-              Concluido
-            </Button>
-            <Button
-              onClick={() => setOpen(false)}
-              className={styles.dialogButtonClose}
-            >
-              Fechar
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <CreateIcon
-                      onClick={() => setModalOpen(true)}
-                      style={{ cursor: "pointer", fontSize: "large" }}
-                    />
-        <Table rows={rows} deleteRow={handleDeleteRow}/>
-
-        {modalOpen && (
-          <ModalEdit
-            closeModal={() => {
-              setModalOpen(false);
+        {modalAddOpen && (
+          <ModalComponent
+            closeAddModal={() => {
+              setModalAddOpen(false);
             }}
+            onSubmit={handleSubmit}
+            userContext={userContext}
           />
         )}
+        {modalEditOpen && (
+          <ModalEdit
+            closeEditModal={() => {
+              setModalEditOpen(false);
+              setRowToEdit(null);
+            }}
+            onSubmit={handleSubmit}
+            defaultValue={rowToEdit !== null && rows[rowToEdit]}
+            userContext={userContext}
+          />
+        )}
+        <Table
+          rows={rows}
+          deleteRow={handleDeleteRow}
+          editRow={handleEditRow}
+        />
       </main>
     </div>
   );

@@ -1,15 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import stylesmodal from "./ModalComponent.module.css";
+import { format } from 'date-fns';
 
-import stylesmodaledit from "./ModalEdit.module.css";
-import { format } from "date-fns";
-import { Context } from "../../Context";
+export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
 
-export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
-  const { userContext, setContext } = useContext(Context);
   const user = userContext;
-
   const [formState, setFormState] = useState(
-    defaultValue || {
+    {
       amount: "",
       description: "",
       category: "",
@@ -17,20 +14,18 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
     }
   );
 
-  const handleChangeEdit = (e) => {
+  const handleChange = (e) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
     });
   };
 
-  async function updateRegister() {
+  async function sendRequest() {
     try {
       const currentDate = new Date();
       const formattedDate = format(currentDate, 'yyyy-MM-dd');
-
-      const newRegister = {
-        id: formState.id,
+      const register = {
         registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(2),
         description: formState.description,
         regGroupType: formState.category,
@@ -39,70 +34,73 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         user: user,
         registerDate: formattedDate,
       };
-
+  
+      const typeUrl = formState.type === 'Entrada' ? 'income' : 'cost';
+  
       const options = {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newRegister),
+        body: JSON.stringify(register),
       };
-
-      const response = await fetch(`http://192.168.0.107:8080/register/update`, options);
-      return await response.json();
+  
+      const response = await fetch(`http://192.168.0.107:8080/register/${typeUrl}`, options);
+      const data = await response.json();
+      console.log('Resposta do servidor:', data);
+      return data;
     } catch (error) {
       console.error('Erro na solicitação:', error);
       throw error;
     }
   }
 
-  const handleSubmitEdit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newRegister = await updateRegister();
-    onSubmit(newRegister);
-
-    closeEditModal(false);
+    const info = await sendRequest();
+    onSubmit(info);
+    closeAddModal(false);
   };
 
   return (
-    <div className={stylesmodaledit.modal_container}>
-      <div className={stylesmodaledit.modal}>
-        <div className={stylesmodaledit.title}>
-          <h2>Editar</h2>
+    <div className={stylesmodal.modal_container}>
+      <div className={stylesmodal.modal}>
+        <div className={stylesmodal.title}>
+          <h2>Cadastro</h2>
         </div>
-        <form>
-          <div className={stylesmodaledit.main_imputs}>
-            <div className={stylesmodaledit.textfield}>
+        <form className={stylesmodal.center_imputs}>
+          <div className={stylesmodal.main_imputs}>
+            <div className={stylesmodal.textfield}>
               <label htmlFor="value">Valor:</label>
               <input
                 type="text"
                 placeholder="0,00"
                 name="amount"
                 value={formState.amount}
-                onChange={handleChangeEdit}
+                onChange={handleChange}
                 required
               />
             </div>
-            <div className={stylesmodaledit.textfield}>
+            <div className={stylesmodal.textfield}>
               <label htmlFor="description">Descrição:</label>
               <input
                 type="text"
                 placeholder="Descrição"
                 name="description"
                 value={formState.description}
-                onChange={handleChangeEdit}
+                onChange={handleChange}
                 required
               />
             </div>
-            <div className={stylesmodaledit.textfield}>
+            <div className={stylesmodal.textfield}>
               <label htmlFor="category">Categoria</label>
-              <div className={stylesmodaledit.textfield_category}>
+              <div className={stylesmodal.textfield_category}>
                 <select
                   name="category"
                   id="category"
                   value={formState.category}
-                  onChange={handleChangeEdit}
+                  onChange={handleChange}
                   required
                 >
                   <option value="" disabled selected>
@@ -118,14 +116,14 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                 </select>
               </div>
             </div>
-            <div className={stylesmodaledit.textfield}>
+            <div className={stylesmodal.textfield}>
               <label htmlFor="type">Tipo:</label>
-              <div className={stylesmodaledit.textfield_type}>
+              <div className={stylesmodal.textfield_type}>
                 <select
                   name="type"
                   id="type"
                   value={formState.type}
-                  onChange={handleChangeEdit}
+                  onChange={handleChange}
                   required
                 >
                   <option value="" disabled selected>
@@ -140,21 +138,19 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                 </select>
               </div>
             </div>
-          </div>
-          <div className={stylesmodaledit.button_teste}>
             <button
               type="submit"
-              className={stylesmodaledit.btn_submit}
-              onClick={() => closeEditModal(false)}
+              className={stylesmodal.btn_submitCancel}
+              onClick={() => closeAddModal(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className={stylesmodaledit.btn_submit}
-              onClick={handleSubmitEdit}
+              className={stylesmodal.btn_submit}
+              onClick={handleSubmit}
             >
-              Salvar Alterações
+              Cadastrar
             </button>
           </div>
         </form>

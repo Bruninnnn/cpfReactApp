@@ -1,11 +1,14 @@
-import React from "react";
+import { React } from "react";
 
 import stylestable from "./Table.module.css";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CreateIcon from "@mui/icons-material/Create";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 
-export const Table = ({ rows, deleteRow }) => {
+
+export const Table = ({ rows, deleteRow, editRow }) => {
   return (
     <div className={stylestable.recent_orders}>
       <h2>Extrato</h2>
@@ -21,21 +24,20 @@ export const Table = ({ rows, deleteRow }) => {
         </thead>
         <tbody>
           {rows.map((row, idx) => {
-            
             return (
               <tr key={idx}>
-                <td>{row.amount}</td>
+                <td>{row.registerValue}</td>
                 <td>{row.description}</td>
-                <td>{row.category}</td>
-                <td>{row.type}</td>
+                <td>{row.regGroupType}</td>
+                <td>{row.registerType === "INCOME" ? <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} /> : <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />}</td>
                 <td>
                   <span className={stylestable.actions}>
-                    <DeleteForeverIcon 
+                    <DeleteForeverIcon
                       onClick={() => deleteRow(idx)}
-                      style={{ cursor: "pointer", fill: "#750a0a" }} 
+                      style={{ cursor: "pointer", fill: "#750a0a" }}
                     />
                     <CreateIcon
-                      //onClick={() => setModalOpen(true)}
+                      onClick={() => editRow(idx)}
                       style={{ cursor: "pointer", fontSize: "large" }}
                     />
                   </span>
