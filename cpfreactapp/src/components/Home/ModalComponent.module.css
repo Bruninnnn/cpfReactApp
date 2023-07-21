@@ -126,3 +126,14 @@ select {
     border-radius: 1rem;
     cursor: pointer;
 }
+
+.btn_submitCancel {
+    width: 75%;
+    height: 50%;
+    color: #fff;
+    background-color: #1E1E24;
+    padding: 0.2rem;
+    margin: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}

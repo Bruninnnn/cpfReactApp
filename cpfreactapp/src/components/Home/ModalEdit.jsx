@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import stylesmodaledit from "./ModalEdit.module.css";
 import { format } from "date-fns";
+import { Context } from "../../Context";
 
-export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext }) => {
+export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
+  const { userContext, setContext } = useContext(Context);
   const user = userContext;
 
   const [formState, setFormState] = useState(
@@ -22,11 +24,11 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext 
     });
   };
 
-  async function updateRegister(){
+  async function updateRegister() {
     try {
       const currentDate = new Date();
       const formattedDate = format(currentDate, 'yyyy-MM-dd');
-  
+
       const newRegister = {
         id: formState.id,
         registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(2),
@@ -37,7 +39,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext 
         user: user,
         registerDate: formattedDate,
       };
-  
+
       const options = {
         method: 'PUT',
         headers: {
@@ -45,18 +47,16 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue, userContext 
         },
         body: JSON.stringify(newRegister),
       };
-  
-      const response = await fetch(`http://172.17.112.1:8080/register/update`, options);
-      const data = await response.json();
-      /* console.log('Resposta do servidor:', data); */
-      return data;
+
+      const response = await fetch(`http://192.168.0.107:8080/register/update`, options);
+      return await response.json();
     } catch (error) {
       console.error('Erro na solicitação:', error);
       throw error;
     }
-  } 
+  }
 
-  const  handleSubmitEdit = async (e) => {
+  const handleSubmitEdit = async (e) => {
     e.preventDefault();
 
     const newRegister = await updateRegister();

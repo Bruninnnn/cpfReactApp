@@ -16,7 +16,6 @@ import { Context } from "../../Context";
 import { ModalEdit } from "./ModalEdit";
 
 function Home() {
-  /* Const para funcionalidade de Abrir as Modals */
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const { userContext, setContext } = useContext(Context);
@@ -30,7 +29,6 @@ function Home() {
   {
     enter(userContext);
   }
-
   const [rows, setRows] = useState([]);
 
   const [rowToEdit, setRowToEdit] = useState(null);
@@ -47,7 +45,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://172.17.112.1:8080/register/delete`,
+        `http://192.168.0.107:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -68,7 +66,6 @@ function Home() {
 
   const handleEditRow = (idx) => {
     setRowToEdit(idx);
-
     setModalEditOpen(true);
   };
 
@@ -76,12 +73,12 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow;
+        rows.map((currRow, idx) => {
+          if (idx !== rowToEdit) return currRow;
 
-            return newRow;
-          })
-        );
+          return newRow;
+        })
+      );
   };
 
   const [receipt, setReceipt] = useState();
@@ -101,15 +98,13 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://172.17.112.1:8080/register/registers?userId=${userId}`,
+          `http://192.168.0.107:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
-        console.log("Resposta do servidor:", responseData);
         setRows(responseData);
       } catch (error) {
         console.error("Erro na solicitação:", error);
-        // Restante do código para lidar com o erro
       }
     };
 
@@ -238,7 +233,6 @@ function Home() {
             </div>
           </div>
         </div>
-
         {modalAddOpen && (
           <ModalComponent
             closeAddModal={() => {
@@ -248,7 +242,6 @@ function Home() {
             userContext={userContext}
           />
         )}
-
         {modalEditOpen && (
           <ModalEdit
             closeEditModal={() => {
@@ -260,7 +253,6 @@ function Home() {
             userContext={userContext}
           />
         )}
-
         <Table
           rows={rows}
           deleteRow={handleDeleteRow}

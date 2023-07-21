@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ModalAbout } from "./ModalAbout";
 import component from "../images/teste.png";
 import useStateImg from "../images/useState.png";
 import useStateCtx from "../images/useCtx.png";
 import stylesAbout from "./StylesAbout.module.css";
 import react from "../images/reactLogo.png";
+import { Context } from "../../Context";
 
 function AboutTech() {
   const [open, setOpen] = useState(false);
   const [openUseState, setOpenUseState] = useState(false);
   const [openUseContext, setOpenUseContext] = useState(false);
+  const { userContext, setContext } = useContext(Context);
 
   return (
     <>
@@ -117,7 +119,13 @@ function AboutTech() {
             className={stylesAbout.btn}
             onClick={() => setOpenUseContext(true)}
           >
-            UseContext
+            UseContextImg
+          </button>
+          <button
+            className={stylesAbout.btn}
+            onClick={() => alert("Olá " + userContext.name)}
+          >
+            UseContextFunc
           </button>
         </div>
         {open && (

@@ -7,15 +7,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context";
-//import {ReactComponent as ReactLogo} from "./images/astronauta.svg"
-// <img src={ReactLogo} alt=""> </img>
 
 function FormLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleChangeEmail = (event) => setEmail(event.target.value);
-
   const handleChangePassword = (event) => setPassword(event.target.value);
 
   const [errors, setErrors] = useState({});
@@ -33,13 +30,12 @@ function FormLogin() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    /*  setErrors(validation(values)); */
     await sendRequest();
   }
 
   async function requestUser() {
     const urlTemplate =
-      "http://172.17.112.1:8080/user/findUser?email=${email}&password=${password}";
+      "http://192.168.0.107:8080/user/findUser?email=${email}&password=${password}";
     const url = urlTemplate
       .replace("${email}", encodeURIComponent(email))
       .replace("${password}", encodeURIComponent(password));
@@ -66,7 +62,7 @@ function FormLogin() {
     if (user !== null) {
       setContextFunction(user);
       navigate("/home");
-    }else {
+    } else {
       alert("Usuário Incorreto! Tente novamente.");
     }
   }
@@ -136,5 +132,3 @@ function FormLogin() {
 }
 
 export default FormLogin;
-
-function ValidateLogin() {}

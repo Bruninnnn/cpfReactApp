@@ -45,7 +45,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
         body: JSON.stringify(register),
       };
   
-      const response = await fetch(`http://172.17.112.1:8080/register/${typeUrl}`, options);
+      const response = await fetch(`http://192.168.0.107:8080/register/${typeUrl}`, options);
       const data = await response.json();
       console.log('Resposta do servidor:', data);
       return data;
@@ -59,9 +59,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
     e.preventDefault();
 
     const info = await sendRequest();
-    console.log(info);
     onSubmit(info);
-
     closeAddModal(false);
   };
 
@@ -142,7 +140,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
             </div>
             <button
               type="submit"
-              className={stylesmodal.btn_submit}
+              className={stylesmodal.btn_submitCancel}
               onClick={() => closeAddModal(false)}
             >
               Cancelar
