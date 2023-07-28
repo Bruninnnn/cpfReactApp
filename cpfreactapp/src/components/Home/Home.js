@@ -45,7 +45,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://192.168.0.107:8080/register/delete`,
+        `http://10.10.29.4:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -73,12 +73,12 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-        rows.map((currRow, idx) => {
-          if (idx !== rowToEdit) return currRow;
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow;
 
-          return newRow;
-        })
-      );
+            return newRow;
+          })
+        );
   };
 
   const [receipt, setReceipt] = useState();
@@ -98,7 +98,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://192.168.0.107:8080/register/registers?userId=${userId}`,
+          `http://10.10.29.4:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -162,13 +162,23 @@ function Home() {
             <h2>MENU</h2>
           </div>
           <ul>
-            <li>
+            <li className={styles.option}>
               <button onClick={() => setModalAddOpen(true)}>
                 <span>
-                  <AddCircleOutlineOutlinedIcon />
+                  <AddCircleOutlineOutlinedIcon className={styles.icon} />
                 </span>
-                <p>Add</p>
+                {/* <p>Add</p> */}
+                {"Add"}
               </button>
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link to="/aboutTech">
+                <span></span>
+                <p></p>
+                {"Tecnologia"}
+              </Link>
             </li>
           </ul>
           <ul>
@@ -177,20 +187,10 @@ function Home() {
                 <span
                   onClick={() => {
                     setContext(null);
-                    navigate("/");
                   }}
                 >
-                  <ExitToAppOutlinedIcon />
+                  <ExitToAppOutlinedIcon className={styles.icon} />
                 </span>
-                <p>Sair</p>
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/aboutTech">
-                <span></span>
-                <p>Sobre a Tecnologia</p>
               </Link>
             </li>
           </ul>

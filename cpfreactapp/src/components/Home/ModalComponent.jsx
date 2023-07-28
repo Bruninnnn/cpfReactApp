@@ -45,7 +45,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
         body: JSON.stringify(register),
       };
   
-      const response = await fetch(`http://192.168.0.107:8080/register/${typeUrl}`, options);
+      const response = await fetch(`http://10.10.29.4:8080/register/${typeUrl}`, options);
       const data = await response.json();
       console.log('Resposta do servidor:', data);
       return data;
