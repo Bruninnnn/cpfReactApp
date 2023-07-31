@@ -101,6 +101,19 @@ small {
   margin-right: auto;
 }
 
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: right;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
 .menu > h2 {
   opacity: 0;
 }
