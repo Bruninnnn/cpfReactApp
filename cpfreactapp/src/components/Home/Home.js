@@ -26,9 +26,11 @@ function Home() {
       redirect("/");
     }
   }
-  {
+
+  useEffect(() => {
     enter(userContext);
-  }
+  }, [userContext]);
+
   const [rows, setRows] = useState([]);
 
   const [rowToEdit, setRowToEdit] = useState(null);
@@ -45,7 +47,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://10.10.29.4:8080/register/delete`,
+        `http://10.10.29.189:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -98,7 +100,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://10.10.29.4:8080/register/registers?userId=${userId}`,
+          `http://10.10.29.189:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
