@@ -7,6 +7,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FormLogin() {
   const [email, setEmail] = useState("");
@@ -17,13 +19,32 @@ function FormLogin() {
 
   const [errors, setErrors] = useState({});
 
+  const showToast = () => {
+    const handleShowError = () => {
+      toast.error("Ops! Algo deu errado.", {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+      });
+    };
+
+    return (
+      <>
+        <button onClick={handleShowError}>Mostrar Erro</button>
+        <ToastContainer />
+      </>
+    );
+  };
+
   useEffect(() => {
     if (Object.keys(errors).length === 0 && email !== "" && password !== "") {
-      alert("teste");
+      showToast();
     }
   }, [errors]);
 
-  const { userContext, setContext } = useContext(Context);
+  const { setContext } = useContext(Context);
   const navigate = useNavigate();
 
   const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -35,7 +56,7 @@ function FormLogin() {
 
   async function requestUser() {
     const urlTemplate =
-      "http://10.10.29.4:8080/user/findUser?email=${email}&password=${password}";
+      "http://10.10.29.189:8080/user/findUser?email=${email}&password=${password}";
     const url = urlTemplate
       .replace("${email}", encodeURIComponent(email))
       .replace("${password}", encodeURIComponent(password));
@@ -47,7 +68,7 @@ function FormLogin() {
     })
       .then((response) => response.json())
       .catch((error) => {
-        console.error("Erro na solicitação:", error);
+        showToast();
       });
 
     return user;
@@ -59,18 +80,16 @@ function FormLogin() {
 
   async function sendRequest() {
     const user = await requestUser();
-    if (user !== null) {
+    if (user) {
       setContextFunction(user);
       navigate("/home");
-    } else {
-      alert("Usuário Incorreto! Tente novamente.");
     }
   }
 
   return (
     <div className={styleslogin.container}>
       <div className={styleslogin.form_image}>
-        <img src={login} alt="" />
+        <img src={login} alt="imgWelcome" />
       </div>
       <div className={styleslogin.form}>
         <form onSubmit={handleSubmit}>
