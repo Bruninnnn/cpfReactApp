@@ -6,8 +6,8 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Context } from "../../Context";
-import { ToastContainer, toast } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,32 +19,6 @@ function FormLogin() {
   const handleChangePassword = (event) => setPassword(event.target.value);
 
   const [errors, setErrors] = useState({});
-
-  /*const showToastError = () => {
-    toast.error("Usuário não encontrado, tente novamente!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };*/
-
-  /*const showToastSucess = () => {
-    toast.success("Usuário acessado com sucesso!", {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
-  };*/
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && email !== "" && password !== "") {
@@ -63,7 +37,7 @@ function FormLogin() {
 
   async function requestUser() {
     const urlTemplate =
-      "http://192.168.3.6:8080/user/findUser?email=${email}&password=${password}";
+      "http://10.10.29.76:8080/user/findUser?email=${email}&password=${password}";
     const url = urlTemplate
       .replace("${email}", encodeURIComponent(email))
       .replace("${password}", encodeURIComponent(password));
@@ -74,16 +48,18 @@ function FormLogin() {
       },
     })
       .then((response) => response.json())
-      .catch((error) => {toast.error("Usuário não encontrado, tente novamente!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      })});
+      .catch((error) => {
+        toast.error("Usuário não encontrado, tente novamente!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
     return user;
   }
 
@@ -95,7 +71,7 @@ function FormLogin() {
     const user = await requestUser();
     if (user) {
       setContextFunction(user);
-      toast.success("Usuário acessado com sucesso!", {
+      toast.success("Usuário logado com sucesso!", {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
