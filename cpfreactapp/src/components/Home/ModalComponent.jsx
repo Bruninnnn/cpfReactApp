@@ -1,6 +1,6 @@
+import { format } from 'date-fns';
 import React, { useState } from "react";
 import stylesmodal from "./ModalComponent.module.css";
-import { format } from 'date-fns';
 
 export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
 
@@ -45,7 +45,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
         body: JSON.stringify(register),
       };
   
-      const response = await fetch(`http://192.168.3.6:8080/register/${typeUrl}`, options);
+      const response = await fetch(`http://10.10.29.76:8080/register/${typeUrl}`, options);
       const data = await response.json();
       console.log('Resposta do servidor:', data);
       return data;
