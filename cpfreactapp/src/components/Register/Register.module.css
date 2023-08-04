@@ -130,6 +130,12 @@ input[type="date"] {
   height: 75%;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input_box > select {
   width: 100%;
   margin: 0.5rem 0;
