@@ -48,7 +48,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         body: JSON.stringify(newRegister),
       };
 
-      const response = await fetch(`http://10.10.29.189:8080/register/update`, options);
+      const response = await fetch(`http://10.10.29.134:8080/register/update`, options);
       return await response.json();
     } catch (error) {
       console.error('Erro na solicitação:', error);

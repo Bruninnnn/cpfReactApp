@@ -29,7 +29,7 @@ function Home() {
 
   useEffect(() => {
     enter(userContext);
-  }, [userContext]);
+  });
 
   const [rows, setRows] = useState([]);
 
@@ -47,7 +47,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://10.10.29.189:8080/register/delete`,
+        `http://10.10.29.134:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -63,8 +63,6 @@ function Home() {
     await deleteRow(row);
     setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
-
-  const navigate = useNavigate();
 
   const handleEditRow = (idx) => {
     setRowToEdit(idx);
@@ -100,7 +98,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://10.10.29.189:8080/register/registers?userId=${userId}`,
+          `http://10.10.29.134:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
