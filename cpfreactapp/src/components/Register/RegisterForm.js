@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import stylesregister from "./Register.module.css";
 
 import log from "../images/log.svg";
@@ -46,6 +46,30 @@ function RegisterForm() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (zipCode.trim() !== (null || undefined)) requestAddress(zipCode.trim());
+  }, [zipCode]);
+
+  async function requestAddress(zipCode) {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const response = await fetch(
+      "https://viacep.com.br/ws/" + zipCode + "/json",
+      options
+    );
+
+    const responseAddress = await response.json();
+    setNeighborhood(responseAddress?.bairro);
+    setCity(responseAddress?.localidade);
+    setStreet(responseAddress?.logradouro);
+    setState(responseAddress?.uf);
+  }
+
   async function sendRequest() {
     const address = {
       city: city,
@@ -80,7 +104,7 @@ function RegisterForm() {
     };
 
     const response = await fetch(
-      "http://10.10.29.189:8080/user/registerUser",
+      "http://10.10.29.134:8080/user/registerUser",
       options
     )
       .then((response) => response.json())
@@ -185,7 +209,7 @@ function RegisterForm() {
                   name="cep"
                   placeholder="xxxxx-xxx"
                   required
-                  onChange={handleChangeZipCode}
+                  onBlur={handleChangeZipCode}
                 />
               </div>
 
@@ -198,6 +222,7 @@ function RegisterForm() {
                   placeholder="Informe sua rua"
                   required
                   onChange={handleChangeStreet}
+                  value={street}
                 />
               </div>
 
@@ -210,6 +235,7 @@ function RegisterForm() {
                   placeholder="Informe seu número"
                   required
                   onChange={handleChangeNumberHouse}
+                  value={numberHouse}
                 />
               </div>
 
@@ -222,6 +248,7 @@ function RegisterForm() {
                   placeholder="Informe seu bairro"
                   required
                   onChange={handleChangeNeighborhood}
+                  value={neighborhood}
                 />
               </div>
 
@@ -234,6 +261,7 @@ function RegisterForm() {
                   placeholder="Informe sua cidade"
                   required
                   onChange={handleChangeCity}
+                  value={city}
                 />
               </div>
 
@@ -246,6 +274,7 @@ function RegisterForm() {
                   placeholder="Informe o seu estado"
                   required
                   onChange={handleChangeState}
+                  value={state}
                 />
               </div>
 
@@ -258,6 +287,7 @@ function RegisterForm() {
                   placeholder="Informe seu país"
                   required
                   onChange={handleChangeCountry}
+                  value={country}
                 />
               </div>
             </div>
