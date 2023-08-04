@@ -5,6 +5,9 @@ import Login from "./components/Login/FormLogin";
 import Register from "./components/Register/RegisterForm";
 import { ContextProvider } from "./Context";
 import AboutTech from "./components/About/AboutTech";
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -17,6 +20,7 @@ function App() {
           <Route path="/aboutTech" element={<AboutTech />} />
         </Routes>
       </Router>
+      <ToastContainer />
     </ContextProvider>
   );
 }
