@@ -15,6 +15,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context";
 import { ModalEdit } from "./ModalEdit";
 
+import { toast } from "react-toastify";
+
 function Home() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
@@ -47,7 +49,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://10.10.29.76:8080/register/delete`,
+        `http://192.168.3.6:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -62,6 +64,16 @@ function Home() {
     const row = rows[targetIndex];
     await deleteRow(row);
     setRows(rows.filter((_, idx) => idx !== targetIndex));
+    toast.warn("Registro excluído com sucesso!", {
+      position: "bottom-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   const handleEditRow = (idx) => {
@@ -98,7 +110,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://10.10.29.76:8080/register/registers?userId=${userId}`,
+          `http://192.168.3.6:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();

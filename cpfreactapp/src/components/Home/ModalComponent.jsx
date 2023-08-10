@@ -1,6 +1,10 @@
-import { format } from 'date-fns';
 import React, { useState } from "react";
+
 import stylesmodal from "./ModalComponent.module.css";
+
+import { format } from 'date-fns';
+
+import { toast } from "react-toastify";
 
 export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
 
@@ -45,7 +49,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
         body: JSON.stringify(register),
       };
   
-      const response = await fetch(`http://10.10.29.76:8080/register/${typeUrl}`, options);
+      const response = await fetch(`http://192.168.3.6:8080/register/${typeUrl}`, options);
       const data = await response.json();
       console.log('Resposta do servidor:', data);
       return data;
@@ -61,6 +65,16 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
     const info = await sendRequest();
     onSubmit(info);
     closeAddModal(false);
+    toast.success("Cadastro realizado com sucesso!", {
+      position: "bottom-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (

@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 
 import stylesmodaledit from "./ModalEdit.module.css";
+
 import { format } from "date-fns";
 import { Context } from "../../Context";
+
+import { toast } from "react-toastify";
 
 export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
   const { userContext, setContext } = useContext(Context);
@@ -27,31 +30,36 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
   async function updateRegister() {
     try {
       const currentDate = new Date();
-      const formattedDate = format(currentDate, 'yyyy-MM-dd');
+      const formattedDate = format(currentDate, "yyyy-MM-dd");
 
       const newRegister = {
         id: formState.id,
-        registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(2),
+        registerValue: parseFloat(formState.amount.replace(",", ".")).toFixed(
+          2
+        ),
         description: formState.description,
         regGroupType: formState.category,
-        registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
+        registerType: formState.type === "Entrada" ? "INCOME" : "COST",
         balance: 0,
         user: user,
         registerDate: formattedDate,
       };
 
       const options = {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(newRegister),
       };
 
-      const response = await fetch(`http://10.10.29.76:8080/register/update`, options);
+      const response = await fetch(
+        `http://192.168.3.6:8080/register/update`,
+        options
+      );
       return await response.json();
     } catch (error) {
-      console.error('Erro na solicitação:', error);
+      console.error("Erro na solicitação:", error);
       throw error;
     }
   }
@@ -63,6 +71,16 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
     onSubmit(newRegister);
 
     closeEditModal(false);
+    toast.success("Registro atualizado com sucesso!", {
+      position: "bottom-right",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
 
   return (
@@ -131,12 +149,8 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                   <option value="" disabled selected>
                     Selecione...
                   </option>
-                  <option value="Entrada">
-                    Entrada
-                  </option>
-                  <option value="Saida">
-                    Saída
-                  </option>
+                  <option value="Entrada">Entrada</option>
+                  <option value="Saida">Saída</option>
                 </select>
               </div>
             </div>
