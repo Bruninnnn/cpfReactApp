@@ -10,6 +10,7 @@ import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
+import DataUsageIcon from '@mui/icons-material/DataUsage';
 
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../Context";
@@ -49,7 +50,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://192.168.3.6:8080/register/delete`,
+        `http://192.168.3.11:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -110,7 +111,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://192.168.3.6:8080/register/registers?userId=${userId}`,
+          `http://192.168.3.11:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -182,6 +183,16 @@ function Home() {
                 {/* <p>Add</p> */}
                 {"Add"}
               </button>
+            </li>
+          </ul>
+          <ul>
+            <li className={styles.option}>
+              <Link to="/analystics">
+                <span>
+                <DataUsageIcon className={styles.icon} />
+                </span>
+                {"Analystics"}
+              </Link>
             </li>
           </ul>
           <ul>
