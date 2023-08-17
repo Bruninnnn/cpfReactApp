@@ -47,7 +47,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://10.10.29.76:8080/register/delete`,
+        `http://10.10.29.67:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -98,7 +98,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://10.10.29.76:8080/register/registers?userId=${userId}`,
+          `http://10.10.29.67:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();

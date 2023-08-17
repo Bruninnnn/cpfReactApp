@@ -37,7 +37,7 @@ function FormLogin() {
 
   async function requestUser() {
     const urlTemplate =
-      "http://10.10.29.76:8080/user/findUser?email=${email}&password=${password}";
+      "http://10.10.29.67:8080/user/findUser?email=${email}&password=${password}";
     const url = urlTemplate
       .replace("${email}", encodeURIComponent(email))
       .replace("${password}", encodeURIComponent(password));
