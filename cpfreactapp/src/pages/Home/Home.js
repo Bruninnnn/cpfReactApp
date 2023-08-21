@@ -176,14 +176,6 @@ function Home() {
           </div>
           <ul>
             <li className={styles.option}>
-              <Button
-                variant="contained"
-                startIcon={<AddCircleOutlineOutlinedIcon />}
-                color="white"
-                onClick={() => setModalAddOpen(true)}
-              >
-                Add
-              </Button>
               <button>
                 <span>
                   <AddCircleOutlineOutlinedIcon className={styles.icon} />
@@ -289,6 +281,14 @@ function Home() {
           deleteRow={handleDeleteRow}
           editRow={handleEditRow}
         />
+        <Button
+          variant="contained"
+          startIcon={<AddCircleOutlineOutlinedIcon />}
+          color="white"
+          onClick={() => setModalAddOpen(true)}
+        >
+          Add
+        </Button>
       </main>
     </div>
   );
