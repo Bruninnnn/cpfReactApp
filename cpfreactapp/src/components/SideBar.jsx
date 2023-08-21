@@ -3,14 +3,13 @@ import { React } from "react";
 import styles from "./SideBar.module.css";
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+
 import DataUsageIcon from '@mui/icons-material/DataUsage';
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 function SideBar() {
   return (
-    <></>
-    /*<div className={styles.header}>
+    <div className={styles.header}>
       <div className={styles.side_nav}>
         <div className={styles.menu}>
           <span>
@@ -18,16 +17,6 @@ function SideBar() {
           </span>
           <h2>MENU</h2>
         </div>
-        <ul>
-          <li className={styles.option}>
-            <button onClick={() => setModalAddOpen(true)}>
-              <span>
-                <AddCircleOutlineOutlinedIcon className={styles.icon} />
-              </span>
-              {"Add"}
-            </button>
-          </li>
-        </ul>
         <ul>
           <li className={styles.option}>
             <Link to="/analystics">
@@ -61,7 +50,7 @@ function SideBar() {
           </li>
         </ul>
       </div>
-    </div>*/
+    </div>
   );
 }
 

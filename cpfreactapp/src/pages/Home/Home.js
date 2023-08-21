@@ -86,12 +86,12 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow;
+        rows.map((currRow, idx) => {
+          if (idx !== rowToEdit) return currRow;
 
-            return newRow;
-          })
-        );
+          return newRow;
+        })
+      );
   };
 
   const [receipt, setReceipt] = useState();
@@ -176,7 +176,15 @@ function Home() {
           </div>
           <ul>
             <li className={styles.option}>
-              <button onClick={() => setModalAddOpen(true)}>
+              <Button
+                variant="contained"
+                startIcon={<AddCircleOutlineOutlinedIcon />}
+                color="white"
+                onClick={() => setModalAddOpen(true)}
+              >
+                Add
+              </Button>
+              <button>
                 <span>
                   <AddCircleOutlineOutlinedIcon className={styles.icon} />
                 </span>
