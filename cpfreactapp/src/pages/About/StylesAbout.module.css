@@ -1,0 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+}
+
+.modal_container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  width: 85%;
+  height: 70vh;
+  border-radius: 1rem;
+  padding: 2rem;
+  background-color: #131316;
+  border: 2px solid #1e1e24;
+}
+
+.center {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.center img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.btn_cancel {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background-color: #1e1e24;
+  padding: 0.2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.btn {
+  width: 6%;
+  height: 6%;
+  color: #fff;
+  border-radius: 1rem;
+  background-color: #1e1e24;
+  cursor: pointer;
+  margin-right: 1rem;
+  margin-left: 2rem;
+}
+
+.img {
+  width: 8rem;
+  height: 8rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.text_h1 {
+  text-align: center;
+}
+
+.text_h1 strong {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 900;
+}
+
+h2 strong {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 900;
+  padding-left: 0.8rem;
+}
+
+p {
+  font-family: 'Quicksand', sans-serif;
+  margin-bottom: 0.4rem;
+  padding-left: 2.5rem;
+  text-align: left;  
+}
+
+div:not(.center) h2 {
+  margin-bottom: 0.5rem;
+}
