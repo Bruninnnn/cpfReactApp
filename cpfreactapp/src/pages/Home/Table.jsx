@@ -11,7 +11,6 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 export const Table = ({ rows, deleteRow, editRow }) => {
   return (
     <div className={stylestable.recent_orders}>
-      <h2>Extrato</h2>
       <table>
         <thead>
           <tr>

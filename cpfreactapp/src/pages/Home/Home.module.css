@@ -75,6 +75,29 @@ small {
   margin-top: 0.6rem;
 }
 
+.darkButton {
+  background-color: #0a5c5a;
+  border-bottom: 1px solid #1e1e1e;
+  color: #ffffff;
+  height: 2rem;
+  width: 4rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 20px #1e1e24;
+  
+}
+
+.darkButton:hover {
+  box-shadow: none;
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3.5rem;
+  padding-right: 10rem;
+  padding-bottom: 0.2rem;
+}
+
 .side_nav {
   width: 7rem;
   height: 100%;
