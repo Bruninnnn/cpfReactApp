@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button } from "@mui/material";
-
 
 import styles from "./Home.module.css";
 
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
 
-import { Table } from "./Table";
 import { Context } from "../../Context";
+import { Table } from "./Table";
 
+import AddIcon from "@mui/icons-material/Add";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+import DataUsageIcon from "@mui/icons-material/DataUsage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
-import DataUsageIcon from "@mui/icons-material/DataUsage";
 
 function Home() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
@@ -52,7 +51,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://192.168.3.11:8080/register/delete`,
+        `http://10.10.30.227:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -88,12 +87,12 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-        rows.map((currRow, idx) => {
-          if (idx !== rowToEdit) return currRow;
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow;
 
-          return newRow;
-        })
-      );
+            return newRow;
+          })
+        );
   };
 
   const [receipt, setReceipt] = useState();
@@ -113,7 +112,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://192.168.3.11:8080/register/registers?userId=${userId}`,
+          `http://10.10.30.227:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -176,16 +175,6 @@ function Home() {
             </span>
             <h2>MENU</h2>
           </div>
-          <ul>
-            <li className={styles.option}>
-              <button>
-                <span>
-                  <AddCircleOutlineOutlinedIcon className={styles.icon} />
-                </span>
-                {"Add"}
-              </button>
-            </li>
-          </ul>
           <ul>
             <li className={styles.option}>
               <Link to="/analystics">
@@ -278,19 +267,20 @@ function Home() {
             userContext={userContext}
           />
         )}
+        <div className={styles.btnDiv}>
+          <button
+            className={styles.darkButton}
+            onClick={() => setModalAddOpen(true)}
+          >
+            <AddIcon />
+          </button>
+        </div>
+
         <Table
           rows={rows}
           deleteRow={handleDeleteRow}
           editRow={handleEditRow}
         />
-        <Button
-          variant="contained"
-          startIcon={<AddCircleOutlineOutlinedIcon />}
-          color="white"
-          onClick={() => setModalAddOpen(true)}
-        >
-          Add
-        </Button>
       </main>
     </div>
   );
