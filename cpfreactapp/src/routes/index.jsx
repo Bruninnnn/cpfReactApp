@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 
-import MyDatePicker from "../components/DatePicker/MyDatePicker";
 import AboutTech from "../pages/About/AboutTech";
 import Analystics from "../pages/Analystics/Analystics";
 import Home from "../pages/Home/Home";
@@ -15,7 +14,6 @@ export function AppRoutes() {
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/aboutTech" element={<AboutTech />} />
       <Route path="/analystics" element={<Analystics />} />
-      <Route path="/date" element={<MyDatePicker />} />
     </Routes>
   );
 }
