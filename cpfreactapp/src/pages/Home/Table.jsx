@@ -7,7 +7,6 @@ import CreateIcon from "@mui/icons-material/Create";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 
-
 export const Table = ({ rows, deleteRow, editRow }) => {
   return (
     <div className={stylestable.recent_orders}>
@@ -25,10 +24,24 @@ export const Table = ({ rows, deleteRow, editRow }) => {
           {rows.map((row, idx) => {
             return (
               <tr key={idx}>
-                <td>{parseFloat(row.registerValue).toFixed(2)}</td>
+                <td>
+                  {row.registerValue.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                    minimumFractionDigits: 2,
+                  })}
+                </td>
                 <td>{row.description}</td>
                 <td>{row.regGroupType}</td>
-                <td>{row.registerType === "INCOME" ? <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} /> : <KeyboardArrowDownOutlinedIcon style={{ fill: "#5A2036" }} />}</td>
+                <td>
+                  {row.registerType === "INCOME" ? (
+                    <KeyboardArrowUpOutlinedIcon style={{ fill: "#0a5c5a" }} />
+                  ) : (
+                    <KeyboardArrowDownOutlinedIcon
+                      style={{ fill: "#5A2036" }}
+                    />
+                  )}
+                </td>
                 <td>
                   <span className={stylestable.actions}>
                     <DeleteForeverIcon

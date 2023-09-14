@@ -105,7 +105,7 @@ function RegisterForm() {
     };
 
     const response = await fetch(
-      "http://10.10.30.227:8080/user/registerUser",
+      "http://10.10.28.115:8080/user/registerUser",
       options
     )
       .then((response) => response.json())
