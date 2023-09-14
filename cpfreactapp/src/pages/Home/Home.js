@@ -11,7 +11,6 @@ import { Context } from "../../Context";
 import { Table } from "./Table";
 
 import AddIcon from "@mui/icons-material/Add";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
@@ -212,6 +211,9 @@ function Home() {
       {/*<Sidebar />*/}
       <main>
         <h1>Controle Financeiro Pessoal</h1>
+        <div className={styles.month}>
+          <input type="month"></input>
+        </div>
         <div className={styles.balances}>
           <div className={styles.receipt}>
             <span>
