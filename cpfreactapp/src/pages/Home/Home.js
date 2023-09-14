@@ -11,7 +11,6 @@ import { Context } from "../../Context";
 import { Table } from "./Table";
 
 import AddIcon from "@mui/icons-material/Add";
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
@@ -51,7 +50,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://10.10.30.227:8080/register/delete`,
+        `http://10.10.28.115:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -112,7 +111,7 @@ function Home() {
         };
 
         const response = await fetch(
-          `http://10.10.30.227:8080/register/registers?userId=${userId}`,
+          `http://10.10.28.115:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -177,7 +176,7 @@ function Home() {
           </div>
           <ul>
             <li className={styles.option}>
-              <Link to="/analystics">
+              <Link to="/date">
                 <span>
                   <DataUsageIcon className={styles.icon} />
                 </span>

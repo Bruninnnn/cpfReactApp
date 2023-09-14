@@ -54,7 +54,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
       };
 
       const response = await fetch(
-        `http://10.10.30.227:8080/register/update`,
+        `http://10.10.28.115:8080/register/update`,
         options
       );
       return await response.json();
