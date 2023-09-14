@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap");
 
+:root {
+  --color-background: #09090b;
+  --color-secondary: #131316;
+  --color-t: ;
+
+  --color-receipt: #0a5c5a;
+  --color-cost: #3c1f2d;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -22,7 +31,7 @@ body {
   font-size: 0.88rem;
   margin: 0;
   color: #ffffff;
-  background-color: #09090b;
+  background-color: var(--color-background);
   user-select: none;
   overflow-x: hidden;
 }
@@ -83,7 +92,7 @@ small {
   width: 4rem;
   border-radius: 1rem;
   box-shadow: 0px 0px 20px #1e1e24;
-  
+
 }
 
 .darkButton:hover {
@@ -137,7 +146,7 @@ small {
   width: 100%;
 }
 
-.menu > h2 {
+.menu>h2 {
   opacity: 0;
 }
 
@@ -155,7 +164,7 @@ small {
   margin-right: auto;
 }
 
-.search-box > input {
+.search-box>input {
   width: 100%;
   height: 2.6rem;
   color: #ffffff;
@@ -166,7 +175,7 @@ small {
   opacity: 0;
 }
 
-.search-box > span {
+.search-box>span {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -220,7 +229,7 @@ ul:hover li:hover {
   width: 14rem;
 }
 
-.side_nav:hover .menu > h2 {
+.side_nav:hover .menu>h2 {
   opacity: 1;
 }
 
@@ -232,7 +241,7 @@ ul:hover li:hover {
   flex-direction: row;
 }
 
-.side_nav:hover .search-box > input {
+.side_nav:hover .search-box>input {
   opacity: 1;
 }
 
@@ -257,6 +266,29 @@ main {
   width: 75vw;
 }
 
+main .month {
+  display: inline-block;
+  margin-top: 1rem;
+  border-radius: 2rem;
+}
+
+main .month input[type='month'] {
+  transition: all 450ms ease;
+  background: transparent;
+  background-color: var(--color-secondary);
+  color: #ffffff;
+  border-radius: 0.8rem;
+  border: 1px solid #1e1e1e;
+  padding: 0.3rem;
+  text-align: center;
+  box-shadow: 0px 0px 20px #1e1e24;
+}
+
+main .month input[type='month']:hover {
+  transition: all 450ms ease;
+  box-shadow: none;
+}
+
 main .balances {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -264,8 +296,8 @@ main .balances {
   margin-top: 2.5rem;
 }
 
-main .balances > div {
-  background-color: #131316;
+main .balances>div {
+  background-color: var(--color-secondary);
   padding: 5%;
   width: 15vw;
   height: 20vh;
@@ -276,11 +308,11 @@ main .balances > div {
   transition: all 300ms ease;
 }
 
-main .balances > div:hover {
+main .balances>div:hover {
   box-shadow: none;
 }
 
-main .balances > div span svg {
+main .balances>div span svg {
   background: #1e1e24;
   padding: 0.6rem;
   border-radius: 100%;
@@ -289,24 +321,24 @@ main .balances > div span svg {
   margin-bottom: 0.4rem;
 }
 
-main .balances > div.receipt span svg {
-  background: #0a5c5a;
+main .balances>div.receipt span svg {
+  background: var(--color-receipt);
 }
 
-main .balances > div.cost span svg {
-  background: #3c1f2d;
+main .balances>div.cost span svg {
+  background: var(--color-cost);
   justify-content: center;
   text-align: center;
 }
 
-main .balances > div h3 {
+main .balances>div h3 {
   padding-left: 0.5rem;
   padding-bottom: 0.2rem;
   font-size: 1rem;
   margin-top: 0.1rem;
 }
 
-main .balances > div h1 {
+main .balances>div h1 {
   padding-left: 0.5rem;
 }
 
@@ -321,7 +353,7 @@ main .recent_orders h2 {
 }
 
 main .recent_orders table {
-  background-color: #131316;
+  background-color: var(--color-secondary);
   width: 66vw;
   border-radius: 0.8rem;
   border: 1px solid #1e1e1e;
@@ -347,8 +379,8 @@ main table tbody td {
   border-bottom: 2px solid #1e1e24;
 }
 
-.keyboardUp > svg {
-  color: #0a5c5a;
+.keyboardUp>svg {
+  color: var(--color-cost);
   filter: url(#inset-shadow);
 }
 
@@ -360,30 +392,30 @@ main table tbody td {
   text-align: center;
 }
 
-.keyboardDown > svg {
+.keyboardDown>svg {
   color: #750a0a;
 }
 
 /* - Dialog/Modal - */
 
 .dialogTitle {
-  background-color: #131316;
+  background-color: var(--color-secondary);
   border-bottom: 1px solid #1e1e1e;
   color: #ffffff;
 }
 
 .dialogContent {
-  background-color: #131316;
+  background-color: var(--color-secondary);
   color: #ffffff;
 }
 
 .dialogActions {
   display: flex;
   justify-content: flex-end;
-  background-color: #131316;
+  background-color: var(--color-secondary); 
   border-top: 1px solid #1e1e1e;
 }
 
-.dialogActions > button {
+.dialogActions>button {
   color: #ffffff;
 }
