@@ -1,4 +1,7 @@
-import { React } from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+
+import { Context } from ".././Context";
 
 import styles from "./SideBar.module.css";
 
@@ -8,6 +11,8 @@ import DataUsageIcon from '@mui/icons-material/DataUsage';
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 function SideBar() {
+  const { userContext, setContext } = useContext(Context);
+
   return (
     <div className={styles.header}>
       <div className={styles.side_nav}>
