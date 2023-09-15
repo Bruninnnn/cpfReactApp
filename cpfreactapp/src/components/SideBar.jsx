@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from ".././Context";
 
-import styles from "./SideBar.module.css";
-
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
-import DataUsageIcon from '@mui/icons-material/DataUsage';
+import DataUsageIcon from "@mui/icons-material/DataUsage";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+
+import styles from "./SideBar.module.css";
 
 function SideBar() {
   const { userContext, setContext } = useContext(Context);
@@ -27,8 +25,8 @@ function SideBar() {
             <Link to="/analystics">
               <span>
                 <DataUsageIcon className={styles.icon} />
+                <p>Analystics</p>
               </span>
-              {"Analystics"}
             </Link>
           </li>
         </ul>

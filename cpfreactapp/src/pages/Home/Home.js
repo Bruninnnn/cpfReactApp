@@ -6,6 +6,7 @@ import styles from "./Home.module.css";
 
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
+import SideBar from "../../components/SideBar";
 
 import { Context } from "../../Context";
 import { Table } from "./Table";
@@ -166,7 +167,7 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      {/*<div className={styles.header}>
         <div className={styles.side_nav}>
           <div className={styles.menu}>
             <span>
@@ -207,12 +208,12 @@ function Home() {
             </li>
           </ul>
         </div>
-      </div>
-      {/*<Sidebar />*/}
+      </div>*/}
+      <SideBar />
       <main>
         <h1>Controle Financeiro Pessoal</h1>
         <div className={styles.month}>
-          <input type="month"></input>
+          <input type="month" ></input>
         </div>
         <div className={styles.balances}>
           <div className={styles.receipt}>
