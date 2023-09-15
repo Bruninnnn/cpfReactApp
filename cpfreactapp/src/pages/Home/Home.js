@@ -176,7 +176,7 @@ function Home() {
           </div>
           <ul>
             <li className={styles.option}>
-              <Link to="/date">
+              <Link to="/analystics">
                 <span>
                   <DataUsageIcon className={styles.icon} />
                 </span>
