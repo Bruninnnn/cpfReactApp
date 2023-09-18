@@ -15,8 +15,8 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
     defaultValue || {
       amount: "",
       description: "",
-      category: "",
-      type: "",
+      regGroupType: "",
+      registerType: "",
     }
   );
 
@@ -38,13 +38,13 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
           2
         ),
         description: formState.description,
-        regGroupType: formState.category,
+        regGroupType: formState.regGroupType,
         registerType: formState.type === "Entrada" ? "INCOME" : "COST",
         balance: 0,
         user: user,
         registerDate: formattedDate,
       };
-
+      console.log(defaultValue);
       const options = {
         method: "PUT",
         headers: {
@@ -92,7 +92,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         <form>
           <div className={stylesmodaledit.main_imputs}>
             <div className={stylesmodaledit.textfield}>
-              <label htmlFor="value">Valor:</label>
+              <label htmlFor="amount">Valor:</label>
               <input
                 type="text"
                 placeholder="0,00"
@@ -114,12 +114,12 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
               />
             </div>
             <div className={stylesmodaledit.textfield}>
-              <label htmlFor="category">Categoria</label>
+              <label htmlFor="regGroupType">Categoria</label>
               <div className={stylesmodaledit.textfield_category}>
                 <select
-                  name="category"
-                  id="category"
-                  value={formState.category}
+                  name="regGroupType"
+                  id="regGroupType"
+                  value={formState.regGroupType}
                   onChange={handleChangeEdit}
                   required
                 >

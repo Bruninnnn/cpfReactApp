@@ -167,48 +167,6 @@ function Home() {
 
   return (
     <div className={styles.container}>
-      {/*<div className={styles.header}>
-        <div className={styles.side_nav}>
-          <div className={styles.menu}>
-            <span>
-              <MenuOutlinedIcon />
-            </span>
-            <h2>MENU</h2>
-          </div>
-          <ul>
-            <li className={styles.option}>
-              <Link to="/analystics">
-                <span>
-                  <DataUsageIcon className={styles.icon} />
-                </span>
-                {"Analystics"}
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/aboutTech">
-                <span></span>
-                <p></p>
-                {"Tecnologia"}
-              </Link>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link to="/">
-                <span
-                  onClick={() => {
-                    setContext(null);
-                  }}
-                >
-                  <ExitToAppOutlinedIcon className={styles.icon} />
-                </span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>*/}
       <SideBar />
       <main>
         <h1>Controle Financeiro Pessoal</h1>

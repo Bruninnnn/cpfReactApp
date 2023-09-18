@@ -4,6 +4,7 @@ import { Context } from ".././Context";
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
+import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import styles from "./SideBar.module.css";
@@ -33,9 +34,10 @@ function SideBar() {
         <ul>
           <li>
             <Link to="/aboutTech">
-              <span></span>
-              <p></p>
-              {"Tecnologia"}
+              <span>
+                <PrecisionManufacturingIcon />
+                <p>Tecnologia</p>
+              </span>
             </Link>
           </li>
         </ul>
@@ -48,6 +50,7 @@ function SideBar() {
                 }}
               >
                 <ExitToAppOutlinedIcon className={styles.icon} />
+                <p>Sair</p>
               </span>
             </Link>
           </li>
