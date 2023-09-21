@@ -32,7 +32,7 @@ main .recent_users td {
   font-size: 1rem;
   letter-spacing: 1.6px;
   text-overflow: ellipsis; /* adiciona “...” no final */
-  -webkit-line-clamp: 2; /* quantidade de linhas */
+  -webkit-line-clamp: 1; /* quantidade de linhas */
   -webkit-box-orient: vertical; /* conteúdo será apresentado verticalmente */
 }
 

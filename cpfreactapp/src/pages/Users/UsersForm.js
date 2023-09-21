@@ -5,7 +5,8 @@ import styles from "./UsersForm.module.css";
 import UserTable from "./UserTable";
 
 function UsersForm() {
-  const row = [];
+  
+  const rows = [];
   const person1 = { id: 1, name: "Teste", email: "teste@gmail.com" };
   const person2 = { id: 1, name: "Teste", email: "teste@gmail.com" };
   const person3 = { id: 1, name: "Teste", email: "teste@gmail.com" };
@@ -17,7 +18,7 @@ function UsersForm() {
   const person9 = { id: 1, name: "Teste", email: "teste@gmail.com" };
   const person10 = { id: 1, name: "Teste", email: "teste@gmail.com" };
 
-  row.push(
+  rows.push(
     person1,
     person2,
     person3,
@@ -35,7 +36,7 @@ function UsersForm() {
       <main>
         <h1>Lista de Usuários</h1>
         <div className={styles.tableUsers}>
-          <UserTable rows={row} />
+          <UserTable rows={rows} />
         </div>
       </main>
     </div>

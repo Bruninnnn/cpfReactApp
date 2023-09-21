@@ -74,8 +74,8 @@ small {
 }
 
 .tableUsers {
-    display: relative;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3rem;
+  display: relative;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
 }

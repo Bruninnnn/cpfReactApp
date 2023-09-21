@@ -2,7 +2,7 @@ import { React } from "react";
 
 import stylestable from "./UserTable.module.css";
 
-export const UserTable = ({ rows, deleteRow, editRow }) => {
+export const UserTable = ({ rows, deleteRow }) => {
   return (
     <div className={stylestable.recent_users}>
       <table>
@@ -20,11 +20,6 @@ export const UserTable = ({ rows, deleteRow, editRow }) => {
                 <td>{row.id}</td>
                 <td>{row.name}</td>
                 <td>{row.email}</td>
-                <td>
-                  {row.registerType === "INCOME" }
-                </td>
-                <td>
-                </td>
               </tr>
             );
           })}
@@ -32,6 +27,6 @@ export const UserTable = ({ rows, deleteRow, editRow }) => {
       </table>
     </div>
   );
-}
+};
 
 export default UserTable;
