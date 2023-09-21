@@ -10,7 +10,7 @@ import { ResponsivePieCanvas } from "@nivo/pie";
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const PieChart = ({ data /* see data tab */ }) => (
-  <ResponsivePieCanvas
+  {/* <ResponsivePieCanvas
     data={data}
     margin={{ top: 40, right: 200, bottom: 40, left: 80 }}
     innerRadius={0.5}
@@ -115,7 +115,7 @@ const PieChart = ({ data /* see data tab */ }) => (
         symbolShape: "circle",
       },
     ]}
-  />
+  /> */}
 );
 
 export default PieChart;

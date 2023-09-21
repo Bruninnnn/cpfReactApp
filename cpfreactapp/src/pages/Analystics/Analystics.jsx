@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import SideBar from "../../components/SideBar";
 
 import styles from "./Analystics.module.css";
-import PieChart from "../../components/PieChart";
+/* import PieChart from "../../components/PieChart"; */
 
 function Analystics() {
   // Array que passa os dados para o cálculo do gráfico //
@@ -58,7 +58,13 @@ function Analystics() {
             />
           </div>
           <div className={styles.rowTwo}>
-            <PieChart />
+            <Chart
+              chartType="PieChart"
+              width="100%"
+              height="100%"
+              data={data}
+              options={options}
+            />
           </div>
           <div className={styles.rowThree}>
             <Chart
