@@ -3,6 +3,7 @@ import { Chart } from "react-google-charts";
 import SideBar from "../../components/SideBar";
 
 import styles from "./Analystics.module.css";
+import PieCharts from "../../components/PieCharts";
 /* import PieChart from "../../components/PieChart"; */
 
 function Analystics() {
@@ -49,31 +50,27 @@ function Analystics() {
         <h1>Analystics</h1>
         <div className={styles.tableAnalystic}>
           <div className={styles.rowOne}>
-            <Chart
+            {/* <Chart
               chartType="PieChart"
               width="100%"
               height="200%"
               data={data}
               options={options}
-            />
+            /> */}
+            <PieCharts />
           </div>
           <div className={styles.rowTwo}>
-            <Chart
-              chartType="PieChart"
-              width="100%"
-              height="100%"
-              data={data}
-              options={options}
-            />
+            <PieCharts />
           </div>
           <div className={styles.rowThree}>
-            <Chart
+            <PieCharts />
+            {/* <Chart
               chartType="PieChart"
               width="100%"
               height="100%"
               data={data}
               options={options}
-            />
+            /> */}
           </div>
         </div>
       </main>
