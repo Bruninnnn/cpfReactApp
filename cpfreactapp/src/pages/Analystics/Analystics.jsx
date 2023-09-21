@@ -1,5 +1,6 @@
 import React from "react";
 import { Chart } from "react-google-charts";
+import SideBar from "../../components/SideBar";
 
 import styles from "./Analystics.module.css";
 
@@ -42,6 +43,7 @@ function Analystics() {
 
   return (
     <div className={styles.container}>
+      <SideBar />
       <Chart
         chartType="PieChart"
         width="200%"
