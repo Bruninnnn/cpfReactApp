@@ -1,7 +1,10 @@
 import React from "react";
 import { Chart } from "react-google-charts";
+import SideBar from "../../components/SideBar";
 
 import styles from "./Analystics.module.css";
+import PieCharts from "../../components/PieCharts";
+/* import PieChart from "../../components/PieChart"; */
 
 function Analystics() {
   // Array que passa os dados para o cálculo do gráfico //
@@ -17,13 +20,13 @@ function Analystics() {
   const options = {
     pieHole: 0.5,
     is3D: false,
-    backgroundColor: "#09090b",
+    backgroundColor: "",
     tooltip: {
       textStyle: {
         color: "#09090b",
       },
       trigger: "hover",
-      backgroundColor: "#f0fd"
+      backgroundColor: "#f0fd",
     },
     pieSliceText: "none",
     pieSliceBorderColor: "#09090b",
@@ -36,19 +39,41 @@ function Analystics() {
     },
     slices: [{ color: "#0a5c5a" }, {}, {}, { color: "#3c1f2d" }],
     chartArea: {
-        backgroundColor: "#09090b",
-    }
+      backgroundColor: "#09090b",
+    },
   };
 
   return (
     <div className={styles.container}>
-      <Chart
-        chartType="PieChart"
-        width="200%"
-        height="400px"
-        data={data}
-        options={options}
-      />
+      <SideBar />
+      <main>
+        <h1>Analystics</h1>
+        <div className={styles.tableAnalystic}>
+          <div className={styles.rowOne}>
+            {/* <Chart
+              chartType="PieChart"
+              width="100%"
+              height="200%"
+              data={data}
+              options={options}
+            /> */}
+            <PieCharts />
+          </div>
+          <div className={styles.rowTwo}>
+            <PieCharts />
+          </div>
+          <div className={styles.rowThree}>
+            <PieCharts />
+            {/* <Chart
+              chartType="PieChart"
+              width="100%"
+              height="100%"
+              data={data}
+              options={options}
+            /> */}
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

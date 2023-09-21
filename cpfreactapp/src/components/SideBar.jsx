@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-
 import { Context } from ".././Context";
 
-import styles from "./SideBar.module.css";
-
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
-import DataUsageIcon from '@mui/icons-material/DataUsage';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import DataUsageIcon from "@mui/icons-material/DataUsage";
+import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
+import RecentActorsIcon from '@mui/icons-material/RecentActors';
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+
+import styles from "./SideBar.module.css";
 
 function SideBar() {
   const { userContext, setContext } = useContext(Context);
@@ -23,21 +24,42 @@ function SideBar() {
           <h2>MENU</h2>
         </div>
         <ul>
+          <li>
+            <Link to="/home">
+              <span>
+                <DashboardIcon />
+                <p>Cadastro</p>
+              </span>
+            </Link>
+          </li>
+        </ul>
+        <ul>
           <li className={styles.option}>
             <Link to="/analystics">
               <span>
                 <DataUsageIcon className={styles.icon} />
+                <p>Analystics</p>
               </span>
-              {"Analystics"}
             </Link>
           </li>
         </ul>
         <ul>
           <li>
             <Link to="/aboutTech">
-              <span></span>
-              <p></p>
-              {"Tecnologia"}
+              <span>
+                <PrecisionManufacturingIcon />
+                <p>Tecnologia</p>
+              </span>
+            </Link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <Link to="/list">
+              <span>
+               <RecentActorsIcon />
+               <p>Lista Usuários</p>
+              </span>
             </Link>
           </li>
         </ul>
@@ -50,6 +72,7 @@ function SideBar() {
                 }}
               >
                 <ExitToAppOutlinedIcon className={styles.icon} />
+                <p>Sair</p>
               </span>
             </Link>
           </li>
