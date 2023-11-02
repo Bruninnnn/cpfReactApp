@@ -21,7 +21,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, idx) => {
+          {rows?.map((row, idx) => {
             return (
               <tr key={idx}>
                 <td>

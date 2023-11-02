@@ -20,6 +20,7 @@ function FormLogin() {
   const handleChangePassword = (event) => setPassword(event.target.value);
 
   const [errors, setErrors] = useState({});
+  const { IP } = require("../../env");
 
   useEffect(() => {
     if (Object.keys(errors).length === 0 && email !== "" && password !== "") {
@@ -37,11 +38,8 @@ function FormLogin() {
   }
 
   async function requestUser() {
-    const urlTemplate =
-      "http://10.10.30.105:8080/user/findUser?email=${email}&password=${password}";
-    const url = urlTemplate
-      .replace("${email}", encodeURIComponent(email))
-      .replace("${password}", encodeURIComponent(password));
+    const urlTemplate = `http://${IP}:8080/user/findUser?email=${email}&password=${password}`;
+    const url = urlTemplate;
 
     const user = await fetch(url, {
       headers: {

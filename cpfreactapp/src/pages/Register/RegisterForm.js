@@ -19,7 +19,9 @@ function RegisterForm() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
+  const { IP } = require("../../env");
 
+  console.log(IP);
   const handleChangeName = (event) => setFullName(event.target.value);
 
   const handleChangeBirthDate = (event) => setBirthDate(event.target.value);
@@ -95,6 +97,7 @@ function RegisterForm() {
       email: email,
       password: password,
       address: address,
+      isAdmin: 0,
     };
     defineLocalStorage(user);
     const userObject = await requestUser(user);
@@ -110,10 +113,7 @@ function RegisterForm() {
       body: JSON.stringify(user),
     };
 
-    const response = await fetch(
-      "http://10.10.30.105:8080/user/registerUser",
-      options
-    )
+    const response = await fetch(`http://${IP}:8080/user/registerUser`, options)
       .then((response) => response.json())
       .then((data) => {
         console.log("Resposta do servidor:", data);

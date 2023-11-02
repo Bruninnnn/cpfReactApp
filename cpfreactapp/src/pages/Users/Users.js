@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../../components/SideBar";
 
-import styles from "./UsersForm.module.css";
+import styles from "./Users.module.css";
 import UserTable from "./UserTable";
 
-function UsersForm() {
+function Users() {
   const [usersArray, setUsersArray] = useState();
 
   useEffect(() => {
@@ -28,4 +28,4 @@ function UsersForm() {
   );
 }
 
-export default UsersForm;
+export default Users;

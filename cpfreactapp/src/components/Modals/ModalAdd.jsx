@@ -7,6 +7,7 @@ import { format } from "date-fns";
 
 export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   const user = userContext;
+  const { IP } = require("../../env");
   const [formState, setFormState] = useState({
     amount: "",
     description: "",
@@ -48,7 +49,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
       };
 
       const response = await fetch(
-        `http://10.10.30.105:8080/register/${typeUrl}`,
+        `http://${IP}:8080/register/${typeUrl}`,
         options
       );
       const data = await response.json();
