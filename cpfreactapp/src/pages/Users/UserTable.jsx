@@ -11,15 +11,17 @@ export const UserTable = ({ rows, deleteRow }) => {
             <th>ID</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Data de Nascimento</th>
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, idx) => {
+          {rows?.map((row, idx) => {
             return (
               <tr key={idx}>
-                <td>{row.id}</td>
-                <td>{row.name}</td>
-                <td>{row.email}</td>
+                <td>{row?.id}</td>
+                <td>{row?.name}</td>
+                <td>{row?.email}</td>
+                <td>{row?.birthDate}</td>
               </tr>
             );
           })}

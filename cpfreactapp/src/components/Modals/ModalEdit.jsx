@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
   const { userContext, setContext } = useContext(Context);
   const user = userContext;
+  const { IP } = require("../../env");
 
   const [formState, setFormState] = useState(
     defaultValue || {
@@ -54,7 +55,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
       };
 
       const response = await fetch(
-        `http://192.168.3.11:8080/register/update`,
+        `http://${IP}:8080/register/update`,
         options
       );
       return await response.json();

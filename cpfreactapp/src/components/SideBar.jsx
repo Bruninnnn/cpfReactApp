@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { Context } from ".././Context";
 
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
-import RecentActorsIcon from '@mui/icons-material/RecentActors';
+import RecentActorsIcon from "@mui/icons-material/RecentActors";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import styles from "./SideBar.module.css";
@@ -33,6 +33,7 @@ function SideBar() {
             </Link>
           </li>
         </ul>
+        {userContext?.isAdmin && (
         <ul>
           <li className={styles.option}>
             <Link to="/analystics">
@@ -43,6 +44,7 @@ function SideBar() {
             </Link>
           </li>
         </ul>
+        )}
         <ul>
           <li>
             <Link to="/aboutTech">
@@ -53,16 +55,18 @@ function SideBar() {
             </Link>
           </li>
         </ul>
-        <ul>
-          <li>
-            <Link to="/list">
-              <span>
-               <RecentActorsIcon />
-               <p>Lista Usuários</p>
-              </span>
-            </Link>
-          </li>
-        </ul>
+        {userContext?.isAdmin && (
+          <ul>
+            <li>
+              <Link to="/list">
+                <span>
+                  <RecentActorsIcon />
+                  <p>Lista Usuários</p>
+                </span>
+              </Link>
+            </li>
+          </ul>
+        )}
         <ul>
           <li>
             <Link to="/">

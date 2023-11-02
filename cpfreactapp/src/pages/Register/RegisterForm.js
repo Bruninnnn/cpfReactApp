@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
   const [birthDate, setBirthDate] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("MALE");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [zipCode, setZipCode] = useState("");
@@ -19,7 +19,9 @@ function RegisterForm() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
+  const { IP } = require("../../env");
 
+  console.log(IP);
   const handleChangeName = (event) => setFullName(event.target.value);
 
   const handleChangeBirthDate = (event) => setBirthDate(event.target.value);
@@ -71,6 +73,12 @@ function RegisterForm() {
     setState(responseAddress?.uf);
   }
 
+  function defineLocalStorage(user) {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+  }
+
   async function sendRequest() {
     const address = {
       city: city,
@@ -84,13 +92,14 @@ function RegisterForm() {
 
     const user = {
       name: fullName,
-      gender: gender === "Masculino" ? "MALE" : "FEMALE",
+      gender: gender,
       birthDate: birthDate,
       email: email,
       password: password,
       address: address,
+      isAdmin: 0,
     };
-
+    defineLocalStorage(user);
     const userObject = await requestUser(user);
     return userObject;
   }
@@ -104,10 +113,7 @@ function RegisterForm() {
       body: JSON.stringify(user),
     };
 
-    const response = await fetch(
-      "http://192.168.3.11:8080/user/registerUser",
-      options
-    )
+    const response = await fetch(`http://${IP}:8080/user/registerUser`, options)
       .then((response) => response.json())
       .then((data) => {
         console.log("Resposta do servidor:", data);
@@ -159,8 +165,8 @@ function RegisterForm() {
                   required
                   onChange={handleChangeGender}
                 >
-                  <option value="op0">Masculino</option>
-                  <option value="op1">Feminino</option>
+                  <option value="MALE">Masculino</option>
+                  <option value="FEMALE">Feminino</option>
                 </select>
               </div>
 

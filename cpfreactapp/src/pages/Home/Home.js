@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import styles from "./Home.module.css";
@@ -13,9 +13,6 @@ import { Table } from "./Table";
 
 import AddIcon from "@mui/icons-material/Add";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import DataUsageIcon from "@mui/icons-material/DataUsage";
-import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
 import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
 
@@ -24,6 +21,7 @@ function Home() {
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const { userContext, setContext } = useContext(Context);
   const redirect = useNavigate();
+  const { IP } = require("../../env");
 
   function enter(userContext) {
     if (!userContext) {
@@ -51,7 +49,7 @@ function Home() {
       };
 
       const response = await fetch(
-        `http://192.168.3.11:8080/register/delete`,
+        `http://${IP}:8080/register/delete`,
         options
       );
       const data = await response.json();
@@ -97,22 +95,38 @@ function Home() {
 
   const [receipt, setReceipt] = useState();
   const [balance, setBalance] = useState();
+  const [calendar, setCalendar] = useState();
   const [cost, setCost] = useState();
+
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  async function filterCalendar(calendar) {
+    try {
+      const response = await fetch(
+        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
+        options
+      );
+
+      const responseData = await response.json();
+      setRows(responseData);
+      console.log(responseData);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userId = userContext?.id;
 
-        const options = {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-
         const response = await fetch(
-          `http://192.168.3.11:8080/register/registers?userId=${userId}`,
+          `http://${IP}:8080/register/registers?userId=${userId}`,
           options
         );
         const responseData = await response.json();
@@ -171,7 +185,14 @@ function Home() {
       <main>
         <h1>Controle Financeiro Pessoal</h1>
         <div className={styles.month}>
-          <input type="month" ></input>
+          <input
+            id="calendar"
+            type="month"
+            onChange={(e) => {
+              console.log(e.target.value);
+              filterCalendar(e.target.value);
+            }}
+          ></input>
         </div>
         <div className={styles.balances}>
           <div className={styles.receipt}>
