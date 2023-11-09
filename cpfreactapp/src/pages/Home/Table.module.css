@@ -1,45 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
 
 * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    appearance: none;
-    border: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  appearance: none;
+  border: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
 }
 
+tbody {
+  overflow: auto;
+  max-height: 640px;
+}
 
+.recent_orders {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 300px;
+  width: 66vw;
+  transition: all 500ms;
+  border-radius: 0.8rem;
+}
 
 main .recent_orders h2 {
-    margin-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 main .recent_orders table {
-    background-color: #131316;
-    width: 66vw;
-    border-radius: 0.8rem;
-    border: 1px solid #1e1e1e;
-    padding: 0.6rem; 
-    text-align: center;
-    box-shadow: 0px 0px 20px #1E1E24;
-    transition: all 300ms ease;
+  background-color: #131316;
+  width: 66vw;
+  height: auto;
+  border-radius: 0.8rem;
+  border: 1px solid #1e1e1e;
+  padding: 0.5rem;
+  text-align: center;
+  box-shadow: 0px 0px 20px #1E1E24;
+  transition: all 300ms ease;
 }
 
 main .recent_orders th {
-    font-size: 1rem;
-    letter-spacing: 2px;
+  font-size: 1rem;
+  letter-spacing: 2px;
 }
 
 main .recent_orders table:hover {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 main table tbody td {
-    color: #c9c9c9;
-    height: 3rem;
-    padding: 0.6rem;
-    border-bottom: 2px solid #1E1E24;
+  color: #c9c9c9;
+  height: 3rem;
+  padding: 0.6rem;
+  border-bottom: 2px solid #1E1E24;
 }

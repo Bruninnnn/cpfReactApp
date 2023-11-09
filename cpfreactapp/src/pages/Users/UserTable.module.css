@@ -11,9 +11,24 @@
   box-sizing: border-box;
 }
 
+tbody {
+  overflow: auto;
+  max-height: 640px;
+}
+
+.recent_users {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 640px;
+  width: 66vw;
+  border-radius: 0.8rem;
+  transition: all 500ms;
+}
+
 main .recent_users table {
   background-color: #131316;
   width: 66vw;
+  height: auto;
   border-radius: 0.8rem;
   border: 1px solid #1e1e1e;
   padding: 0.5rem;
@@ -31,9 +46,12 @@ main .recent_users th {
 main .recent_users td {
   font-size: 1rem;
   letter-spacing: 1.6px;
-  text-overflow: ellipsis; /* adiciona “...” no final */
-  -webkit-line-clamp: 1; /* quantidade de linhas */
-  -webkit-box-orient: vertical; /* conteúdo será apresentado verticalmente */
+  text-overflow: ellipsis;
+  /* adiciona “...” no final */
+  -webkit-line-clamp: 1;
+  /* quantidade de linhas */
+  -webkit-box-orient: vertical;
+  /* conteúdo será apresentado verticalmente */
 }
 
 main .recent_users table:hover {
