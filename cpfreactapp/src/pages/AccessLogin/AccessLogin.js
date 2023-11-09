@@ -1,4 +1,4 @@
-import styles from "./AccessLogin.module.css";
+/* import styles from "./AccessLogin.module.css";
 import React from "react";
 
 function AccessLogin() {
@@ -39,3 +39,4 @@ function AccessLogin() {
 }
 
 export default AccessLogin;
+ */

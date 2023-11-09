@@ -127,13 +127,18 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                   <option value="" disabled selected>
                     Selecione...
                   </option>
-                  <option value="Alimentação">Alimentação</option>
-                  <option value="Compras">Compras</option>
                   <option value="Casa">Casa</option>
-                  <option value="Saúde">Saúde</option>
+                  <option value="Educação">Educação</option>
+                  <option value="Eletrônicos">Eletrônicos</option>
                   <option value="Lazer">Lazer</option>
-                  <option value="Transporte">Transporte</option>
                   <option value="Outros">Outros</option>
+                  <option value="Restaurante">Restaurante</option>
+                  <option value="Saúde">Saúde</option>
+                  <option value="Serviços">Serviços</option>
+                  <option value="Supermercado">Supermercado</option>
+                  <option value="Transporte">Transporte</option>
+                  <option value="Vestuário">Vestuário</option>
+                  <option value="Viagem">Viagem</option>
                 </select>
               </div>
             </div>

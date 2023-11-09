@@ -15,9 +15,16 @@ import "react-toastify/dist/ReactToastify.css";
 function FormLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordShow, setPasswordShow] = useState(false);
 
   const handleChangeEmail = (event) => setEmail(event.target.value);
   const handleChangePassword = (event) => setPassword(event.target.value);
+  
+  const togglePassword = () => {
+    setPasswordShow(!passwordShow);
+  };
+
+  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   const [errors, setErrors] = useState({});
   const { IP } = require("../../env");
@@ -29,8 +36,6 @@ function FormLogin() {
 
   const { setContext } = useContext(Context);
   const navigate = useNavigate();
-
-  const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -111,7 +116,7 @@ function FormLogin() {
           <div className={styleslogin.input_box}>
             <label htmlFor="password">Senha</label>
             <input
-              type="password"
+              type={passwordShow ? "text" : "password"}
               id="password"
               name="password"
               placeholder="Informe sua senha"
@@ -127,8 +132,20 @@ function FormLogin() {
           <div className={styleslogin.textfield_remember}>
             <FormControlLabel
               value="start"
-              control={<Checkbox {...label} size="small" />}
-              label="Relembrar Senha"
+              control={
+                <Checkbox
+                  {...label}
+                  style={{
+                    color: "#0A5C5A",
+                  }}
+                  size="small"
+                />
+              }
+              label="Mostrar Senha"
+              style={{
+                color: "#FFFFFF",
+              }}
+              onClick={togglePassword}
             />
           </div>
           <br></br>
