@@ -20,8 +20,8 @@ function RegisterForm() {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const { IP } = require("../../env");
+  const bcrypt = require("bcryptjs");
 
-  console.log(IP);
   const handleChangeName = (event) => setFullName(event.target.value);
 
   const handleChangeBirthDate = (event) => setBirthDate(event.target.value);
@@ -80,6 +80,8 @@ function RegisterForm() {
   }
 
   async function sendRequest() {
+    const hashPassword = bcrypt.hashSync(password, 10);
+
     const address = {
       city: city,
       numberHouse: numberHouse,
@@ -95,7 +97,7 @@ function RegisterForm() {
       gender: gender,
       birthDate: birthDate,
       email: email,
-      password: password,
+      password: hashPassword,
       address: address,
       isAdmin: 0,
     };

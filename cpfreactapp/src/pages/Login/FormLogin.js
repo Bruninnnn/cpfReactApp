@@ -16,10 +16,11 @@ function FormLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShow, setPasswordShow] = useState(false);
+  const bcrypt = require("bcryptjs");
 
   const handleChangeEmail = (event) => setEmail(event.target.value);
   const handleChangePassword = (event) => setPassword(event.target.value);
-  
+
   const togglePassword = () => {
     setPasswordShow(!passwordShow);
   };
@@ -43,7 +44,7 @@ function FormLogin() {
   }
 
   async function requestUser() {
-    const urlTemplate = `http://${IP}:8080/user/findUser?email=${email}&password=${password}`;
+    const urlTemplate = `http://${IP}:8080/user/findUser?email=${email}`;
     const url = urlTemplate;
 
     const user = await fetch(url, {
@@ -71,21 +72,41 @@ function FormLogin() {
     setContext(user);
   };
 
+  const verifyPassword = (hashedPassword) => {
+    return bcrypt.compareSync(password, hashedPassword);
+  };
+
   async function sendRequest() {
     const user = await requestUser();
+    console.log(user);
+    console.log(password);
     if (user) {
-      setContextFunction(user);
-      toast.success("Usuário logado com sucesso!", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      navigate("/home");
+      const isLoggedIn = await verifyPassword(user?.password);
+      if (!!isLoggedIn) {
+        setContextFunction(user);
+        toast.success("Usuário logado com sucesso!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        navigate("/home");
+      } else {
+        toast.error("Senha incorreta, tente novamente!", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
     }
   }
 
