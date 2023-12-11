@@ -72,16 +72,14 @@ function FormLogin() {
     setContext(user);
   };
 
-  const verifyPassword = (hashedPassword) => {
+  const verifyPassword = (hashedPassword, password) => {
     return bcrypt.compareSync(password, hashedPassword);
   };
 
   async function sendRequest() {
     const user = await requestUser();
-    console.log(user);
-    console.log(password);
     if (user) {
-      const isLoggedIn = await verifyPassword(user?.password);
+      const isLoggedIn = await verifyPassword(user?.password, password);
       if (!!isLoggedIn) {
         setContextFunction(user);
         toast.success("Usuário logado com sucesso!", {
