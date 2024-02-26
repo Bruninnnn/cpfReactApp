@@ -58,7 +58,7 @@ function SideBar() {
         {userContext?.isAdmin && (
           <ul>
             <li>
-              <Link to="/list">
+              <Link to="/teste">
                 <span>
                   <RecentActorsIcon />
                   <p>Lista Usuários</p>
