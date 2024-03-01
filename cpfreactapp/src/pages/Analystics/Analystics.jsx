@@ -16,10 +16,14 @@ function Analystics() {
             <PieChart />
           </div>
           <div className={styles.rowTwo}>
-            <p>chart2</p>
+            <div className="flex justify-content-center bg-slate-300 p-10">
+              <p>chart2</p>
+            </div>
           </div>
           <div className={styles.rowThree}>
-            <p>chart3</p>
+            <div className="flex">
+              <SimpleLineChart />
+            </div>
           </div>
         </div>
       </main>

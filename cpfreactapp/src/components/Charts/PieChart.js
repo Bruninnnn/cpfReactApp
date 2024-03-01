@@ -1,5 +1,6 @@
-import React from 'react'
-import ApexCharts from 'apexcharts';
+import React, { useEffect, useState } from 'react'
+
+import { Chart } from 'primereact/chart';
 
 /* import { Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import { CustomTooltip } from './CustomTooltip' */
@@ -13,80 +14,46 @@ import { CustomTooltip } from './CustomTooltip' */
 
 
 const PieChart = () => {
-  
-  const options = {
-    options: {
-      chart: {
-        width: 380,
-        type: 'donut',
-      },
-      dataLabels: {
-        enabled: false
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            show: false
-          }
+
+
+  const [chartData, setChartData] = useState({});
+  const [chartOptions, setChartOptions] = useState({});
+
+  useEffect(() => {
+    const data = {
+      labels: ['Teste', '123', 'C'],
+      datasets: [
+        {
+          data: [300, 50, 100],
+          backgroundColor: [
+            "rgba(245, 40, 145, 0.8)",
+            "rgba(245, 241, 39, 0.8)",
+            "rgba(39, 245, 65, 0.8)"
+          ],
+          hoverBackgroundColor: [
+            "rgba(245, 40, 145, 0.8)",
+            "rgba(245, 241, 39, 0.8)",
+            "rgba(39, 245, 65, 0.8)"
+          ],
+          borderColor: [
+            "rgba(0, 0, 0, 1)"
+          ],
         }
-      }],
-      legend: {
-        position: 'right',
-        offsetY: 0,
-        height: 230,
-      }
-    }
-  }
+      ]
+    };
+    const options = {
+      cutout: '70%',
+    };
 
-  const series = {
-    series: [44, 55, 13, 33],
-    chartOptions: {
-      labels: ['Apple', 'Mango', 'Orange', 'Watermelon']
-    }
-  }
-  
+    setChartData(data);
+    setChartOptions(options);
+  }, []);
+
   return (
-    <ApexCharts
-      options={options}
-      series={series}
-      type="pie"
-      width={1000}
-      height={300}
-    />
-  )
-}
-
-
-/* const data = [
-  { name: "Restaurante", value: 500 },
-  { name: "Eletrônicos", value: 250 },
-  { name: "Teste", value: 500 },
-  { name: "Teste2", value: 250 },
-]
-
-const PieCharts = () => {
-  return (
-    <div style={{ width: 1000, height: 300 }}>
-      <ResponsiveContainer style={{ width: 1000, height: 300 }}>
-        <PieChart width={1000} height={1000}>
-          <Pie
-            dataKey="value"
-            data={data}
-            innerRadius={55}
-            outerRadius={75}
-            fill='#400000'
-          />
-          <Tooltip
-            content={<CustomTooltip active={[]} payload={[]} label={[]} />}
-          />
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="flex justify-content-center">
+      <Chart type="doughnut" data={chartData} options={chartOptions} />
     </div>
   )
-} */
+}
 
 export default PieChart;
