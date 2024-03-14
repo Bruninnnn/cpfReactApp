@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from ".././Context";
 
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import DataUsageIcon from "@mui/icons-material/DataUsage";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PrecisionManufacturingIcon from "@mui/icons-material/PrecisionManufacturing";
 import RecentActorsIcon from "@mui/icons-material/RecentActors";
-import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 
 import styles from "./SideBar.module.css";
 
@@ -34,16 +34,16 @@ function SideBar() {
           </li>
         </ul>
         {userContext?.isAdmin && (
-        <ul>
-          <li className={styles.option}>
-            <Link to="/analystics">
-              <span>
-                <DataUsageIcon className={styles.icon} />
-                <p>Analystics</p>
-              </span>
-            </Link>
-          </li>
-        </ul>
+          <ul>
+            <li className={styles.option}>
+              <Link to="/analystics">
+                <span>
+                  <DataUsageIcon className={styles.icon} />
+                  <p>Relatórios</p>
+                </span>
+              </Link>
+            </li>
+          </ul>
         )}
         <ul>
           <li>
