@@ -3,8 +3,8 @@ import PieChart from "../../components/Charts/PieChart";
 import SideBar from "../../components/SideBar";
 import styles from "./Analystics.module.css";
 
-defaults.maintainAspectRatio = false;
-defaults.responsive = true;
+/* defaults.maintainAspectRatio = false;
+defaults.responsive = true; */
 
 function Analystics() {
   return (
