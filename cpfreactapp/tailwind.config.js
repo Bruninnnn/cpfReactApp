@@ -18,6 +18,7 @@ module.exports = {
       'color-border': '#1e1e1e',
       'color-bginputs': '#1E1E24',
       'color-border-login': '#ffffff',
+      'white-primary': '#fff'
     },
     fontFamily: {
       quick: ['QuickSand', 'quickserif'],

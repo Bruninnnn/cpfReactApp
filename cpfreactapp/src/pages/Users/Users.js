@@ -16,14 +16,16 @@ function Users() {
   }, []);
 
   return (
-    <div className={styles.container}>
-      <SideBar />
-      <main>
-        <h1>Lista de Usuários</h1>
-        <div className={styles.tableUsers}>
-          <UserTable rows={usersArray} />
-        </div>
-      </main>
+    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden"> {/* body */}
+      <div className="grid w-full mx-auto my-0 gap-7 grid-cols-[14rem_auto]"> {/* container */}
+        <SideBar />
+        <main>
+          <h1>Lista de Usuários</h1>
+          <div className="justify-center items-center mt-12"> {/* tableUsers */}
+            <UserTable rows={usersArray} />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

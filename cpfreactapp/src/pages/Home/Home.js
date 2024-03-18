@@ -85,12 +85,12 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow;
+        rows.map((currRow, idx) => {
+          if (idx !== rowToEdit) return currRow;
 
-            return newRow;
-          })
-        );
+          return newRow;
+        })
+      );
   };
 
   const [receipt, setReceipt] = useState();
@@ -180,90 +180,92 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className={styles.container}>
-      <SideBar />
-      <main>
-        <h1>Controle Financeiro Pessoal</h1>
-        <div className={styles.month}>
-          <input
-            id="calendar"
-            type="month"
-            onChange={(e) => {
-              console.log(e.target.value);
-              filterCalendar(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div className={styles.balances}>
-          <div className={styles.receipt}>
-            <span>
-              <AttachMoneyOutlinedIcon />
-            </span>
-            <div className={styles.middle}>
-              <div className={styles.left}>
-                <h3>Receita</h3>
-                <h1>{receipt}</h1>
+    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden"> {/* body */}
+      <div className="grid w-full mx-auto my-0 gap-8 grid-cols-[14rem_auto]"> {/* container */}
+        <SideBar />
+        <main>
+          <h1>Controle Financeiro Pessoal</h1>
+          <div className={styles.month}> {/* month */}
+            <input
+              id="calendar"
+              type="month"
+              onChange={(e) => {
+                console.log(e.target.value);
+                filterCalendar(e.target.value);
+              }}
+            ></input>
+          </div>
+          <div className={styles.balances}> {/* balances */}
+            <div className={styles.receipt}> {/* receipt */}
+              <span>
+                <AttachMoneyOutlinedIcon />
+              </span>
+              <div className="middle"> {/* middle */}
+                <div className="left"> {/* left */}
+                  <h3>Receita</h3>
+                  <h1>{receipt}</h1>
+                </div>
+              </div>
+            </div>
+            <div className={styles.balance}> {/* balance */}
+              <span>
+                <TollOutlinedIcon />
+              </span>
+              <div className="middle"> {/* middle */}
+                <div className="left"> {/* left */}
+                  <h3>Saldo</h3>
+                  <h1>{balance}</h1>
+                </div>
+              </div>
+            </div>
+            <div className={styles.cost}> {/* cost */}
+              <span>
+                <MoneyOffCsredOutlinedIcon />
+              </span>
+              <div className="middle"> {/* middle */}
+                <div className="left"> {/* left */}
+                  <h3>Despesas</h3>
+                  <h1>{cost}</h1>
+                </div>
               </div>
             </div>
           </div>
-          <div className={styles.balance}>
-            <span>
-              <TollOutlinedIcon />
-            </span>
-            <div className={styles.middle}>
-              <div className={styles.left}>
-                <h3>Saldo</h3>
-                <h1>{balance}</h1>
-              </div>
-            </div>
+          {modalAddOpen && (
+            <ModalComponent
+              closeAddModal={() => {
+                setModalAddOpen(false);
+              }}
+              onSubmit={handleSubmit}
+              userContext={userContext}
+            />
+          )}
+          {modalEditOpen && (
+            <ModalEdit
+              closeEditModal={() => {
+                setModalEditOpen(false);
+                setRowToEdit(null);
+              }}
+              onSubmit={handleSubmit}
+              defaultValue={rowToEdit !== null && rows[rowToEdit]}
+              userContext={userContext}
+            />
+          )}
+          <div className={styles.btnDiv}> {/* btnDiv */}
+            <button
+              className={styles.darkButton}
+              onClick={() => setModalAddOpen(true)}
+            >
+              <AddIcon />
+            </button>
           </div>
-          <div className={styles.cost}>
-            <span>
-              <MoneyOffCsredOutlinedIcon />
-            </span>
-            <div className={styles.middle}>
-              <div className={styles.left}>
-                <h3>Despesas</h3>
-                <h1>{cost}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-        {modalAddOpen && (
-          <ModalComponent
-            closeAddModal={() => {
-              setModalAddOpen(false);
-            }}
-            onSubmit={handleSubmit}
-            userContext={userContext}
-          />
-        )}
-        {modalEditOpen && (
-          <ModalEdit
-            closeEditModal={() => {
-              setModalEditOpen(false);
-              setRowToEdit(null);
-            }}
-            onSubmit={handleSubmit}
-            defaultValue={rowToEdit !== null && rows[rowToEdit]}
-            userContext={userContext}
-          />
-        )}
-        <div className={styles.btnDiv}>
-          <button
-            className={styles.darkButton}
-            onClick={() => setModalAddOpen(true)}
-          >
-            <AddIcon />
-          </button>
-        </div>
 
-        <Table
-          rows={rows}
-          deleteRow={handleDeleteRow}
-          editRow={handleEditRow}
-        />
-      </main>
+          <Table
+            rows={rows}
+            deleteRow={handleDeleteRow}
+            editRow={handleEditRow}
+          />
+        </main>
+      </div>
     </div>
   );
 }

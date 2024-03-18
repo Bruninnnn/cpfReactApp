@@ -152,7 +152,7 @@ function FormLogin() {
                 className="my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt md:mb-1"
               />
             </div>
-            <div className="flex flex-col mb-6 -m-3 w-full mt-4 border-none text-center bg-color-receipt p-3 rounded-lg cursor-pointer md:mb-1"> {/* continue_button */}
+            <div className="w-80 flex flex-col mb-6 -m-3 mt-4 border-none text-center bg-color-receipt p-3 rounded-lg cursor-pointer md:mb-1"> {/* continue_button */}
               <button onClick={handleSubmit} className="text-sm font-medium">Logar</button>
             </div>
             <div className="mb-4 md:mb-1"> {/* textfield_remember */}
@@ -177,7 +177,7 @@ function FormLogin() {
             <div className="flex"> {/* createaccount */}
               <p>
                 Ainda não tem conta?{" "}
-                <Link className="text-color-receipt font-medium" to="/register">{" "}
+                <Link className="text-color-receipt font-bold" to="/register">{" "}
                   Criar Conta
                 </Link>
               </p>

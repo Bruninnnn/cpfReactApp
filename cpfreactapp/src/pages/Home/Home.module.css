@@ -24,7 +24,7 @@ html {
   font-size: 14px;
 }
 
-body {
+/* body {
   width: 100vw;
   height: 100vh;
   font-family: "Quicksand", sans-serif;
@@ -34,7 +34,7 @@ body {
   background-color: var(--color-background);
   user-select: none;
   overflow-x: hidden;
-}
+} */
 
 .container {
   display: grid;

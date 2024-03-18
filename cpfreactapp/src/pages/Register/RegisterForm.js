@@ -129,7 +129,7 @@ function RegisterForm() {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-color-background"> {/* body */}
-      <div className="w-4/5 h-[80vh] flex"> {/* container */}
+      <div className="w-4/5 h-[80vh] flex "> {/* container */}
         <div className="w-1/2 flex justify-center items-center bg-color-bgforms p-4"> {/* form_image */}
           <img src={log} alt="" className="w-5/6" />
         </div>
