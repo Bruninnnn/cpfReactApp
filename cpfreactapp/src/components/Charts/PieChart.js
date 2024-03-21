@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import { Chart } from "primereact/chart";
-import { defaults } from "chart.js";
+/* import { defaults } from "chart.js";
 
 defaults.maintainAspectRatio = false;
-defaults.responsive = true;
+defaults.responsive = true; */
 
 const PieChart = ({ data }) => {
   const [chartData, setChartData] = useState({});
