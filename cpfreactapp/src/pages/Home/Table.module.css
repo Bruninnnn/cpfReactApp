@@ -1,20 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-  appearance: none;
-  border: 0;
-  text-decoration: none;
-  list-style: none;
-  box-sizing: border-box;
-}
-
+/* 
 tbody {
   overflow: auto;
   max-height: 640px;
-}
+}*/
 
 /* .recent_orders {
   overflow-x: hidden;

@@ -11,10 +11,8 @@ import SideBar from "../../components/SideBar";
 import { Context } from "../../Context";
 import { Table } from "./Table";
 
-import AddIcon from "@mui/icons-material/Add";
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
-import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
+import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md";
+import { DashBoardBalances } from "./DashBoardBalances";
 
 function Home() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
@@ -180,12 +178,12 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden"> {/* body */}
-      <div className="grid w-full mx-auto my-0 gap-8 grid-cols-[14rem_auto]"> {/* container */}
-        <SideBar />
-        <main>
-          <h1>Controle Financeiro Pessoal</h1>
-          <div className={styles.month}> {/* month */}
+    <div className="flex flex-row w-screen h-screen bg-color-background text-color-border-login overflow-hidden"> {/* body */}
+      <SideBar />
+      <div className="flex w-full h-full mx-auto my-0 gap-12"> {/* container */}
+        <main className="p-7 mt-8">
+          <h1 className="mb-4">Controle Financeiro Pessoal</h1>
+          <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
             <input
               id="calendar"
               type="month"
@@ -193,43 +191,16 @@ function Home() {
                 console.log(e.target.value);
                 filterCalendar(e.target.value);
               }}
-            ></input>
+              className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
+            />
           </div>
-          <div className={styles.balances}> {/* balances */}
-            <div className={styles.receipt}> {/* receipt */}
-              <span>
-                <AttachMoneyOutlinedIcon />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3>Receita</h3>
-                  <h1>{receipt}</h1>
-                </div>
-              </div>
-            </div>
-            <div className={styles.balance}> {/* balance */}
-              <span>
-                <TollOutlinedIcon />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3>Saldo</h3>
-                  <h1>{balance}</h1>
-                </div>
-              </div>
-            </div>
-            <div className={styles.cost}> {/* cost */}
-              <span>
-                <MoneyOffCsredOutlinedIcon />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3>Despesas</h3>
-                  <h1>{cost}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
+
+          <DashBoardBalances
+            receipt={receipt}
+            balance={balance}
+            cost={cost}
+          />
+
           {modalAddOpen && (
             <ModalComponent
               closeAddModal={() => {
@@ -250,12 +221,12 @@ function Home() {
               userContext={userContext}
             />
           )}
-          <div className={styles.btnDiv}> {/* btnDiv */}
+          <div className="flex justify-end mt-14 pr-0 pb-2"> {/* btnDiv */}
             <button
-              className={styles.darkButton}
+              className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
               onClick={() => setModalAddOpen(true)}
             >
-              <AddIcon />
+              <MdAdd />
             </button>
           </div>
 

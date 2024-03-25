@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "primereact/chart";
 import { defaults } from "chart.js";
 
-defaults.maintainAspectRatio = false;
-defaults.responsive = true;
 
-const PieChart = ({ data }) => {
+
+const PieChart = ({ title }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
     const data = {
-      labels: ["Teste", "123", "C"],
+      labels: ["Comida", "Lazer", "Eletrônicos"],
       datasets: [
         {
+          label: "R$",
           data: [300, 50, 100],
           backgroundColor: [
             "rgba(245, 40, 145, 0.8)",
@@ -32,6 +32,18 @@ const PieChart = ({ data }) => {
     };
     const options = {
       cutout: "70%",
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            boxWidth: 12,
+            color: '#ffffff',
+            font: {
+              size: 12
+            }
+          }
+        }
+      },
     };
 
     setChartData(data);
@@ -39,8 +51,11 @@ const PieChart = ({ data }) => {
   }, []);
 
   return (
-    <div className="flex justify-content-center">
-      <Chart type="doughnut" data={chartData} options={chartOptions} />
+    <div className="card flex flex-col justify-center w-full h-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
+      <strong className="font-medium my-3">{title}</strong>
+      <div className="card flex justify-center h-full">
+        <Chart width={700} height={350} type="doughnut" data={chartData} options={chartOptions}/>
+      </div>
     </div>
   );
 };
