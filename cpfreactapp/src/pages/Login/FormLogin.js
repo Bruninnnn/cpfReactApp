@@ -129,7 +129,7 @@ function FormLogin() {
               </div>
             </div>
             <div className="flex flex-col mb-3 -m-3"> {/* input_box */}
-              <label htmlFor="email" className="md:-mb-2 md:mt-1">E-mail</label>
+              <label htmlFor="email" className="md:-mb-2 md:mt-2">E-mail</label>
               <input
                 type="email"
                 id="email"
@@ -137,7 +137,7 @@ function FormLogin() {
                 placeholder="Informe seu e-mail"
                 required
                 onChange={handleChangeEmail}
-                className="my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
+                className="my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-3"
               />
             </div>
             <div className="flex flex-col mb-3 -m-3"> {/* input_box */}

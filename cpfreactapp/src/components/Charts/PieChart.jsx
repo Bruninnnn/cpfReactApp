@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import { Chart } from "primereact/chart";
-import { defaults } from "chart.js";
+import { defaults } from "chart.js/auto";
 
-
+defaults.responsive = true;
 
 const PieChart = ({ title }) => {
   const [chartData, setChartData] = useState({});
@@ -31,6 +31,7 @@ const PieChart = ({ title }) => {
       ],
     };
     const options = {
+      responsive: true,
       cutout: "70%",
       plugins: {
         legend: {
@@ -51,10 +52,10 @@ const PieChart = ({ title }) => {
   }, []);
 
   return (
-    <div className="card flex flex-col justify-center w-full h-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
-      <strong className="font-medium my-3">{title}</strong>
-      <div className="card flex justify-center h-full">
-        <Chart width={700} height={350} type="doughnut" data={chartData} options={chartOptions}/>
+    <div className="justify-center bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
+      <strong className="font-medium my-4">{title}</strong>
+      <div className="flex justify-center">
+        <Chart className="w-1/2 sm:w-1/2 md:w-10 lg:w-1/2 m-xlw-full" type="doughnut" data={chartData} options={chartOptions}/>
       </div>
     </div>
   );

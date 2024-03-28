@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import styles from "./Home.module.css";
+/* import styles from "./Home.module.css"; */
 
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
@@ -178,9 +178,9 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="flex flex-row w-screen h-screen bg-color-background text-color-border-login overflow-hidden"> {/* body */}
+    <div className="flex flex-row w-screen h-dvh bg-color-background text-color-border-login overflow"> {/* body */}
       <SideBar />
-      <div className="flex w-full h-full mx-auto my-0 gap-12"> {/* container */}
+      <div className="flex w-full h-full mx-4 my-0"> {/* container */}
         <main className="p-7 mt-8">
           <h1 className="mb-4">Controle Financeiro Pessoal</h1>
           <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
@@ -194,12 +194,41 @@ function Home() {
               className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
             />
           </div>
-
-          <DashBoardBalances
-            receipt={receipt}
-            balance={balance}
-            cost={cost}
-          />
+          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-[95%] h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-56"> {/* balances */}
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* receipt */}
+              <span>
+                <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
+              </span>
+              <div className="middle"> {/* middle */}
+                
+                  <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
+                  <h1>{receipt}</h1>
+                
+              </div>
+            </div>
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* balance */}
+              <span>
+                <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
+              </span>
+              <div className="middle"> {/* middle */}
+                <div className="left"> {/* left */}
+                  <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
+                  <h1>{balance}</h1>
+                </div>
+              </div>
+            </div>
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]"> {/* cost */}
+              <span>
+                <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
+              </span>
+              <div className="middle"> {/* middle */}
+                <div className="left"> {/* left */}
+                  <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
+                  <h1>{cost}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {modalAddOpen && (
             <ModalComponent

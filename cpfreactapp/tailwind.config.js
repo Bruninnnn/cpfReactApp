@@ -8,6 +8,11 @@ module.exports = {
       'lg': {'max': '1024px'},
       'xl': {'max': '1280px'},
       '2xl': {'max': '1536px'},
+      'm-sm': {'min': '640px'},
+      'm-md': {'min': '768px'},
+      'm-lg': {'min': '1024px'},
+      'm-xl': {'min': '1280px'},
+      'm-2xl': {'min': '1536px'},
     },
     colors: {
       'color-receipt': '#0a5c5a',
