@@ -45,7 +45,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         user: user,
         registerDate: formattedDate,
       };
-      console.log(defaultValue);
+''
       const options = {
         method: "PUT",
         headers: {

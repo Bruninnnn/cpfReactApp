@@ -85,17 +85,15 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-        rows.map((currRow, idx) => {
-          if (idx !== rowToEdit) return currRow;
-
-          return newRow;
-        })
-      );
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow;
+            return newRow;
+          })
+        );
   };
 
   const [receipt, setReceipt] = useState();
   const [balance, setBalance] = useState();
-  const [calendar, setCalendar] = useState();
   const [cost, setCost] = useState();
 
   const options = {
@@ -180,50 +178,75 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden"> {/* body */}
-      <div className="grid w-full mx-auto my-0 gap-8 grid-cols-[14rem_auto]"> {/* container */}
+    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden">
+      {" "}
+      {/* body */}
+      <div className="grid w-full mx-auto my-0 gap-8 grid-cols-[14rem_auto]">
+        {" "}
+        {/* container */}
         <SideBar />
         <main>
-          <h1>Controle Financeiro Pessoal</h1>
-          <div className={styles.month}> {/* month */}
+          <h1>Registros</h1>
+          <div className={styles.month}>
+            {" "}
+            {/* month */}
             <input
               id="calendar"
               type="month"
               onChange={(e) => {
-                console.log(e.target.value);
                 filterCalendar(e.target.value);
               }}
             ></input>
           </div>
-          <div className={styles.balances}> {/* balances */}
-            <div className={styles.receipt}> {/* receipt */}
+          <div className={styles.balances}>
+            {" "}
+            {/* balances */}
+            <div className={styles.receipt}>
+              {" "}
+              {/* receipt */}
               <span>
                 <AttachMoneyOutlinedIcon />
               </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <div className="left">
+                  {" "}
+                  {/* left */}
                   <h3>Receita</h3>
                   <h1>{receipt}</h1>
                 </div>
               </div>
             </div>
-            <div className={styles.balance}> {/* balance */}
+            <div className={styles.balance}>
+              {" "}
+              {/* balance */}
               <span>
                 <TollOutlinedIcon />
               </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <div className="left">
+                  {" "}
+                  {/* left */}
                   <h3>Saldo</h3>
                   <h1>{balance}</h1>
                 </div>
               </div>
             </div>
-            <div className={styles.cost}> {/* cost */}
+            <div className={styles.cost}>
+              {" "}
+              {/* cost */}
               <span>
                 <MoneyOffCsredOutlinedIcon />
               </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <div className="left">
+                  {" "}
+                  {/* left */}
                   <h3>Despesas</h3>
                   <h1>{cost}</h1>
                 </div>
@@ -250,7 +273,9 @@ function Home() {
               userContext={userContext}
             />
           )}
-          <div className={styles.btnDiv}> {/* btnDiv */}
+          <div className={styles.btnDiv}>
+            {" "}
+            {/* btnDiv */}
             <button
               className={styles.darkButton}
               onClick={() => setModalAddOpen(true)}

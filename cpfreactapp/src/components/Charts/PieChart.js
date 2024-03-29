@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from "react";
-
 import { Chart } from "primereact/chart";
 import { defaults } from "chart.js";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
-const PieChart = ({ data }) => {
+const PieChart = ({ baseData }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
+  console.log(baseData, "BASE");
 
   useEffect(() => {
+    const labels = baseData.map((data) => data.description);
+    const values = baseData.map((data) =>
+      parseFloat(data.registerValue).toFixed(2)
+    );
+    const formattedValues = values.map((value) => parseFloat(value));
+
     const data = {
-      labels: ["Teste", "123", "C"],
+      labels: labels,
       datasets: [
         {
-          data: [300, 50, 100],
+          data: formattedValues,
           backgroundColor: [
             "rgba(245, 40, 145, 0.8)",
             "rgba(245, 241, 39, 0.8)",
@@ -30,13 +36,14 @@ const PieChart = ({ data }) => {
         },
       ],
     };
+
     const options = {
       cutout: "70%",
     };
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [baseData]);
 
   return (
     <div className="flex justify-content-center">

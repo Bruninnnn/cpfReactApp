@@ -11,15 +11,13 @@ import { Context } from "../Context";
 
 export function AppRoutes() {
   const { userContext } = useContext(Context);
-  console.log(userContext?.isAdmin);
+
   return (
     <Routes>
       <Route path="/" element={<FormLogin />} />
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<RegisterForm />} />
-      <Route path="/aboutTech" element={<AboutTech />} />
-      {userContext?.isAdmin && <Route path="/analystics" element={<Analystics />} />}
-      {userContext?.isAdmin && <Route path="/list" element={<UsersForm />} />}
+      <Route path="/analystics" element={<Analystics />} />
     </Routes>
   );
 }
