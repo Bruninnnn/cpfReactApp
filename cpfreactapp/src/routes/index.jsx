@@ -1,11 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
-import AboutTech from "../pages/About/AboutTech";
 import Analystics from "../pages/Analystics/Analystics";
 import Home from "../pages/Home/Home";
 import FormLogin from "../pages/Login/FormLogin";
 import RegisterForm from "../pages/Register/RegisterForm";
-import UsersForm from "../pages/Users/Users";
+
 import { useContext } from "react";
 import { Context } from "../Context";
 
