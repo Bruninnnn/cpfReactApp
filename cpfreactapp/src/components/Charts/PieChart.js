@@ -12,11 +12,11 @@ const PieChart = ({ baseData }) => {
 
   useEffect(() => {
     if (baseData) {
-      const labels = baseData.map((data) => data.description);
-      const values = baseData.map((data) =>
+      const labels = baseData?.map((data) => data?.description);
+      const values = baseData?.map((data) =>
         parseFloat(data.registerValue).toFixed(2)
       );
-      const formattedValues = values.map((value) => parseFloat(value));
+      const formattedValues = values?.map((value) => parseFloat(value));
 
       const data = {
         labels: labels,
