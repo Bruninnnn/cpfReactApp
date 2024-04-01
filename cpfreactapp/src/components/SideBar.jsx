@@ -4,6 +4,7 @@ import { Context } from ".././Context";
 
 import { MdDashboard, MdDataUsage, MdExitToApp } from "react-icons/md";
 import { FcBullish } from "react-icons/fc"
+import { VscDebugDisconnect } from "react-icons/vsc";
 /* 
 import styles from "./SideBar.module.css"; */
 
@@ -35,6 +36,14 @@ export default function SideBar() {
                   <MdDataUsage fontSize={24} />
                 </span>
                 <p className="mt-1 items-center px-2">Relatórios</p>
+              </Link>
+            </div>
+            <div className="flex w-full p-4 items-center">
+              <Link to="/openfinance" className="flex items-center font-light px-3">
+                <span>
+                  <VscDebugDisconnect fontSize={24} />
+                </span>
+                <p className="mt-1 items-center px-2">OpenFinance</p>
               </Link>
             </div>
           </div>

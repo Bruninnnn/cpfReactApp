@@ -78,8 +78,7 @@ function FormLogin() {
 
   async function sendRequest() {
     const user = await requestUser();
-    console.log(user);
-    console.log(password);
+
     if (user) {
       const isLoggedIn = await verifyPassword(user?.password);
       if (!!isLoggedIn) {

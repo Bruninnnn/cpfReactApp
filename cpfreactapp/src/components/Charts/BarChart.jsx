@@ -6,71 +6,87 @@ import { defaults } from "chart.js/auto";
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
-export const BarChart = ({ title }) => {
+export const BarChart = ({ baseData, title }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    const data = {
-      labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-      datasets: [
-        {
-          label: 'Ganhos - R$',
-          backgroundColor: 'rgb(10, 92, 90)',
-          borderColor: 'rgb(10, 92, 90)',
-          data: [65, 59, 80, 81, 56, 55, 40]
-        },
-        {
-          label: 'Despesas - R$',
-          backgroundColor: 'rgb(60, 31, 45)',
-          borderColor: 'rgb(60, 31, 45)',
-          data: [28, 48, 40, 19, 86, 27, 90]
-        }
-      ]
-    }
+    if (baseData) {
+      /* const formatedLabel = filterLabel?.map((data) => data.regGroupType) */
 
-    const options = {
-      maintainAspectRatio: false,
-      aspectRatio: 1,
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: {
-            boxWidth: 12,
-            color: '#ffffff',
-            font: {
-              size: 12
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#fff',
-            font: {
-              weight: 500
-            }
+      const filterCost = baseData?.filter((data) => data.registerType === "COST")
+
+      const CostValue = filterCost?.map((data) => parseFloat(data.registerValue).toFixed(2))
+
+      const filterIncome = baseData?.filter((data) => data.registerType === "INCOME")
+      const IncomeValue = filterIncome?.map((data) => parseFloat(data.registerValue).toFixed(2))
+      
+      const formattedValueCost = CostValue?.map((value) => parseFloat(value));
+      const formattedValueIncome = IncomeValue?.map((value) => parseFloat(value));
+
+      console.log(formattedValueCost)
+      console.log(formattedValueIncome)
+      const data = {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        datasets: [
+          {
+            label: 'Ganhos - R$',
+            backgroundColor: 'rgb(10, 92, 90)',
+            borderColor: 'rgb(10, 92, 90)',
+            data: formattedValueIncome,
           },
-          grid: {
-            display: false,
-            drawBorder: false
+          {
+            label: 'Despesas - R$',
+            backgroundColor: 'rgb(60, 31, 45)',
+            borderColor: 'rgb(60, 31, 45)',
+            data: formattedValueCost,
+          }
+        ]
+      }
+
+      const options = {
+        maintainAspectRatio: false,
+        aspectRatio: 1,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 12,
+              color: '#ffffff',
+              font: {
+                size: 12
+              }
+            }
           }
         },
-        y: {
-          ticks: {
-            color: '#fff'
+        scales: {
+          x: {
+            ticks: {
+              color: '#fff',
+              font: {
+                weight: 500
+              }
+            },
+            grid: {
+              display: false,
+              drawBorder: false
+            }
           },
-          grid: {
-            color: '#fff',
-            drawBorder: true
+          y: {
+            ticks: {
+              color: '#fff'
+            },
+            grid: {
+              color: '#fff',
+              drawBorder: true
+            }
           }
         }
       }
+      setChartData(data);
+      setChartOptions(options);
     }
-    setChartData(data);
-    setChartOptions(options);
-  }, [])
+  }, [baseData]);
 
   return (
     <div className="justify-center bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">

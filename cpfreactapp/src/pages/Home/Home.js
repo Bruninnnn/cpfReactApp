@@ -182,13 +182,12 @@ function Home() {
       <SideBar />
       <div className="flex w-full h-full mx-4 my-0"> {/* container */}
         <main className="p-7 mt-8">
-          <h1 className="mb-4">Controle Financeiro Pessoal</h1>
+          <h1 className="mb-4">Registros</h1>
           <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
             <input
               id="calendar"
               type="month"
               onChange={(e) => {
-                console.log(e.target.value);
                 filterCalendar(e.target.value);
               }}
               className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
