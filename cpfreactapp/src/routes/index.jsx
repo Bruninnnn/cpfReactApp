@@ -18,7 +18,7 @@ export function AppRoutes() {
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/aboutTech" element={<AboutTech />} />
-      {userContext?.isAdmin && <Route path="/analystics" element={<Analystics />} /> }
+      {userContext?.isAdmin && <Route path="/analystics" element={<Analystics />} />}
       {userContext?.isAdmin && <Route path="/list" element={<UsersForm />} />}
     </Routes>
   );

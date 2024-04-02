@@ -128,26 +128,26 @@ function RegisterForm() {
   }
 
   return (
-    <div className={stylesregister.body}>
-      <div className={stylesregister.container}>
-        <div className={stylesregister.form_image}>
-          <img src={log} alt="" />
+    <div className="w-full h-screen flex justify-center items-center bg-color-background"> {/* body */}
+      <div className="w-4/5 h-[80vh] flex "> {/* container */}
+        <div className="w-1/2 flex justify-center items-center bg-color-bgforms p-4"> {/* form_image */}
+          <img src={log} alt="" className="w-5/6" />
         </div>
-        <div className={stylesregister.form}>
+        <div className="w-1/2 flex justify-center items-center flex-col bg-color-bgforms p-12 border-l-2 border-solid border-color-border-login"> {/* form */}
           <form action="#">
-            <div className={stylesregister.form_header}>
-              <div className={stylesregister.title}>
+            <div className="h-[-50vh] -mb-2 flex justify-between"> {/* form_header */}
+              <div className="-mt-4 ml-16"> {/* Title */}
                 <h1>Cadastre-se</h1>
               </div>
-              <div className={stylesregister.login_button}>
-                <button>
+              <div className="flex items-center -mt-8"> {/* login_button */}
+                <button className="border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer -ml-[50%] mt-[15%] font-medium no-underline">
                   <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
-            <div className={stylesregister.input_group}>
-              <div className={stylesregister.input_box}>
-                <label htmlFor="fullName">Nome Completo</label>
+            <div className="flex flex-wrap justify-between p-4 mt-[5vh] mx-[6vh] mb-[1vh] mb-[5.8rem]"> {/* input_group */}
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="fullName" className="-mb-2">Nome Completo</label>
                 <input
                   type="text"
                   id="fullName"
@@ -156,24 +156,26 @@ function RegisterForm() {
                   required
                   value={fullName}
                   onChange={handleChangeName}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="gender">Genêro</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="gender" className="-mb-2">Genêro</label>
                 <select
                   id="gender"
                   name="gender"
                   required
                   onChange={handleChangeGender}
+                  className="w-full my-3 mx-0 py-2 pr-4 mr-[5.2rem] ,b_ rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 >
                   <option value="MALE">Masculino</option>
                   <option value="FEMALE">Feminino</option>
                 </select>
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="birthDate">Data de Nascimento</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="birthDate" className="-mb-2 mt-1">Data de Nascimento</label>
                 <input
                   type="date"
                   id="birthDate"
@@ -182,11 +184,12 @@ function RegisterForm() {
                   required
                   value={birthDate}
                   onChange={handleChangeBirthDate}
+                  className="w-full my-3 mx-0 py-2 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="email">E-mail</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */} {/* input_box */}
+                <label htmlFor="email" className="-mb-2 mt-1">E-mail</label>
                 <input
                   type="email"
                   id="email"
@@ -195,11 +198,12 @@ function RegisterForm() {
                   required
                   value={email}
                   onChange={handleChangeEmail}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="password">Senha</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}{/* input_box */}
+                <label htmlFor="password" className="-mb-2 mt-1">Senha</label>
                 <input
                   type="password"
                   id="password"
@@ -207,11 +211,12 @@ function RegisterForm() {
                   placeholder="Informe sua senha"
                   required
                   onChange={handleChangePassword}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="zipCode">CEP</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="zipCode" className="-mb-2 mt-1">CEP</label>
                 <input
                   type="cep"
                   id="zipCode"
@@ -219,11 +224,12 @@ function RegisterForm() {
                   placeholder="xxxxx-xxx"
                   required
                   onBlur={handleChangeZipCode}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="street">Rua</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="street" className="-mb-2 mt-1">Rua</label>
                 <input
                   type="text"
                   id="street"
@@ -232,11 +238,12 @@ function RegisterForm() {
                   required
                   onChange={handleChangeStreet}
                   value={street}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="numberHouse">Número</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="numberHouse" className="-mb-2 mt-1">Número</label>
                 <input
                   type="number"
                   id="number"
@@ -245,11 +252,12 @@ function RegisterForm() {
                   required
                   onChange={handleChangeNumberHouse}
                   value={numberHouse}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="neighborhood">Bairro</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="neighborhood" className="-mb-2 mt-1">Bairro</label>
                 <input
                   type="text"
                   id="neighborhood"
@@ -258,11 +266,12 @@ function RegisterForm() {
                   required
                   onChange={handleChangeNeighborhood}
                   value={neighborhood}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="city">Cidade</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="city" className="-mb-2 mt-1">Cidade</label>
                 <input
                   type="text"
                   id="city"
@@ -271,11 +280,12 @@ function RegisterForm() {
                   required
                   onChange={handleChangeCity}
                   value={city}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="state">Estado</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="state" className="-mb-2 mt-1">Estado</label>
                 <input
                   type="text"
                   id="state"
@@ -284,11 +294,12 @@ function RegisterForm() {
                   required
                   onChange={handleChangeState}
                   value={state}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
 
-              <div className={stylesregister.input_box}>
-                <label htmlFor="country">País</label>
+              <div className="flex flex-col -mb-2 -m-[1%]"> {/* input_box */}
+                <label htmlFor="country" className="-mb-2 mt-1">País</label>
                 <input
                   type="text"
                   id="country"
@@ -297,11 +308,13 @@ function RegisterForm() {
                   required
                   onChange={handleChangeCountry}
                   value={country}
+                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
               </div>
             </div>
-            <div className={stylesregister.continue_button}>
+            <div className="flex w-4/5 -mt-24 items-center ml-[3.7rem]"> {/* continue_button */}
               <button
+                className="w-full mt-6 ml-1 border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer font-medium text-base"
                 onClick={() => {
                   sendRequest();
                   navigate("/");
