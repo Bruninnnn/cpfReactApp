@@ -68,14 +68,9 @@ function Analystics() {
   }
 
   return (
-    <div className="flex flex-row w-screen h-screen bg-color-background text-color-border-login overflow">
-      {" "}
-      {/* body */}
-      <SideBar className="fixed" />
-      <div className="flex w-full h-full mx-4 my-0 justify-center">
-        {" "}
-        {/* container */}
-        <main className="ml-24 mt-8 ">
+    <div className="flex flex-row bg-color-background text-color-border-login overflow"> {/* body */}
+      <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
+        <main className="mx-0 mt-8 ">
           <h1 className="mb-4">Gráficos</h1>
           <div className="inline-block mt-4 rounded-[2rem]">
             <input
@@ -86,15 +81,12 @@ function Analystics() {
               className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
             />
           </div>
-          <div className="flex w-full flex-wrap mx-auto my-auto">
+          <div className="flex w-full flex-wrap mx-auto my-auto mt-4">
             <div className="w-full px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-full md:px-2 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-full ">
               <BarChart baseData={data} title={"Ganhos X Despesas:"} />
             </div>
             <div className="w-1/2 px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-1/2 md:px-1 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-1/2 ">
-              <PieChartCategory
-                baseData={data}
-                title={"Categoria de Gasto Mensal:"}
-              />
+              <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
             </div>
             <div className="w-1/2 px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-1/2 md:px-1 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-1/2 ">
               <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
@@ -102,7 +94,7 @@ function Analystics() {
           </div>
         </main>
       </div>
-    </div>
+    </div >
   );
 }
 

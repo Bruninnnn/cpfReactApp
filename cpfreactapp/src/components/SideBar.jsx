@@ -5,15 +5,14 @@ import { Context } from ".././Context";
 import { MdDashboard, MdDataUsage, MdExitToApp } from "react-icons/md";
 import { FcBullish } from "react-icons/fc"
 import { VscDebugDisconnect } from "react-icons/vsc";
-/* 
-import styles from "./SideBar.module.css"; */
+import { TbPigMoney } from "react-icons/tb";
 
 export default function SideBar() {
   const { userContext, setContext } = useContext(Context);
 
   return (
-    <aside className="fixed h-dvh loat-left top: 0 right: 0">
-      <div className="fixed flex h-dvh mt-2.5">
+    <aside className="flex flex-col fixed w-60">
+{/*       <div className="flex mt-2.5"> */}
         <div className="flex flex-col flex-1 w-60 h-screen fixed top-0 left-0 px-4 py-8 bg-color-bgforms">
           <div className="flex w-full p-4 mx-auto items-center">
             <span>
@@ -22,8 +21,8 @@ export default function SideBar() {
             <h2 className="mt-2 p-2">ConnectBills</h2>
           </div>
           <div className="py-8 h-full flex flex-col flex-1 gap-0.5 ">
-            <div className="flex w-full p-4 -mb-3 items-center hover:bg-color-background">
-              <Link to="/home" className="flex items-center font-light px-3">
+            <div className="flex w-full p-4 -mb-3 items-center focus:bg-">
+              <Link to="/home" className="flex items-center font-light px-3 hover:bg-color-receipt">
                 <span>
                   <MdDashboard fontSize={24} />
                 </span>
@@ -31,7 +30,7 @@ export default function SideBar() {
               </Link>
             </div>
             <div className="flex w-full p-4 items-center">
-              <Link to="/reports" className="flex items-center font-light px-3">
+              <Link to="/home/reports" className="flex items-center font-light px-3">
                 <span>
                   <MdDataUsage fontSize={24} />
                 </span>
@@ -44,6 +43,14 @@ export default function SideBar() {
                   <VscDebugDisconnect fontSize={24} />
                 </span>
                 <p className="mt-1 items-center px-2">OpenFinance</p>
+              </Link>
+            </div>
+            <div className="flex w-full p-4 items-center">
+              <Link to="/metas" className="flex items-center font-light px-3">
+                <span>
+                  <TbPigMoney fontSize={24} />
+                </span>
+                <p className="mt-1 items-center px-2">Metas</p>
               </Link>
             </div>
           </div>
@@ -59,7 +66,7 @@ export default function SideBar() {
             </div>
           </div>
         </div>
-      </div>
+{/*       </div> */}
     </aside>
   )
 }

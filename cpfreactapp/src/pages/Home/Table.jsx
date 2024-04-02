@@ -6,8 +6,8 @@ import { MdDeleteForever, MdCreate, MdKeyboardArrowDown, MdKeyboardArrowUp } fro
 
 export const Table = ({ rows, deleteRow, editRow }) => {
   return (
-    <div className="overflow-x-hidden overflow-y-auto max-h-[300px] w-3/5 [transition:all_500ms] rounded-lg mb-2"> {/* recent_orders */}
-      <table className="w-3/5 h-auto rounded-lg bg-color-rows border-2 border-solid border-color-border p-2 text-center [transition:all_300ms_ease] text-[#c9c9c9] h-12 p-2 border-solid border-b-2 border-b-color-bginputs">
+    <div className="overflow-x-hidden overflow-y-auto h-12 max-h-[100px] w-3/5 [transition:all_500ms] rounded-lg mb-2"> {/* recent_orders */}
+      <table className="w-full h-auto rounded-lg bg-color-rows border-2 border-solid border-color-border p-2 text-center [transition:all_300ms_ease] text-[#c9c9c9] p-2 border-solid border-b-2 border-b-color-bginputs">
         <thead>
           <tr>
             <th className="text-[1rem] tracking-[2px]">Valor</th>

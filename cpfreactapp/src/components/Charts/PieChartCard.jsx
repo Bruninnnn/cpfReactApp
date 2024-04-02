@@ -14,7 +14,7 @@ const PieChartCategory = ({ baseData, title }) => {
   useEffect(() => {
     if (baseData) {
       const filterLabel = baseData?.filter((data) => data.registerType === "INCOME")
-      const formatedLabel = filterLabel?.map((data) => data.regGroupType)
+      const formatedLabel = filterLabel?.map((data) => data.description)
       
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
