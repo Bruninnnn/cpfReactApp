@@ -10,13 +10,12 @@ import { Context } from "../Context";
 
 export function AppRoutes() {
   const { userContext } = useContext(Context);
-
   return (
     <Routes>
       <Route path="/" element={<FormLogin />} />
       <Route path="/home" element={<Home />} />
       <Route path="/register" element={<RegisterForm />} />
-      <Route path="/analystics" element={<Analystics />} />
+      <Route path="/reports" element={<Analystics />} />
     </Routes>
   );
 }

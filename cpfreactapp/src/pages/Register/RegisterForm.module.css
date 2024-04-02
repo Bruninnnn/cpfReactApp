@@ -13,11 +13,6 @@
   color: white;
 }
 
-input[type="date"] {
-  width: 110%;
-  height: 60%;
-}
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -34,18 +29,18 @@ input::-webkit-inner-spin-button {
 }
 
 @media screen and (max-width: 1064px) {
-  .container {
+/*   .container {
     width: 198%;
     height: auto;
-  }
+  } */
 
-  .input_group {
+/*   .input_group {
     flex-direction: column;
     overflow-y: scroll;
     flex-wrap: nowrap;
     max-height: 10rem;
     padding-right: 5rem;
-  }
+  } */
   .gender_inputs {
     margin-top: 2rem;
   }

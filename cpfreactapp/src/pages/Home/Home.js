@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import styles from "./Home.module.css";
+/* import styles from "./Home.module.css"; */
 
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
@@ -11,10 +11,13 @@ import SideBar from "../../components/SideBar";
 import { Context } from "../../Context";
 import { Table } from "./Table";
 
-import AddIcon from "@mui/icons-material/Add";
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import MoneyOffCsredOutlinedIcon from "@mui/icons-material/MoneyOffCsredOutlined";
-import TollOutlinedIcon from "@mui/icons-material/TollOutlined";
+import {
+  MdAdd,
+  MdAttachMoney,
+  MdMoneyOff,
+  MdOutlineToll,
+} from "react-icons/md";
+import { DashBoardBalances } from "./DashBoardBalances";
 
 function Home() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
@@ -87,6 +90,7 @@ function Home() {
       : setRows(
           rows.map((currRow, idx) => {
             if (idx !== rowToEdit) return currRow;
+
             return newRow;
           })
         );
@@ -94,6 +98,9 @@ function Home() {
 
   const [receipt, setReceipt] = useState();
   const [balance, setBalance] = useState();
+  const [data, setData] = useState();
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [initialized, setInitialized] = useState(false);
   const [cost, setCost] = useState();
 
   const options = {
@@ -102,6 +109,52 @@ function Home() {
       "Content-Type": "application/json",
     },
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const defaultValue = `${year}-${month}`;
+
+        setSelectedMonth(defaultValue);
+
+        if (!initialized) {
+          await filterCalendar(defaultValue);
+          setInitialized(true);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (!initialized) {
+      fetchData();
+    }
+  }, [initialized]);
+
+  const handleMonthChange = useCallback(async (e) => {
+    const monthValue = e.target.value;
+    setSelectedMonth(monthValue);
+    await filterCalendar(monthValue);
+  }, []);
+
+  async function filterCalendar(calendar) {
+    try {
+      const response = await fetch(
+        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
+        options
+      );
+
+      const responseData = await response.json();
+      if (responseData) {
+        await setData(responseData);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function filterCalendar(calendar) {
     try {
@@ -178,51 +231,53 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="w-screen h-screen text-sm m-0 bg-color-background text-color-border-login select-none overflow-x-hidden">
+    <div className="flex flex-row w-screen h-dvh bg-color-background text-color-border-login overflow">
       {" "}
       {/* body */}
-      <div className="grid w-full mx-auto my-0 gap-8 grid-cols-[14rem_auto]">
+      <SideBar />
+      <div className="flex w-full h-full mx-4 my-0 justify-center">
         {" "}
         {/* container */}
-        <SideBar />
-        <main>
-          <h1>Registros</h1>
-          <div className={styles.month}>
+        <main className="ml-24 mt-8">
+          <h1 className="mb-4">Registros</h1>
+          <div className="inline-block mt-4 rounded-[2rem]">
             {" "}
             {/* month */}
             <input
               id="calendar"
               type="month"
-              onChange={(e) => {
-                filterCalendar(e.target.value);
-              }}
-            ></input>
+              value={selectedMonth}
+              onChange={handleMonthChange}
+              className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
+            />
           </div>
-          <div className={styles.balances}>
+          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-[95%] h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-56">
             {" "}
             {/* balances */}
-            <div className={styles.receipt}>
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]">
               {" "}
               {/* receipt */}
               <span>
-                <AttachMoneyOutlinedIcon />
+                <MdAttachMoney
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
               <div className="middle">
                 {" "}
                 {/* middle */}
-                <div className="left">
-                  {" "}
-                  {/* left */}
-                  <h3>Receita</h3>
-                  <h1>{receipt}</h1>
-                </div>
+                <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
+                <h1>{receipt}</h1>
               </div>
             </div>
-            <div className={styles.balance}>
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]">
               {" "}
               {/* balance */}
               <span>
-                <TollOutlinedIcon />
+                <MdOutlineToll
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
               <div className="middle">
                 {" "}
@@ -230,16 +285,19 @@ function Home() {
                 <div className="left">
                   {" "}
                   {/* left */}
-                  <h3>Saldo</h3>
+                  <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
                   <h1>{balance}</h1>
                 </div>
               </div>
             </div>
-            <div className={styles.cost}>
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]">
               {" "}
               {/* cost */}
               <span>
-                <MoneyOffCsredOutlinedIcon />
+                <MdMoneyOff
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
               <div className="middle">
                 {" "}
@@ -247,12 +305,13 @@ function Home() {
                 <div className="left">
                   {" "}
                   {/* left */}
-                  <h3>Despesas</h3>
+                  <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
                   <h1>{cost}</h1>
                 </div>
               </div>
             </div>
           </div>
+
           {modalAddOpen && (
             <ModalComponent
               closeAddModal={() => {
@@ -273,14 +332,14 @@ function Home() {
               userContext={userContext}
             />
           )}
-          <div className={styles.btnDiv}>
+          <div className="flex justify-end mt-14 pr-0 pb-2">
             {" "}
             {/* btnDiv */}
             <button
-              className={styles.darkButton}
+              className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
               onClick={() => setModalAddOpen(true)}
             >
-              <AddIcon />
+              <MdAdd />
             </button>
           </div>
 
