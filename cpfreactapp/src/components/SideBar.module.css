@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap");
-
-* {
+/* * {
   margin: 0;
   padding: 0;
   outline: 0;
@@ -18,14 +16,11 @@ html {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: "Quicksand", sans-serif;
   font-size: 0.88rem;
   margin: 0;
-  color: #ffffff;
-  background-color: #09090b;
   user-select: none;
   overflow-x: hidden;
-}
+} 
 
 .header {
   width: 100%;
@@ -43,12 +38,12 @@ body {
   top: 0;
   left: 0;
   padding: 30px 15px;
-  background-color: #131316;
+  background-color: var(--background-card);
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   transition: width 0.5s;
-  border-right: 1px solid #1e1e1e;
+  border-right: 1px solid var(--border-card);
 }
 
 .menu {
@@ -57,7 +52,7 @@ body {
   justify-content: space-between;
   width: 60%;
   padding: 10px;
-  border-bottom: 1.5px solid #1e1e24;
+  border-bottom: 1.5px solid var(--border-card);
   margin-left: auto;
   margin-right: auto;
 }
@@ -75,16 +70,7 @@ body {
   width: 100%;
 }
 
-.menu > h2 {
-  opacity: 0;
-}
-
-.teste {
-  list-style: none;
-  padding: 0 15px;
-}
-
-ul {
+.side_nav ul {
   list-style: none;
   padding: 0 15px;
 }
@@ -97,25 +83,32 @@ ul li {
   line-height: 50px;
   cursor: pointer;
   border-radius: 1rem;
+} 
+
+.side_nav ul li p {
+  white-space: nowrap;
+  display: none;
 }
 
-ul li span {
+
+.side_nav ul li span {
+  color: var(--primary-text);
   display: flex;
   align-items: center;
   width: 20px;
   margin-right: 0px;
 }
 
-ul li span p {
+.side_nav ul li span p {
   height: 50px;
   min-width: 50px;
   border-radius: 12px;
-  line-height: 50px;
 }
 
-ul button {
+.side_nav ul button {
   background-color: transparent;
-  color: white;
+  color: var(--primary-text);
+  color: black;
   width: 14rem;
   display: flex;
   align-items: center;
@@ -124,21 +117,33 @@ ul button {
   border-radius: 1rem;
 }
 
-ul:hover li:hover {
-  background-color: #1e1e24;
+.side_nav ul li {
+  height: 100%;
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.side_nav ul:hover li:hover {
+  background-color: var(--background-card-hover);
   transition: ease-in 200ms;
+  align-items: center;
+  justify-content: center;
 }
 
 .side_nav:hover {
   width: 14rem;
 }
 
-.side_nav:hover .menu > h2 {
+.side_nav:hover .menu>h2 {
   opacity: 1;
 }
 
 .side_nav:hover .menu {
-  border-bottom: 2px solid #1e1e24;
+  border-bottom: 2px solid var(--border-card);
 }
 
 .side_nav:hover ul li span p {
@@ -154,5 +159,5 @@ ul:hover li:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*margin-right: 20px;*/
-}
+  margin-right: 20px;
+} */
