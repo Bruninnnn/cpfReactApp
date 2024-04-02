@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,12 @@ import SideBar from "../../components/SideBar";
 import { Context } from "../../Context";
 import { Table } from "./Table";
 
-import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md";
+import {
+  MdAdd,
+  MdAttachMoney,
+  MdMoneyOff,
+  MdOutlineToll,
+} from "react-icons/md";
 import { DashBoardBalances } from "./DashBoardBalances";
 
 function Home() {
@@ -83,17 +88,19 @@ function Home() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-        rows.map((currRow, idx) => {
-          if (idx !== rowToEdit) return currRow;
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow;
 
-          return newRow;
-        })
-      );
+            return newRow;
+          })
+        );
   };
 
   const [receipt, setReceipt] = useState();
   const [balance, setBalance] = useState();
-  const [calendar, setCalendar] = useState();
+  const [data, setData] = useState();
+  const [selectedMonth, setSelectedMonth] = useState("");
+  const [initialized, setInitialized] = useState(false);
   const [cost, setCost] = useState();
 
   const options = {
@@ -102,6 +109,52 @@ function Home() {
       "Content-Type": "application/json",
     },
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = (today.getMonth() + 1).toString().padStart(2, "0");
+        const defaultValue = `${year}-${month}`;
+
+        setSelectedMonth(defaultValue);
+
+        if (!initialized) {
+          await filterCalendar(defaultValue);
+          setInitialized(true);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    if (!initialized) {
+      fetchData();
+    }
+  }, [initialized]);
+
+  const handleMonthChange = useCallback(async (e) => {
+    const monthValue = e.target.value;
+    setSelectedMonth(monthValue);
+    await filterCalendar(monthValue);
+  }, []);
+
+  async function filterCalendar(calendar) {
+    try {
+      const response = await fetch(
+        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
+        options
+      );
+
+      const responseData = await response.json();
+      if (responseData) {
+        await setData(responseData);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function filterCalendar(calendar) {
     try {
@@ -178,50 +231,80 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="flex flex-row w-screen h-dvh bg-color-background text-color-border-login overflow"> {/* body */}
+    <div className="flex flex-row w-screen h-dvh bg-color-background text-color-border-login overflow">
+      {" "}
+      {/* body */}
       <SideBar />
-      <div className="flex w-full h-full mx-4 my-0"> {/* container */}
-        <main className="p-7 mt-8">
+      <div className="flex w-full h-full mx-4 my-0 justify-center">
+        {" "}
+        {/* container */}
+        <main className="ml-24 mt-8">
           <h1 className="mb-4">Registros</h1>
-          <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
+          <div className="inline-block mt-4 rounded-[2rem]">
+            {" "}
+            {/* month */}
             <input
               id="calendar"
               type="month"
-              onChange={(e) => {
-                filterCalendar(e.target.value);
-              }}
+              value={selectedMonth}
+              onChange={handleMonthChange}
               className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
             />
           </div>
-          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-[95%] h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-56"> {/* balances */}
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* receipt */}
+          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-[95%] h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-56">
+            {" "}
+            {/* balances */}
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]">
+              {" "}
+              {/* receipt */}
               <span>
-                <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
+                <MdAttachMoney
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
-              <div className="middle"> {/* middle */}
-                
-                  <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
-                  <h1>{receipt}</h1>
-                
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
+                <h1>{receipt}</h1>
               </div>
             </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* balance */}
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]">
+              {" "}
+              {/* balance */}
               <span>
-                <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
+                <MdOutlineToll
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <div className="left">
+                  {" "}
+                  {/* left */}
                   <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
                   <h1>{balance}</h1>
                 </div>
               </div>
             </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]"> {/* cost */}
+            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]">
+              {" "}
+              {/* cost */}
               <span>
-                <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
+                <MdMoneyOff
+                  style={{ fontSize: "2.5rem" }}
+                  className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full"
+                />
               </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
+              <div className="middle">
+                {" "}
+                {/* middle */}
+                <div className="left">
+                  {" "}
+                  {/* left */}
                   <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
                   <h1>{cost}</h1>
                 </div>
@@ -249,7 +332,9 @@ function Home() {
               userContext={userContext}
             />
           )}
-          <div className="flex justify-end mt-14 pr-0 pb-2"> {/* btnDiv */}
+          <div className="flex justify-end mt-14 pr-0 pb-2">
+            {" "}
+            {/* btnDiv */}
             <button
               className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
               onClick={() => setModalAddOpen(true)}

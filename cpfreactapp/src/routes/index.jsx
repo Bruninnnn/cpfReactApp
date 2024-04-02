@@ -8,10 +8,8 @@ import RegisterForm from "../pages/Register/RegisterForm";
 import { useContext } from "react";
 import { Context } from "../Context";
 
-
 export function AppRoutes() {
   const { userContext } = useContext(Context);
-  
   return (
     <Routes>
       <Route path="/" element={<FormLogin />} />
