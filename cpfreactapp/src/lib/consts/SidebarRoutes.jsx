@@ -3,9 +3,9 @@ import { MdDashboard, MdDataUsage } from "react-icons/md"
 
 export const DASHBOARD_SIDEBAR_LINKS = [
 	{
-		key: 'home',
+		key: 'dashboard',
 		label: 'Cadastro',
-		path: '/home',
+		path: '/dashboard',
 		icon: <MdDashboard size={24} />
 	},
 	{

@@ -5,11 +5,12 @@ import { defaults } from "chart.js";
 import { BarChart } from "../../components/Charts/BarChart";
 import { IP } from "../../env";
 import PieChartCard from "../../components/Charts/PieChartCard";
+import InputDate from "../../components/Input/InputDate";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
-function Analystics() {
+function Reports() {
   const [data, setData] = useState();
   const [selectedMonth, setSelectedMonth] = useState("");
   const [initialized, setInitialized] = useState(false);
@@ -72,13 +73,12 @@ function Analystics() {
       <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
         <main className="mx-0 mt-8 ">
           <h1 className="mb-4">Gráficos</h1>
-          <div className="inline-block mt-4 rounded-[2rem]">
-            <input
-              id="calendar"
+          <div className="inline-block mt-0 rounded-[2rem]">
+            <InputDate
+              id="calendarReports"
               type="month"
               value={selectedMonth}
               onChange={handleMonthChange}
-              className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
             />
           </div>
           <div className="flex w-full flex-wrap mx-auto my-auto mt-4">
@@ -98,4 +98,4 @@ function Analystics() {
   );
 }
 
-export default Analystics;
+export default Reports;

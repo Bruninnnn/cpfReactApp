@@ -1,20 +1,19 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
-/* import styles from "./Home.module.css"; */
-
+import InputDate from "../../components/Input/InputDate";
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
-import SideBar from "../../components/SideBar";
 
 import { Context } from "../../Context";
 import { Table } from "./Table";
 
 import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md";
-import { DashBoardBalances } from "./DashBoardBalances";
 
-function Home() {
+import { toast } from "react-toastify";
+import DashBoardBalances from "./DashBoardBalances";
+
+function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const { userContext, setContext } = useContext(Context);
@@ -226,55 +225,21 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="flex flex-row bg-color-background text-color-border-login overflow"> {/* body */}
+    <div className="flex flex-row w-full bg-color-background text-color-border-login overflow"> {/* body */}
       <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
         <main className="mx-0 mt-8">
           <h1 className="mb-4">Registros</h1>
-          <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
-            <input
-              id="calendar"
+          <div className="inline-block mt-0 rounded-[2rem]"> {/* month */}
+            <InputDate
+              id="calendarDashBoard"
               type="month"
               value={selectedMonth}
               onChange={handleMonthChange}
-              className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
             />
           </div>
-          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-full h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-72"> {/* balances */}
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* receipt */}
-              <span>
-                <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                
-                  <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
-                  <h1>{receipt}</h1>
-                
-              </div>
-            </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* balance */}
-              <span>
-                <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
-                  <h1>{balance}</h1>
-                </div>
-              </div>
-            </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]"> {/* cost */}
-              <span>
-                <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
-                  <h1>{cost}</h1>
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-row md:flex-col w-full gap-80 mt-0"> {/* balances */}
+            <DashBoardBalances receipt={receipt} balance={balance} cost={cost} />
           </div>
-
           {modalAddOpen && (
             <ModalComponent
               closeAddModal={() => {
@@ -315,4 +280,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default DashBoard;

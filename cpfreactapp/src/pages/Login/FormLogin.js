@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
 import login from "../../components/images/login.svg";
-import styleslogin from "./Login.module.css";
 
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -92,7 +91,7 @@ function FormLogin() {
           progress: undefined,
           theme: "dark",
         });
-        navigate("/home");
+        navigate("/dashboard");
       } else {
         toast.error("Senha incorreta, tente novamente!", {
           position: "bottom-right",
