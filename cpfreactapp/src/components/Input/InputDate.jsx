@@ -7,7 +7,7 @@ const InputDate = ({ id, type, value, onChange }) => {
       type={type}
       value={value}
       onChange={onChange}
-      className="bg-color-rows text-xl p-2 text-[#ffffff] text-center [transition:all_450ms_ease] hover:[box-shadow:none]"
+      className="bg-color-rows text-base rounded-lg p-2 text-[#ffffff] text-center border border-solid border-color-border hover:outline-1 focus:outline-1 outline outline-color-receipt"
     />
   )
 }

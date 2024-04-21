@@ -15,7 +15,7 @@ const PieChartCategory = ({ baseData, title }) => {
     if (baseData) {
       const filterLabel = baseData?.filter((data) => data.registerType === "INCOME")
       const formatedLabel = filterLabel?.map((data) => data.description)
-      
+
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
 
@@ -86,7 +86,7 @@ const PieChartCategory = ({ baseData, title }) => {
     <div className="justify-center bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
       <strong className="font-medium my-4">{title}</strong>
       <div className="flex justify-center">
-        <Chart className="w-1/2 sm:w-1/2 md:w-10 lg:w-1/2 m-xlw-full" type="doughnut" data={chartData} options={chartOptions} />
+        <Chart className="w-1/2 sm:w-1/2 md:w-10 lg:w-1/2 m-xl:w-full" type="doughnut" data={chartData} options={chartOptions} />
       </div>
     </div>
   );

@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
+
 * {
   outline: 0;
   appearance: none;
@@ -16,8 +18,8 @@
   cursor: pointer;
 }
 
-body {
-  background-color: #09090b;
+html{
+  font-size: 14px;
 }
 
 h1 {

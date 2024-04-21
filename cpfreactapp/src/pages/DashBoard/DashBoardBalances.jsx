@@ -1,44 +1,21 @@
 import React from 'react'
 import { MdAttachMoney, MdMoneyOff, MdOutlineToll } from 'react-icons/md'
 
+import { CardWallet } from '../../components/Card/CardWallet'
+
 const DashBoardBalances = ({ receipt, balance, cost }) => {
   return (
-    <div className="flex flex-row md:flex-col w-full gap-80 mt-4"> {/* balances */}
-      <div className="bg-color-rows p-4 w-[15vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* receipt */}
-        <span>
-          <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
-        </span>
-        <div className="middle"> {/* middle */}
-          <div className="left"> {/* left */}
-            <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
-            <h1>{receipt}</h1>
-          </div>
-        </div>
-      </div>
-      <div className="bg-color-rows p-4 w-[15vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* balance */}
-        <span>
-          <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
-        </span>
-        <div className="middle"> {/* middle */}
-          <div className="left"> {/* left */}
-            <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
-            <h1>{balance}</h1>
-          </div>
-        </div>
-      </div>
-      <div className="bg-color-rows p-4 w-[15vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]"> {/* cost */}
-        <span>
-          <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-        </span>
-        <div className="middle"> {/* middle */}
-          <div className="left"> {/* left */}
-            <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
-            <h1>{cost}</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div className="flex justify-evenly mt-4 mx-0 gap-12 w-full m-sm:w-3/4 m-md:w-full md:flex-col m-sm:gap-2 m-lg:gap-24 m-xl:gap-4 m-2xl:gap-12">
+      <CardWallet id={1} propTitle={"Receita"} propTypeValue={receipt} />
+      <CardWallet id={2} propTitle={"Saldo"} propTypeValue={balance} />
+      <CardWallet id={3} propTitle={"Despesas"} propTypeValue={cost} />
+      <CardWallet id={3} propTitle={"Despesas"} propTypeValue={cost} />
+    </div >
   )
 }
 
 export default DashBoardBalances;
+
+function BoxWrapper({ children }) {
+  return <div className="bg-color-rows rounded-3xl p-4 flex-1 border border-color-border flex items-center">{children}</div>
+}

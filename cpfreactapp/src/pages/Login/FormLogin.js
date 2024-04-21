@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { Context } from "../../Context";
 
 import "react-toastify/dist/ReactToastify.css";
+import { InputLayout } from "../../components/Input/InputLayout";
+import InputPassword from "../../components/Input/InputPassword";
 
 function FormLogin() {
   const [email, setEmail] = useState("");
@@ -143,38 +145,10 @@ function FormLogin() {
                 <h1 className="mt-0 -ml-3.5">LOGIN</h1>
               </div>
             </div>
-            <div className="flex flex-col mb-3 -m-3">
-              {" "}
-              {/* input_box */}
-              <label htmlFor="email" className="md:-mb-2 md:mt-2">
-                E-mail
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Informe seu e-mail"
-                required
-                onChange={handleChangeEmail}
-                className="my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-3"
-              />
-            </div>
-            <div className="flex flex-col mb-3 -m-3">
-              {" "}
-              {/* input_box */}
-              <label htmlFor="password" className="md:-mb-2 md:mt-1">
-                Senha
-              </label>
-              <input
-                type={passwordShow ? "text" : "password"}
-                id="password"
-                name="password"
-                placeholder="Informe sua senha"
-                required
-                onChange={handleChangePassword}
-                className="my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt md:mb-1"
-              />
-            </div>
+            <InputLayout label="Email" id="email" type="email" placeholder={"Informe seu email"} onChange={handleChangeEmail} />
+
+            <InputPassword label="Senha" id="password" name="password" type="password" placeholder="Informe sua senha" onChange={handleChangePassword} togglePassword={passwordShow} />
+
             <div className="w-80 flex flex-col mb-6 -m-3 mt-4 border-none text-center bg-color-receipt p-3 rounded-lg cursor-pointer md:mb-1">
               {" "}
               {/* continue_button */}
@@ -200,12 +174,10 @@ function FormLogin() {
                 style={{
                   color: "#FFFFFF",
                 }}
-                onClick={togglePassword}
+                onChange={togglePassword}
               />
             </div>
-            <div className="flex">
-              {" "}
-              {/* createaccount */}
+            <div className="flex" id="createAccount">
               <p>
                 Ainda não tem conta?{" "}
                 <Link className="text-color-receipt font-bold" to="/register">
@@ -216,8 +188,8 @@ function FormLogin() {
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

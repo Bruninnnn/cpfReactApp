@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PieChartCategory from "../../components/Charts/PieChartCategory";
-import SideBar from "../../components/SideBar";
 import { defaults } from "chart.js";
 import { BarChart } from "../../components/Charts/BarChart";
 import { IP } from "../../env";
@@ -69,30 +68,26 @@ function Reports() {
   }
 
   return (
-    <div className="flex flex-row bg-color-background text-color-border-login overflow"> {/* body */}
-      <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
-        <main className="mx-0 mt-8 ">
-          <h1 className="mb-4">Gráficos</h1>
-          <div className="inline-block mt-0 rounded-[2rem]">
-            <InputDate
-              id="calendarReports"
-              type="month"
-              value={selectedMonth}
-              onChange={handleMonthChange}
-            />
-          </div>
-          <div className="flex w-full flex-wrap mx-auto my-auto mt-4">
-            <div className="w-full px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-full md:px-2 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-full ">
-              <BarChart baseData={data} title={"Ganhos X Despesas:"} />
-            </div>
-            <div className="w-1/2 px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-1/2 md:px-1 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-1/2 ">
-              <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
-            </div>
-            <div className="w-1/2 px-2 py-2 sm:w-full sm:px-1 sm:my-1 md:w-1/2 md:px-1 md:my-1 lg:w-1/2 lg:px-1 lg:my-1 m-xl:w-1/2 ">
-              <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
-            </div>
-          </div>
-        </main>
+    <div className="flex flex-col gap-4 mx-4">
+      <h1 className="mb-4 mt-4">Gráficos</h1>
+      <div className="inline-block -mt-4 rounded-3xl">
+        <InputDate
+          id="calendarReports"
+          type="month"
+          value={selectedMonth}
+          onChange={handleMonthChange}
+        />
+      </div>
+      <div className="flex gap-x-4 gap-y-4 flew-row w-full flex-wrap mx-0 my-0 md:flex-col">
+        <div className="flex-none w-full px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-full ">
+          <BarChart baseData={data} title={"Ganhos X Despesas:"} />
+        </div>
+        <div className="flex-1 w-1/2 px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-1/2 ">
+          <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
+        </div>
+        <div className="flex-1 w-1/2 px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-1/2 ">
+          <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
+        </div>
       </div>
     </div >
   );

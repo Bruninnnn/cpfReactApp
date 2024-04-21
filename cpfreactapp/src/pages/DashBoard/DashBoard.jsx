@@ -12,6 +12,7 @@ import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md"
 
 import { toast } from "react-toastify";
 import DashBoardBalances from "./DashBoardBalances";
+import { CardWallet } from "../../components/Card/CardWallet";
 
 function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
@@ -84,7 +85,6 @@ function DashBoard() {
       : setRows(
         rows.map((currRow, idx) => {
           if (idx !== rowToEdit) return currRow;
-
           return newRow;
         })
       );
@@ -225,57 +225,55 @@ function DashBoard() {
   }, [rows]);
 
   return (
-    <div className="flex flex-row w-full bg-color-background text-color-border-login overflow"> {/* body */}
-      <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
-        <main className="mx-0 mt-8">
-          <h1 className="mb-4">Registros</h1>
-          <div className="inline-block mt-0 rounded-[2rem]"> {/* month */}
-            <InputDate
-              id="calendarDashBoard"
-              type="month"
-              value={selectedMonth}
-              onChange={handleMonthChange}
-            />
-          </div>
-          <div className="flex flex-row md:flex-col w-full gap-80 mt-0"> {/* balances */}
-            <DashBoardBalances receipt={receipt} balance={balance} cost={cost} />
-          </div>
-          {modalAddOpen && (
-            <ModalComponent
-              closeAddModal={() => {
-                setModalAddOpen(false);
-              }}
-              onSubmit={handleSubmit}
-              userContext={userContext}
-            />
-          )}
-          {modalEditOpen && (
-            <ModalEdit
-              closeEditModal={() => {
-                setModalEditOpen(false);
-                setRowToEdit(null);
-              }}
-              onSubmit={handleSubmit}
-              defaultValue={rowToEdit !== null && rows[rowToEdit]}
-              userContext={userContext}
-            />
-          )}
-          <div className="flex justify-end mt-14 pr-0 pb-2"> {/* btnDiv */}
-            <button
-              className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
-              onClick={() => setModalAddOpen(true)}
-            >
-              <MdAdd />
-            </button>
-          </div>
-
-          <Table
-            rows={rows}
-            deleteRow={handleDeleteRow}
-            editRow={handleEditRow}
-          />
-        </main>
+    <div className="flex-col gap-4 mx-4">
+      {/*       <main className="mt-4"> */}
+      <h1 className="mt-4 mb-4">Registros</h1>
+      <div className="inline-block mt-0 rounded-3xl">
+        <InputDate
+          id="calendarDashBoard"
+          type="month"
+          value={selectedMonth}
+          onChange={handleMonthChange}
+        />
       </div>
+      <DashBoardBalances receipt={receipt} balance={balance} cost={cost} />
+      {modalAddOpen && (
+        <ModalComponent
+          closeAddModal={() => {
+            setModalAddOpen(false);
+          }}
+          onSubmit={handleSubmit}
+          userContext={userContext}
+        />
+      )}
+      {modalEditOpen && (
+        <ModalEdit
+          closeEditModal={() => {
+            setModalEditOpen(false);
+            setRowToEdit(null);
+          }}
+          onSubmit={handleSubmit}
+          primaryDefaultValue={rowToEdit !== null && rows[rowToEdit]}
+          userContext={userContext}
+        />
+      )}
+      <div className="flex mt-8 pr-0 pb-2"> {/* btnDiv */}
+        <button
+          className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
+          onClick={() => setModalAddOpen(true)}
+        >
+          <MdAdd />
+        </button>
+      </div>
+
+      <div className="flex flex-row gap-4 w-full">
+        <Table
+          rows={rows}
+          deleteRow={handleDeleteRow}
+          editRow={handleEditRow}
+        />
+      </div>
+      {/*       </main> */}
     </div>
   );
 }
