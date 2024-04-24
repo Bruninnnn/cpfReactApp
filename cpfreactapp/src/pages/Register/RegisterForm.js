@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import register from "../../components/images/register.svg";
 
-import { Link, useNavigate } from "react-router-dom";
+import { InputLayout } from "../../components/Input/InputLayout";
+import { SelectLayout } from "../../components/Select/SelectLayout";
+import InputPassword from "../../components/Input/InputPassword";
+import { InputDateRegister } from "../../components/Input/InputDateRegister";
 
 function RegisterForm() {
   const [fullName, setFullName] = useState("");
@@ -125,182 +129,60 @@ function RegisterForm() {
     return response;
   }
 
+  const genderOptions = [
+    { value: "MALE", label: "Masculino" },
+    { value: "FEMALE", label: "Feminino" }
+  ];
+
   return (
     <div className="w-full h-screen flex justify-center items-center bg-color-background"> {/* body */}
       <div className="w-4/5 h-[80vh] flex
-      md:w-full md:h-1/2"> {/* container */}
+      lg:w-full lg:h-1/2"> {/* container */}
         <div className="flex w-1/2 justify-center items-center bg-color-bgforms p-4
-        md:w-full md:h-1/2 md:flex md:absolute md:left-0 md:top-0 md:items-center md:p-4"> {/* form_image */}
-          <img src={register} alt="registerSVG" className="w-5/6md:w-full md:h-2/3 sm:w-full sm:h-1/5" />
+        lg:w-full lg:h-1/2 lg:flex lg:absolute lg:left-0 lg:top-0 lg:items-center lg:p-4"> {/* form_image */}
+          <img src={register} alt="registerSVG" className="w-5/6 lg:w-full lg:h-2/3 sm:w-full sm:h-1/5" />
         </div>
         <div className="w-1/2 flex justify-center items-center flex-col bg-color-bgforms p-12 border-l-2 border-solid border-color-border-login
-        md:w-full md:h-1/2 md:top-1/2 md:left-0 md:flex md:absolute md:overflow-hidden md:items-center md:p-8 md:border-l-0"> {/* form */}
+        lg:w-full lg:h-1/2 lg:top-1/2 lg:left-0 lg:flex lg:absolute lg:overflow-hidden lg:items-center lg:p-8 lg:border-l-0"> {/* form */}
           <form action="#" className="w-full h-full">
-            <div className="h-[-50vh] -mb-2 flex justify-between md:-mb-6"> {/* form_header */}
-              <div className="-mt-2 ml-16 sm:ml-4"> {/* Title */}
+            <div className="h-[-50vh] -mb-2 flex justify-between lg:-mb-6"> {/* form_header */}
+              <div className="-mt-2 ml-16 sm:ml-16"> {/* Title */}
                 <h1>Cadastre-se</h1>
               </div>
               <div className="flex items-center -mt-8"> {/* login_button */}
-                <button className="border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer -ml-[50%] mt-[15%] font-medium no-underline md:-ml-[40%] sm:-ml-[80%] m-xl-ml-[45%]">
+                <button className="border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer -ml-[50%] mt-[15%] font-medium no-underline lg:-ml-[40%] sm:-ml-[25%]">
                   <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
             <div className="flex flex-wrap justify-between w-4/5 p-4 mt-[5vh] mx-auto mb-[6rem] 
-            sm:w-full sm:ml-0 md:flex md:justify-between md:w-[85%] md:lg:overflow-y-scroll md:max-h-52 m-xlw-[85%]"> {/* input_group */}
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="fullName" className="-mb-2">Nome Completo</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  placeholder="Nome Completo"
-                  required
-                  value={fullName}
-                  onChange={handleChangeName}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+            sm:w-full sm:ml-16 lg:flex m-md:justify-between lg:w-[85%] lg:overflow-y-scroll lg:max-h-52 m-xlw-[85%]"> {/* input_group */}
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="gender" className="-mb-2">Genêro</label>
-                <select
-                  id="gender"
-                  name="gender"
-                  required
-                  onChange={handleChangeGender}
-                  className="w-full my-3 mx-0 py-2 pr-4 mr-24 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                >
-                  <option value="MALE">Masculino</option>
-                  <option value="FEMALE">Feminino</option>
-                </select>
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Nome Completo" id="fullName" type="text" value={fullName} placeholder="Nome completo" onChange={handleChangeName} />
 
-              <div className="flex flex-col w-[48.5%] -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="birthDate" className="-mb-2 mt-1">Data de Nascimento</label>
-                <input
-                  type="date"
-                  id="birthDate"
-                  name="birthDate"
-                  placeholder="Data de Nascimento"
-                  required
-                  value={birthDate}
-                  onChange={handleChangeBirthDate}
-                  className="w-full my-3 mx-0 py-2 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputDateRegister width="m-sm:w-2/4 m-xl:w-2/4" label="Data de Nascimento" id="birthDate" type="date" value={birthDate} placeholder="Data de Nascimento" onChange={handleChangeBirthDate} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */} {/* input_box */}
-                <label htmlFor="email" className="-mb-2 mt-1">E-mail</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Informe seu e-mail"
-                  required
-                  value={email}
-                  onChange={handleChangeEmail}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <SelectLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Gênero" id="gender" onChange={handleChangeGender}
+                options={genderOptions}
+              />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}{/* input_box */}
-                <label htmlFor="password" className="-mb-2 mt-1">Senha</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  placeholder="Informe sua senha"
-                  required
-                  onChange={handleChangePassword}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Email" id="email" type="email" value={email} placeholder="Informe seu email" onChange={handleChangeEmail} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="zipCode" className="-mb-2 mt-1">CEP</label>
-                <input
-                  type="cep"
-                  id="zipCode"
-                  name="cep"
-                  placeholder="xxxxx-xxx"
-                  required
-                  onBlur={handleChangeZipCode}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Senha" id="password" type="password" placeholder="Informe sua senha" onChange={handleChangePassword} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="street" className="-mb-2 mt-1">Rua</label>
-                <input
-                  type="text"
-                  id="street"
-                  name="street"
-                  placeholder="Informe sua rua"
-                  required
-                  onChange={handleChangeStreet}
-                  value={street}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="CEP" id="zipCode" type="cep" placeholder="xxxxx-xxx" onBlur={handleChangeZipCode} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="numberHouse" className="-mb-2 mt-1">Número</label>
-                <input
-                  type="number"
-                  id="number"
-                  name="numberHouse"
-                  placeholder="Informe seu número"
-                  required
-                  onChange={handleChangeNumberHouse}
-                  value={numberHouse}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Rua" id="street" type="text" value={street} placeholder="Informe sua Rua" onChange={handleChangeStreet} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="neighborhood" className="-mb-2 mt-1">Bairro</label>
-                <input
-                  type="text"
-                  id="neighborhood"
-                  name="neighborhood"
-                  placeholder="Informe seu bairro"
-                  required
-                  onChange={handleChangeNeighborhood}
-                  value={neighborhood}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Número" id="numberHouse" type="number" value={numberHouse} placeholder="Informe seu número" onChange={handleChangeNumberHouse} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="city" className="-mb-2 mt-1">Cidade</label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  placeholder="Informe sua cidade"
-                  required
-                  onChange={handleChangeCity}
-                  value={city}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Bairro" id="neighborhood" type="text" value={neighborhood} placeholder="Informe seu bairro" onChange={handleChangeNeighborhood} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
-                <label htmlFor="state" className="-mb-2 mt-1">Estado</label>
-                <input
-                  type="text"
-                  id="state"
-                  name="state"
-                  placeholder="Informe o seu estado"
-                  required
-                  onChange={handleChangeState}
-                  value={state}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div>
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Cidade" id="city" type="text" value={city} placeholder="Informe sua Cidade" onChange={handleChangeCity} />
 
-              <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2"> {/* input_box */}
+              <InputLayout width="m-sm:w-2/4 m-xl:w-2/4" label="Estado" id="state" type="text" value={state} placeholder="Informe seu Estado" onChange={handleChangeState} />
+
+              {/* <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2">
                 <label htmlFor="country" className="-mb-2 mt-1">País</label>
                 <input
                   type="text"
@@ -312,11 +194,11 @@ function RegisterForm() {
                   value={country}
                   className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
                 />
-              </div>
+              </div> */}
             </div>
-            <div className="flex w-4/5 -mt-24 items-center ml-16 md:w-[85%] m-xlw-[83%]"> {/* continue_button */}
+            <div className="flex w-10/12 -mt-24 items-center ml-16 lg:w-[85%] m-xlw-[83%]"> {/* continue_button */}
               <button
-                className="w-full mt-6 ml-1 border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer font-medium text-base"
+                className="w-full mt-6 ml-2 border-none bg-color-receipt px-2.5 py-2 rounded-lg cursor-pointer font-medium text-base"
                 onClick={() => {
                   sendRequest();
                   navigate("/");
@@ -327,8 +209,8 @@ function RegisterForm() {
             </div>
           </form>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

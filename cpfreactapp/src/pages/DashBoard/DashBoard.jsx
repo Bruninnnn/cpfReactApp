@@ -1,20 +1,20 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
-/* import styles from "./Home.module.css"; */
-
+import InputDate from "../../components/Input/InputDate";
 import { ModalComponent } from "../../components/Modals/ModalAdd";
 import { ModalEdit } from "../../components/Modals/ModalEdit";
-import SideBar from "../../components/SideBar";
 
 import { Context } from "../../Context";
 import { Table } from "./Table";
 
 import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md";
-import { DashBoardBalances } from "./DashBoardBalances";
 
-function Home() {
+import { toast } from "react-toastify";
+import DashBoardBalances from "./DashBoardBalances";
+import { CardWallet } from "../../components/Card/CardWallet";
+
+function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
   const [modalEditOpen, setModalEditOpen] = useState(false);
   const { userContext, setContext } = useContext(Context);
@@ -85,7 +85,6 @@ function Home() {
       : setRows(
         rows.map((currRow, idx) => {
           if (idx !== rowToEdit) return currRow;
-
           return newRow;
         })
       );
@@ -226,93 +225,57 @@ function Home() {
   }, [rows]);
 
   return (
-    <div className="flex flex-row bg-color-background text-color-border-login overflow"> {/* body */}
-      <div className="flex w-full h-full mx-4 my-0 justify-center"> {/* container */}
-        <main className="mx-0 mt-8">
-          <h1 className="mb-4">Registros</h1>
-          <div className="inline-block mt-4 rounded-[2rem]"> {/* month */}
-            <input
-              id="calendar"
-              type="month"
-              value={selectedMonth}
-              onChange={handleMonthChange}
-              className="bg-color-rows text-sm text-[#ffffff] border-2 border-[solid] border-color-border p-2 text-center [transition:all_450ms_ease] hover:[transition:all_450ms_ease] hover:[box-shadow:none]"
-            />
-          </div>
-          <div className="flex m-lg:flex-row m-sm:m-md:flex-col w-full m-xl:w-full h-1/4 m-md:h-3/4 m-lg:h-1/4 mt-10 m-md:gap-8 m-lg:gap-8 m-xl:gap-40 m-2xl:gap-72"> {/* balances */}
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* receipt */}
-              <span>
-                <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                
-                  <h3 className="mb-4 text-[1rem] mt-1">Receita</h3>
-                  <h1>{receipt}</h1>
-                
-              </div>
-            </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border border-[solid] border-color-border [transition:all_300ms_ease]"> {/* balance */}
-              <span>
-                <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3 className="mb-4 text-[1rem] mt-1">Saldo</h3>
-                  <h1>{balance}</h1>
-                </div>
-              </div>
-            </div>
-            <div className="bg-color-rows p-4 w-[15vw] m-md:w-full m-lg:w-[22vw] m-xl:w-[20vw] h-[18vh] rounded-3xl mt-2 border-[1px] border-[solid] border-color-border [transition:all_300ms_ease]"> {/* cost */}
-              <span>
-                <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-              </span>
-              <div className="middle"> {/* middle */}
-                <div className="left"> {/* left */}
-                  <h3 className="mb-4 text-[1rem] mt-1">Despesas</h3>
-                  <h1>{cost}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {modalAddOpen && (
-            <ModalComponent
-              closeAddModal={() => {
-                setModalAddOpen(false);
-              }}
-              onSubmit={handleSubmit}
-              userContext={userContext}
-            />
-          )}
-          {modalEditOpen && (
-            <ModalEdit
-              closeEditModal={() => {
-                setModalEditOpen(false);
-                setRowToEdit(null);
-              }}
-              onSubmit={handleSubmit}
-              defaultValue={rowToEdit !== null && rows[rowToEdit]}
-              userContext={userContext}
-            />
-          )}
-          <div className="flex justify-end mt-14 pr-0 pb-2"> {/* btnDiv */}
-            <button
-              className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
-              onClick={() => setModalAddOpen(true)}
-            >
-              <MdAdd />
-            </button>
-          </div>
-
-          <Table
-            rows={rows}
-            deleteRow={handleDeleteRow}
-            editRow={handleEditRow}
-          />
-        </main>
+    <div className="flex-col gap-4 mx-4">
+      {/*       <main className="mt-4"> */}
+      <h1 className="mt-4 mb-4">Registros</h1>
+      <div className="inline-block mt-0 rounded-3xl">
+        <InputDate
+          id="calendarDashBoard"
+          type="month"
+          value={selectedMonth}
+          onChange={handleMonthChange}
+        />
       </div>
+      <DashBoardBalances receipt={receipt} balance={balance} cost={cost} />
+      {modalAddOpen && (
+        <ModalComponent
+          closeAddModal={() => {
+            setModalAddOpen(false);
+          }}
+          onSubmit={handleSubmit}
+          userContext={userContext}
+        />
+      )}
+      {modalEditOpen && (
+        <ModalEdit
+          closeEditModal={() => {
+            setModalEditOpen(false);
+            setRowToEdit(null);
+          }}
+          onSubmit={handleSubmit}
+          primaryDefaultValue={rowToEdit !== null && rows[rowToEdit]}
+          userContext={userContext}
+        />
+      )}
+      <div className="flex mt-8 pr-0 pb-2"> {/* btnDiv */}
+        <button
+          className="bg-color-receipt h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border text-[#ffffff]" /* darkButton */
+          onClick={() => setModalAddOpen(true)}
+        >
+          <MdAdd />
+        </button>
+      </div>
+
+      <div className="flex flex-row gap-4 w-full">
+        <Table
+          rows={rows}
+          deleteRow={handleDeleteRow}
+          editRow={handleEditRow}
+        />
+      </div>
+      {/*       </main> */}
     </div>
   );
 }
 
-export default Home;
+export default DashBoard;

@@ -1,19 +1,21 @@
 import React, { useContext, useState } from "react";
 
-import stylesmodaledit from "./ModalEdit.module.css";
+import { InputLayout } from "../Input/InputLayout"
+import { SelectLayout } from "../Select/SelectLayout";
 
 import { format } from "date-fns";
 import { Context } from "../../Context";
 
 import { toast } from "react-toastify";
 
-export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
+
+export const ModalEdit = ({ closeEditModal, onSubmit, primaryDefaultValue }) => {
   const { userContext, setContext } = useContext(Context);
   const user = userContext;
   const { IP } = require("../../env");
 
   const [formState, setFormState] = useState(
-    defaultValue || {
+    primaryDefaultValue || {
       amount: "",
       description: "",
       regGroupType: "",
@@ -45,7 +47,7 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
         user: user,
         registerDate: formattedDate,
       };
-''
+      ''
       const options = {
         method: "PUT",
         headers: {
@@ -84,16 +86,39 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
     });
   };
 
+  const categoryOptions = [
+    { value: "Casa", label: "Casa" },
+    { value: "Educação", label: "Educação" },
+    { value: "Eletrônicos", label: "Eletrônicos" },
+    { value: "Lazer", label: "Lazer" },
+    { value: "Outros", label: "Outros" },
+    { value: "Restaurante", label: "Restaurante" },
+    { value: "Saúde", label: "Saúde" },
+    { value: "Serviços", label: "Serviços" },
+    { value: "Supermercado", label: "Supermercado" },
+    { value: "Transporte", label: "Transporte" },
+    { value: "Vestuário", label: "Vestuário" },
+    { value: "Viagem", label: "Viagem" }
+  ];
+
+  const typeOptions = [
+    { value: "Entrada", label: "Entrada" },
+    { value: "Saida", label: "Saída" }
+  ];
+
+  console.log(formState)
+
   return (
-    <div className={stylesmodaledit.modal_container}>
-      <div className={stylesmodaledit.modal}>
-        <div className={stylesmodaledit.title}>
+    <div className="flex w-full h-full left-0 top-0 items-center justify-center fixed bg-modal-background"> {/* modal_container */}
+      <div className="w-1/4 h-1/2 rounded-lg p-8 bg-color-bgforms border-2 border-solid border-color-bginputs"> {/* modal */}
+        <div className="title">
           <h2>Editar</h2>
         </div>
-        <form>
-          <div className={stylesmodaledit.main_imputs}>
-            <div className={stylesmodaledit.textfield}>
-              <label htmlFor="amount">Valor:</label>
+        <form className="flex w-full items-center justify-center my-6">
+          <div className="grid grid-cols-2 gap-5 mt-2 justify-center"> {/* main_inputs */}
+            <div className="w-full whitespace-nowrap items-center justify-center p-4"> {/* textfield */}
+              <InputLayout label="Valor:" type="text" value={formState.amount} placeholder="0,00" onChange={handleChangeEdit} />
+              {/* <label htmlFor="amount">Valor:</label>
               <input
                 type="text"
                 placeholder="0,00"
@@ -101,10 +126,11 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                 value={formState.amount}
                 onChange={handleChangeEdit}
                 required
-              />
+              /> */}
             </div>
-            <div className={stylesmodaledit.textfield}>
-              <label htmlFor="description">Descrição:</label>
+            <div className="w-full whitespace-nowrap items-center justify-center p-4"> {/* textfield */}
+              <InputLayout label="Descrição:" type="text" value={formState.description} placeholder="Descrição" onChange={handleChangeEdit} />
+              {/* <label htmlFor="description">Descrição:</label>
               <input
                 type="text"
                 placeholder="Descrição"
@@ -112,66 +138,29 @@ export const ModalEdit = ({ closeEditModal, onSubmit, defaultValue }) => {
                 value={formState.description}
                 onChange={handleChangeEdit}
                 required
+              /> */}
+            </div>
+            <div className="w-full whitespace-nowrap items-center justify-center p-4 -mt-12"> {/* textfield */}
+              <SelectLayout label="Categoria:" id="regGroupType" value={formState.defaultValue} onChange={handleChangeEdit}
+                options={categoryOptions}
               />
             </div>
-            <div className={stylesmodaledit.textfield}>
-              <label htmlFor="regGroupType">Categoria</label>
-              <div className={stylesmodaledit.textfield_category}>
-                <select
-                  name="regGroupType"
-                  id="regGroupType"
-                  value={formState.regGroupType}
-                  onChange={handleChangeEdit}
-                  required
-                >
-                  <option value="" disabled selected>
-                    Selecione...
-                  </option>
-                  <option value="Casa">Casa</option>
-                  <option value="Educação">Educação</option>
-                  <option value="Eletrônicos">Eletrônicos</option>
-                  <option value="Lazer">Lazer</option>
-                  <option value="Outros">Outros</option>
-                  <option value="Restaurante">Restaurante</option>
-                  <option value="Saúde">Saúde</option>
-                  <option value="Serviços">Serviços</option>
-                  <option value="Supermercado">Supermercado</option>
-                  <option value="Transporte">Transporte</option>
-                  <option value="Vestuário">Vestuário</option>
-                  <option value="Viagem">Viagem</option>
-                </select>
-              </div>
+            <div className="w-full whitespace-nowrap items-center justify-center p-4 -mt-12"> {/* textfield */}
+              <SelectLayout label="Tipo:" id="type" value={formState.type} onChange={handleChangeEdit}
+                options={typeOptions}
+              />
             </div>
-            <div className={stylesmodaledit.textfield}>
-              <label htmlFor="type">Tipo:</label>
-              <div className={stylesmodaledit.textfield_type}>
-                <select
-                  name="type"
-                  id="type"
-                  value={formState.type}
-                  onChange={handleChangeEdit}
-                  required
-                >
-                  <option value="" disabled selected>
-                    Selecione...
-                  </option>
-                  <option value="Entrada">Entrada</option>
-                  <option value="Saida">Saída</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div className={stylesmodaledit.button_teste}>
+
             <button
               type="submit"
-              className={stylesmodaledit.btn_submit}
+              className="w-full h-1/2 bg-color-bginputs p-2 m-0 my-4 rounded-lg cursor-pointer" /* btn_submitCancel */
               onClick={() => closeEditModal(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className={stylesmodaledit.btn_submit}
+              className="w-full h-1/2 bg-color-bginputs p-2 m-0 my-4 rounded-lg cursor-pointer" /* btn_submit */
               onClick={handleSubmitEdit}
             >
               Salvar Alterações

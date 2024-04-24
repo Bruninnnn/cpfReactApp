@@ -1,24 +1,25 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { useContext } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import Analystics from "../pages/Analystics/Analystics";
-import Home from "../pages/Home/Home";
 import FormLogin from "../pages/Login/FormLogin";
+import Layout from "../components/Layout";
+import DashBoard from "../pages/DashBoard/DashBoard";
+import Reports from "../pages/Reports/Reports";
+import Goals from "../pages/Goals/Goals";
 import RegisterForm from "../pages/Register/RegisterForm";
 
-import { useContext } from "react";
 import { Context } from "../Context";
-import Layout from "../components/Layout";
-
 
 export function AppRoutes() {
   const { userContext } = useContext(Context);
 
   return (
     <Routes>
-      <Route path="/" element={<FormLogin />} /> 
-      <Route path="/home" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/home/reports" element={<Analystics />} />
+      <Route path="/" element={<FormLogin />} />
+      <Route path="/dashboard" element={<Layout />}>
+        <Route index element={<DashBoard />} />
+        <Route path="/dashboard/reports" element={<Reports />} />
+        <Route path="/dashboard/goals" element={<Goals />} />
       </Route>
       <Route path="/register" element={<RegisterForm />} />
     </Routes>
