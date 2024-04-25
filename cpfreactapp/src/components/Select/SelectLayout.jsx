@@ -1,16 +1,23 @@
 import React from 'react'
 
-export const SelectLayout = ({ label, id, value, options, onChange, width }) => {
+export const SelectLayout = ({
+  label,
+  name,
+  id,
+  value,
+  options,
+  onChange,
+  width
+}) => {
   return (
-    <div className={`flex flex-col mb-3 -m-3 h-24 ${width}`}>
-      <label className="mt-4 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">
-        {label}
-      </label>
+    <div className={`-m-3 mb-3 flex h-24 flex-col ${width}`}>
+      <label className="mt-4 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">{label}</label>
       <select
         id={id}
+        name={name}
         value={value}
         onChange={onChange}
-        className="my-2 mx-0 p-3 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-3"
+        className="mx-0 my-2 rounded-lg border-none bg-color-bginputs p-3 outline outline-color-receipt hover:outline-1 sm:mb-3"
         required
       >
         <option value="" disabled selected>
