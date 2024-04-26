@@ -159,7 +159,6 @@ function DashBoard() {
 
       const responseData = await response.json();
       setRows(responseData);
-      console.log(responseData);
     } catch (err) {
       console.log(err);
     }
@@ -254,6 +253,7 @@ function DashBoard() {
           }}
           onSubmit={handleSubmit}
           primaryDefaultValue={rowToEdit !== null && rows[rowToEdit]}
+          data={rowToEdit || null}
           userContext={userContext}
         />
       )}
