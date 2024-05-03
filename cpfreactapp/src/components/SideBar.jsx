@@ -6,6 +6,7 @@ import { MdDashboard, MdDataUsage, MdExitToApp } from "react-icons/md";
 import { FcBullish } from "react-icons/fc"
 import { VscDebugDisconnect } from "react-icons/vsc";
 import { TbPigMoney } from "react-icons/tb";
+import { AiOutlineBank } from "react-icons/ai";
 
 export default function SideBar() {
   const { userContext, setContext } = useContext(Context);
@@ -21,7 +22,7 @@ export default function SideBar() {
         </div>
         <div className="py-8 flex flex-1 flex-col gap-0.5 ">
           <Link to="/dashboard" className="flex items-center font-light px-0">
-            <div className="flex w-full p-4 -mb-2 items-center hover:bg-color-border focus:bg-color-border">
+            <div className="flex w-full p-4 -mb-2 items-center hover:bg-color-border">
               <span>
                 <MdDashboard fontSize={24} />
               </span>
@@ -52,17 +53,25 @@ export default function SideBar() {
               <p className="mt-1 items-center px-2">Metas</p>
             </div>
           </Link>
+          <Link to="/dashboard/bankaccount" className="flex items-center font-light px-0">
+            <div className="flex w-full p-4 -mb-2 items-center hover:bg-color-border">
+              <span>
+                <AiOutlineBank fontSize={24} />
+              </span>
+              <p className="mt-1 items-center px-2">Carteiras</p>
+            </div>
+          </Link>
         </div>
 
-        <div className="relative flex items-end flex-1 mb-4">
-          <div className="flex w-full p-4 items-center hover:bg-color-border">
-            <Link to="/" className="flex items-center font-light px-0">
+        <div className="flex items-end mb-4">
+          <Link to="/" className="flex items-center font-light px-0">
+            <div className="flex w-full p-4 items-center hover:bg-color-border">
               <span>
                 <MdExitToApp fontSize={24} />
               </span>
               <p className="mt-1 items-center px-2">Sair</p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
       </div>
     </aside >

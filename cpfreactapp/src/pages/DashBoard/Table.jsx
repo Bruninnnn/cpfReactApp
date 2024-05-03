@@ -5,7 +5,7 @@ import { MdDeleteForever, MdCreate, MdKeyboardArrowDown, MdKeyboardArrowUp } fro
 export const Table = ({ rows, deleteRow, editRow }) => {
   return (
     <div className="overflow-x-auto w-full max-h-[500px]">
-      <table className="w-full text-base text-left text-color-border-login rounded-3xl max-h-[500px]">
+      <table className="w-full text-base text-left table-auto text-color-border-login rounded-3xl max-h-[500px]">
         <thead className="text-base text-color-border-login uppercase bg-color-bginputs">
           <tr>
             <th scope="col" className="px-6 py-3">
@@ -36,7 +36,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                     minimumFractionDigits: 2,
                   })}
                 </th>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 animate-pulse">
                   {row.description}
                 </td>
                 <td className="px-6 py-4">
@@ -55,7 +55,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                     )}
                   </span>
                 </td>
-                <td className="px-6 py-4 ">
+                <td className="px-6 py-4">
                   <span className="flex items-center justify-start">
                     <MdDeleteForever
                       onClick={() => deleteRow(idx)}

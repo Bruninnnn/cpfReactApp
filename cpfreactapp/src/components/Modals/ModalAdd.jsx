@@ -193,13 +193,19 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
             <button
               type="submit"
               className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
-              onClick={handleSubmit}
+              onClick={() => {
+                if (formState == '' || formState == null) {
+                  closeAddModal(false)
+                } else {
+                  handleSubmit
+                }
+              }}
             >
               Cadastrar
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
