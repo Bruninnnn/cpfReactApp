@@ -36,7 +36,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                     minimumFractionDigits: 2,
                   })}
                 </th>
-                <td className="px-6 py-4 animate-pulse">
+                <td className="px-6 py-4">
                   {row.description}
                 </td>
                 <td className="px-6 py-4">

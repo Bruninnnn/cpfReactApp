@@ -65,6 +65,11 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if (!formState.amount || !formState.description || !formState.category || !formState.type) {
+      closeAddModal(false)
+      return
+    }
+
     const info = await sendRequest()
     onSubmit(info)
 
@@ -102,24 +107,14 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   ]
 
   return (
-    <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
-      {' '}
-      {/* modal_container */}
+    <div className="fixed z-10 left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
       <div className="h-1/2 w-1/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
-        {' '}
-        {/* modal */}
         <div className="title">
           <h2>Cadastro</h2>
         </div>
         <form className="my-6 flex w-full items-center justify-center">
-          {' '}
-          {/* center_imputs */}
           <div className="mt-2 grid grid-cols-2 justify-center gap-5">
-            {' '}
-            {/* main_imputs */}
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <InputLayout
                 label="Valor:"
                 name="amount"
@@ -128,19 +123,8 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
                 placeholder="0,00"
                 onChange={handleChange}
               />
-              {/*               <label htmlFor="value">Valor:</label>
-              <input
-                type="text"
-                placeholder="0,00"
-                name="amount"
-                value={formState.amount}
-                onChange={handleChange}
-                required
-              /> */}
             </div>
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <InputLayout
                 label="Descrição:"
                 name="description"
@@ -149,19 +133,8 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
                 placeholder="Descrição"
                 onChange={handleChange}
               />
-              {/*               <label htmlFor="description">Descrição:</label>
-              <input
-                type="text"
-                placeholder="Descrição"
-                name="description"
-                value={formState.description}
-                onChange={handleChange}
-                required
-              /> */}
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <SelectLayout
                 label="Categoria:"
                 name="category"
@@ -172,8 +145,6 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
               />
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <SelectLayout
                 label="Tipo:"
                 name="type"
@@ -193,13 +164,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
             <button
               type="submit"
               className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
-              onClick={() => {
-                if (formState == '' || formState == null) {
-                  closeAddModal(false)
-                } else {
-                  handleSubmit
-                }
-              }}
+              onClick={handleSubmit}
             >
               Cadastrar
             </button>

@@ -6,7 +6,7 @@ export const ModalAddGoals = ({ onClose }) => {
   const [formState, setFormState] = useState({
     titleGoals: '',
     amountGoals: '',
-    category: '',
+    finalGoalsDate: '',
     type: ''
   })
 
@@ -32,33 +32,33 @@ export const ModalAddGoals = ({ onClose }) => {
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Valor da meta:"
-                name="amountGoals"
+                name="priceGoals"
                 type="text"
-                value={formState.amountGoals}
+                value={formState.priceGoals}
                 placeholder="0,00"
                 onChange={""}
               />
             </div>
-            {/*             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-            <SelectLayout
-              label="Categoria:"
-              name="category"
-              id="regGroupType"
-              value={category}
-              onChange={handleChange}
-              options={categoryOptions}
-            />
-          </div>
-          <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-            <SelectLayout
-              label="Tipo:"
-              name="type"
-              id="type"
-              value={type}
-              onChange={handleChange}
-              options={typeOptions}
-            />
-          </div> */}
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+              <InputLayout
+                label="Data final da Meta:"
+                name="finalGoalsDate"
+                type="date"
+                value={formState.finalGoalsDate}
+                placeholder="0,00"
+                onChange={""}
+              />
+            </div>
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+              <InputLayout
+                label="Data final da Meta:"
+                name="finalGoalsDate"
+                type="date"
+                value={formState.finalGoalsDate}
+                placeholder="0,00"
+                onChange={""}
+              />
+            </div>
             <button
               type="submit"
               className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
