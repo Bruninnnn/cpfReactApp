@@ -9,8 +9,7 @@ defaults.responsive = true;
 const PieChartCategory = ({ baseData, title }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
-  console.log(baseData, "BASE");
-
+ 
   useEffect(() => {
     if (baseData) {
       const filterLabel = baseData?.filter((data) => data.registerType === "INCOME")
@@ -19,7 +18,7 @@ const PieChartCategory = ({ baseData, title }) => {
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
 
-      console.log(filterValue)
+  
 
       const data = {
         labels: formatedLabel,

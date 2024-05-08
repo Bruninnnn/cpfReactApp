@@ -123,8 +123,6 @@ export const ModalEdit = ({
     { value: 'Saida', label: 'Saída' }
   ]
 
-  console.log(formState)
-
   return (
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
       {' '}
