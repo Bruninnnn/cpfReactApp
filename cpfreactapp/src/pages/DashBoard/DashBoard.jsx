@@ -12,7 +12,7 @@ import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md"
 
 import { toast } from "react-toastify";
 import DashBoardBalances from "./DashBoardBalances";
-import { CardWallet } from "../../components/Card/CardWallet";
+import { CardWallet } from "../../components/Card/CardDashBoardWallet";
 
 function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false);

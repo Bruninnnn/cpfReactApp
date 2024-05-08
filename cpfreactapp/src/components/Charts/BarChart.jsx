@@ -20,26 +20,25 @@ export const BarChart = ({ baseData, title }) => {
 
       const filterIncome = baseData?.filter((data) => data.registerType === "INCOME")
       const IncomeValue = filterIncome?.map((data) => parseFloat(data.registerValue).toFixed(2))
-      
+
       const formattedValueCost = CostValue?.map((value) => parseFloat(value));
       const formattedValueIncome = IncomeValue?.map((value) => parseFloat(value));
 
-      console.log(formattedValueCost)
-      console.log(formattedValueIncome)
       const data = {
-        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        /* labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'], */
+        labels: [""],
         datasets: [
           {
             label: 'Ganhos - R$',
             backgroundColor: 'rgb(10, 92, 90)',
             borderColor: 'rgb(10, 92, 90)',
-            data: formattedValueIncome,
+            data: /* formattedValueIncome */"",
           },
           {
             label: 'Despesas - R$',
             backgroundColor: 'rgb(60, 31, 45)',
             borderColor: 'rgb(60, 31, 45)',
-            data: formattedValueCost,
+            data: /* formattedValueCost */"",
           }
         ]
       }
