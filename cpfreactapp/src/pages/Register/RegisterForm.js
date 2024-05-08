@@ -47,12 +47,10 @@ function RegisterForm() {
 
   const handleChangeState = (event) => setState(event.target.value)
 
-  const handleChangeCountry = (event) => setCountry(event.target.value)
-
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log(zipCode.trim())
+   
     if (zipCode.trim() !== (null || undefined || ''))
       requestAddress(zipCode.trim())
   }, [zipCode])

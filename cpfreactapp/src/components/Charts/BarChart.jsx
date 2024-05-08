@@ -24,8 +24,7 @@ export const BarChart = ({ baseData, title }) => {
       const formattedValueCost = CostValue?.map((value) => parseFloat(value));
       const formattedValueIncome = IncomeValue?.map((value) => parseFloat(value));
 
-      console.log(formattedValueCost)
-      console.log(formattedValueIncome)
+     
       const data = {
         labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
         datasets: [
