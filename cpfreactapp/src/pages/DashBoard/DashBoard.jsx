@@ -12,7 +12,7 @@ import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from "react-icons/md"
 
 import { toast } from "react-toastify";
 import DashBoardBalances from "./DashBoardBalances";
-import { CardWallet } from "../../components/Card/CardWallet";
+import { CardWallet } from "../../components/Card/CardDashBoardWallet";
 
 function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false);
@@ -159,7 +159,6 @@ function DashBoard() {
 
       const responseData = await response.json();
       setRows(responseData);
-      console.log(responseData);
     } catch (err) {
       console.log(err);
     }
@@ -254,6 +253,7 @@ function DashBoard() {
           }}
           onSubmit={handleSubmit}
           primaryDefaultValue={rowToEdit !== null && rows[rowToEdit]}
+          data={rowToEdit || null}
           userContext={userContext}
         />
       )}

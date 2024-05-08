@@ -1,7 +1,8 @@
 import React from 'react'
-import { MdAttachMoney, MdMoneyOff, MdOutlineToll } from 'react-icons/md'
 
-export const CardWallet = ({ id, propTitle, propTypeValue }) => {
+import { MdAttachMoney, MdMoneyOff, MdOutlineCreditCard, MdOutlineToll } from 'react-icons/md'
+
+export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
   const propIcon = {
     1: {
       icon: <MdAttachMoney style={{ fontSize: '2.5rem' }} className="bg-color-receipt justify-center text-center p-1.5 mb-2 rounded-full" />
@@ -11,7 +12,10 @@ export const CardWallet = ({ id, propTitle, propTypeValue }) => {
     },
     3: {
       icon: <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-    }
+    },
+    4: {
+      icon: <MdOutlineCreditCard style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
+    },
   }
 
   return (

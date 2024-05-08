@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { InputLayout } from '../Input/InputLayout'
 import { SelectLayout } from '../Select/SelectLayout'
@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 export const ModalEdit = ({
   closeEditModal,
   onSubmit,
-  primaryDefaultValue
+  primaryDefaultValue,
 }) => {
   const { userContext, setContext } = useContext(Context)
   const user = userContext
@@ -26,7 +26,25 @@ export const ModalEdit = ({
     }
   )
 
+  useEffect(() => {
+    console.log(primaryDefaultValue, "DATA");
+
+    setFormState(prevState => ({
+      ...prevState,
+      type: primaryDefaultValue?.registerType || prevState.registerType,
+      category: primaryDefaultValue?.regGroupType || prevState.regGroupType,
+      amount: primaryDefaultValue?.registerValue || prevState.amount,
+      description: primaryDefaultValue?.description || prevState.description
+    }));
+  }, [primaryDefaultValue]);
+
+
   const handleChangeEdit = (e) => {
+    if (e.target.name === "type") {
+      setFormState({ ...formState, registerType: e.target.value });
+    } else if (e.target.name === "category") {
+      setFormState({ ...formState, regGroupType: e.target.value });
+    }
     setFormState({
       ...formState,
       [e.target.name]: e.target.value
@@ -50,7 +68,6 @@ export const ModalEdit = ({
         user: user,
         registerDate: formattedDate
       }
-      ;('')
       const options = {
         method: 'PUT',
         headers: {
@@ -169,7 +186,7 @@ export const ModalEdit = ({
                 label="Categoria:"
                 name="category"
                 id="regGroupType"
-                value={formState.defaultValue}
+                value={formState.category}
                 onChange={handleChangeEdit}
                 options={categoryOptions}
               />

@@ -11,6 +11,8 @@ export const InputLayout = ({
   onBlur,
   width
 }) => {
+
+
   return (
     <div className={`-m-3 mb-3 flex flex-col ${width}`}>
       <label className="mt-4 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">{label}</label>

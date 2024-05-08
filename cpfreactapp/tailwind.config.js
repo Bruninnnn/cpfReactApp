@@ -25,6 +25,7 @@ module.exports = {
       'color-border-login': '#ffffff',
       'white-primary': '#fff',
       'modal-background': '#00000066',
+      'color-nubank': '#8A05BE'
     },
     fontFamily: {
       quick: ['QuickSand', 'quickserif'],
