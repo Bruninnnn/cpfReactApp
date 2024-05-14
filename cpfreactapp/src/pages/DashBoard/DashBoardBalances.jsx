@@ -7,7 +7,7 @@ const card = "R$ 0,00"
 
 const DashBoardBalances = ({ receipt, balance, cost }) => {
   return (
-    <div className="flex justify-evenly mt-4 mx-0 gap-12 w-full m-sm:w-3/4 m-md:w-full md:flex-col m-sm:gap-2 m-lg:gap-24 m-xl:gap-4 m-2xl:gap-12">
+    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 justify-evenly mt-4 mx-0 gap-4 w-full sm:flex-col">
       <CardDashBoardWallet id={1} propTitle={"Receita"} propTypeValue={receipt} />
       <CardDashBoardWallet id={2} propTitle={"Saldo"} propTypeValue={balance} />
       <CardDashBoardWallet id={3} propTitle={"Despesas"} propTypeValue={cost} />

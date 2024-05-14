@@ -21,7 +21,7 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
 
 
   return (
-    <div className="m-xl:w-80 m-2xl:w-full xl:h-full h-3/4 m-lg:w-80 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
+    <div className="m-xl:w-80 m-2xl:w-full xl:h-full h-full m-lg:w-80 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
       <div className="flex flex-row -mt-2">
         <div className="flex flex-1 items-center">
           <h3 className="text-[1.5rem] font-semibold">{titleGoals}</h3>
@@ -32,14 +32,13 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
       </div>
       <div className="flex flex-row h-2/5 2xl:h-1/4">
         <div className="flex flex-1">
-          <span className=''>Criado em: {createdGoalsDate}</span>
+          <h3 className='text-[0.75rem] mt-2'>Criado em: {createdGoalsDate}</h3>
         </div>
         <div className="">
-          <span className=''>Expira em: {finalGoalsDate}</span>
+          <h3 className='text-[0.75rem] mt-2'>Expira em: {finalGoalsDate}</h3>
         </div>
       </div>
       <ProgressBar priceInitial={""} priceGoals={""} />
-
       {openModalPopUp && (
         <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
           <ModalPopUp
