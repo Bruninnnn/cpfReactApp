@@ -52,15 +52,19 @@ export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCredi
           <SlOptionsVertical />
         </button>
       </div>
-      <div className="middle">
-        <div className="flex flex-col">
-          <h3 className="text-[1rem] mt-2">Criado em: {propCreatedDate}</h3>
-          <h3 className="text-[1rem] mt-1">Atualizado em: {propUpdatedDate}</h3>
-          <h3 className="text-[1rem] mt-1">Valor da fatura: {propCreditCard}</h3>
-          <h3 className="text-[1rem] mt-1 mb-4">Limite disponível: {propLimitCreditCard}</h3>
-          <h1>{propTypeValue}</h1>
+      <div className="flex flex-row h-2/5 2xl:h-1/4">
+        <div className="flex flex-1">
+          <h3 className="text-[0.75rem] mt-2">Criado em: {propCreatedDate}</h3>
+        </div>
+        <div className="">
+          <h3 className="text-[0.75rem] mt-2">Atualizado em: {propUpdatedDate}</h3>
         </div>
       </div>
+        <div className="flex flex-col">
+          <h3 className="text-[1rem] mt-0.5">Valor da fatura: {propCreditCard}</h3>
+          <h3 className="text-[1rem] mt-0.5 mb-4">Limite disponível: {propLimitCreditCard}</h3>
+          <h1>{propTypeValue}</h1>
+        </div>
       {openModalPopUp && (
         <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
           <ModalPopUp
@@ -68,6 +72,6 @@ export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCredi
           />
         </div>
       )}
-    </div >
+      </div>
   )
 }

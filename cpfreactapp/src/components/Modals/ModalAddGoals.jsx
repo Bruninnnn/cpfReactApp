@@ -17,8 +17,8 @@ export const ModalAddGoals = ({ onClose }) => {
         <div className="title">
           <h2>Cadastro de Metas</h2>
         </div>
-        <form className="my-6 flex w-full items-center justify-center">
-          <div className="mt-2 grid grid-cols-2 justify-center gap-5">
+        <form className="my-4 flex w-full h-full items-center justify-center">
+          <div className="mt-0 grid grid-cols-2 justify-center gap-4">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Nome da Meta:"
@@ -61,14 +61,14 @@ export const ModalAddGoals = ({ onClose }) => {
             </div>
             <button
               type="submit"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
+              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
               onClick={() => onClose(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
+              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
               onClick={""}
             >
               Cadastrar

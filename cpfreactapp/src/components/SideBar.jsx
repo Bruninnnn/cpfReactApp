@@ -12,7 +12,7 @@ export default function SideBar() {
   const { userContext, setContext } = useContext(Context);
 
   return (
-    <aside className="relative flex flex-col w-60 h-screen">
+    <aside className="relative flex flex-col w-60 h-screen md:hidden">
       <div className="flex flex-col w-60 h-screen top-0 left-0 px-4 py-0 bg-color-bgforms">
         <div className="flex w-full p-2 mx-auto items-center border-b-2 border-color-border">
           <span>
