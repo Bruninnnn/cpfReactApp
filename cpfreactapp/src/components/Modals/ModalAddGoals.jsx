@@ -1,15 +1,39 @@
 import React, { useState } from 'react'
 import { InputLayout } from '../Input/InputLayout'
+import { InputValue } from '../Input/InputValue'
 
 export const ModalAddGoals = ({ onClose }) => {
-
   const [formState, setFormState] = useState({
-    titleGoals: '',
-    amountGoals: '',
-    finalGoalsDate: '',
-    type: ''
+    title: '',
+    goalValue: '',
+    initialDate: '',
+    finalDate: ''
   })
 
+  const handleChange = (e) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handlePriceChange = (values) => {
+    const { value } = values
+    setFormState({
+      ...formState,
+      goalValue: value
+    })
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const formattedGoalValue = parseFloat(
+      formState.goalValue.replace(/\./g, '').replace(',', '.')
+    )
+    const updatedFormState = { ...formState, goalValue: formattedGoalValue }
+    console.log('FormState', updatedFormState)
+    console.log(formattedGoalValue)
+  }
 
   return (
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
@@ -17,65 +41,64 @@ export const ModalAddGoals = ({ onClose }) => {
         <div className="title">
           <h2>Cadastro de Metas</h2>
         </div>
-        <form className="my-4 flex w-full h-full items-center justify-center">
+        <form
+          className="my-4 flex h-full w-full items-center justify-center"
+          onSubmit={handleSubmit}
+        >
           <div className="mt-0 grid grid-cols-2 justify-center gap-4">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Nome da Meta:"
-                name="titleGoals"
+                name="title"
                 type="text"
-                value={formState.titleGoals}
-                placeholder="Ex.: Viagem Argentina"
-                onChange={""}
+                value={formState.title}
+                placeholder="Ex: Viagem Argentina"
+                onChange={handleChange}
               />
             </div>
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              <InputLayout
+              <InputValue
                 label="Valor da meta:"
-                name="priceGoals"
-                type="text"
-                value={formState.priceGoals}
-                placeholder="0,00"
-                onChange={""}
+                name="goalValue"
+                value={formState.goalValue}
+                placeholder="R$ 0,00"
+                onValueChange={handlePriceChange}
+              />
+            </div>
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+              <InputLayout
+                label="Data inicial da Meta:"
+                name="initialDate"
+                type="date"
+                value={formState.initialDate}
+                onChange={handleChange}
               />
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Data final da Meta:"
-                name="finalGoalsDate"
+                name="finalDate"
                 type="date"
-                value={formState.finalGoalsDate}
-                placeholder="0,00"
-                onChange={""}
-              />
-            </div>
-            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              <InputLayout
-                label="Data final da Meta:"
-                name="finalGoalsDate"
-                type="date"
-                value={formState.finalGoalsDate}
-                placeholder="0,00"
-                onChange={""}
+                value={formState.finalDate}
+                onChange={handleChange}
               />
             </div>
             <button
-              type="submit"
-              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
+              type="button"
+              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
               onClick={() => onClose(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
-              onClick={""}
+              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
             >
               Cadastrar
             </button>
           </div>
         </form>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
