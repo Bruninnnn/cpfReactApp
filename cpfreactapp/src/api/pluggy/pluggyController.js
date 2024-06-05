@@ -8,10 +8,12 @@ export async function requestAPIKey() {
     })
   }
 
-  return await fetch('https://api.pluggy.ai/auth', options)
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err))
+  try {
+    const response = await fetch('https://api.pluggy.ai/auth', options)
+    return response.json()
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 export async function requestConnectToken({ apiKey }) {
@@ -24,10 +26,12 @@ export async function requestConnectToken({ apiKey }) {
     }
   }
 
-  fetch('https://api.pluggy.ai/connect_token', options)
-    .then((response) => response.json())
-    .then((response) => console.log(response))
-    .catch((err) => console.error(err))
+  try {
+    const response = await fetch('https://api.pluggy.ai/connect_token', options)
+    return response.json()
+  } catch (err) {
+    console.error(err)
+  }
 
   /* 
     const options = {
