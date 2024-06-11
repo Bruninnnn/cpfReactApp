@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { toast } from 'react-toastify'
-
 import { InputLayout } from '../Input/InputLayout'
 import { SelectLayout } from '../Select/SelectLayout'
-
 import { format } from 'date-fns'
+import { InputValue } from '../Input/InputValue'
 
 export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   const user = userContext
@@ -23,13 +22,21 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
     })
   }
 
+  const handlePriceChange = (values) => {
+    const { formattedValue } = values
+    setFormState({
+      ...formState,
+      amount: formattedValue
+    })
+  }
+
   async function sendRequest() {
     try {
       const currentDate = new Date()
       const formattedDate = format(currentDate, 'yyyy-MM-dd')
       const register = {
-        registerValue: parseFloat(formState.amount.replace(',', '.')).toFixed(
-          2
+        registerValue: parseFloat(
+          formState.amount.replace(/\./g, '').replace(',', '.')
         ),
         description: formState.description,
         regGroupType: formState.category,
@@ -65,7 +72,12 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if (!formState.amount || !formState.description || !formState.category || !formState.type) {
+    if (
+      !formState.amount ||
+      !formState.description ||
+      !formState.category ||
+      !formState.type
+    ) {
       closeAddModal(false)
       return
     }
@@ -107,7 +119,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   ]
 
   return (
-    <div className="fixed z-10 left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
+    <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-modal-background">
       <div className="h-1/2 w-1/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
         <div className="title">
           <h2>Cadastro</h2>
@@ -115,13 +127,13 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
         <form className="my-6 flex w-full items-center justify-center">
           <div className="mt-2 grid grid-cols-2 justify-center gap-5">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              <InputLayout
+              <InputValue
                 label="Valor:"
                 name="amount"
                 type="text"
                 value={formState.amount}
-                placeholder="0,00"
-                onChange={handleChange}
+                placeholder="R$ 0,00"
+                onValueChange={handlePriceChange}
               />
             </div>
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
@@ -170,7 +182,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
             </button>
           </div>
         </form>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
