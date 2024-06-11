@@ -25,14 +25,30 @@ export const ModalAddGoals = ({ onClose }) => {
     })
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const formattedGoalValue = parseFloat(
-      formState.goalValue.replace(/\./g, '').replace(',', '.')
-    )
-    const updatedFormState = { ...formState, goalValue: formattedGoalValue }
-    console.log('FormState', updatedFormState)
-    console.log(formattedGoalValue)
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault()
+      const formattedGoalValue = parseFloat(
+        formState.goalValue.replace(/\./g, '').replace(',', '.')
+      )
+      const updatedFormState = { ...formState, goalValue: formattedGoalValue }
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedFormState)
+      }
+
+      const response = await fetch(`http://${IP}:8080/goal/create`, options)
+      const data = await response.json()
+      console.log('Resposta do servidor:', data)
+      return data
+    } catch (error) {
+      console.error('Erro na solicitação:', error)
+      throw error
+    }
   }
 
   return (
@@ -67,7 +83,7 @@ export const ModalAddGoals = ({ onClose }) => {
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
-                label="Data inicial da Meta:"
+                label="Data inicial da meta:"
                 name="initialDate"
                 type="date"
                 value={formState.initialDate}
@@ -76,7 +92,7 @@ export const ModalAddGoals = ({ onClose }) => {
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
-                label="Data final da Meta:"
+                label="Data final da meta:"
                 name="finalDate"
                 type="date"
                 value={formState.finalDate}
@@ -93,6 +109,7 @@ export const ModalAddGoals = ({ onClose }) => {
             <button
               type="submit"
               className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
+              onSubmit={() => handleSubmit()}
             >
               Cadastrar
             </button>
