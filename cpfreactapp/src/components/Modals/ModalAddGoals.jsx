@@ -53,15 +53,13 @@ export const ModalAddGoals = ({ onClose }) => {
 
   return (
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
-      <div className="h-1/2 w-1/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
+      <div className="md:h-3/4 md:w-3/4 lg:w-2/4 h-1/2 w-2/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
         <div className="title">
           <h2>Cadastro de Metas</h2>
         </div>
-        <form
-          className="my-4 flex h-full w-full items-center justify-center"
-          onSubmit={handleSubmit}
-        >
-          <div className="mt-0 grid grid-cols-2 justify-center gap-4">
+        <form className="my-2 flex w-full h-full"
+        onSubmit={handleSubmit}>
+          <div className="w-full mt-0 grid md:grid-cols-1 grid-cols-2 justify-center gap-4 ">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Nome da Meta:"
@@ -72,8 +70,8 @@ export const ModalAddGoals = ({ onClose }) => {
                 onChange={handleChange}
               />
             </div>
-            <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              <InputValue
+            <div className="md:-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+               <InputValue
                 label="Valor da meta:"
                 name="goalValue"
                 value={formState.goalValue}
@@ -81,16 +79,7 @@ export const ModalAddGoals = ({ onClose }) => {
                 onValueChange={handlePriceChange}
               />
             </div>
-            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              <InputLayout
-                label="Data inicial da meta:"
-                name="initialDate"
-                type="date"
-                value={formState.initialDate}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+            <div className="md:-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
                 label="Data final da meta:"
                 name="finalDate"
@@ -99,20 +88,44 @@ export const ModalAddGoals = ({ onClose }) => {
                 onChange={handleChange}
               />
             </div>
-            <button
-              type="button"
-              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
-              onClick={() => onClose(false)}
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              className="m-0 my-0 -mt-4 mb-12 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
-              onSubmit={() => handleSubmit()}
-            >
-              Cadastrar
-            </button>
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+              <InputLayout
+                label="Valor inicial da meta:"
+                name="priceGoals"
+                type="text"
+                value={formState.priceInitial}
+                placeholder="0,00"
+                onChange={""}
+              />
+            </div>
+           <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+              <InputLayout
+                label="Valor total da meta:"
+                name="goalValue"
+                type="text"
+                value={formState.finalDate}
+                placeholder="0,00"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-full md:h-full flex">
+              <button
+                type="submit"
+                className="w-full h-1/2 sm:h-full cursor-pointer rounded-lg bg-color-bginputs" /* btn_submitCancel */
+                onClick={() => onClose(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+            <div className="w-full md:h-full flex">
+              <button
+                type="submit"
+                className="w-full h-1/2 sm:h-full cursor-pointer rounded-lg bg-color-bginputs" /* btn_submit */
+                onClick={""}
+              >
+                Cadastrar
+              </button>
+            </div>
           </div>
         </form>
       </div>

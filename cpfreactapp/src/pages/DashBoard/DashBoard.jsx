@@ -21,7 +21,7 @@ function DashBoard() {
   const redirect = useNavigate()
   const { IP } = require('../../env')
 
-  function enter(userContext) {
+  /* function enter(userContext) {
     if (!userContext) {
       redirect('/')
     }
@@ -29,7 +29,7 @@ function DashBoard() {
 
   useEffect(() => {
     enter(userContext)
-  })
+  }) */
 
   const [rows, setRows] = useState([])
 
@@ -80,11 +80,11 @@ function DashBoard() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow
-            return newRow
-          })
-        )
+        rows.map((currRow, idx) => {
+          if (idx !== rowToEdit) return currRow
+          return newRow
+        })
+      )
   }
 
   const [receipt, setReceipt] = useState()

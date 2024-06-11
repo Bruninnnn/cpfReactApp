@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { ProgressBar } from '../ProgressBar'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { ModalPopUp } from '../Modals/ModalPopUp';
+import { MdFormatListBulleted, MdModeEdit } from 'react-icons/md';
+import { IoMdTrash } from 'react-icons/io';
+import { RiPlaneFill } from 'react-icons/ri';
 
 export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceInitial, priceGoals, propOnClick }) => {
   const [openModalPopUp, setOpenModalPopUp] = useState(false)
@@ -22,23 +25,43 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
 
   return (
     <div className="m-xl:w-80 m-2xl:w-full xl:h-full h-full m-lg:w-80 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
-      <div className="flex flex-row -mt-2">
-        <div className="flex flex-1 items-center">
-          <h3 className="text-[1.5rem] font-semibold">{titleGoals}</h3>
+      <div className="flex flex-row">
+        <div className="flex flex-1 items-center text-center">
+          <div className="text-xl font-semibold text-center rounded-full bg-color-receipt p-2" id='imagem-card'>
+            <RiPlaneFill />
+          </div>
+          <h3 className="text-2xl font-semibold text-center ml-2">{titleGoals}</h3>
         </div>
-        <button onClick={handleButtonClick} className='p-4 text-center hover:bg-color-border rounded-full'>
-          <SlOptionsVertical />
-        </button>
       </div>
-      <div className="flex flex-row h-2/5 2xl:h-1/4">
+      <div className="flex flex-row mt-2.5">
         <div className="flex flex-1">
-          <h3 className='text-[0.75rem] mt-2'>Criado em: {createdGoalsDate}</h3>
+          <h3 className='text-sm'>Criado em: {createdGoalsDate}</h3>
         </div>
-        <div className="">
-          <h3 className='text-[0.75rem] mt-2'>Expira em: {finalGoalsDate}</h3>
+        <div className="flex">
+          <h3 className='text-sm'>Expira em: {finalGoalsDate}</h3>
         </div>
       </div>
       <ProgressBar priceInitial={""} priceGoals={""} />
+      <div className="flex justify-center">
+        <button
+          className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Editar Metas'
+          onClick={""}
+        >
+          <MdModeEdit />
+        </button>
+        <button
+          className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Excluir Metas'
+          onClick={""}
+        >
+          <IoMdTrash />
+        </button>
+        <button
+          className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Detalhes Metas'
+          onClick={""}
+        >
+          <MdFormatListBulleted />
+        </button>
+      </div>
       {openModalPopUp && (
         <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
           <ModalPopUp
