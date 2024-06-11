@@ -27,7 +27,9 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
     <div className="m-xl:w-80 m-2xl:w-full xl:h-full h-full m-lg:w-80 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
       <div className="flex flex-row">
         <div className="flex flex-1 items-center text-center">
-          <h3 className="text-xl font-semibold text-center rounded-full bg-color-receipt p-2"><RiPlaneFill /></h3>
+          <div className="text-xl font-semibold text-center rounded-full bg-color-receipt p-2" id='imagem-card'>
+            <RiPlaneFill />
+          </div>
           <h3 className="text-2xl font-semibold text-center ml-2">{titleGoals}</h3>
         </div>
       </div>
