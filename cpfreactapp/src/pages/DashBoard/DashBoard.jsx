@@ -8,7 +8,7 @@ import { ModalEdit } from '../../components/Modals/ModalEdit'
 import { Context } from '../../Context'
 import { Table } from './Table'
 
-import { MdAdd, MdAttachMoney, MdMoneyOff, MdOutlineToll } from 'react-icons/md'
+import { MdAdd } from 'react-icons/md'
 
 import { toast } from 'react-toastify'
 import DashBoardBalances from './DashBoardBalances'
@@ -221,7 +221,7 @@ function DashBoard() {
   }, [rows])
 
   return (
-    <div className="mx-4 w-full flex-col gap-4">
+    <div className="relative mx-4 w-full flex-col gap-4">
       <h1 className="mb-4 mt-4">Registros</h1>
       <div className="mt-0 inline-block rounded-3xl">
         <InputDate
@@ -253,25 +253,22 @@ function DashBoard() {
           userContext={userContext}
         />
       )}
-      <div className="mt-8 flex pb-2 pr-0">
-        {' '}
-        {/* btnDiv */}
-        <button
-          className="h-8 w-16 rounded-2xl border-b-2 border-solid border-color-border bg-color-receipt text-[#ffffff]" /* darkButton */
-          onClick={() => setModalAddOpen(true)}
-        >
-          <MdAdd />
-        </button>
-      </div>
 
-      <div className="flex w-full flex-row gap-4">
+      <div className="mt-10 flex max-h-[45vh] w-full flex-row gap-4 overflow-y-auto">
         <Table
           rows={rows}
           deleteRow={handleDeleteRow}
           editRow={handleEditRow}
         />
       </div>
-      {/*       </main> */}
+      <div className="absolute bottom-0.5 w-full pb-2 pr-0">
+        <button
+          className="flex h-8 w-full items-center justify-center rounded-2xl border-b-2 border-solid border-color-border bg-color-receipt text-[#ffffff]"
+          onClick={() => setModalAddOpen(true)}
+        >
+          <MdAdd />
+        </button>
+      </div>
     </div>
   )
 }
