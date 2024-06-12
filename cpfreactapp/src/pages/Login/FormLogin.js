@@ -153,7 +153,7 @@ function FormLogin() {
               {" "}
               {/* continue_button */}
               <button onClick={handleSubmit} className="text-sm font-medium">
-                Logar
+                Acessar
               </button>
             </div>
             <div className="mb-4 md:mb-1">

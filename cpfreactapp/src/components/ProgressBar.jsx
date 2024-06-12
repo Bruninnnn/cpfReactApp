@@ -2,7 +2,7 @@ import React from 'react'
 
 export const ProgressBar = ({ priceInitial, priceGoals }) => {
   return (
-    <div className="mt-10">
+    <div className="mt-2">
       <div className="flex justify-between mb-1">
         <span className="text-base font-medium">R$ {priceInitial}</span>
         <span className="text-base font-medium">de {priceGoals}</span>

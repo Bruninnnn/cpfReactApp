@@ -5,13 +5,14 @@ import { CardDashBoardWallet } from '../../components/Card/CardDashBoardWallet'
 
 const card = "R$ 0,00"
 
-const DashBoardBalances = ({ receipt, balance, cost }) => {
+const DashBoardBalances = ({ receipt, balance, cost, balanceCard, balanceGoals }) => {
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-1 md:grid-cols-2 justify-evenly mt-4 mx-0 gap-4 w-full sm:flex-col">
+    <div className="grid w-full grid-cols-5 grid-rows-1 gap-4 m-md:grid-cols-2 m-sm:grid-cols-1 m-lg:grid-cols-5 justify-evenly mt-4 mx-0">
       <CardDashBoardWallet id={1} propTitle={"Receita"} propTypeValue={receipt} />
       <CardDashBoardWallet id={2} propTitle={"Saldo"} propTypeValue={balance} />
       <CardDashBoardWallet id={3} propTitle={"Despesas"} propTypeValue={cost} />
-      <CardDashBoardWallet id={4} propTitle={"Cartão"} propTypeValue={card} />
+      <CardDashBoardWallet id={4} propTitle={"Cartão"} propTypeValue={balanceCard} />
+      <CardDashBoardWallet id={5} propTitle={"Metas"} propTypeValue={balanceGoals} />
     </div >
   )
 }

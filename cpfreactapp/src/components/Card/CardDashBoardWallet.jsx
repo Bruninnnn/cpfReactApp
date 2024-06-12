@@ -6,6 +6,7 @@ import {
   MdOutlineCreditCard,
   MdOutlineToll
 } from 'react-icons/md'
+import { TbPigMoney } from 'react-icons/tb'
 
 export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
   const propIcon = {
@@ -40,18 +41,24 @@ export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
           className="mb-2 justify-center rounded-full bg-color-cost p-1.5 text-center"
         />
       )
-    }
+    },
+    5: {
+      icon: (
+        <TbPigMoney
+          style={{ fontSize: '2.5rem' }}
+          className="mb-2 justify-center rounded-full bg-color-nubank p-1.5 text-center"
+        />
+      )
+    },
   }
 
   return (
-    <div className="mt-2 w-full items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
-      {' '}
-      {/* balance */}
+    <div className="mt-2 m-sm:w-80 w-auto items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
       {propIcon[id].icon}
       <div className="middle">
         <div className="left">
           <h3 className="mb-4 mt-1 text-[1rem]">{propTitle}</h3>
-          <h1>{propTypeValue}</h1>
+          <h1 className='xl:text-2xl'>{propTypeValue}</h1>
         </div>
       </div>
     </div>
