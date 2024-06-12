@@ -68,7 +68,7 @@ function Reports() {
   }
 
   return (
-    <div className="flex flex-col gap-4 mx-4">
+    <div className="flex w-full flex-col gap-4 mx-4 sm:mx-0">
       <h1 className="mb-4 mt-4">Gráficos</h1>
       <div className="inline-block -mt-4 rounded-3xl">
         <InputDate
@@ -78,15 +78,17 @@ function Reports() {
           onChange={handleMonthChange}
         />
       </div>
-      <div className="flex gap-x-4 gap-y-4 flew-row w-full flex-wrap mx-0 my-0 md:flex-col">
-        <div className="flex-none w-full px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-full ">
+      <div className="flex flex-wrap flex-row w-full gap-x-4 gap-y-4 ">
+        <div className="flex flex-initial w-full px-0 py-0">
           <BarChart baseData={data} title={"Ganhos X Despesas:"} />
         </div>
-        <div className="flex-1 w-1/2 px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-1/2 ">
-          <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
-        </div>
-        <div className="flex-1 w-1/2 px-0 py-0 m-sm:w-full m-sm:px-0 m-sm:my-0 m-lg:px-0 m-lg:w-1/2 ">
-          <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
+        <div className="flex w-full flex-row md:flex-col gap-x-4 gap-y-4">
+          <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
+            <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
+          </div>
+          <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
+            <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
+          </div>
         </div>
       </div>
     </div >

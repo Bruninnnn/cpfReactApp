@@ -42,7 +42,7 @@ export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCredi
   };
 
   return (
-    <div className="m-xl:w-80 m-2xl:w-full h-full m-lg:w-80 m-sm:w-72 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
+    <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
       <div className="flex flex-row">
         <div className="flex flex-1 items-center">
           {propIcon[id].icon}
@@ -60,11 +60,11 @@ export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCredi
           <h3 className="text-[0.75rem] mt-2">Atualizado em: {propUpdatedDate}</h3>
         </div>
       </div>
-        <div className="flex flex-col">
-          <h3 className="text-[1rem] mt-0.5">Valor da fatura: {propCreditCard}</h3>
-          <h3 className="text-[1rem] mt-0.5 mb-4">Limite disponível: {propLimitCreditCard}</h3>
-          <h1>{propTypeValue}</h1>
-        </div>
+      <div className="flex flex-col">
+        <h3 className="text-[1rem] mt-0.5">Valor da fatura: {propCreditCard}</h3>
+        <h3 className="text-[1rem] mt-0.5 mb-4">Limite disponível: {propLimitCreditCard}</h3>
+        <h1>{propTypeValue}</h1>
+      </div>
       {openModalPopUp && (
         <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
           <ModalPopUp
@@ -72,6 +72,6 @@ export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCredi
           />
         </div>
       )}
-      </div>
+    </div>
   )
 }

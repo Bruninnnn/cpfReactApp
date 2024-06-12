@@ -88,7 +88,7 @@ export const BarChart = ({ baseData, title }) => {
   }, [baseData]);
 
   return (
-    <div className="justify-center bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
+    <div className="flex w-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
       <strong className="font-medium my-4">{title}</strong>
       <div className="flex justify-center">
         <Chart className="w-full" type="bar" data={chartData} options={chartOptions} />

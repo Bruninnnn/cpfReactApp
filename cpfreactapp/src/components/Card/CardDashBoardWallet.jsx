@@ -53,7 +53,7 @@ export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
   }
 
   return (
-    <div className="mt-2 m-sm:w-80 w-auto items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
+    <div className="mt-2 w-auto items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
       {propIcon[id].icon}
       <div className="middle">
         <div className="left">
