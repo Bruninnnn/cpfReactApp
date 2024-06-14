@@ -30,7 +30,11 @@ module.exports = {
     fontFamily: {
       quick: ['QuickSand', 'quickserif'],
     },
-    extend: {},
+    extend: {
+      transitionProperty: {
+        'width': 'width'
+      },
+    },
   },
   plugins: [],
   layerOrder: ['components', 'utilities'],

@@ -9,7 +9,7 @@ defaults.responsive = true;
 const PieChartCategory = ({ baseData, title }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
- 
+
   useEffect(() => {
     if (baseData) {
       const filterLabel = baseData?.filter((data) => data.registerType === "INCOME")
@@ -18,7 +18,7 @@ const PieChartCategory = ({ baseData, title }) => {
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
 
-  
+
 
       const data = {
         labels: formatedLabel,
@@ -82,10 +82,10 @@ const PieChartCategory = ({ baseData, title }) => {
   }, [baseData]);
 
   return (
-    <div className="justify-center bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
+    <div className="flex w-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
       <strong className="font-medium my-4">{title}</strong>
       <div className="flex justify-center">
-        <Chart className="w-1/2 sm:w-1/2 md:w-10 lg:w-1/2 m-xl:w-full" type="doughnut" data={chartData} options={chartOptions} />
+        <Chart className="w-1/2 sm:w-full md:w-10 lg:w-1/2 m-xl:w-full" type="doughnut" data={chartData} options={chartOptions} />
       </div>
     </div>
   );

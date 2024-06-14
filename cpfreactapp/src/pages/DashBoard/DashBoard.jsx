@@ -21,7 +21,7 @@ function DashBoard() {
   const redirect = useNavigate()
   const { IP } = require('../../env')
 
-  /* function enter(userContext) {
+  function enter(userContext) {
     if (!userContext) {
       redirect('/')
     }
@@ -29,7 +29,7 @@ function DashBoard() {
 
   useEffect(() => {
     enter(userContext)
-  }) */
+  })
 
   const [rows, setRows] = useState([])
 
@@ -221,7 +221,7 @@ function DashBoard() {
   }, [rows])
 
   return (
-    <div className="relative mx-4 w-full flex-col gap-4">
+    <div className="flex w-full relative mx-4 sm:mx-0 flex-col gap-4 sm:gap-1">
       <h1 className="mb-4 mt-4">Registros</h1>
       <div className="mt-0 inline-block rounded-3xl">
         <InputDate
@@ -231,7 +231,7 @@ function DashBoard() {
           onChange={handleMonthChange}
         />
       </div>
-      <DashBoardBalances receipt={receipt} balance={balance} cost={cost} />
+      <DashBoardBalances receipt={receipt} balance={balance} cost={cost} balanceCard={"R$ 0,00"} balanceGoals={"R$ 0,00"} />
       {modalAddOpen && (
         <ModalComponent
           closeAddModal={() => {
@@ -261,7 +261,7 @@ function DashBoard() {
           editRow={handleEditRow}
         />
       </div>
-      <div className="absolute bottom-0.5 w-full pb-2 pr-0">
+      <div className="bottom-0.5 w-full pb-2 pr-0">
         <button
           className="flex h-8 w-full items-center justify-center rounded-2xl border-b-2 border-solid border-color-border bg-color-receipt text-[#ffffff]"
           onClick={() => setModalAddOpen(true)}

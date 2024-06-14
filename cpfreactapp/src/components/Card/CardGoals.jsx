@@ -8,15 +8,6 @@ import { RiPlaneFill } from 'react-icons/ri';
 
 export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceInitial, priceGoals, propOnClick }) => {
   const [openModalPopUp, setOpenModalPopUp] = useState(false)
-  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
-
-  const handleButtonClick = (event) => {
-    // Obtém a posição do botão clicado
-    const buttonRect = event.target.getBoundingClientRect();
-    setButtonPosition({ x: buttonRect.x, y: buttonRect.y + buttonRect.height });
-    // Exibe o componente
-    setOpenModalPopUp(true);
-  };
 
   const handleCloseModal = () => {
     setOpenModalPopUp(false);
@@ -24,9 +15,9 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
 
 
   return (
-    <div className="m-xl:w-80 m-2xl:w-full xl:h-full h-full m-lg:w-80 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
+    <div className="w-full h-48 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
       <div className="flex flex-row">
-        <div className="flex flex-1 items-center text-center">
+        <div className="flex h-full flex-1 items-center text-center">
           <div className="text-xl font-semibold text-center rounded-full bg-color-receipt p-2" id='imagem-card'>
             <RiPlaneFill />
           </div>

@@ -10,8 +10,8 @@ export const SelectLayout = ({
   width
 }) => {
   return (
-    <div className={`-m-3 mb-3 flex h-24 flex-col ${width}`}>
-      <label className="mt-4 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">{label}</label>
+    <div className={`-m-3 mb-2 flex flex-col ${width}`}>
+      <label className="mt-2 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">{label}</label>
       <select
         id={id}
         name={name}
