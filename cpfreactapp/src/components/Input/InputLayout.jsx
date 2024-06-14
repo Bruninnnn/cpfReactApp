@@ -15,7 +15,7 @@ export const InputLayout = ({
 
   return (
     <div className={`-m-3 mb-2 flex flex-col ${width}`}>
-      <label className="mt-2 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 ">{label}</label>
+      <label className="mt-2 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 xl:text-sm">{label}</label>
       <input
         id={id}
         name={name}

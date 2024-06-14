@@ -4,11 +4,6 @@ import { MdMoneyOff, MdOutlineCreditCard, MdOutlineToll } from 'react-icons/md'
 import { SiNubank } from 'react-icons/si'
 import { SlOptionsVertical } from 'react-icons/sl'
 import { ModalPopUp } from '../Modals/ModalPopUp'
-/* 
-import PropTypes from 'prop-types'
-
-CardBankWallet.propTypes = {}
-*/
 
 export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCreditCard, propLimitCreditCard, bankName, propTitle, propTypeValue, propOnClick }) => {
   const [openModalPopUp, setOpenModalPopUp] = useState(false);

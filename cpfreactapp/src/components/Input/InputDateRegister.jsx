@@ -2,8 +2,8 @@ import React from 'react'
 
 export const InputDateRegister = ({ label, id, type, value, placeholder, onChange, onBlur, width }) => {
   return (
-    <div className={`flex flex-col mb-3 -m-3 ${width}`}>
-      <label className="mt-4 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2">
+    <div className={`-m-3 mb-2 flex flex-col ${width}`}>
+      <label className="mt-2 sm:-mb-4 sm:mt-4 md:-mb-2 md:mt-2 xl:text-sm">
         {label}
       </label>
       <input
