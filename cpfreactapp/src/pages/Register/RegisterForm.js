@@ -50,7 +50,7 @@ function RegisterForm() {
   const navigate = useNavigate()
 
   useEffect(() => {
-   
+
     if (zipCode.trim() !== (null || undefined || ''))
       requestAddress(zipCode.trim())
   }, [zipCode])
@@ -136,55 +136,29 @@ function RegisterForm() {
 
   return (
     <div className="flex h-screen w-full items-center justify-center bg-color-background">
-      {' '}
-      {/* body */}
-      <div
-        className="flex h-[80vh] w-4/5
-      lg:h-1/2 lg:w-full"
-      >
-        {' '}
-        {/* container */}
-        <div
-          className="flex w-1/2 items-center justify-center bg-color-bgforms p-4
-        lg:absolute lg:left-0 lg:top-0 lg:flex lg:h-1/2 lg:w-full lg:items-center lg:p-4"
-        >
-          {' '}
-          {/* form_image */}
+      <div className="flex h-[80vh] w-4/5 lg:h-1/2 lg:w-full">
+        <div className="flex w-1/2 items-center justify-center bg-color-bgforms p-4 lg:absolute lg:left-0 lg:top-0 lg:flex lg:h-1/2 lg:w-full lg:items-center lg:p-4">
           <img
             src={register}
             alt="registerSVG"
             className="w-5/6 sm:h-1/5 sm:w-full lg:h-2/3 lg:w-full"
           />
         </div>
-        <div
-          className="flex w-1/2 flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-12
-        lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center lg:overflow-hidden lg:border-l-0 lg:p-8"
-        >
-          {' '}
-          {/* form */}
+        <div className="flex w-1/2 flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-12 lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center lg:overflow-hidden lg:border-l-0 lg:p-8">
           <form action="#" className="h-full w-full">
             <div className="-mb-2 flex h-[-50vh] justify-between lg:-mb-6">
-              {' '}
-              {/* form_header */}
               <div className="-mt-2 ml-16 sm:ml-16">
-                {' '}
-                {/* Title */}
                 <h1>Cadastre-se</h1>
               </div>
               <div className="-mt-8 flex items-center">
-                {' '}
-                {/* login_button */}
                 <button className="-ml-[50%] mt-[15%] cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 font-medium no-underline sm:-ml-[25%] lg:-ml-[40%]">
                   <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
-            <div
-              className="m-xlw-[85%] mx-auto mb-[6rem] mt-[5vh] flex w-4/5 flex-wrap justify-between 
+            <div className="m-xlw-[85%] mx-auto mb-[6rem] mt-[5vh] flex w-4/5 flex-wrap justify-between 
             p-4 sm:ml-16 sm:w-full lg:flex lg:max-h-52 lg:w-[85%] lg:overflow-y-scroll m-md:justify-between"
             >
-              {' '}
-              {/* input_group */}
               <InputLayout
                 width="m-sm:w-2/4 m-xl:w-2/4"
                 label="Nome Completo"
@@ -291,23 +265,9 @@ function RegisterForm() {
                 placeholder="Informe seu Estado"
                 onChange={handleChangeState}
               />
-              {/* <div className="flex flex-col -mb-2 -m-[1%] md:w-2/4 m-xlw-2/4 m-xlmb-2">
-                <label htmlFor="country" className="-mb-2 mt-1">País</label>
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  placeholder="Informe seu país"
-                  required
-                  onChange={handleChangeCountry}
-                  value={country}
-                  className="w-full my-3 mx-0 py-3 pr-4 rounded-lg border-none bg-color-bginputs hover:outline-1 outline outline-color-receipt sm:mb-1"
-                />
-              </div> */}
             </div>
             <div className="m-xlw-[83%] -mt-24 ml-16 flex w-10/12 items-center lg:w-[85%]">
               {' '}
-              {/* continue_button */}
               <button
                 className="ml-2 mt-6 w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium"
                 onClick={() => {
