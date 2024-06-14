@@ -23,10 +23,10 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
   }
 
   const handlePriceChange = (values) => {
-    const { formattedValue } = values
+    const { value } = values
     setFormState({
       ...formState,
-      amount: formattedValue
+      amount: value
     })
   }
 
@@ -34,14 +34,13 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
     try {
       const currentDate = new Date()
       const formattedDate = format(currentDate, 'yyyy-MM-dd')
+      const registerValue = parseFloat(formState.amount.replace(',', '.'))
+
       const register = {
-        registerValue: parseFloat(
-          formState.amount.replace(/\./g, '').replace(',', '.')
-        ),
+        registerValue: registerValue,
         description: formState.description,
         regGroupType: formState.category,
         registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
-        balance: 0,
         user: user,
         registerDate: formattedDate
       }
@@ -167,7 +166,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
               />
             </div>
             <button
-              type="submit"
+              type="button"
               className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
               onClick={() => closeAddModal(false)}
             >

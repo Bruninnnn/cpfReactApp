@@ -7,11 +7,12 @@ import { format } from 'date-fns'
 import { Context } from '../../Context'
 
 import { toast } from 'react-toastify'
+import { InputValue } from '../Input/InputValue'
 
 export const ModalEdit = ({
   closeEditModal,
   onSubmit,
-  primaryDefaultValue,
+  primaryDefaultValue
 }) => {
   const { userContext, setContext } = useContext(Context)
   const user = userContext
@@ -27,28 +28,45 @@ export const ModalEdit = ({
   )
 
   useEffect(() => {
-    console.log(primaryDefaultValue, "DATA");
-
-    setFormState(prevState => ({
+    setFormState((prevState) => ({
       ...prevState,
       type: primaryDefaultValue?.registerType || prevState.registerType,
       category: primaryDefaultValue?.regGroupType || prevState.regGroupType,
       amount: primaryDefaultValue?.registerValue || prevState.amount,
       description: primaryDefaultValue?.description || prevState.description
-    }));
-  }, [primaryDefaultValue]);
-
+    }))
+  }, [primaryDefaultValue])
 
   const handleChangeEdit = (e) => {
-    if (e.target.name === "type") {
-      setFormState({ ...formState, registerType: e.target.value });
-    } else if (e.target.name === "category") {
-      setFormState({ ...formState, regGroupType: e.target.value });
+    if (e && e.target) {
+      const { name, value } = e.target
+      if (name === 'type') {
+        setFormState((prevState) => ({
+          ...prevState,
+          registerType: value
+        }))
+      } else if (name === 'category') {
+        setFormState((prevState) => ({
+          ...prevState,
+          regGroupType: value
+        }))
+      } else if (name === 'amount') {
+        setFormState((prevState) => ({
+          ...prevState,
+          amount: parseFloat(value.replace(',', '.'))
+        }))
+      } else {
+        setFormState((prevState) => ({
+          ...prevState,
+          [name]: value
+        }))
+      }
+    } else if (e && e.floatValue !== undefined) {
+      setFormState((prevState) => ({
+        ...prevState,
+        amount: e.floatValue
+      }))
     }
-    setFormState({
-      ...formState,
-      [e.target.name]: e.target.value
-    })
   }
 
   async function updateRegister() {
@@ -58,9 +76,7 @@ export const ModalEdit = ({
 
       const newRegister = {
         id: formState.id,
-        registerValue: parseFloat(formState.amount.replace(',', '.')).toFixed(
-          2
-        ),
+        registerValue: formState.amount,
         description: formState.description,
         regGroupType: formState.regGroupType,
         registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
@@ -138,29 +154,16 @@ export const ModalEdit = ({
             {' '}
             {/* main_inputs */}
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
-              <InputLayout
+              <InputValue
                 label="Valor:"
                 name="amount"
                 type="text"
                 value={formState.amount}
-                placeholder="0,00"
-                onChange={handleChangeEdit}
+                placeholder="R$ 0,00"
+                onValueChange={handleChangeEdit}
               />
-              {/* <label htmlFor="amount">Valor:</label>
-              <input
-                type="text"
-                placeholder="0,00"
-                name="amount"
-                value={formState.amount}
-                onChange={handleChangeEdit}
-                required
-              /> */}
             </div>
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <InputLayout
                 label="Descrição:"
                 name="description"
@@ -169,19 +172,8 @@ export const ModalEdit = ({
                 placeholder="Descrição"
                 onChange={handleChangeEdit}
               />
-              {/* <label htmlFor="description">Descrição:</label>
-              <input
-                type="text"
-                placeholder="Descrição"
-                name="description"
-                value={formState.description}
-                onChange={handleChangeEdit}
-                required
-              /> */}
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <SelectLayout
                 label="Categoria:"
                 name="category"
@@ -192,8 +184,6 @@ export const ModalEdit = ({
               />
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
-              {' '}
-              {/* textfield */}
               <SelectLayout
                 label="Tipo:"
                 name="type"
@@ -205,14 +195,14 @@ export const ModalEdit = ({
             </div>
             <button
               type="submit"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
+              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
               onClick={() => closeEditModal(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
+              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
               onClick={handleSubmitEdit}
             >
               Salvar Alterações
