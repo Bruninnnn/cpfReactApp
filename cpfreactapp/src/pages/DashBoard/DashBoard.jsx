@@ -21,7 +21,7 @@ function DashBoard() {
   const redirect = useNavigate()
   const { IP } = require('../../env')
 
-  function enter(userContext) {
+  /* function enter(userContext) {
     if (!userContext) {
       redirect('/')
     }
@@ -29,7 +29,7 @@ function DashBoard() {
 
   useEffect(() => {
     enter(userContext)
-  })
+  }) */
 
   const [rows, setRows] = useState([])
 
@@ -222,7 +222,7 @@ function DashBoard() {
 
   return (
     <div className="flex w-full relative mx-4 sm:mx-0 flex-col gap-4 sm:gap-1">
-      <h1 className="mb-4 mt-4">Registros</h1>
+      <h1 className="mb-4 mt-4 sm:mt-12">Registros</h1>
       <div className="mt-0 inline-block rounded-3xl">
         <InputDate
           id="calendarDashBoard"

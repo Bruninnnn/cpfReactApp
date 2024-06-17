@@ -6,7 +6,7 @@ import InputDate from '../../components/Input/InputDate'
 
 const BankAccount = () => {
   return (
-    <div className="flex w-full h-full mx-4">
+    <div className="flex w-full h-full mx-4 sm:mt-16">
       <BankAccountWallets />
     </div>
   )

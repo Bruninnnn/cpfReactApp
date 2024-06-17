@@ -22,7 +22,7 @@ const Goals = () => {
   };
 
   return (
-    <div className="flex w-full h-full mx-4">
+    <div className="flex w-full h-full mx-4 sm:mt-16">
       <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
         <CardGoals titleGoals={"Viagem"} />
