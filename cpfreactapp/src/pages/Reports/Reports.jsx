@@ -69,7 +69,7 @@ function Reports() {
 
   return (
     <div className="flex w-full flex-col gap-4 mx-4 sm:mx-0">
-      <h1 className="mb-4 mt-4">Gráficos</h1>
+      <h1 className="mb-4 mt-4 sm:mt-12">Gráficos</h1>
       <div className="inline-block -mt-4 rounded-3xl">
         <InputDate
           id="calendarReports"

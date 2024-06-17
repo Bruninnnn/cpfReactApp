@@ -20,8 +20,8 @@ export default function SideBar() {
   };
 
   return (
-    <div className="relative">
-      <div className={`relative flex p-4 ${sidebarOpen ? 'hidden' : 'flex'}  m-md:hidden`} onClick={toggleSidebar}>
+    <div className="relative sm:absolute z-10">
+      <div className={`bg-color-bgforms rounded-full relative flex p-2 m-2 ${sidebarOpen ? 'hidden ' : 'flex'}  m-md:hidden `} onClick={toggleSidebar}>
         <IoMenu fontSize={"2.5rem"} />
       </div>
       <aside className={`relative flex h-screen w-60 flex-col transition-width duration-700 ease-in-out ${sidebarOpen ? 'w-60' : 'w-0 m-md:w-60 md:hidden'}`}>
