@@ -167,14 +167,14 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
             </div>
             <button
               type="button"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submitCancel */
+              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
               onClick={() => closeAddModal(false)}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2" /* btn_submit */
+              className="m-0 my-4 h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs p-2"
               onClick={handleSubmit}
             >
               Cadastrar

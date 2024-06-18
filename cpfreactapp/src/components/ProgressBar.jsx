@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ProgressBar = ({ priceInitial, priceGoals }) => {
+export const ProgressBar = ({ priceInitial, priceGoals, percentGoals }) => {
   return (
     <div className="mt-2">
       <div className="flex justify-between mb-1">
@@ -8,7 +8,7 @@ export const ProgressBar = ({ priceInitial, priceGoals }) => {
         <span className="text-base font-medium">de {priceGoals}</span>
       </div>
       <div className="w-full bg-color-border rounded-full h-2.5 mb-4">
-        <div className="bg-color-nubank h-2.5 rounded-full mb-4" style={{ width: "50%" }}></div>
+        <div className="bg-color-nubank h-2.5 rounded-full mb-4" style={{ width: `${percentGoals}%` }}></div>
       </div>
     </div>
   )

@@ -4,7 +4,7 @@ import { MdAddCircleOutline } from 'react-icons/md'
 export const CardAddBankWallet = ({ handleOnClick }) => {
 
   return (
-    <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
+    <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
         <div className="flex flex-1 items-center">
           <h3 className="pl-2 text-[1.5rem] font-semibold">Conectar Banco</h3>

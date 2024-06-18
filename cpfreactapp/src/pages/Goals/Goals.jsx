@@ -21,20 +21,21 @@ const Goals = () => {
     setOpenModalPopUp(false)
   }
 
-  const goals = [
-    { title: 'Viagem' },
-    { title: 'Exercícios' },
-    { title: 'Aprender React' },
-    { title: 'Aprender JAVA' },
-    { title: 'Aprender Kotlin' }
-  ]
+  /* function calcularPorcentagem(x, valoresY) {
+    const somaY = valoresY.reduce((acc, curr) => acc + curr, 0);
+    const porcentagem = (somaY / x) * 100;
+    return porcentagem.toFixed(2); // para arredondar para 2 casas decimais
+  }
+
+  const x = 500; // valor total da meta
+  const valoresY = [50, 200]; // valores inseridos */
 
   return (
-    <div className="mx-4 flex h-full w-full sm:mt-16">
-      <div className="grid h-full w-full grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+    <div className="flex w-full h-full mx-4 sm:mt-16">
+      <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
         {goals.map((goal, index) => (
-          <CardGoals key={index} titleGoals={goal.title} />
+          <CardGoals key={index} titleGoals={goal.title} percentGoals={"goal.calcularPorcentagem"} />
         ))}
       </div>
       {openModalAddGoals && (

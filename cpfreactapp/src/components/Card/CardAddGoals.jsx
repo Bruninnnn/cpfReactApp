@@ -3,7 +3,7 @@ import { MdAddCircleOutline } from 'react-icons/md';
 
 export const CardAddGoals = ({ propOpenModal }) => {
   return (
-    <div className="w-full h-48 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl"> {/* balance */}
+    <div className="w-full h-48 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
         <div className="flex flex-1 items-center">
           <h3 className="pl-2 text-[1.5rem] font-semibold">Criar Meta</h3>

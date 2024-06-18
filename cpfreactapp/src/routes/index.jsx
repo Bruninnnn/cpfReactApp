@@ -10,6 +10,7 @@ import BankAccount from "../pages/BankAccount/BankAccount";
 import RegisterForm from "../pages/Register/RegisterForm";
 
 import { Context } from "../Context";
+import { GoalsDetails } from "../pages/Goals/GoalsDetails";
 
 
 export function AppRoutes() {
@@ -22,6 +23,7 @@ export function AppRoutes() {
         <Route index element={<DashBoard />} />
         <Route path="/dashboard/reports" element={<Reports />} />
         <Route path="/dashboard/goals" element={<Goals />} />
+        <Route path="/dashboard/goals/details" element={<GoalsDetails />} />
         <Route path="/dashboard/bankaccount" element={<BankAccount />} />
       </Route>
       <Route path="/register" element={<RegisterForm />} />

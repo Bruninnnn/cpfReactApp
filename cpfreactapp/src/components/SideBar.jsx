@@ -37,7 +37,7 @@ export default function SideBar() {
           </div>
           <div className="flex flex-1 flex-col gap-0.5 py-8 ">
             <Link to="/dashboard" className="flex items-center px-0 font-light">
-              <div className="-mb-2 flex w-full items-center p-4 hover:bg-color-border">
+              <div className="flex w-full items-center p-4 hover:bg-color-border">
                 <span>
                   <MdDashboard fontSize={24} />
                 </span>
@@ -48,7 +48,7 @@ export default function SideBar() {
               to="/dashboard/reports"
               className="flex items-center px-0 font-light"
             >
-              <div className="-mb-2 flex w-full items-center p-4 hover:bg-color-border">
+              <div className="flex w-full items-center p-4 hover:bg-color-border">
                 <span>
                   <MdDataUsage fontSize={24} />
                 </span>
@@ -59,7 +59,7 @@ export default function SideBar() {
               to="/dashboard/goals"
               className="flex items-center px-0 font-light"
             >
-              <div className="-mb-2 flex w-full items-center p-4 hover:bg-color-border">
+              <div className="flex w-full items-center p-4 hover:bg-color-border">
                 <span>
                   <TbPigMoney fontSize={24} />
                 </span>
@@ -70,7 +70,7 @@ export default function SideBar() {
               to="/dashboard/bankaccount"
               className="flex items-center px-0 font-light"
             >
-              <div className="-mb-2 flex w-full items-center p-4 hover:bg-color-border">
+              <div className="flex w-full items-center p-4 hover:bg-color-border">
                 <span>
                   <AiOutlineBank fontSize={24} />
                 </span>
@@ -79,8 +79,8 @@ export default function SideBar() {
             </Link>
           </div>
 
-          <div className="mb-4 flex items-end">
-            <Link to="/" className="flex items-center px-0 font-light">
+          <div className="mb-4 flex w-full items-end">
+            <Link to="/" className="flex w-full items-center px-0 font-light">
               <div className="flex w-full items-center p-4 hover:bg-color-border">
                 <span>
                   <MdExitToApp fontSize={24} />
