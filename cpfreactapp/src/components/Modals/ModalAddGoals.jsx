@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { InputLayout } from '../Input/InputLayout'
 import { InputValue } from '../Input/InputValue'
 import { MdClose } from 'react-icons/md'
+const { IP } = require('../../env')
 
 export const ModalAddGoals = ({ onClose }) => {
   const [formState, setFormState] = useState({
     title: '',
     goalValue: '',
-    initialDate: '',
     finalDate: ''
   })
 
@@ -27,8 +27,8 @@ export const ModalAddGoals = ({ onClose }) => {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault() // Certifique-se de que a página não recarrega
     try {
-      e.preventDefault()
       const formattedGoalValue = parseFloat(
         formState.goalValue.replace(/\./g, '').replace(',', '.')
       )
@@ -42,13 +42,18 @@ export const ModalAddGoals = ({ onClose }) => {
         body: JSON.stringify(updatedFormState)
       }
 
+      console.log(
+        `Enviando solicitação para http://${IP}:8080/goal/create`,
+        options
+      )
+
       const response = await fetch(`http://${IP}:8080/goal/create`, options)
+
       const data = await response.json()
       console.log('Resposta do servidor:', data)
       return data
     } catch (error) {
       console.error('Erro na solicitação:', error)
-      throw error
     }
   }
 
@@ -56,13 +61,18 @@ export const ModalAddGoals = ({ onClose }) => {
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
       <div className="h-1/2 w-2/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8 md:h-3/4 md:w-3/4 lg:w-2/4">
         <div className="flex items-center">
-          <h2 className='flex flex-1'>Cadastro de Metas</h2>
-          <div className="flex justify-end hover:bg-color-border p-4 rounded-full cursor-pointer" onClick={() => onClose(false)}>
-            <MdClose 
-            />
+          <h2 className="flex flex-1">Cadastro de Metas</h2>
+          <div
+            className="flex cursor-pointer justify-end rounded-full p-4 hover:bg-color-border"
+            onClick={() => onClose(false)}
+          >
+            <MdClose />
           </div>
         </div>
-        <form className="flex flex-col h-full w-full my-0" onSubmit={handleSubmit}>
+        <form
+          className="my-0 flex h-full w-full flex-col"
+          onSubmit={handleSubmit}
+        >
           <div className="mt-0 grid w-full grid-cols-2 justify-center gap-4 md:grid-cols-1 ">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputLayout
@@ -94,11 +104,11 @@ export const ModalAddGoals = ({ onClose }) => {
             </div>
             <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12"></div>
           </div>
-          <div className="flex w-full h-1/4">
+          <div className="flex h-1/4 w-full">
             <button
               type="submit"
-              className="w-full h-1/2 sm:h-1/3 cursor-pointer rounded-lg bg-color-bginputs"
-              onClick={''}
+              className="h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs sm:h-1/3"
+              onClick={handleSubmit}
             >
               Cadastrar
             </button>
