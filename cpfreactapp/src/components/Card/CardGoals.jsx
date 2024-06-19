@@ -48,7 +48,6 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
         </button>
         <button
           className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Detalhes Metas'
-          onClick={""}
         >
           <Link to="/dashboard/goals/details" className="flex items-center px-0 font-light">
             <MdFormatListBulleted />

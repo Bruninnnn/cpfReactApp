@@ -6,26 +6,26 @@ export const TableGoals = () => {
       <table class="w-full text-sm text-left text-white-primary">
         <thead class="text-xs border-b border-color-nubank uppercase">
           <tr>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" className="px-6 py-3">
               Data
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" className="px-6 py-3">
               Valor
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" className="w-auto px-6 py-3">
               Ação
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="px-6 py-4 font-medium whitespace-nowrap">
+            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
               18/06/2024
-            </td>
-            <td class="px-6 py-4">
+            </th>
+            <td className="px-6 py-4">
               R$ 430,99
             </td>
-            <td class="px-6 py-4">
+            <td className="px-6 py-4">
               Deletar
             </td>
           </tr>

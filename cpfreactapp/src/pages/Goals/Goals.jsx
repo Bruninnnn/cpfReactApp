@@ -30,9 +30,17 @@ const Goals = () => {
   const x = 500; // valor total da meta
   const valoresY = [50, 200]; // valores inseridos */
 
+  const goals = [
+    { title: 'Viagem' },
+    { title: 'Exercícios' },
+    { title: 'Aprender React' },
+    { title: 'Aprender JAVA' },
+    { title: 'Aprender Kotlin' }
+  ]
+
   return (
-    <div className="flex w-full h-full mx-4 sm:mt-16">
-      <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
+    <div className="flex sm:flex-col w-full h-full mx-4 sm:mt-16">
+      <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 sm:grid-rows-1 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
         {goals.map((goal, index) => (
           <CardGoals key={index} titleGoals={goal.title} percentGoals={"goal.calcularPorcentagem"} />

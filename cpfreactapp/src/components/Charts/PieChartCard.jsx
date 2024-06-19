@@ -18,8 +18,6 @@ const PieChartCategory = ({ baseData, title }) => {
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
 
-
-
       const data = {
         labels: formatedLabel,
         datasets: [
