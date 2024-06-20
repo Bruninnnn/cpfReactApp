@@ -141,18 +141,12 @@ export const ModalEdit = ({
 
   return (
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
-      {' '}
-      {/* modal_container */}
       <div className="h-1/2 w-1/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
-        {' '}
-        {/* modal */}
         <div className="title">
           <h2>Editar</h2>
         </div>
         <form className="my-6 flex w-full items-center justify-center">
           <div className="mt-2 grid grid-cols-2 justify-center gap-5">
-            {' '}
-            {/* main_inputs */}
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputValue
                 label="Valor:"

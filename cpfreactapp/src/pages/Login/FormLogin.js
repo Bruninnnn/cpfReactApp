@@ -111,20 +111,14 @@ function FormLogin() {
 
   return (
     <div className="w-full h-screen flex justify-center items-center bg-color-background">
-      {" "}
-      {/* body */}
       <div
         className="flex w-4/5 h-[80vh]
-    md:w-full md:h-1/2 lg:w-full lg:h-auto"
+        md:w-full md:h-1/2 lg:w-full lg:h-auto"
       >
-        {" "}
-        {/* container */}
         <div
           className="flex w-1/2 justify-center items-center bg-color-bgforms p-4 
-      md:w-full md:h-1/2 md:flex md:absolute md:left-0 md:top-0 md:items-center md:p-4"
+          md:w-full md:h-1/2 md:flex md:absolute md:left-0 md:top-0 md:items-center md:p-4"
         >
-          {" "}
-          {/* form_image */}
           <img
             src={login}
             alt="imgWelcome"
@@ -133,14 +127,10 @@ function FormLogin() {
         </div>
         <div
           className="flex flex-col w-1/2 justify-center items-center bg-color-bgforms p-12 border-l-2 border-solid border-color-border-login
-      md:w-full md:h-1/2 md:top-1/2 md:left-0 md:flex md:absolute md:overflow-hidden md:items-center md:p-8 md:border-l-0"
+          md:w-full md:h-1/2 md:top-1/2 md:left-0 md:flex md:absolute md:overflow-hidden md:items-center md:p-8 md:border-l-0"
         >
-          {" "}
-          {/* form */}
           <form onSubmit={handleSubmit}>
             <div className="flex w-4/5 mb-8 justify-between md:mb-6">
-              {" "}
-              {/* form_header */}
               <div className="title">
                 <h1 className="mt-0 -ml-3.5">LOGIN</h1>
               </div>
@@ -150,15 +140,11 @@ function FormLogin() {
             <InputPassword label="Senha" id="password" name="password" type="password" placeholder="Informe sua senha" onChange={handleChangePassword} togglePassword={passwordShow} />
 
             <div className="w-80 flex flex-col mb-6 -m-3 mt-4 border-none text-center bg-color-receipt p-3 rounded-lg cursor-pointer md:mb-1">
-              {" "}
-              {/* continue_button */}
               <button onClick={handleSubmit} className="text-sm font-medium">
                 Acessar
               </button>
             </div>
             <div className="mb-4 md:mb-1">
-              {" "}
-              {/* textfield_remember */}
               <FormControlLabel
                 value="start"
                 control={
