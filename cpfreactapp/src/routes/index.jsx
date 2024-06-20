@@ -8,9 +8,10 @@ import Reports from "../pages/Reports/Reports";
 import Goals from "../pages/Goals/Goals";
 import BankAccount from "../pages/BankAccount/BankAccount";
 import RegisterForm from "../pages/Register/RegisterForm";
+import GoalsDetails from "../pages/Goals/GoalsDetails";
 
 import { Context } from "../Context";
-import { GoalsDetails } from "../pages/Goals/GoalsDetails";
+
 
 
 export function AppRoutes() {
