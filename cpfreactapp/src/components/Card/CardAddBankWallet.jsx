@@ -7,7 +7,7 @@ export const CardAddBankWallet = ({ handleOnClick }) => {
     <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
         <div className="flex flex-1 items-center">
-          <h3 className="pl-2 text-[1.5rem] font-semibold">Conectar Banco</h3>
+          <h3 className="pl-2 pt-2 text-[1.5rem] font-semibold">Conectar Banco</h3>
         </div>
       </div>
       <div className="flex h-2/3">

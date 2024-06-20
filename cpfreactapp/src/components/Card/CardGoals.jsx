@@ -7,7 +7,7 @@ import { IoMdTrash } from 'react-icons/io';
 import { RiPlaneFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceInitial, priceGoals, percentGoals }) => {
+export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceInitial, priceGoals, percentGoals, onOpen }) => {
   const [openModalPopUp, setOpenModalPopUp] = useState(false)
 
   const handleCloseModal = () => {
@@ -32,11 +32,13 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
           <h3 className='text-sm'>Expira em: {finalGoalsDate}</h3>
         </div>
       </div>
+
       <ProgressBar priceInitial={""} priceGoals={""} percentGoals={""} />
+
       <div className="flex justify-center">
         <button
           className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Editar Metas'
-          onClick={""}
+          onClick={onOpen}
         >
           <MdModeEdit />
         </button>

@@ -4,9 +4,11 @@ import { CardAddGoals } from '../../components/Card/CardAddGoals'
 import { CardGoals } from '../../components/Card/CardGoals'
 import { ModalAddGoals } from '../../components/Modals/ModalAddGoals'
 import { ModalPopUp } from '../../components/Modals/ModalPopUp'
+import { ModalEditGoals } from '../../components/Modals/ModalEditGoals'
 
 const Goals = () => {
   const [openModalAddGoals, setOpenModalAddGoals] = useState(false)
+  const [openModalEditGoals, setOpenModalEditGoals] = useState(false)
   const [openModalPopUp, setOpenModalPopUp] = useState(false)
 
   const handleOpenAddGoals = (event) => {
@@ -15,6 +17,14 @@ const Goals = () => {
 
   const handleCloseAddGoalsModal = () => {
     setOpenModalAddGoals(false)
+  }
+
+  const handleOpenEditGoals = (event) => {
+    setOpenModalEditGoals(true)
+  }
+
+  const handleCloseEditGoalsModal = () => {
+    setOpenModalEditGoals(false)
   }
 
   const handleClosePopUp = () => {
@@ -43,11 +53,14 @@ const Goals = () => {
       <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 sm:grid-rows-1 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
         {goals.map((goal, index) => (
-          <CardGoals key={index} titleGoals={goal.title} percentGoals={"goal.calcularPorcentagem"} />
+          <CardGoals key={index} titleGoals={goal.title} percentGoals={"goal.calcularPorcentagem"} onOpen={handleOpenEditGoals} />
         ))}
       </div>
       {openModalAddGoals && (
         <ModalAddGoals onClose={handleCloseAddGoalsModal} />
+      )}
+      {openModalEditGoals && (
+        <ModalEditGoals onClose={handleCloseEditGoalsModal} />
       )}
       {openModalPopUp && (
         <div
