@@ -12,8 +12,6 @@ import GoalsDetails from "../pages/Goals/GoalsDetails";
 
 import { Context } from "../Context";
 
-
-
 export function AppRoutes() {
   const { userContext } = useContext(Context);
 
