@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { InputLayout } from '../Input/InputLayout'
 import { InputValue } from '../Input/InputValue'
 import { MdClose } from 'react-icons/md'
+import { Context } from '../../Context'
+import { format } from 'date-fns'
 const { IP } = require('../../env')
 
 export const ModalAddGoals = ({ onClose }) => {
+  const { userContext } = useContext(Context)
   const [formState, setFormState] = useState({
     title: '',
     goalValue: '',
-    finalDate: ''
+    initialDate: format(new Date(), 'yyyy-MM-dd'),
+    finalDate: '',
+    user: userContext
   })
 
   const handleChange = (e) => {
@@ -27,10 +32,10 @@ export const ModalAddGoals = ({ onClose }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault() // Certifique-se de que a página não recarrega
+    e.preventDefault()
     try {
       const formattedGoalValue = parseFloat(
-        formState.goalValue.replace(/\./g, '').replace(',', '.')
+        formState.goalValue.replace(',', '.')
       )
       const updatedFormState = { ...formState, goalValue: formattedGoalValue }
 
@@ -42,15 +47,9 @@ export const ModalAddGoals = ({ onClose }) => {
         body: JSON.stringify(updatedFormState)
       }
 
-      console.log(
-        `Enviando solicitação para http://${IP}:8080/goal/create`,
-        options
-      )
-
       const response = await fetch(`http://${IP}:8080/goal/create`, options)
 
       const data = await response.json()
-      console.log('Resposta do servidor:', data)
       return data
     } catch (error) {
       console.error('Erro na solicitação:', error)
@@ -88,6 +87,7 @@ export const ModalAddGoals = ({ onClose }) => {
               <InputValue
                 label="Valor da meta:"
                 name="goalValue"
+                type="text"
                 value={formState.goalValue}
                 placeholder="R$ 0,00"
                 onValueChange={handlePriceChange}

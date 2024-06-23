@@ -16,10 +16,8 @@ export const BankAccountWallets = () => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 })
 
   const handleButtonClick = (event) => {
-    // Obtém a posição do botão clicado
     const buttonRect = event.target.getBoundingClientRect()
     setButtonPosition({ x: buttonRect.x, y: buttonRect.y + buttonRect.height })
-    // Exibe o componente
     setOpenModalPopUp(true)
   }
 
@@ -44,8 +42,7 @@ export const BankAccountWallets = () => {
 
   const onSuccess = (itemData) => {
     console.log(itemData)
-    // do something with the financial data
-  };
+  }
 
   return (
     <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
@@ -107,7 +104,13 @@ export const BankAccountWallets = () => {
           <ModalPopUp onClose={handleCloseModal} />
         </div>
       )}
-      {openWidget && <PluggyConnect connectToken={connectToken} theme='dark' onSuccess={onSuccess} />}
+      {openWidget && (
+        <PluggyConnect
+          connectToken={connectToken}
+          theme="dark"
+          onSuccess={onSuccess}
+        />
+      )}
     </div>
   )
 }
