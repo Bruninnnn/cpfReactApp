@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { InputLayout } from '../Input/InputLayout'
 import { InputValue } from '../Input/InputValue'
 import { MdClose } from 'react-icons/md'
+import { Context } from '../../Context'
 const { IP } = require('../../env')
 
 export const ModalEditGoals = ({ onClose }) => {
+  const { userContext } = useContext(Context)
   const [formState, setFormState] = useState({
     title: '',
     goalValue: '',
-    finalDate: ''
+    finalDate: '',
+    user: userContext
   })
 
   const handleChange = (e) => {
@@ -27,11 +30,12 @@ export const ModalEditGoals = ({ onClose }) => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault() // Certifique-se de que a página não recarrega
+    e.preventDefault()
     try {
       const formattedGoalValue = parseFloat(
-        formState.goalValue.replace(/\./g, '').replace(',', '.')
+        formState.goalValue.replace(',', '.')
       )
+
       const updatedFormState = { ...formState, goalValue: formattedGoalValue }
 
       const options = {
@@ -88,6 +92,7 @@ export const ModalEditGoals = ({ onClose }) => {
               <InputValue
                 label="Valor da meta:"
                 name="goalValue"
+                type="text"
                 value={formState.goalValue}
                 placeholder="R$ 0,00"
                 onValueChange={handlePriceChange}

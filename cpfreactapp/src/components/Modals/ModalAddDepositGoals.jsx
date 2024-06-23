@@ -16,26 +16,24 @@ export const ModalAddDepositGoals = ({ onClose }) => {
             <MdClose />
           </div>
         </div>
-        <form
-          className="my-0 flex h-full w-full flex-col"
-          onSubmit={""}
-        >
+        <form className="my-0 flex h-full w-full flex-col" onSubmit={''}>
           <div className="mt-0 flex w-full justify-center gap-4">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputValue
                 label="Valor do Depósito:"
                 name="goalValue"
-                value={"formState.goalValue"}
+                type="text"
+                value={'formState.goalValue'}
                 placeholder="R$ 0,00"
-                onValueChange={"handlePriceChange"}
+                onValueChange={'handlePriceChange'}
               />
             </div>
           </div>
-          <div className="flex w-full h-1/4 mt-4">
+          <div className="mt-4 flex h-1/4 w-full">
             <button
               type="submit"
               className="h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs sm:h-1/3"
-              onClick={"handleSubmit"}
+              onClick={'handleSubmit'}
             >
               Cadastrar
             </button>
