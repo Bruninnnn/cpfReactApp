@@ -80,10 +80,10 @@ const PieChartCategory = ({ baseData, title }) => {
   }, [baseData]);
 
   return (
-    <div className="flex w-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
+    <div className="flex flex-col w-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
       <strong className="font-medium my-4">{title}</strong>
       <div className="flex justify-center">
-        <Chart className="w-1/2 sm:w-full md:w-10 lg:w-1/2 m-xl:w-full" type="doughnut" data={chartData} options={chartOptions} />
+        <Chart className="w-1/2 sm:w-full md:w-10 lg:w-1/2" type="doughnut" data={chartData} options={chartOptions} />
       </div>
     </div>
   );

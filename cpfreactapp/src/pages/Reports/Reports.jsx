@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PieChartCategory from "../../components/Charts/PieChartCategory";
 import { defaults } from "chart.js";
-import { BarChart } from "../../components/Charts/BarChart";
 import { IP } from "../../env";
 import PieChartCard from "../../components/Charts/PieChartCard";
 import InputDate from "../../components/Input/InputDate";
+import PieChartBankAccounts from "../../components/Charts/PieChartBankAccounts";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -79,15 +79,20 @@ function Reports() {
         />
       </div>
       <div className="flex flex-wrap flex-row w-full gap-x-4 gap-y-4 ">
-        <div className="flex flex-initial w-full px-0 py-0">
-          <BarChart baseData={data} title={"Ganhos X Despesas:"} />
-        </div>
         <div className="flex w-full flex-row md:flex-col gap-x-4 gap-y-4">
-          <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
+          <div className="flex sm:flex-1 flex-auto m-sm:w-full w-1/2 px-0 py-0">
             <PieChartCategory baseData={data} title={"Categoria de Gasto Mensal:"} />
           </div>
           <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
             <PieChartCard baseData={data} title={"Gastos com o cartão:"} />
+          </div>
+        </div>
+        <div className="flex w-full flex-row md:flex-col gap-x-4 gap-y-4">
+          <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
+            <PieChartCategory baseData={data} title={"Distribuição de Despesas mensal:"} />
+          </div>
+          <div className="flex sm:flex-1 flex-initial m-sm:w-full w-1/2 px-0 py-0">
+            <PieChartBankAccounts baseData={data} title={"Gastos por conta:"} />
           </div>
         </div>
       </div>
