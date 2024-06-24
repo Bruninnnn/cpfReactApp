@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import { CardAddBankWallet } from '../../components/Card/CardAddBankWallet'
 import { CardBankWallet } from '../../components/Card/CardBankWallet'
-import { ModalPopUp } from '../../components/Modals/ModalPopUp'
 import { FaTrashAlt } from 'react-icons/fa'
 
 import {
@@ -10,23 +9,18 @@ import {
   requestConnectToken
 } from '../../api/pluggy/pluggyController'
 import { PluggyConnect } from 'react-pluggy-connect'
+import { SiNubank } from 'react-icons/si'
+import { format } from 'date-fns'
 
 export const BankAccountWallets = () => {
-  const [openModalPopUp, setOpenModalPopUp] = useState(false)
-  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 })
-
-  const handleButtonClick = (event) => {
-    const buttonRect = event.target.getBoundingClientRect()
-    setButtonPosition({ x: buttonRect.x, y: buttonRect.y + buttonRect.height })
-    setOpenModalPopUp(true)
-  }
-
   const [openWidget, setOpenWidget] = useState(false)
   const [connectToken, setConnectToken] = useState()
 
-  const handleCloseModal = () => {
-    setOpenModalPopUp(false)
-  }
+  const [bankName, setBankName] = useState('');
+  const [bankImageUrl, setBankImageUrl] = useState('');
+  const [bankPrimaryColor, setBankPrimaryColor] = useState('');
+  const [bankCreatedDate, setBankCreatedDate] = useState('');
+  const [bankUpdatedDate, setBankUpdatedDate] = useState('');
 
   async function handleConnectPluggy() {
     const responseApiKey = await requestAPIKey()
@@ -42,6 +36,18 @@ export const BankAccountWallets = () => {
 
   const onSuccess = (itemData) => {
     console.log(itemData)
+
+    setBankName(itemData.item.connector.name);
+    setBankImageUrl(itemData.item.connector.imageUrl);
+    setBankPrimaryColor("#" + itemData.item.connector.primaryColor);
+
+    const createdDate = new Date(itemData.item.createdAt);
+    const updatedDate = new Date(itemData.item.updatedAt);
+    setBankCreatedDate(format(createdDate, 'dd/MM/yyyy'));
+    setBankUpdatedDate(format(updatedDate, 'dd/MM/yyyy'));
+
+    console.log("Nome do Banco: ", itemData.item.connector.name, "Link da imagem: ", itemData.item.connector.imageUrl,
+      "Cor: ", itemData.item.connector.primaryColor, "Criado em: ", createdDate, "Atualizado em: ", updatedDate)
   }
 
   return (
@@ -51,64 +57,21 @@ export const BankAccountWallets = () => {
       </div>
       <div className="w-auto">
         <CardBankWallet
-          bankName={'Nubank'}
-          id={1}
-          propCreatedDate={'04/07/2023'}
-          propUpdatedDate={'04/07/2024'}
+          bankName={bankName}
+          bankIcon={bankImageUrl} //Criar a prop que usa o link compartilhado pelo widget
+          bankColor={bankPrimaryColor}
+          propCreatedDate={bankCreatedDate}
+          propUpdatedDate={bankUpdatedDate}
           propCreditCard={'- R$ 900,00'}
           propLimitCreditCard={' R$ 100,00'}
-          propOnClick={handleButtonClick}
         />
       </div>
-      <div className="w-auto">
-        <CardBankWallet
-          bankName={'Itaú'}
-          id={1}
-          propCreatedDate={'04/07/2023'}
-          propUpdatedDate={'04/07/2024'}
-          propCreditCard={'- R$ 900,00'}
-          propLimitCreditCard={' R$ 100,00'}
-          propOnClick={handleButtonClick}
-        />
-      </div>
-      <div className="w-auto">
-        <CardBankWallet
-          bankName={'Caixa'}
-          id={1}
-          propCreatedDate={'04/07/2023'}
-          propUpdatedDate={'04/07/2024'}
-          propCreditCard={'- R$ 900,00'}
-          propLimitCreditCard={' R$ 100,00'}
-          propOnClick={handleButtonClick}
-        />
-      </div>
-      <div className="w-auto">
-        <CardBankWallet
-          bankName={'Santander'}
-          id={1}
-          propCreatedDate={'04/07/2023'}
-          propUpdatedDate={'04/07/2024'}
-          propCreditCard={'- R$ 900,00'}
-          propLimitCreditCard={' R$ 100,00'}
-          propOnClick={handleButtonClick}
-        />
-      </div>
-      {openModalPopUp && (
-        <div
-          style={{
-            position: 'absolute',
-            top: buttonPosition.y,
-            left: buttonPosition.x
-          }}
-        >
-          <ModalPopUp onClose={handleCloseModal} />
-        </div>
-      )}
       {openWidget && (
         <PluggyConnect
           connectToken={connectToken}
           theme="dark"
           onSuccess={onSuccess}
+          includeSandbox={true}
         />
       )}
     </div>

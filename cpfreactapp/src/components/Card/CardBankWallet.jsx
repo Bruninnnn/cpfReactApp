@@ -1,72 +1,60 @@
 import React, { useState } from 'react'
 
-import { MdMoneyOff, MdOutlineCreditCard, MdOutlineToll } from 'react-icons/md'
-import { SiNubank } from 'react-icons/si'
-import { SlOptionsVertical } from 'react-icons/sl'
-import { ModalPopUp } from '../Modals/ModalPopUp'
+import { RxUpdate } from "react-icons/rx";
+import { IoMdTrash } from 'react-icons/io'
 
-export const CardBankWallet = ({ id, propCreatedDate, propUpdatedDate, propCreditCard, propLimitCreditCard, bankName, propTitle, propTypeValue, propOnClick }) => {
-  const [openModalPopUp, setOpenModalPopUp] = useState(false);
-  const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
-
-  const propIcon = {
-    1: {
-      icon: <SiNubank style={{ fontSize: '2.5rem' }} className="bg-color-nubank justify-center text-center p-2 rounded-full" />
-    },
-    2: {
-      icon: <MdOutlineToll style={{ fontSize: '2.5rem' }} className="bg-color-bginputs justify-center text-center p-1.5 mb-2 rounded-full" />
-    },
-    3: {
-      icon: <MdMoneyOff style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-    },
-    4: {
-      icon: <MdOutlineCreditCard style={{ fontSize: '2.5rem' }} className="bg-color-cost justify-center text-center p-1.5 mb-2 rounded-full" />
-    },
-  }
-
-  const handleButtonClick = (event) => {
-    // Obtém a posição do botão clicado
-    const buttonRect = event.target.getBoundingClientRect();
-    setButtonPosition({ x: buttonRect.x, y: buttonRect.y + buttonRect.height });
-    // Exibe o componente
-    setOpenModalPopUp(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModalPopUp(false);
-  };
+export const CardBankWallet = ({ propCreatedDate, propUpdatedDate, propCreditCard, propLimitCreditCard, bankName, bankIcon, bankColor }) => {
+  /*   const propIcon = {
+      icon: bankIcon
+    } */
 
   return (
     <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
-        <div className="flex flex-1 items-center">
-          {propIcon[id].icon}
-          <h3 className='pl-2 text-[1.5rem] font-semibold'>{bankName}</h3>
+        <div className="flex h-full flex-1 items-center text-center">
+          <div className="text-xl font-semibold text-center rounded-full" style={{ backgroundColor: bankColor }} id='imagem-card'>
+            <img src={bankIcon} alt={`${bankName} logo`} className="bank-icon w-10 h-10 filter-custom-color" />
+          </div>
+          <h3 className="text-2xl font-semibold text-center ml-2">{bankName}</h3>
         </div>
-        <button onClick={handleButtonClick} className='p-4 text-center hover:bg-color-border rounded-full'>
-          <SlOptionsVertical />
-        </button>
       </div>
-      <div className="flex flex-row h-2/5 2xl:h-1/4">
+      <div className="flex flex-row mt-2.5">
         <div className="flex flex-1">
-          <h3 className="text-[0.75rem] mt-2">Criado em: {propCreatedDate}</h3>
+          <h3 className="text-xs">Criado em: {propCreatedDate}</h3>
         </div>
         <div className="">
-          <h3 className="text-[0.75rem] mt-2">Atualizado em: {propUpdatedDate}</h3>
+          <h3 className="text-xs">Atualizado em: {propUpdatedDate}</h3>
         </div>
       </div>
-      <div className="flex flex-col">
-        <h3 className="text-[1rem] mt-0.5">Valor da fatura: {propCreditCard}</h3>
-        <h3 className="text-[1rem] mt-0.5 mb-4">Limite disponível: {propLimitCreditCard}</h3>
-        <h1>{propTypeValue}</h1>
-      </div>
-      {openModalPopUp && (
-        <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
-          <ModalPopUp
-            onClose={handleCloseModal}
-          />
+
+      <div className="h-1/3 sm:h-1/3 m-2xl:h-1/2">
+        <div className="flex flex-row mt-2">
+          <div className="flex flex-1">
+            <h3 className="text-base">Valor da fatura: </h3>
+          </div>
+          <h3 className="text-base mt-0.5">{propCreditCard}</h3>
         </div>
-      )}
+        <div className="flex flex-row">
+          <div className="flex flex-1">
+            <h3 className="text-base mt-0.5">Limite disponível: </h3>
+          </div>
+          <h3 className="text-base mt-0.5">{propLimitCreditCard}</h3>
+        </div>
+      </div>
+      <div className="flex w-full h-auto justify-end">
+        <button
+          className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Atualizar Conexão'
+          onClick={""}
+        >
+          <RxUpdate />
+        </button>
+        <button
+          className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Excluir Conexão'
+          onClick={""}
+        >
+          <IoMdTrash />
+        </button>
+      </div>
     </div>
   )
 }

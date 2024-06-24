@@ -1,19 +1,12 @@
 import React, { useState } from 'react'
 import { ProgressBar } from '../ProgressBar'
 import { SlOptionsVertical } from 'react-icons/sl'
-import { ModalPopUp } from '../Modals/ModalPopUp';
 import { MdFormatListBulleted, MdModeEdit } from 'react-icons/md';
 import { IoMdTrash } from 'react-icons/io';
 import { RiPlaneFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
 export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceInitial, priceGoals, percentGoals, onOpen }) => {
-  const [openModalPopUp, setOpenModalPopUp] = useState(false)
-
-  const handleCloseModal = () => {
-    setOpenModalPopUp(false);
-  };
-
   return (
     <div className="w-full h-48 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
@@ -56,13 +49,6 @@ export const CardGoals = ({ titleGoals, createdGoalsDate, finalGoalsDate, priceI
           </Link>
         </button>
       </div>
-      {openModalPopUp && (
-        <div style={{ position: 'absolute', top: buttonPosition.y, left: buttonPosition.x }}>
-          <ModalPopUp
-            onClose={handleCloseModal}
-          />
-        </div>
-      )}
     </div>
   )
 }
