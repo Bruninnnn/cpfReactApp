@@ -10,6 +10,7 @@ const Goals = () => {
   const [openModalAddGoals, setOpenModalAddGoals] = useState(false)
   const [openModalEditGoals, setOpenModalEditGoals] = useState(false)
   const [openModalPopUp, setOpenModalPopUp] = useState(false)
+  const [goals, setGoals] = useState()
 
   const handleOpenAddGoals = (event) => {
     setOpenModalAddGoals(true)
@@ -40,7 +41,9 @@ const Goals = () => {
   const x = 500; // valor total da meta
   const valoresY = [50, 200]; // valores inseridos */
 
-  const goals = [
+  useEffect(() => {}, [])
+
+  const goalsA = [
     { title: 'Viagem' },
     { title: 'Exercícios' },
     { title: 'Aprender React' },
@@ -49,11 +52,16 @@ const Goals = () => {
   ]
 
   return (
-    <div className="flex sm:flex-col w-full h-full mx-4 sm:mt-16">
+    <div className="mx-4 flex h-full w-full sm:mt-16 sm:flex-col">
       <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 sm:grid-rows-1 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
-        {goals.map((goal, index) => (
-          <CardGoals key={index} titleGoals={goal.title} percentGoals={"goal.calcularPorcentagem"} onOpen={handleOpenEditGoals} />
+        {goalsA.map((goal, index) => (
+          <CardGoals
+            key={index}
+            titleGoals={goal.title}
+            percentGoals={'goal.calcularPorcentagem'}
+            onOpen={handleOpenEditGoals}
+          />
         ))}
       </div>
       {openModalAddGoals && (

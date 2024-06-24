@@ -4,6 +4,7 @@ import { InputValue } from '../Input/InputValue'
 import { MdClose } from 'react-icons/md'
 import { Context } from '../../Context'
 import { format } from 'date-fns'
+import { toast } from 'react-toastify'
 const { IP } = require('../../env')
 
 export const ModalAddGoals = ({ onClose }) => {
@@ -50,6 +51,16 @@ export const ModalAddGoals = ({ onClose }) => {
       const response = await fetch(`http://${IP}:8080/goal/create`, options)
 
       const data = await response.json()
+      toast.success('Cadastro realizado com sucesso!', {
+        position: 'bottom-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      })
       return data
     } catch (error) {
       console.error('Erro na solicitação:', error)
