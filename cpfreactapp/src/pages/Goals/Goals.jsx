@@ -3,13 +3,11 @@ import React, { useState } from 'react'
 import { CardAddGoals } from '../../components/Card/CardAddGoals'
 import { CardGoals } from '../../components/Card/CardGoals'
 import { ModalAddGoals } from '../../components/Modals/ModalAddGoals'
-import { ModalPopUp } from '../../components/Modals/ModalPopUp'
 import { ModalEditGoals } from '../../components/Modals/ModalEditGoals'
 
 const Goals = () => {
   const [openModalAddGoals, setOpenModalAddGoals] = useState(false)
   const [openModalEditGoals, setOpenModalEditGoals] = useState(false)
-  const [openModalPopUp, setOpenModalPopUp] = useState(false)
 
   const handleOpenAddGoals = (event) => {
     setOpenModalAddGoals(true)
@@ -25,10 +23,6 @@ const Goals = () => {
 
   const handleCloseEditGoalsModal = () => {
     setOpenModalEditGoals(false)
-  }
-
-  const handleClosePopUp = () => {
-    setOpenModalPopUp(false)
   }
 
   /* function calcularPorcentagem(x, valoresY) {
@@ -61,17 +55,6 @@ const Goals = () => {
       )}
       {openModalEditGoals && (
         <ModalEditGoals onClose={handleCloseEditGoalsModal} />
-      )}
-      {openModalPopUp && (
-        <div
-          style={{
-            position: 'absolute',
-            top: buttonPosition.y,
-            left: buttonPosition.x
-          }}
-        >
-          <ModalPopUp onClose={handleClosePopUp} />
-        </div>
       )}
     </div>
   )

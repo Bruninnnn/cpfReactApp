@@ -13,6 +13,10 @@
   color: white;
 }
 
+.filter-custom-color {
+  filter: brightness(0) saturate(100%) invert(94%) sepia(6%) saturate(26%) hue-rotate(327deg) brightness(107%) contrast(106%);
+}
+
 ::-webkit-calendar-picker-indicator {
   filter: invert(1);
   cursor: pointer;
