@@ -254,7 +254,7 @@ function DashBoard() {
         />
       )}
 
-      <div className="mt-10 flex max-h-[45vh] w-full flex-row gap-4 overflow-y-auto">
+      <div className="flex flex-row w-full mt-10 max-h-[45vh] overflow-y-auto sm:overflow-auto">
         <Table
           rows={rows}
           deleteRow={handleDeleteRow}

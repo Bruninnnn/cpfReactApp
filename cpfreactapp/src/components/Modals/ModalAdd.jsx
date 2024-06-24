@@ -119,12 +119,12 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
 
   return (
     <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-modal-background">
-      <div className="h-1/2 w-1/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8">
+      <div className="h-1/2 w-2/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8 sm:w-full sm:h-full md:h-3/4 md:w-3/4 lg:w-2/4">
         <div className="title">
           <h2>Cadastro</h2>
         </div>
-        <form className="my-6 flex w-full items-center justify-center">
-          <div className="mt-2 grid grid-cols-2 justify-center gap-5">
+        <form className="my-0 flex h-full w-full flex-col">
+          <div className="mt-0 grid w-full grid-cols-2 justify-center gap-4 md:grid-cols-1 ">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputValue
                 label="Valor:"
@@ -135,7 +135,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
                 onValueChange={handlePriceChange}
               />
             </div>
-            <div className="w-full items-center justify-center whitespace-nowrap p-4">
+            <div className="w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12">
               <InputLayout
                 label="Descrição:"
                 name="description"
@@ -145,7 +145,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
                 onChange={handleChange}
               />
             </div>
-            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12">
               <SelectLayout
                 label="Categoria:"
                 name="category"
@@ -155,7 +155,7 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
                 options={categoryOptions}
               />
             </div>
-            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4">
+            <div className="-mt-12 w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12">
               <SelectLayout
                 label="Tipo:"
                 name="type"

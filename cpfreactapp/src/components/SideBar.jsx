@@ -7,6 +7,7 @@ import { MdDashboard, MdDataUsage, MdExitToApp } from 'react-icons/md'
 import { TbPigMoney } from 'react-icons/tb'
 import { IoMenu } from 'react-icons/io5'
 import { IoMdClose } from 'react-icons/io'
+import { GiTakeMyMoney } from 'react-icons/gi'
 
 export default function SideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -53,6 +54,17 @@ export default function SideBar() {
                   <MdDataUsage fontSize={24} />
                 </span>
                 <p className="mt-1 items-center px-2">Relatórios</p>
+              </div>
+            </Link>
+            <Link
+              to="/dashboard/extract"
+              className="flex items-center px-0 font-light"
+            >
+              <div className="flex w-full items-center p-4 hover:bg-color-border">
+                <span>
+                  <GiTakeMyMoney fontSize={24} />
+                </span>
+                <p className="mt-1 items-center px-2">Extrato</p>
               </div>
             </Link>
             <Link

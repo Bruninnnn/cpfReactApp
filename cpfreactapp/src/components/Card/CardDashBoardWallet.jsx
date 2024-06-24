@@ -38,7 +38,7 @@ export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
       icon: (
         <MdOutlineCreditCard
           style={{ fontSize: '2.5rem' }}
-          className="mb-2 justify-center rounded-full bg-color-cost p-1.5 text-center"
+          className="mb-2 justify-center rounded-full bg-color-card p-1.5 text-center"
         />
       )
     },
@@ -46,7 +46,7 @@ export const CardDashBoardWallet = ({ id, propTitle, propTypeValue }) => {
       icon: (
         <TbPigMoney
           style={{ fontSize: '2.5rem' }}
-          className="mb-2 justify-center rounded-full bg-color-nubank p-1.5 text-center"
+          className="mb-2 justify-center rounded-full bg-color-goals p-1.5 text-center"
         />
       )
     },
