@@ -7,7 +7,7 @@ Em relação à tecnologia utilizada, para o Frontend utilizamos React com algum
 
 ## Documentação
 
-ara mais informações sobre como fazer a instalação, acesse 
+Para mais informações sobre como fazer a instalação, acesse 
 [Instalação](https://github.com/Bruninnnn/cpfReactApp/tree/main/cpfreactapp#readme)
 
 Nosso arquivo com informações de conexão ao Pluggy.ai, se encontra no arquivo [PluggyConnector](https://github.com/Bruninnnn/cpfReactApp/blob/main/cpfreactapp/src/api/pluggy/pluggyController.js)
