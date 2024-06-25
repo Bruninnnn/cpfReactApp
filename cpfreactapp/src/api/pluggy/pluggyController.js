@@ -32,19 +32,4 @@ export async function requestConnectToken({ apiKey }) {
   } catch (err) {
     console.error(err)
   }
-
-  /* 
-    const options = {
-        method: 'POST',
-        headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
-          'X-API-KEY': `${apiKey}`},
-        body: JSON.stringify({options: {webhookUrl: 'http://{IP}:8080/webhook', clientUserId: `${userId}`}})
-      };
-      
-      fetch('https://api.pluggy.ai/connect_token', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err)); */
 }
