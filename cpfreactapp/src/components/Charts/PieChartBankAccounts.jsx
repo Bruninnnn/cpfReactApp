@@ -6,19 +6,17 @@ import { defaults } from "chart.js/auto";
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
 
-const PieChartCategory = ({ baseData, title }) => {
+const PieChartBankAccounts = ({ baseData, title }) => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
-
   useEffect(() => {
     if (baseData) {
-      const filterLabel = baseData?.filter((data) => data.registerType === "COST")
-      const formatedLabel = filterLabel?.map((data) => data.regGroupType)
+      const filterLabel = baseData?.filter((data) => data.registerType === "INCOME")
+      const formatedLabel = filterLabel?.map((data) => data.description)
 
       const filterValue = filterLabel?.map((data) => parseFloat(data.registerValue).toFixed(2))
       const formattedValue = filterValue?.map((value) => parseFloat(value));
-
 
       const data = {
         labels: formatedLabel,
@@ -85,10 +83,10 @@ const PieChartCategory = ({ baseData, title }) => {
     <div className="flex flex-col w-full bg-color-bgforms p-4 rounded-2xl border border-solid border-color-border">
       <strong className="font-medium my-4">{title}</strong>
       <div className="flex justify-center">
-        <Chart className="w-1/2 sm:w-full md:w-10 lg:w-1/2 " type="doughnut" data={chartData} options={chartOptions} />
+        <Chart className="w-1/2 sm:w-full md:w-10 lg:w-1/2" type="doughnut" data={chartData} options={chartOptions} />
       </div>
     </div>
   );
 };
 
-export default PieChartCategory;
+export default PieChartBankAccounts;

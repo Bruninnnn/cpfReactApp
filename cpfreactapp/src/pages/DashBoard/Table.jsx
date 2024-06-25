@@ -7,10 +7,6 @@ import {
 } from 'react-icons/md'
 
 export const Table = ({ rows, deleteRow, editRow }) => {
-
-  const row = {
-
-  }
   return (
     <div className="max-h-[500px] w-full overflow-x-auto">
       <table className="max-h-[500px] w-full table-auto text-left text-base text-color-border-login">
@@ -53,13 +49,10 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                 <td className="px-6 py-4">{row.description}</td>
                 <td className="px-6 py-4">{row.regGroupType}</td>
                 <td className="px-6 py-4">
-                  <span className="flex items-center justify-start text-center">
-                    <MdKeyboardArrowUp className='bg-sea-green-900 rounded-full shad'
-                      style={{ fill: '#00aaa1', fontSize: '24px' }}
-                    />
+                  <span className="flex items-center text-center">
                     {row.registerType === 'INCOME' ? (
-                      <MdKeyboardArrowUp className='bg-color-receipt'
-                        style={{ fill: '#0a5c5a', fontSize: '24px' }}
+                      <MdKeyboardArrowUp className='bg-sea-green-900 rounded-full'
+                        style={{ fill: '#00aaa1', fontSize: '24px' }}
                       />
                     ) : (
                       <MdKeyboardArrowDown className='bg-color-cost rounded-full'
@@ -69,7 +62,7 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                   </span>
                 </td>
                 <td className="px-6 py-4">
-                  <span className="flex items-center justify-start text-center">
+                  <span className="flex items-center justify-start text-center gap-2">
                     <MdDeleteForever className='bg-japanese-maple-900 rounded-md p-0.5'
                       onClick={() => deleteRow(idx)}
                       style={{
