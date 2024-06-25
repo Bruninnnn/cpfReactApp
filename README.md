@@ -1,22 +1,23 @@
 # ConnectBills
 
-ConnectBills é um projeto para nosso TCC da faculdade Senac de Blumenau, na qual fizemos um sistema de Controle Pessoal Financeiro integrado com a [Pluggy.ai](https://www.pluggy.ai), na qual agradecemos imensamente, por ter sido uma parceira que nos forneceu acesso a sua API, a mesma tem o objetivo de fornecer soluções com conexão ao OpenFinance para empresas, para mais informações acessar o site da [Pluggy.ai](https://www.pluggy.ai). 
+ConnectBills é um projeto para nosso TCC da faculdade Senac de Blumenau, na qual desenvolvemos um sistema de Controle Pessoal Financeiro integrado com a [Pluggy.ai](https://www.pluggy.ai), na quem agradecemos imensamente por ter sido uma parceira que nos forneceu acesso à sua API. A Pluggy.ai tem o objetivo de fornecer soluções com conexão ao OpenFinance para empresas. Para mais informações, acesse o site da [Pluggy.ai](https://www.pluggy.ai). 
 
-Sobre a tecnologia utilizada, para o Frontend utilizamos React com algumas bibliotecas. Para o Backend utilizamos o Java Spring Boot e MySQL para o banco de dados.
+Em relação à tecnologia utilizada, para o Frontend utilizamos React com algumas bibliotecas. Para o Backend utilizamos Java com Spring Boot e MySQL para o banco de dados.
 
 
 ## Documentação
 
-Para mais informações de como fazer a instalação acessar 
+ara mais informações sobre como fazer a instalação, acesse 
 [Instalação](https://github.com/Bruninnnn/cpfReactApp/tree/main/cpfreactapp#readme)
 
-Nosso arquivo com informações de conexão ao Pluggy.ai se encontra no arquivo [PluggyConnector](https://github.com/Bruninnnn/cpfReactApp/blob/main/cpfreactapp/src/api/pluggy/pluggyController.js)
+Nosso arquivo com informações de conexão ao Pluggy.ai, se encontra no arquivo [PluggyConnector](https://github.com/Bruninnnn/cpfReactApp/blob/main/cpfreactapp/src/api/pluggy/pluggyController.js)
 
-Para tirar algumas dúvidas, recomendamos fazer o acesso a própria informações da documentação da Pluggy.ai → 
+Para tirar dúvidas sobre a utilização de conexões, recomendamos acessar a documentação da  Pluggy.ai → 
 [Documentação](https://docs.pluggy.ai/docs/quick-pluggy-introduction)
+
 ## Relacionados
 
-Lembrando que para funcionar, precisa que utilize nosso segundo repositório que engloba a parte do Backend com a conexão ao Banco de Dados
+Lembrando que para funcionar, é necessário que utilize nosso segundo repositório que engloba a parte do Backend com a conexão ao Banco de Dados
 
 - [ControlePessoalFinanceiroAPI](https://github.com/Bruninnnn/ControlePessoalFinanceiroAPI)
 
