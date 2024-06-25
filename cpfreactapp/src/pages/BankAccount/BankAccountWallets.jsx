@@ -27,6 +27,8 @@ export const BankAccountWallets = () => {
   const [bankPrimaryColor, setBankPrimaryColor] = useState('');
   const [bankCreatedDate, setBankCreatedDate] = useState('');
   const [bankUpdatedDate, setBankUpdatedDate] = useState('');
+  const [creditCard, setCreditCard] = useState('');
+  const [limitCreditCard, setLimitCreditCard] = useState('');
 
   const onClosePopup = useCallback(() => {
     setOpenWidget(false);
@@ -56,8 +58,16 @@ export const BankAccountWallets = () => {
     const data = await requestAccountConnect({ itemId, apiKey })
     console.log(data)
 
-    const ids = data.results.map(result => result.id);
-    console.log(ids);
+    const ids = data.results.map(result => result.id); // segue este formato devido a ser um array.
+    const balanceCreditCard = data.results.map(result => result.balance);
+    const availableCreditLimits = data.results.map(result => result.creditData.availableCreditLimit);
+
+    const formatCurrency = (value) => {
+      return value.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    };
 
     setBankName(itemData.item.connector.name);
     setBankImageUrl(itemData.item.connector.imageUrl);
@@ -67,6 +77,22 @@ export const BankAccountWallets = () => {
 
     setBankCreatedDate(format(createdDate, 'dd/MM/yyyy'));
     setBankUpdatedDate(format(updatedDate, 'dd/MM/yyyy'));
+    setCreditCard(
+      balanceCreditCard.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+      }))
+    setLimitCreditCard(
+      availableCreditLimits.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+      })
+    )
+    console.log(ids);
+    console.log(balanceCreditCard)
+    console.log(availableCreditLimits)
   }
 
   return (
@@ -81,8 +107,8 @@ export const BankAccountWallets = () => {
           bankColor={bankPrimaryColor}
           propCreatedDate={bankCreatedDate}
           propUpdatedDate={bankUpdatedDate}
-          propCreditCard={'- R$ 900,00'}
-          propLimitCreditCard={' R$ 100,00'}
+          propCreditCard={creditCard}
+          propLimitCreditCard={limitCreditCard}
         />
       </div>
       {openWidget && (
