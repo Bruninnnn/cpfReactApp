@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import { CardAddBankWallet } from '../../components/Card/CardAddBankWallet'
 import { CardBankWallet } from '../../components/Card/CardBankWallet'
@@ -8,6 +8,9 @@ import {
   requestAPIKey,
   requestConnectToken
 } from '../../api/pluggy/pluggyController'
+
+import { requestAccountConnect } from '../../api/pluggy/account'
+
 import { PluggyConnect } from 'react-pluggy-connect'
 import { SiNubank } from 'react-icons/si'
 import { format } from 'date-fns'
@@ -16,14 +19,22 @@ export const BankAccountWallets = () => {
   const [openWidget, setOpenWidget] = useState(false)
   const [connectToken, setConnectToken] = useState()
 
+  const [itemId, setItemId] = useState('');
+  const [apiKey, setApiKey] = useState('')
+
   const [bankName, setBankName] = useState('');
   const [bankImageUrl, setBankImageUrl] = useState('');
   const [bankPrimaryColor, setBankPrimaryColor] = useState('');
   const [bankCreatedDate, setBankCreatedDate] = useState('');
   const [bankUpdatedDate, setBankUpdatedDate] = useState('');
 
+  const onClosePopup = useCallback(() => {
+    setOpenWidget(false);
+  }, []);
+
   async function handleConnectPluggy() {
     const responseApiKey = await requestAPIKey()
+    setApiKey(responseApiKey.apiKey)
     const connectToken = await requestConnectToken({
       apiKey: responseApiKey.apiKey
     })
@@ -31,23 +42,28 @@ export const BankAccountWallets = () => {
     if (connectToken?.accessToken) {
       await setConnectToken(connectToken?.accessToken)
       setOpenWidget(true)
+    } else {
+      setOpenWidget(false)
     }
   }
 
-  const onSuccess = (itemData) => {
+  const onSuccess = async (itemData) => {
     console.log(itemData)
+
+    const itemId = itemData.item.id
+    setItemId(itemId);
+
+    const data = await requestAccountConnect({ itemId, apiKey })
+    console.log(data)
 
     setBankName(itemData.item.connector.name);
     setBankImageUrl(itemData.item.connector.imageUrl);
     setBankPrimaryColor("#" + itemData.item.connector.primaryColor);
+    const createdDate = new Date(itemData.item.connector.createdAt);
+    const updatedDate = new Date(itemData.item.connector.updatedAt);
 
-    const createdDate = new Date(itemData.item.createdAt);
-    const updatedDate = new Date(itemData.item.updatedAt);
     setBankCreatedDate(format(createdDate, 'dd/MM/yyyy'));
     setBankUpdatedDate(format(updatedDate, 'dd/MM/yyyy'));
-
-    console.log("Nome do Banco: ", itemData.item.connector.name, "Link da imagem: ", itemData.item.connector.imageUrl,
-      "Cor: ", itemData.item.connector.primaryColor, "Criado em: ", createdDate, "Atualizado em: ", updatedDate)
   }
 
   return (
@@ -72,6 +88,7 @@ export const BankAccountWallets = () => {
           theme="dark"
           onSuccess={onSuccess}
           includeSandbox={true}
+          onClose={onClosePopup}
         />
       )}
     </div>
