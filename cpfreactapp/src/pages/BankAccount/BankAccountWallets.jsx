@@ -56,6 +56,9 @@ export const BankAccountWallets = () => {
     const data = await requestAccountConnect({ itemId, apiKey })
     console.log(data)
 
+    const ids = data.results.map(result => result.id);
+    console.log(ids);
+
     setBankName(itemData.item.connector.name);
     setBankImageUrl(itemData.item.connector.imageUrl);
     setBankPrimaryColor("#" + itemData.item.connector.primaryColor);
