@@ -1,4 +1,4 @@
-# Controle Pessoal Financeiro
+# ConnectBills
 
 Projeto Aplicação WEB utilizando `React` e `Springboot`.
 <br>
