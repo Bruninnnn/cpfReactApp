@@ -16,6 +16,7 @@ import {
 import { PluggyConnect } from 'react-pluggy-connect'
 import { SiNubank } from 'react-icons/si'
 import { format } from 'date-fns'
+import { toast } from 'react-toastify'
 
 export const BankAccountWallets = () => {
   const [openWidget, setOpenWidget] = useState(false)
@@ -143,6 +144,17 @@ export const BankAccountWallets = () => {
 
       const deleteItemId = await requestItemDelete({ itemId, apiKey })
       console.log('Resposta do servidor:', deleteItemId)
+      toast.warn('Excluido a conta com sucesso!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     } catch (error) {
       console.error('Erro ao deletar o itemId:', error)
       throw error
