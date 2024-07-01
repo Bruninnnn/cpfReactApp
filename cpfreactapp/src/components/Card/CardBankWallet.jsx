@@ -3,11 +3,7 @@ import React, { useState } from 'react'
 import { RxUpdate } from "react-icons/rx";
 import { IoMdTrash } from 'react-icons/io'
 
-export const CardBankWallet = ({ propCreatedDate, propUpdatedDate, propCreditCard, propLimitCreditCard, bankName, bankIcon, bankColor }) => {
-  /*   const propIcon = {
-      icon: bankIcon
-    } */
-
+export const CardBankWallet = ({ propCreatedDate, propUpdatedDate, propCreditCard, propLimitCreditCard, bankName, bankIcon, bankColor, propDeleteConnection, propUpdateConnection }) => {
   return (
     <div className="w-full h-64 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
@@ -44,13 +40,13 @@ export const CardBankWallet = ({ propCreatedDate, propUpdatedDate, propCreditCar
       <div className="flex w-full h-auto justify-end">
         <button
           className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Atualizar Conexão'
-          onClick={""}
+          onClick={propUpdateConnection}
         >
           <RxUpdate />
         </button>
         <button
           className='flex-initial text-2xl text-center hover:bg-color-bginputs p-2 rounded-full' title='Excluir Conexão'
-          onClick={""}
+          onClick={propDeleteConnection}
         >
           <IoMdTrash />
         </button>
