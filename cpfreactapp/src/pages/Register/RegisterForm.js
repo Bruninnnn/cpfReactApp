@@ -144,20 +144,20 @@ function RegisterForm() {
             className="w-5/6 sm:h-1/5 sm:w-full lg:h-2/3 lg:w-full"
           />
         </div>
-        <div className="flex w-1/2 flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-12 lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center lg:overflow-hidden lg:border-l-0 lg:p-8">
-          <form action="#" className="h-full w-full">
-            <div className="-mb-2 flex h-[-50vh] justify-between lg:-mb-6">
-              <div className="-mt-2 ml-16 sm:ml-16">
-                <h1>Cadastre-se</h1>
+        <div className="flex w-1/2 h-full flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-8 lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center xl:overflow-hidden lg:border-l-0 lg:p-8">
+          <form action="#" className="w-full h-full p-4 sm:-mt-12">
+            <div className="flex justify-between ">
+              <div className="px-4">
+                <h1 className='lg:text-lg'>Cadastre-se</h1>
               </div>
-              <div className="-mt-8 flex items-center">
-                <button className="-ml-[50%] mt-[15%] cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 font-medium no-underline sm:-ml-[25%] lg:-ml-[40%]">
+              <div className="flex px-4">
+                <button className="cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 font-medium no-underline sm:-ml-[25%] lg:-ml-[40%]">
                   <Link to="/">Voltar para Login</Link>
                 </button>
               </div>
             </div>
-            <div className="m-xlw-[85%] mx-auto mb-[6rem] mt-[5vh] flex w-4/5 flex-wrap justify-between 
-            p-4 sm:ml-16 sm:w-full lg:flex lg:max-h-52 lg:w-[85%] lg:overflow-y-scroll m-md:justify-between"
+            <div className="flex flex-wrap w-full h-[90%] px-8 p-8 justify-between
+              lg:flex lg:max-h-52 xl:max-h-[400px] xl:overflow-y-scroll"
             >
               <InputLayout
                 width="m-sm:w-2/4 m-xl:w-2/4"
@@ -266,10 +266,9 @@ function RegisterForm() {
                 onChange={handleChangeState}
               />
             </div>
-            <div className="m-xlw-[83%] -mt-24 ml-16 flex w-10/12 items-center lg:w-[85%]">
-              {' '}
+            <div className="flex w-full items-center justify-center">
               <button
-                className="ml-2 mt-6 w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium"
+                className="mx- w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium"
                 onClick={() => {
                   sendRequest()
                   navigate('/')
