@@ -16,7 +16,7 @@ import {
 import { PluggyConnect } from 'react-pluggy-connect'
 import { SiNubank } from 'react-icons/si'
 import { format } from 'date-fns'
-import { toast } from 'react-toastify'
+import { Bounce, toast } from 'react-toastify'
 
 export const BankAccountWallets = () => {
   const [openWidget, setOpenWidget] = useState(false)
@@ -152,7 +152,8 @@ export const BankAccountWallets = () => {
         pauseOnHover: false,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
+        style: { background: '#131316' },
         transition: Bounce,
       });
     } catch (error) {

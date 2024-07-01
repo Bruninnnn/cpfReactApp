@@ -10,7 +10,9 @@ function App() {
     <BrowserRouter>
       <ContextProvider>
         <AppRoutes />
-        <ToastContainer />
+        <ToastContainer
+          limit={5}
+        />
       </ContextProvider>
     </BrowserRouter>
   );

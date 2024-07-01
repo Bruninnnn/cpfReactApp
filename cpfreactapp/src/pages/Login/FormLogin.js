@@ -63,7 +63,8 @@ function FormLogin() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
+          style: { background: '#131316' }
         });
       });
     return user;
@@ -91,7 +92,8 @@ function FormLogin() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
+          style: { background: '#131316' }
         });
         navigate("/dashboard");
       } else {
@@ -103,7 +105,8 @@ function FormLogin() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
+          style: { background: '#131316' }
         });
       }
     }
