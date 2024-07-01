@@ -268,7 +268,7 @@ function RegisterForm() {
             </div>
             <div className="flex w-full items-center justify-center">
               <button
-                className="mx- w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium"
+                className="mx-4 w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium"
                 onClick={() => {
                   sendRequest()
                   navigate('/')
