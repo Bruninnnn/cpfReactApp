@@ -9,7 +9,7 @@ export const CardBankWallet = ({ propCreatedDate, propUpdatedDate, propCreditCar
     } */
 
   return (
-    <div className="w-full h-full items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
+    <div className="w-full h-64 items-center p-4 mt-0 border border-solid bg-color-bgforms border-color-border rounded-3xl">
       <div className="flex flex-row">
         <div className="flex h-full flex-1 items-center text-center">
           <div className="text-xl font-semibold text-center rounded-full" style={{ backgroundColor: bankColor }} id='imagem-card'>
