@@ -146,9 +146,9 @@ function RegisterForm() {
         </div>
         <div className="flex w-1/2 h-full flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-8 lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center xl:overflow-hidden lg:border-l-0 lg:p-8">
           <form action="#" className="w-full h-full p-4 sm:-mt-24">
-            <div className="flex justify-between 2xl:-mt-6">
+            <div className="flex justify-between text-center items-center">
               <div className="px-4">
-                <h1 className='lg:text-base'>Cadastre-se</h1>
+                <h1 className='lg:text-lg xl:text-2xl'>Cadastre-se</h1>
               </div>
               <div className="flex px-4">
                 <button className="cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 font-medium no-underline sm:-ml-[25%] lg:-ml-[40%]">
@@ -157,7 +157,7 @@ function RegisterForm() {
               </div>
             </div>
             <div className="flex flex-wrap w-full h-[90%] px-8 p-8 mb-0 justify-between
-              lg:flex lg:max-h-52 lg:mb-0 xl:max-h-[400px] xl:overflow-y-scroll m-xl:-mb-4 2xl:-mb-8 "
+              lg:flex lg:max-h-52 lg:mb-0 xl:max-h-[400px] xl:overflow-y-scroll  xl:mb-10 "
             >
               <InputLayout
                 width="m-sm:w-2/4 m-xl:w-2/4"
@@ -266,7 +266,7 @@ function RegisterForm() {
                 onChange={handleChangeState}
               />
             </div>
-            <div className="flex w-full items-center justify-center sm:-mt-4 lg:mt-8 2xl:mt-12">
+            <div className="flex w-full items-center justify-center sm:-mt-4">
               <button
                 className="mx-4 w-full cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 text-base font-medium "
                 onClick={() => {
