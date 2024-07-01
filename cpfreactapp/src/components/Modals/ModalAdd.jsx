@@ -93,7 +93,8 @@ export const ModalComponent = ({ closeAddModal, onSubmit, userContext }) => {
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: 'dark'
+      theme: 'dark',
+      style: { background: '#131316' }
     })
   }
 

@@ -146,9 +146,9 @@ function RegisterForm() {
         </div>
         <div className="flex w-1/2 h-full flex-col items-center justify-center border-l-2 border-solid border-color-border-login bg-color-bgforms p-8 lg:absolute lg:left-0 lg:top-1/2 lg:flex lg:h-1/2 lg:w-full lg:items-center xl:overflow-hidden lg:border-l-0 lg:p-8">
           <form action="#" className="w-full h-full p-4 sm:-mt-24">
-            <div className="flex justify-between ">
+            <div className="flex justify-between text-center items-center">
               <div className="px-4">
-                <h1 className='lg:text-lg'>Cadastre-se</h1>
+                <h1 className='lg:text-lg xl:text-2xl'>Cadastre-se</h1>
               </div>
               <div className="flex px-4">
                 <button className="cursor-pointer rounded-lg border-none bg-color-receipt px-2.5 py-2 font-medium no-underline sm:-ml-[25%] lg:-ml-[40%]">
