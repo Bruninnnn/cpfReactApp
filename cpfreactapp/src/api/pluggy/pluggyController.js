@@ -92,7 +92,10 @@ export async function requestItemDelete({ itemId, apiKey }) { // Faz a requisiç
   };
 
   try {
-    const response = await fetch(`https://api.pluggy.ai/items/127b644c-35fd-49f6-b6be-334b802aacbd`, options)
+    const response = await fetch(`https://api.pluggy.ai/items/${itemId}`, options)
+    if (!response.ok) {
+      throw new Error(`Erro ao deletar o item: ${response.statusText}`);
+    }
     const deletedItemId = await response.json()
     return deletedItemId
   } catch (err) {

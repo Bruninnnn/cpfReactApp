@@ -24,17 +24,22 @@ export const BankAccountWallets = () => {
   const [connectToken, setConnectToken] = useState()
 
   const [itemId, setItemId] = useState('');
-  const [updatedItemID, setUpdatedItemID] = useState('');
   const [accountId, setAccountId] = useState('');
   const [apiKey, setApiKey] = useState('')
 
-  const [bankName, setBankName] = useState('');
-  const [bankImageUrl, setBankImageUrl] = useState('');
-  const [bankPrimaryColor, setBankPrimaryColor] = useState('');
-  const [bankCreatedDate, setBankCreatedDate] = useState('');
-  const [bankUpdatedDate, setBankUpdatedDate] = useState('');
-  const [creditCard, setCreditCard] = useState('');
-  const [limitCreditCard, setLimitCreditCard] = useState('');
+  const [bankData, setBankData] = useState({
+    itemId: '',
+    bankName: '',
+    bankImageUrl: '',
+    bankPrimaryColor: '',
+    bankCreatedDate: '',
+    bankUpdatedDate: '',
+  });
+  const [accountData, setAccountData] = useState({
+    accountId: '',
+    balanceCreditCard: '',
+    availableCreditLimit: '',
+  });
 
   const onClosePopup = useCallback(() => {
     setOpenWidget(false);
@@ -62,54 +67,52 @@ export const BankAccountWallets = () => {
   const onSuccessDefaultConnect = async (itemData) => {
     console.log(itemData)
 
+    const newBankData = {
+      itemId: itemData.item.id,
+      bankName: itemData.item.connector.name,
+      bankImageUrl: itemData.item.connector.imageUrl,
+      bankPrimaryColor: "#" + itemData.item.connector.primaryColor,
+      bankCreatedDate: format(new Date(itemData.item.connector.createdAt), 'dd/MM/yyyy'),
+      bankUpdatedDate: format(new Date(itemData.item.connector.updatedAt), 'dd/MM/yyyy'),
+    };
+    console.log('Bank Data:', newBankData);
+    setBankData(newBankData);
+
     const itemId = itemData.item.id
     setItemId(itemId);
 
     const data = await requestAccountConnect({ itemId, apiKey })
     console.log(data)
 
-    const ids = data.results.map(result => result.id); // segue este formato devido a ser um array. id da conta bancária
-    const idsString = ids.join(',');
-    setAccountId(idsString);
-
-    try {
-      const dataTrans = await requestAccountTransaction({ accountId: idsString, apiKey })
-      console.log(dataTrans);
-    } catch (error) {
-      console.error("Erro ao obter transações:", error);
-    }
+    const accountId = data.results.map(result => result.id); // segue este formato devido a ser um array. id da conta bancária
+    const idString = accountId.join(',');
+    setAccountId(idString);
 
     const balanceCreditCard = data.results.map(result => result.balance);
-    const availableCreditLimits = data.results.map(result => result.creditData.availableCreditLimit);
+    const availableCreditLimit = data.results.map(result => result.creditData.availableCreditLimit);
 
-    const formatCurrency = (value) => {
-      return value.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      });
-    };
-
-    setBankName(itemData.item.connector.name);
-    setBankImageUrl(itemData.item.connector.imageUrl);
-    setBankPrimaryColor("#" + itemData.item.connector.primaryColor);
-    const createdDate = new Date(itemData.item.connector.createdAt);
-    const updatedDate = new Date(itemData.item.connector.updatedAt);
-
-    setBankCreatedDate(format(createdDate, 'dd/MM/yyyy'));
-    setBankUpdatedDate(format(updatedDate, 'dd/MM/yyyy'));
-    setCreditCard(
-      balanceCreditCard.toLocaleString('pt-BR', {
+    const newAccountData = {
+      accountId: idString,
+      balanceCreditCard: balanceCreditCard.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL',
         minimumFractionDigits: 2
-      }))
-    setLimitCreditCard(
-      availableCreditLimits.toLocaleString('pt-BR', {
+      }),
+      availableCreditLimit: availableCreditLimit.toLocaleString('pt-BR', {
         style: 'currency',
         currency: 'BRL',
         minimumFractionDigits: 2
       })
-    )
+    };
+    console.log('Account Data:', newAccountData);
+    setAccountData(newAccountData)
+
+    try {
+      const dataTrans = await requestAccountTransaction({ accountId: idString, apiKey })
+      console.log(dataTrans);
+    } catch (error) {
+      console.error("Erro ao obter transações:", error);
+    }
   }
 
   const onSuccessUpdateItem = async (itemData) => {
@@ -122,7 +125,7 @@ export const BankAccountWallets = () => {
       setApiKey(responseApiKey.apiKey)
       const connectToken = await requestConnectTokenToId({
         apiKey: responseApiKey.apiKey,
-        itemId: '83f22e82-1ce8-4a17-a8ce-8cebc577b796' // Substituir pelo itemId daquele card em específico
+        itemId: itemId // Substituir pelo itemId daquele card em específico
       });
       setConnectToken(connectToken);
       if (connectToken?.accessToken) {
@@ -144,27 +147,67 @@ export const BankAccountWallets = () => {
 
       const deleteItemId = await requestItemDelete({ itemId, apiKey })
       console.log('Resposta do servidor:', deleteItemId)
-      toast.warn('Excluido a conta com sucesso!', {
-        position: "bottom-right",
-        autoClose: 5000,
+      if (deleteItemId === undefined) {
+        toast.error('Não foi possível excluir esta conexão, tente novamente!', {
+          position: 'bottom-right',
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          style: { background: '#131316' },
+          transition: Bounce,
+        })
+      } else {
+        toast.warn('Conta desvinculada com sucesso!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          style: { background: '#131316' },
+          transition: Bounce,
+        });
+      }
+    } catch (error) {
+      toast.error('Algo não correu como esperado, tente novamente!', {
+        position: 'bottom-right',
+        autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: false,
+        pauseOnHover: true,
         draggable: true,
         progress: undefined,
         theme: 'dark',
         style: { background: '#131316' },
         transition: Bounce,
-      });
-    } catch (error) {
+      })
       console.error('Erro ao deletar o itemId:', error)
       throw error
     }
   }
 
   const banks = [
-    { bankName: 'Banco Mockado', bankIcon: '', bankPrimaryColor: '#000000' }
-  ]
+    {
+      itemId: bankData.itemId,
+      bankName: bankData.bankName,
+      bankIcon: bankData.bankImageUrl,
+      bankColor: bankData.bankPrimaryColor,
+      propCreatedDate: bankData.bankCreatedDate,
+      propUpdatedDate: bankData.bankUpdatedDate,
+      propCreditCard: accountData.balanceCreditCard,
+      propLimitCreditCard: accountData.availableCreditLimit,
+      propDeleteConnection: handleDeleteConnection,
+      propUpdateConnection: handleOpenWidget,
+    },
+  ];
+
+  console.log(banks)
 
   return (
     <div className="flex sm:flex-col w-full h-full mx-4 sm:mt-8">
@@ -173,20 +216,21 @@ export const BankAccountWallets = () => {
           <CardAddBankWallet handleOnClick={handleConnectPluggy} />
         </div>
         <div className="w-auto">
-          {banks.map((bank, index) => (
-            <CardBankWallet
-              key={bank.itemId}
-              bankName={bank.bankName}
-              bankIcon={bank.bankImageUrl}
-              bankColor={bank.bankPrimaryColor}
-              propCreatedDate={bank.bankCreatedDate}
-              propUpdatedDate={bank.bankUpdatedDate}
-              propCreditCard={bank.creditCard}
-              propLimitCreditCard={bank.limitCreditCard}
-              propDeleteConnection={handleDeleteConnection}
-              propUpdateConnection={handleOpenWidget}
-            />
-          ))}
+          {banks.filter(bank => bank.itemId)
+            .map((bank, index) => (
+              <CardBankWallet
+                key={bank.itemId}
+                bankName={bank.bankName}
+                bankIcon={bank.bankIcon}
+                bankColor={bank.bankColor}
+                propCreatedDate={bank.propCreatedDate}
+                propUpdatedDate={bank.propUpdatedDate}
+                propCreditCard={bank.propCreditCard}
+                propLimitCreditCard={bank.propLimitCreditCard}
+                propDeleteConnection={bank.propDeleteConnection}
+                propUpdateConnection={bank.propUpdateConnection}
+              />
+            ))}
         </div>
         {openWidget && (
           <PluggyConnect
@@ -203,7 +247,7 @@ export const BankAccountWallets = () => {
             theme="dark"
             onSuccess={onSuccessUpdateItem}
             onClose={onCloseUpdateWidget}
-            updateItem={'83f22e82-1ce8-4a17-a8ce-8cebc577b796'}
+            updateItem={banks.itemId}
           />
         )}
       </div>
