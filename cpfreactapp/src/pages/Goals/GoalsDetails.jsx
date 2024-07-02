@@ -45,9 +45,9 @@ export const GoalsDetails = () => {
               </div>
             </div>
             <div className="flex w-full items-center justify-between pt-4">
-              <h3>Valor da meta:</h3>
-              <h3>Valor guardado:</h3>
-              <h3>Valor restante:</h3>
+              <h3>Valor da meta: R$ 5.430,99</h3>
+              <h3>Valor guardado: R$ 430,99</h3>
+              <h3>Valor restante: R$ 5.000,00</h3>
             </div>
           </div>
 
