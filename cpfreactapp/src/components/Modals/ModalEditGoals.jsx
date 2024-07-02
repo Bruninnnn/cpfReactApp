@@ -67,14 +67,25 @@ export const ModalEditGoals = ({ onClose, setGoals, id, goalValue }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark'
+          theme: 'dark',
+          style: { background: '#131316' }
         })
         setGoals()
         onClose()
         return
       }
     } catch (error) {
-      console.error('Erro na solicitação:', error)
+      toast.error('Algo não correu como esperado, tente novamente!', {
+        position: 'bottom-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        style: { background: '#131316' }
+      })
     }
   }
 

@@ -55,7 +55,7 @@ export const ModalAddGoals = ({ onClose, setGoals }) => {
 
       const data = await response.json()
       if (data?.length > 0) {
-        toast.success('Cadastro de meta realizado com sucesso!', {
+        toast.success('Cadastro realizado com sucesso!', {
           position: 'bottom-right',
           autoClose: 2500,
           hideProgressBar: false,
@@ -63,7 +63,8 @@ export const ModalAddGoals = ({ onClose, setGoals }) => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark'
+          theme: 'dark',
+          style: { background: '#131316' }
         })
         setGoals(data)
         onClose()
@@ -78,7 +79,8 @@ export const ModalAddGoals = ({ onClose, setGoals }) => {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: 'dark'
+        theme: 'dark',
+        style: { background: '#131316' }
       })
     }
   }
