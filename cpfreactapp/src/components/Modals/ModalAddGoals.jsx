@@ -4,13 +4,14 @@ import { InputValue } from '../Input/InputValue'
 import { MdClose } from 'react-icons/md'
 import { Context } from '../../Context'
 import { format } from 'date-fns'
+import { toast } from 'react-toastify'
 const { IP } = require('../../env')
 
-export const ModalAddGoals = ({ onClose }) => {
+export const ModalAddGoals = ({ onClose, setGoals }) => {
   const { userContext } = useContext(Context)
   const [formState, setFormState] = useState({
     title: '',
-    goalValue: '',
+    targetValue: '',
     initialDate: format(new Date(), 'yyyy-MM-dd'),
     finalDate: '',
     user: userContext
@@ -27,17 +28,20 @@ export const ModalAddGoals = ({ onClose }) => {
     const { value } = values
     setFormState({
       ...formState,
-      goalValue: value
+      targetValue: value
     })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const formattedGoalValue = parseFloat(
-        formState.goalValue.replace(',', '.')
+      const formattedTargetValue = parseFloat(
+        formState.targetValue.replace(',', '.')
       )
-      const updatedFormState = { ...formState, goalValue: formattedGoalValue }
+      const updatedFormState = {
+        ...formState,
+        targetValue: formattedTargetValue
+      }
 
       const options = {
         method: 'POST',
@@ -50,9 +54,32 @@ export const ModalAddGoals = ({ onClose }) => {
       const response = await fetch(`http://${IP}:8080/goal/create`, options)
 
       const data = await response.json()
-      return data
+      if (data?.length > 0) {
+        toast.success('Cadastro de meta realizado com sucesso!', {
+          position: 'bottom-right',
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark'
+        })
+        setGoals(data)
+        onClose()
+        return
+      }
     } catch (error) {
-      console.error('Erro na solicitação:', error)
+      toast.error('Algo não correu como esperado, tente novamente!', {
+        position: 'bottom-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark'
+      })
     }
   }
 
@@ -86,9 +113,9 @@ export const ModalAddGoals = ({ onClose }) => {
             <div className="w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12">
               <InputValue
                 label="Valor da meta:"
-                name="goalValue"
+                name="targetValue"
                 type="text"
-                value={formState.goalValue}
+                value={formState.targetValue}
                 placeholder="R$ 0,00"
                 onValueChange={handlePriceChange}
               />

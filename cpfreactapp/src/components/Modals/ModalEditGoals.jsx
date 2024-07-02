@@ -1,17 +1,20 @@
-import React, { useState, useContext } from 'react'
+import { format } from 'date-fns'
+import React, { useContext, useEffect, useState } from 'react'
+import { MdClose } from 'react-icons/md'
+import { toast } from 'react-toastify'
+import { Context } from '../../Context'
 import { InputLayout } from '../Input/InputLayout'
 import { InputValue } from '../Input/InputValue'
-import { MdClose } from 'react-icons/md'
-import { Context } from '../../Context'
 const { IP } = require('../../env')
 
-export const ModalEditGoals = ({ onClose }) => {
+export const ModalEditGoals = ({ onClose, setGoals, id, goalValue }) => {
   const { userContext } = useContext(Context)
   const [formState, setFormState] = useState({
     title: '',
-    goalValue: '',
+    targetValue: goalValue || '',
     finalDate: '',
-    user: userContext
+    user: userContext,
+    initialDate: format(new Date(), 'yyyy-MM-dd')
   })
 
   const handleChange = (e) => {
@@ -25,41 +28,62 @@ export const ModalEditGoals = ({ onClose }) => {
     const { value } = values
     setFormState({
       ...formState,
-      goalValue: value
+      targetValue: value
     })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const formattedGoalValue = parseFloat(
-        formState.goalValue.replace(',', '.')
+      const formattedTargetValue = parseFloat(
+        formState.targetValue.replace(',', '.')
       )
 
-      const updatedFormState = { ...formState, goalValue: formattedGoalValue }
+      const updatedFormState = {
+        ...formState,
+        targetValue: formattedTargetValue,
+        id: id
+      }
 
       const options = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(updatedFormState)
       }
 
-      console.log(
-        `Enviando solicitação para http://${IP}:8080/goal/create`,
-        options
-      )
-
-      const response = await fetch(`http://${IP}:8080/goal/create`, options)
+      const response = await fetch(`http://${IP}:8080/goal/update`, options)
 
       const data = await response.json()
       console.log('Resposta do servidor:', data)
-      return data
+      console.log('Updated formState:', updatedFormState)
+      if (data?.length > 0) {
+        toast.success('Atualização realizada com sucesso!', {
+          position: 'bottom-right',
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark'
+        })
+        setGoals()
+        onClose()
+        return
+      }
     } catch (error) {
       console.error('Erro na solicitação:', error)
     }
   }
+
+  useEffect(() => {
+    setFormState((prevState) => ({
+      ...prevState,
+      targetValue: goalValue || prevState.targetValue
+    }))
+  }, [goalValue])
 
   return (
     <div className="fixed left-0 top-0 flex h-full w-full items-center justify-center bg-modal-background">
@@ -91,9 +115,9 @@ export const ModalEditGoals = ({ onClose }) => {
             <div className="w-full items-center justify-center whitespace-nowrap p-4 md:-mt-12">
               <InputValue
                 label="Valor da meta:"
-                name="goalValue"
+                name="targetValue"
                 type="text"
-                value={formState.goalValue}
+                value={formState.targetValue}
                 placeholder="R$ 0,00"
                 onValueChange={handlePriceChange}
               />

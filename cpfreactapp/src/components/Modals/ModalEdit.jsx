@@ -14,7 +14,7 @@ export const ModalEdit = ({
   onSubmit,
   primaryDefaultValue
 }) => {
-  const { userContext, setContext } = useContext(Context)
+  const { userContext } = useContext(Context)
   const user = userContext
   const { IP } = require('../../env')
 
@@ -22,16 +22,16 @@ export const ModalEdit = ({
     primaryDefaultValue || {
       amount: '',
       description: '',
-      regGroupType: '',
-      registerType: ''
+      category: '',
+      type: ''
     }
   )
 
   useEffect(() => {
     setFormState((prevState) => ({
       ...prevState,
-      type: primaryDefaultValue?.registerType || prevState.registerType,
-      category: primaryDefaultValue?.regGroupType || prevState.regGroupType,
+      type: primaryDefaultValue?.type || prevState.type,
+      category: primaryDefaultValue?.category || prevState.category,
       amount: primaryDefaultValue?.registerValue || prevState.amount,
       description: primaryDefaultValue?.description || prevState.description
     }))
@@ -43,12 +43,12 @@ export const ModalEdit = ({
       if (name === 'type') {
         setFormState((prevState) => ({
           ...prevState,
-          registerType: value
+          type: value
         }))
       } else if (name === 'category') {
         setFormState((prevState) => ({
           ...prevState,
-          regGroupType: value
+          category: value
         }))
       } else if (name === 'amount') {
         setFormState((prevState) => ({
@@ -78,12 +78,13 @@ export const ModalEdit = ({
         id: formState.id,
         registerValue: formState.amount,
         description: formState.description,
-        regGroupType: formState.regGroupType,
+        regGroupType: formState.category,
         registerType: formState.type === 'Entrada' ? 'INCOME' : 'COST',
         balance: 0,
         user: user,
         registerDate: formattedDate
       }
+
       const options = {
         method: 'PUT',
         headers: {
@@ -125,14 +126,14 @@ export const ModalEdit = ({
     { value: 'Educação', label: 'Educação' },
     { value: 'Eletrônicos', label: 'Eletrônicos' },
     { value: 'Lazer', label: 'Lazer' },
-    { value: 'Outros', label: 'Outros' },
     { value: 'Restaurante', label: 'Restaurante' },
     { value: 'Saúde', label: 'Saúde' },
     { value: 'Serviços', label: 'Serviços' },
     { value: 'Supermercado', label: 'Supermercado' },
     { value: 'Transporte', label: 'Transporte' },
     { value: 'Vestuário', label: 'Vestuário' },
-    { value: 'Viagem', label: 'Viagem' }
+    { value: 'Viagem', label: 'Viagem' },
+    { value: 'Outros', label: 'Outros' }
   ]
 
   const typeOptions = [
@@ -142,7 +143,7 @@ export const ModalEdit = ({
 
   return (
     <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-modal-background">
-      <div className="h-1/2 w-2/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8 sm:w-full sm:h-full md:h-3/4 md:w-3/4 lg:w-2/4">
+      <div className="h-1/2 w-2/4 rounded-lg border-2 border-solid border-color-bginputs bg-color-bgforms p-8 sm:h-full sm:w-full md:h-3/4 md:w-3/4 lg:w-2/4">
         <div className="title">
           <h2>Editar</h2>
         </div>
