@@ -21,7 +21,7 @@ function DashBoard() {
   const redirect = useNavigate()
   const { IP } = require('../../env')
 
-  /* function enter(userContext) {
+  function enter(userContext) {
     if (!userContext) {
       redirect('/')
     }
@@ -29,7 +29,7 @@ function DashBoard() {
 
   useEffect(() => {
     enter(userContext)
-  }) */
+  })
 
   const [rows, setRows] = useState([])
 
@@ -50,7 +50,6 @@ function DashBoard() {
       const data = await response.json()
       console.log('Resposta do servidor:', data)
     } catch (error) {
-      console.error('Erro na solicitação:', error)
       throw error
     }
   }
@@ -81,11 +80,11 @@ function DashBoard() {
     rowToEdit === null
       ? setRows([...rows, newRow])
       : setRows(
-        rows.map((currRow, idx) => {
-          if (idx !== rowToEdit) return currRow
-          return newRow
-        })
-      )
+          rows.map((currRow, idx) => {
+            if (idx !== rowToEdit) return currRow
+            return newRow
+          })
+        )
   }
 
   const [receipt, setReceipt] = useState()
@@ -222,7 +221,7 @@ function DashBoard() {
   }, [rows])
 
   return (
-    <div className="flex w-full relative mx-4 sm:mx-0 flex-col gap-4 sm:gap-1">
+    <div className="relative mx-4 flex w-full flex-col gap-4 sm:mx-0 sm:gap-1">
       <h1 className="mb-4 mt-4">Registros</h1>
       <div className="mt-0 inline-block rounded-3xl">
         <InputDate
@@ -232,7 +231,13 @@ function DashBoard() {
           onChange={handleMonthChange}
         />
       </div>
-      <DashBoardBalances receipt={receipt} balance={balance} cost={cost} balanceCard={"R$ 0,00"} balanceGoals={"R$ 0,00"} />
+      <DashBoardBalances
+        receipt={receipt}
+        balance={balance}
+        cost={cost}
+        balanceCard={'R$ 0,00'}
+        balanceGoals={'R$ 0,00'}
+      />
       {modalAddOpen && (
         <ModalComponent
           closeAddModal={() => {
@@ -255,7 +260,7 @@ function DashBoard() {
         />
       )}
 
-      <div className="flex flex-row w-full mt-10 max-h-[45vh] overflow-y-auto sm:overflow-auto">
+      <div className="mt-10 flex max-h-[45vh] w-full flex-row overflow-y-auto sm:overflow-auto">
         <Table
           rows={rows}
           deleteRow={handleDeleteRow}

@@ -1,81 +1,156 @@
 import React, { useEffect, useState } from 'react'
 
-import { InputLayout } from '../../components/Input/InputLayout'
-import { TableGoals } from '../../components/Table/TableGoals'
 import { FaPaperPlane } from 'react-icons/fa'
 import { IoMdArrowRoundBack } from 'react-icons/io'
 import { Link, useParams } from 'react-router-dom'
-import { ModalAddDepositGoals } from '../../components/Modals/ModalAddDepositGoals'
 import { DoughnutProgressChart } from '../../components/Charts/DoughnutProgressChart'
+import { ModalAddDepositGoals } from '../../components/Modals/ModalAddDepositGoals'
+import { TableGoals } from '../../components/Table/TableGoals'
 import { IP } from '../../env'
+import { toast } from 'react-toastify'
 
 export const GoalsDetails = () => {
-  const { id } = useParams();
-  const [goal, setGoal] = useState(null);
+  const { id } = useParams()
+  const [goal, setGoal] = useState({})
   const [openModalDepositGoals, setOpenModalDepositGoals] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [registers, setRegisters] = useState([])
+  const [percent, setPercent] = useState()
 
   const [goalsDetails, setGoalsDetails] = useState({
     goalId: '',
     targetValue: '',
     value: '',
-    percentGoals: '',
-  });
+    percentGoals: ''
+  })
 
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
+  async function getRegisters() {
+    try {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const response = await fetch(
+        `http://${IP}:8080/goal-register/goals/${id}`,
+        options
+      )
+      const data = await response.json()
+      setRegisters(data || [])
+    } catch (error) {
+      setRegisters([])
     }
   }
 
   useEffect(() => {
+    const fetchRegisters = async () => {
+      await getRegisters()
+    }
+    fetchRegisters()
+  }, [id])
+
+  useEffect(() => {
     const fetchGoalDetails = async () => {
       try {
-        const response = await fetch(`http://${IP}:8080/goal/${id}`, options);
-        const goalData = await response.json();
-        console.log(goalData)
+        const options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
 
-        const goalId = goalData.map(goal => (goal.id));
-        const targetValue = goalData.map(goal => (goal.targetValue));
-        const goalValue = goalData.map(goal => (goal.goalValue));
-        const balance = targetValue - goalValue;
-        const percentGoals = ((goalValue / targetValue) * 100).toFixed(0);
+        const response = await fetch(`http://${IP}:8080/goal/${id}`, options)
+        const goalData = await response.json()
 
-        const newGoalData = {
-          goalId: goalId,
-          targetValue: targetValue.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2
-          }),
-          value: goalValue.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2
-          }),
-          balance: balance.toLocaleString('pt-BR', {
-            style: 'currency',
-            currency: 'BRL',
-            minimumFractionDigits: 2
-          }),
-          percentGoals: percentGoals
-        };
-        console.log(newGoalData)
-        setGoalsDetails(newGoalData)
+        if (goalData) {
+          const id = goalData?.id
+          const targetValue = goalData?.targetValue
+          const goalValue = goalData?.goalValue
+          const balance = targetValue - goalValue
+          const percentGoals = ((goalValue / targetValue) * 100).toFixed(0)
+          setPercent(percentGoals)
+
+          setGoal({
+            id: goalData?.id,
+            title: goalData?.title,
+            targetValue: goalData?.targetValue,
+            goalValue: goalData?.goalValue,
+            initialDate: goalData?.initialDate,
+            finalDate: goalData?.finalDate,
+            user: goalData?.user
+          })
+
+          const newGoalData = {
+            id,
+            targetValue: targetValue.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+              minimumFractionDigits: 2
+            }),
+            value: goalValue.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+              minimumFractionDigits: 2
+            }),
+            balance: balance.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+              minimumFractionDigits: 2
+            }),
+            percentGoals: percentGoals
+          }
+          setGoalsDetails(newGoalData)
+        }
       } catch (error) {
-        console.error('Erro ao buscar detalhes da meta:', error);
+        console.error('Erro ao buscar detalhes da meta:', error)
       }
-    };
+    }
 
-    fetchGoalDetails();
-  }, [id]);
+    fetchGoalDetails()
+    setSuccess(false)
+  }, [id, success])
 
-  const handleOpenModalDepositGoals = (event) => {
+  const handleOpenModalDepositGoals = () => {
     setOpenModalDepositGoals(true)
   }
 
   const handleCloseModalDepositGoals = () => {
     setOpenModalDepositGoals(false)
+  }
+
+  const handleDeleteRow = async (registerId) => {
+    try {
+      const response = await fetch(
+        `http://${IP}:8080/goal-register/delete/${id}/${registerId}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      if (response) {
+        const updatedRegisters = await response.json()
+        setRegisters(updatedRegisters || [])
+        setSuccess(true)
+        toast.success('Registro deletado com sucesso!', {
+          position: 'bottom-right',
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          style: { background: '#131316' }
+        })
+      }
+    } catch (error) {
+      console.error('Erro ao deletar registro:', error)
+    }
   }
 
   return (
@@ -95,12 +170,14 @@ export const GoalsDetails = () => {
             id="card-relatório-metas"
             className="flex h-full w-1/2 flex-col rounded-2xl bg-color-bgforms p-8 md:h-1/2 md:w-full"
           >
-            <div className="flex w-full mb-4">
+            <div className="mb-4 flex w-full">
               <h2 className="md:text-lg">Relatório de depósitos</h2>
             </div>
             <div className="flex h-full w-full flex-1 md:h-1/2">
               <div className="flex h-full w-full items-center">
-                <DoughnutProgressChart percentGoals={goalsDetails.percentGoals} />
+                {percent && (
+                  <DoughnutProgressChart percentGoals={percent || 0} />
+                )}
               </div>
             </div>
             <div className="flex w-full items-center justify-between pt-4">
@@ -109,7 +186,6 @@ export const GoalsDetails = () => {
               <h3>Valor restante: {goalsDetails.balance}</h3>
             </div>
           </div>
-
           <div
             id="card-extrato-metas"
             className="flex h-full w-1/2 flex-col rounded-2xl bg-color-bgforms p-8 md:h-1/2 md:w-full"
@@ -118,7 +194,7 @@ export const GoalsDetails = () => {
               <h2 className="md:text-lg">Últimos depósitos</h2>
             </div>
             <div className="flex w-full flex-1">
-              <TableGoals />
+              <TableGoals rows={registers} onDeleteRow={handleDeleteRow} />
             </div>
             <div className="flex items-end justify-end">
               <button
@@ -134,7 +210,12 @@ export const GoalsDetails = () => {
         </div>
       </div>
       {openModalDepositGoals && (
-        <ModalAddDepositGoals onClose={handleCloseModalDepositGoals} idGoals={goalsDetails.goalId} />
+        <ModalAddDepositGoals
+          onClose={handleCloseModalDepositGoals}
+          goal={goal}
+          setRegisters={(value) => setRegisters(value)}
+          setSuccess={(value) => setSuccess(value)}
+        />
       )}
     </div>
   )

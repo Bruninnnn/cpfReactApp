@@ -64,6 +64,22 @@ const PieChartCategory = ({ baseData, title }) => {
                 size: 12
               }
             }
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => {
+                let label = tooltipItem.dataset.label || ''
+                if (label) {
+                  label += ': '
+                }
+                if (!isNaN(tooltipItem.raw)) {
+                  label += parseFloat(tooltipItem.raw).toFixed(2)
+                } else {
+                  label += tooltipItem.raw
+                }
+                return label
+              }
+            }
           }
         }
       }
