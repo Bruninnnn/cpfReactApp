@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 
 import Chart from 'chart.js/auto';
 
-export const DoughnutProgressChart = () => {
+export const DoughnutProgressChart = ({ percentGoals }) => {
   const chartContainer = useRef(null);
   const chartInstance = useRef(null);
 
@@ -15,7 +15,7 @@ export const DoughnutProgressChart = () => {
         data: {
           datasets: [{
             label: 'Depósito',
-            percent: 98,
+            percent: percentGoals,
             backgroundColor: ['#8A05BE', '#e0e0e0'],
             borderWidth: 0
           }]

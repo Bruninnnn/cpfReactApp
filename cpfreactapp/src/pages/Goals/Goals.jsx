@@ -14,15 +14,15 @@ const Goals = () => {
   const [goals, setGoals] = useState([])
   const [selectedGoal, setSelectedGoal] = useState(null)
 
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-
   const getGoals = async () => {
     try {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
       const userId = userContext.id
       const response = await fetch(
         `http://${IP}:8080/goal/goals/${userId}`,
@@ -30,6 +30,7 @@ const Goals = () => {
       )
 
       const goalsData = await response.json()
+      console.log(goalsData)
 
       if (Array.isArray(goalsData)) {
         setGoals(goalsData)
@@ -37,6 +38,10 @@ const Goals = () => {
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const SelectedGoal = () => {
+
   }
 
   useEffect(() => {
@@ -67,6 +72,30 @@ const Goals = () => {
     setSelectedGoal(null)
   }
 
+  const handleDeleteGoals = async (goalId) => {
+    try {
+      const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const response = await fetch(
+        `http://${IP}:8080/goal/delete/${goalId}`,
+        options
+      )
+      if (response.ok) {
+        await getGoals();
+      } else {
+        console.log('Failed to delete goal');
+      }
+      await getGoals();
+    } catch (err) {
+      console.error('Erro ao deletar a meta:', err);
+    }
+  }
+
   const formatDate = (dateString) => {
     return format(new Date(dateString), 'dd/MM/yyyy')
   }
@@ -79,13 +108,14 @@ const Goals = () => {
           goals.map((goal, index) => (
             <CardGoals
               key={index}
+              goalId={goal.id}
               titleGoals={goal.title}
               createdGoalsDate={formatDate(goal.initialDate)}
               finalGoalsDate={formatDate(goal.finalDate)}
               targetValue={goal.targetValue}
               value={goal.value}
-              percentGoals={'goal.calcularPorcentagem'}
               onOpen={() => handleOpenEditGoals(goal)}
+              handleDeleteGoals={() => handleDeleteGoals(goal.id)}
             />
           ))}
       </div>
