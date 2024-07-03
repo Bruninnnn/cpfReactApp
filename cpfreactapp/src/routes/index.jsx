@@ -24,7 +24,7 @@ export function AppRoutes() {
         <Route path="/dashboard/reports" element={<Reports />} />
         <Route path="/dashboard/extract" element={<Extract />} />
         <Route path="/dashboard/goals" element={<Goals />} />
-        <Route path="/dashboard/goals/details" element={<GoalsDetails />} />
+        <Route path="/dashboard/goals/details/:id" element={<GoalsDetails />} />
         <Route path="/dashboard/bankaccount" element={<BankAccount />} />
       </Route>
       <Route path="/register" element={<RegisterForm />} />

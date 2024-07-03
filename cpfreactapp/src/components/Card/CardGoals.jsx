@@ -6,14 +6,18 @@ import { Link } from 'react-router-dom'
 import { ProgressBar } from '../ProgressBar'
 
 export const CardGoals = ({
+  goalId,
   titleGoals,
   createdGoalsDate,
   finalGoalsDate,
   targetValue,
   value,
-  percent,
-  onOpen
+  onOpen,
+  handleDeleteGoals
 }) => {
+
+  const percentGoals = ((value / targetValue) * 100).toFixed(0) + '%';
+
   return (
     <div className="mt-0 h-48 w-full items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
       <div className="flex flex-row">
@@ -38,7 +42,7 @@ export const CardGoals = ({
         </div>
       </div>
 
-      <ProgressBar targetValue={targetValue} value={value} percent={percent} />
+      <ProgressBar targetValue={targetValue} value={value} percent={percentGoals} />
 
       <div className="flex justify-center">
         <button
@@ -51,7 +55,7 @@ export const CardGoals = ({
         <button
           className="flex-initial rounded-full p-2 text-center text-2xl hover:bg-color-bginputs"
           title="Excluir Metas"
-          onClick={''}
+          onClick={handleDeleteGoals}
         >
           <IoMdTrash />
         </button>
@@ -60,7 +64,7 @@ export const CardGoals = ({
           title="Detalhes Metas"
         >
           <Link
-            to="/dashboard/goals/details"
+            to={`/dashboard/goals/details/${goalId}`}
             className="flex items-center px-0 font-light"
           >
             <MdFormatListBulleted />

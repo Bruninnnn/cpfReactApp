@@ -1,7 +1,4 @@
 // Conexão
-
-import { PluggyConnect } from "react-pluggy-connect"
-
 export async function requestAPIKey() {
   const options = {
     method: 'POST',
