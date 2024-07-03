@@ -1,6 +1,7 @@
 import React from 'react'
+import { MdDeleteForever } from 'react-icons/md'
 
-export const TableGoals = () => {
+export const TableGoals = ({ rows, deleteRow }) => {
   return (
     <div class="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-left text-white-primary">
@@ -18,17 +19,34 @@ export const TableGoals = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
-              18/06/2024
-            </th>
-            <td className="px-6 py-4">
-              R$ 430,99
-            </td>
-            <td className="px-6 py-4">
-              Deletar
-            </td>
-          </tr>
+          {rows?.map((row, idx) => {
+            return (
+              <tr
+                key={idx}
+              >
+                <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
+                  {row.nome_da_função_que_retorna_a_data}
+                </th>
+                <td className="px-6 py-4">
+                  {row.value.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                  })}
+                </td>
+                <td className="px-6 py-4" title='Deletar linha'>
+                  <MdDeleteForever className='bg-japanese-maple-900 rounded-md p-0.5'
+                    onClick={() => deleteRow(idx)}
+                    style={{
+                      cursor: 'pointer',
+                      fill: '#fb0707',
+                      fontSize: '24px'
+                    }}
+                  />
+                </td>
+              </tr>
+            )
+          })}
         </tbody>
       </table>
     </div>
