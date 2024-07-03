@@ -1,37 +1,39 @@
 import React, { useState } from 'react'
-
 import { MdClose } from 'react-icons/md'
 import { InputValue } from '../Input/InputValue'
 import { format } from 'date-fns'
+import { IP } from '../../env.js'
+import { toast } from 'react-toastify'
 
-export const ModalAddDepositGoals = ({ onClose, idGoals }) => {
+export const ModalAddDepositGoals = ({
+  onClose,
+  goal,
+  setRegisters,
+  setSuccess
+}) => {
   const [formState, setFormState] = useState({
-    dataRegister: '',
-    goalValue: '',
-    idGoals: '',
+    date: '',
+    value: '',
+    goal
   })
 
   const handlePriceChange = (values) => {
     const { value } = values
     setFormState({
       ...formState,
-      goalValue: value
+      value: value
     })
   }
 
   async function sendRequest() {
     try {
-      const currentDate = new Date()
-      const formattedDate = format(currentDate, 'yyyy-MM-dd')
-      const idString = idGoals.join(',');
+      const formattedDate = format(new Date(), 'yyyy-MM-dd')
 
       const deposit = {
-        dataRegister: formattedDate,
-        goalValue: formState.goalValue,
-        idGoals: idString
+        date: formattedDate,
+        value: formState.value,
+        goal: goal
       }
-
-      console.log(deposit)
 
       const options = {
         method: 'POST',
@@ -46,16 +48,38 @@ export const ModalAddDepositGoals = ({ onClose, idGoals }) => {
         options
       )
       const data = await response.json()
-      console.log('Resposta do servidor:', data)
-      return data
+      toast.success('Depósito realizado com sucesso!', {
+        position: 'bottom-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        style: { background: '#131316' }
+      })
+      await setRegisters(data)
+      await setSuccess(true)
+      onClose(false)
     } catch (error) {
-      console.error('Erro na solicitação:', error)
-      throw error
+      toast.error('Algo não correu como esperado, tente novamente!', {
+        position: 'bottom-right',
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        style: { background: '#131316' }
+      })
     }
   }
 
   const handleSubmit = async (e) => {
-    await sendRequest();
+    e.preventDefault()
+    await sendRequest()
   }
 
   return (
@@ -70,14 +94,17 @@ export const ModalAddDepositGoals = ({ onClose, idGoals }) => {
             <MdClose />
           </div>
         </div>
-        <form className="my-0 flex h-full w-full flex-col" onSubmit={''}>
+        <form
+          className="my-0 flex h-full w-full flex-col"
+          onSubmit={handleSubmit}
+        >
           <div className="mt-0 flex w-full justify-center gap-4">
             <div className="w-full items-center justify-center whitespace-nowrap p-4">
               <InputValue
                 label="Valor do Depósito:"
-                name="goalValue"
+                name="value"
                 type="text"
-                value={formState.goalValue}
+                value={formState.value}
                 placeholder="R$ 0,00"
                 onValueChange={handlePriceChange}
               />
@@ -87,7 +114,6 @@ export const ModalAddDepositGoals = ({ onClose, idGoals }) => {
             <button
               type="submit"
               className="h-1/2 w-full cursor-pointer rounded-lg bg-color-bginputs sm:h-1/3"
-              onClick={handleSubmit}
             >
               Cadastrar
             </button>

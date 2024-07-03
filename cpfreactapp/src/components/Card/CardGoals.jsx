@@ -15,8 +15,7 @@ export const CardGoals = ({
   onOpen,
   handleDeleteGoals
 }) => {
-
-  const percentGoals = ((value / targetValue) * 100).toFixed(0) + '%';
+  const percentGoals = ((value / targetValue) * 100).toFixed(0)
 
   return (
     <div className="mt-0 h-48 w-full items-center rounded-3xl border border-solid border-color-border bg-color-bgforms p-4">
@@ -42,7 +41,11 @@ export const CardGoals = ({
         </div>
       </div>
 
-      <ProgressBar targetValue={targetValue} value={value} percent={percentGoals} />
+      <ProgressBar
+        targetValue={targetValue}
+        value={value}
+        percent={percentGoals}
+      />
 
       <div className="flex justify-center">
         <button

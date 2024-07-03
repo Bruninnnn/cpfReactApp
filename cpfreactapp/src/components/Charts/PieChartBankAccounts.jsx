@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 import { Chart } from 'primereact/chart'
 import { defaults } from 'chart.js/auto'
 
@@ -64,6 +63,18 @@ const PieChartBankAccounts = ({ baseData, title }) => {
               color: '#ffffff',
               font: {
                 size: 12
+              }
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (tooltipItem) => {
+                let label = tooltipItem.dataset.label || ''
+                if (label) {
+                  label += ': '
+                }
+                label += parseFloat(tooltipItem.raw).toFixed(2)
+                return label
               }
             }
           }

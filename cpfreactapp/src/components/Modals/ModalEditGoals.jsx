@@ -56,8 +56,6 @@ export const ModalEditGoals = ({ onClose, setGoals, id, goalValue }) => {
       const response = await fetch(`http://${IP}:8080/goal/update`, options)
 
       const data = await response.json()
-      console.log('Resposta do servidor:', data)
-      console.log('Updated formState:', updatedFormState)
       if (data?.length > 0) {
         toast.success('Atualização realizada com sucesso!', {
           position: 'bottom-right',

@@ -30,18 +30,12 @@ const Goals = () => {
       )
 
       const goalsData = await response.json()
-      console.log(goalsData)
-
       if (Array.isArray(goalsData)) {
         setGoals(goalsData)
       }
     } catch (err) {
       console.log(err)
     }
-  }
-
-  const SelectedGoal = () => {
-
   }
 
   useEffect(() => {
@@ -86,13 +80,10 @@ const Goals = () => {
         options
       )
       if (response.ok) {
-        await getGoals();
-      } else {
-        console.log('Failed to delete goal');
+        await getGoals()
       }
-      await getGoals();
     } catch (err) {
-      console.error('Erro ao deletar a meta:', err);
+      console.error('Erro ao deletar a meta:', err)
     }
   }
 
@@ -113,7 +104,7 @@ const Goals = () => {
               createdGoalsDate={formatDate(goal.initialDate)}
               finalGoalsDate={formatDate(goal.finalDate)}
               targetValue={goal.targetValue}
-              value={goal.value}
+              value={goal.goalValue}
               onOpen={() => handleOpenEditGoals(goal)}
               handleDeleteGoals={() => handleDeleteGoals(goal.id)}
             />

@@ -9,6 +9,8 @@ export const ProgressBar = ({ value, targetValue, percent }) => {
       .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
   }
 
+  const width = Math.min(Math.max(percent, 0), 100)
+
   return (
     <div className="mt-2">
       <div className="mb-1 flex justify-between">
@@ -20,7 +22,7 @@ export const ProgressBar = ({ value, targetValue, percent }) => {
       <div className="mb-4 h-2.5 w-full rounded-full bg-color-border">
         <div
           className="mb-4 h-2.5 rounded-full bg-color-nubank"
-          style={{ width: `${percent}` }}
+          style={{ width: `${width}%` }}
         ></div>
       </div>
     </div>
