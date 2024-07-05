@@ -122,7 +122,7 @@ export const BankAccountWallets = () => {
     }
   }
 
-  const onSuccessUpdateItem = async (itemData) => {}
+  const onSuccessUpdateItem = async (itemData) => { }
 
   async function handleOpenWidget() {
     try {
@@ -214,29 +214,26 @@ export const BankAccountWallets = () => {
   console.log(banks)
 
   return (
-    <div className="mx-4 flex h-full w-full sm:mt-8 sm:flex-col">
+    <div className="mx-4 flex w-full h-full sm:mt-8 sm:flex-col">
       <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
-        <div className="w-auto">
-          <CardAddBankWallet handleOnClick={handleConnectPluggy} />
-        </div>
-        <div className="w-auto">
-          {banks
-            .filter((bank) => bank.itemId)
-            .map((bank, index) => (
-              <CardBankWallet
-                key={bank.itemId}
-                bankName={bank.bankName}
-                bankIcon={bank.bankIcon}
-                bankColor={bank.bankColor}
-                propCreatedDate={bank.propCreatedDate}
-                propUpdatedDate={bank.propUpdatedDate}
-                propCreditCard={bank.propCreditCard}
-                propLimitCreditCard={bank.propLimitCreditCard}
-                propDeleteConnection={bank.propDeleteConnection}
-                propUpdateConnection={bank.propUpdateConnection}
-              />
-            ))}
-        </div>
+        <CardAddBankWallet handleOnClick={handleConnectPluggy} />
+        {banks
+          .filter((bank) => bank.itemId)
+          .map((bank, index) => (
+            <CardBankWallet
+              key={bank.itemId}
+              bankName={bank.bankName}
+              bankIcon={bank.bankIcon}
+              bankColor={bank.bankColor}
+              propCreatedDate={bank.propCreatedDate}
+              propUpdatedDate={bank.propUpdatedDate}
+              propCreditCard={bank.propCreditCard}
+              propLimitCreditCard={bank.propLimitCreditCard}
+              propDeleteConnection={bank.propDeleteConnection}
+              propUpdateConnection={bank.propUpdateConnection}
+            />
+          ))
+        }
         {openWidget && (
           <PluggyConnect
             connectToken={connectToken}

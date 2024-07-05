@@ -4,8 +4,8 @@ import { MdDeleteForever } from 'react-icons/md'
 
 export const TableGoals = ({ rows, onDeleteRow }) => {
   return (
-    <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="w-full text-left text-sm text-white-primary">
+    <div className="relative w-full overflow-x-auto shadow-md sm:rounded-lg sm:max-h-28 xl:max-h-64">
+      <table className="w-full text-left text-sm text-white-primary ">
         <thead className="border-b border-color-nubank text-xs uppercase">
           <tr>
             <th scope="col" className="px-6 py-3">

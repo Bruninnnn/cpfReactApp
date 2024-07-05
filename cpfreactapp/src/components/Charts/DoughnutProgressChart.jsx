@@ -15,10 +15,7 @@ export const DoughnutProgressChart = ({ percentGoals }) => {
           datasets: [
             {
               label: 'Depósito',
-              data: [
-                Math.min(percentGoals, 100),
-                Math.max(0, percentGoals - 100)
-              ],
+              data: [percentGoals, 100 - percentGoals],
               backgroundColor: [
                 '#8A05BE', // Purple for up to 100%
                 percentGoals > 100 ? '#4A0579' : '#e0e0e0' // Dark purple if over 100%, gray otherwise
@@ -56,21 +53,12 @@ export const DoughnutProgressChart = ({ percentGoals }) => {
               display: false
             },
             tooltip: {
-              callbacks: {
-                label: (tooltipItem) => {
-                  if (tooltipItem.dataIndex === 0) {
-                    return `${tooltipItem.raw}%`
-                  } else if (
-                    tooltipItem.dataIndex === 1 &&
-                    percentGoals > 100
-                  ) {
-                    return `${percentGoals - 100}%` // Display excess percentage if over 100%
-                  }
-                  return null
-                }
-              }
+              enabled: false // Disable tooltips
             }
-          }
+          },
+          hover: {
+            mode: null // Disable hover effects
+          },
         }
       })
     }
@@ -85,21 +73,18 @@ export const DoughnutProgressChart = ({ percentGoals }) => {
   useEffect(() => {
     if (chartInstance.current) {
       const dataset = chartInstance.current.data.datasets[0]
-      dataset.data = [
-        Math.min(percentGoals, 100),
-        Math.max(0, percentGoals - 100)
-      ]
+      dataset.data = [percentGoals, 100 - percentGoals]
       dataset.backgroundColor = [
-        '#8A05BE',
-        percentGoals > 100 ? '#4A0579' : '#e0e0e0'
+        '#8A05BE', // Purple for up to 100%
+        percentGoals > 100 ? '#4A0579' : '#e0e0e0' // Dark purple if over 100%, gray otherwise
       ]
       chartInstance.current.update()
     }
   }, [percentGoals])
 
   return (
-    <div className="relative flex h-full w-full p-12 xl:p-0">
-      <canvas ref={chartContainer} />
+    <div className="relative flex w-full h-full p-12 xl:p-0">
+      <canvas className='flex w-full h-full' ref={chartContainer} />
     </div>
   )
 }
