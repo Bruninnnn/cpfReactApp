@@ -29,10 +29,9 @@ function DashBoard() {
 
   useEffect(() => {
     enter(userContext)
-  })
+  }, [userContext, redirect])
 
   const [rows, setRows] = useState([])
-
   const [rowToEdit, setRowToEdit] = useState(null)
 
   async function deleteRow(row) {
@@ -89,10 +88,9 @@ function DashBoard() {
 
   const [receipt, setReceipt] = useState()
   const [balance, setBalance] = useState()
-  const [data, setData] = useState()
+  const [cost, setCost] = useState()
   const [selectedMonth, setSelectedMonth] = useState('')
   const [initialized, setInitialized] = useState(false)
-  const [cost, setCost] = useState()
 
   const options = {
     method: 'GET',
@@ -111,10 +109,8 @@ function DashBoard() {
 
         setSelectedMonth(defaultValue)
 
-        if (!initialized) {
-          await filterCalendar(defaultValue)
-          setInitialized(true)
-        }
+        await filterCalendar(defaultValue)
+        setInitialized(true)
       } catch (error) {
         console.error('Error fetching data:', error)
       }
@@ -133,24 +129,9 @@ function DashBoard() {
 
   async function filterCalendar(calendar) {
     try {
+      const userId = userContext?.id
       const response = await fetch(
-        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
-        options
-      )
-
-      const responseData = await response.json()
-      if (responseData) {
-        await setData(responseData)
-      }
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  async function filterCalendar(calendar) {
-    try {
-      const response = await fetch(
-        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
+        `http://${IP}:8080/register/filteredRegisters?date=${calendar}&userId=${userId}`,
         options
       )
 
@@ -160,25 +141,6 @@ function DashBoard() {
       console.log(err)
     }
   }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userId = userContext?.id
-
-        const response = await fetch(
-          `http://${IP}:8080/register/registers?userId=${userId}`,
-          options
-        )
-        const responseData = await response.json()
-        setRows(responseData)
-      } catch (error) {
-        console.error('Erro na solicitação:', error)
-      }
-    }
-
-    fetchData()
-  }, [userContext?.id])
 
   useEffect(() => {
     const receiptSum = rows.reduce((total, obj) => {
