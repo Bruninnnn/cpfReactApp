@@ -114,7 +114,6 @@ export async function requestAccountTransaction({ accountId, apiKey }) {
   try {
     const response = await fetch(`https://api.pluggy.ai/transactions?accountId=${accountId}`, options)
     const transactions = await response.json()
-    console.log(transactions)
     return transactions
   } catch (err) {
     console.error(err)

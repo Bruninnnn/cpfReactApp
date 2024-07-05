@@ -1,18 +1,20 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import PieChartCategory from '../../components/Charts/PieChartCategory'
 import { defaults } from 'chart.js'
 import { IP } from '../../env'
 import PieChartCard from '../../components/Charts/PieChartCard'
 import InputDate from '../../components/Input/InputDate'
 import PieChartBankAccounts from '../../components/Charts/PieChartBankAccounts'
+import { Context } from '../../Context'
 
 defaults.maintainAspectRatio = false
 defaults.responsive = true
 
 function Reports() {
-  const [data, setData] = useState()
+  const [data, setData] = useState([])
   const [selectedMonth, setSelectedMonth] = useState('')
   const [initialized, setInitialized] = useState(false)
+  const { userContext } = useContext(Context)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,8 +55,9 @@ function Reports() {
 
   async function filterCalendar(calendar) {
     try {
+      const userId = userContext?.id
       const response = await fetch(
-        `http://${IP}:8080/register/filteredRegisters?date=${calendar}`,
+        `http://${IP}:8080/register/filteredRegisters?date=${calendar}&userId=${userId}`,
         options
       )
 

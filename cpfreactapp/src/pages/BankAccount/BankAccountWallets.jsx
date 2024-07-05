@@ -31,14 +31,16 @@ export const BankAccountWallets = () => {
     itemId: '',
     bankName: '',
     bankImageUrl: '',
-    bankPrimaryColor: '',
-    bankCreatedDate: '',
-    bankUpdatedDate: ''
+    bankImageColor: '',
+    createdAt: '',
+    updatedAt: '',
+    balance: '', // valor da fatura
+    limit: '' // limite disponível
   })
   const [accountData, setAccountData] = useState({
     accountId: '',
-    balanceCreditCard: '',
-    availableCreditLimit: ''
+    balanceCreditCard: '', // valor da fatura
+    availableCreditLimit: '' // limite disponível
   })
 
   const onClosePopup = useCallback(() => {
@@ -84,8 +86,9 @@ export const BankAccountWallets = () => {
     setBankData(newBankData)
     setItemId(itemId)
 
+    console.log(newBankData, 'BANKDATA')
     const data = await requestAccountConnect({ itemId, apiKey })
-    console.log(data)
+    console.log(data, 'ACCOUNT DATA')
 
     const accountId = data.results.map((result) => result.id)
     const idString = accountId.join(',')
@@ -109,7 +112,6 @@ export const BankAccountWallets = () => {
         minimumFractionDigits: 2
       })
     }
-    console.log('Account Data:', newAccountData)
     setAccountData(newAccountData)
 
     try {
@@ -117,12 +119,13 @@ export const BankAccountWallets = () => {
         accountId: idString,
         apiKey
       })
+      console.log(dataTrans, 'TRANSACTIONS')
     } catch (error) {
       console.error('Erro ao obter transações:', error)
     }
   }
 
-  const onSuccessUpdateItem = async (itemData) => { }
+  const onSuccessUpdateItem = async (itemData) => {}
 
   async function handleOpenWidget() {
     try {
@@ -211,10 +214,10 @@ export const BankAccountWallets = () => {
     }
   ]
 
-  console.log(banks)
+  console.log(banks, 'BANKS')
 
   return (
-    <div className="mx-4 flex w-full h-full sm:mt-8 sm:flex-col">
+    <div className="mx-4 flex h-full w-full sm:mt-8 sm:flex-col">
       <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddBankWallet handleOnClick={handleConnectPluggy} />
         {banks
@@ -232,8 +235,7 @@ export const BankAccountWallets = () => {
               propDeleteConnection={bank.propDeleteConnection}
               propUpdateConnection={bank.propUpdateConnection}
             />
-          ))
-        }
+          ))}
         {openWidget && (
           <PluggyConnect
             connectToken={connectToken}
