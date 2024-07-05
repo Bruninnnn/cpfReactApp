@@ -6,6 +6,7 @@ import { ModalEditGoals } from '../../components/Modals/ModalEditGoals'
 import { format } from 'date-fns'
 import { IP } from '../../env'
 import { Context } from '../../Context'
+import { Bounce, toast } from 'react-toastify'
 
 const Goals = () => {
   const { userContext } = useContext(Context)
@@ -13,6 +14,7 @@ const Goals = () => {
   const [openModalEditGoals, setOpenModalEditGoals] = useState(false)
   const [goals, setGoals] = useState([])
   const [selectedGoal, setSelectedGoal] = useState(null)
+  const [goalsDetailsDeleted, setGoalsDetailsDeleted] = useState(false);
 
   const getGoals = async () => {
     try {
@@ -68,31 +70,93 @@ const Goals = () => {
 
   const handleDeleteGoals = async (goalId) => {
     try {
-      const options = {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }
+      const goalsDetailsDeleted = await checkGoalsDetailsDeleted(goalId);
 
-      const response = await fetch(
-        `http://${IP}:8080/goal/delete/${goalId}`,
-        options
-      )
-      if (response.ok) {
-        await getGoals()
+      if (goalsDetailsDeleted === true) {
+        const options = {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+
+        const userId = userContext.id
+        const response = await fetch(
+          `http://${IP}:8080/goal/delete/${goalId}?userId=${userId}`,
+          options
+        )
+        if (response.ok) {
+          await getGoals()
+        }
+        toast.warn('Meta excluída com sucesso!', {
+          position: 'bottom-right',
+          autoClose: 3500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          style: { background: '#131316' },
+          transition: Bounce
+        })
+      } else {
+        toast.error('Não foi possível excluir, pois há dados dentro da meta!', {
+          position: 'bottom-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          style: { background: '#131316' },
+          transition: Bounce
+        })
       }
     } catch (err) {
       console.error('Erro ao deletar a meta:', err)
     }
   }
 
+  const checkGoalsDetailsDeleted = async (goalId) => {
+    try {
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const response = await fetch(
+        `http://${IP}:8080/goal-register/goals/${goalId}`,
+        options
+      )
+
+      const goalsData = await response.json()
+      console.log(goalsData)
+
+      if (goalsData && goalsData.length > 0) {
+        return false;
+      } else {
+        console.log('Dados do GoalsDetails foram excluídos com sucesso.');
+
+        setGoalsDetailsDeleted(true);
+
+        return true;
+      }
+    } catch (error) {
+      console.error('Erro ao verificar a exclusão do GoalsDetails:', error);
+      return false;
+    }
+  };
+
   const formatDate = (dateString) => {
     return format(new Date(dateString), 'dd/MM/yyyy')
   }
 
   return (
-    <div className="mx-4 flex h-full w-full sm:mt-16 sm:flex-col">
+    <div className="mx-4 flex w-full h-full sm:mt-16 sm:flex-col">
       <div className="grid w-full grid-cols-4 grid-rows-4 gap-8 sm:grid-rows-1 m-sm:grid-cols-1 m-md:grid-cols-2 m-xl:grid-cols-3 m-2xl:grid-cols-4">
         <CardAddGoals propOpenModal={handleOpenAddGoals} />
         {Array.isArray(goals) &&
