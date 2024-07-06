@@ -73,7 +73,7 @@ function Reports() {
   return (
     <div className="mx-4 flex w-full flex-col gap-4 sm:mx-0">
       <h1 className="mb-4 mt-4 sm:mt-12">Gráficos</h1>
-      <div className="-mt-4 inline-block rounded-3xl">
+      <div className="inline-block rounded-3xl">
         <InputDate
           id="calendarReports"
           type="month"
@@ -81,7 +81,7 @@ function Reports() {
           onChange={handleMonthChange}
         />
       </div>
-      <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-4 ">
+      <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-4 mt-6 ">
         <div className="flex w-full flex-row gap-x-4 gap-y-4 md:flex-col">
           <div className="flex w-1/2 flex-auto px-0 py-0 sm:flex-1 m-sm:w-full">
             <PieChartCategory

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 
 import { CardAddBankWallet } from '../../components/Card/CardAddBankWallet'
 import { CardBankWallet } from '../../components/Card/CardBankWallet'
@@ -17,8 +17,11 @@ import { PluggyConnect } from 'react-pluggy-connect'
 import { SiNubank } from 'react-icons/si'
 import { format } from 'date-fns'
 import { Bounce, toast } from 'react-toastify'
+import { Context } from '../../Context'
+import { IP } from '../../env'
 
 export const BankAccountWallets = () => {
+  const { userContext } = useContext(Context)
   const [openWidget, setOpenWidget] = useState(false)
   const [openUpdateWidget, setOpenUpdateWidget] = useState(false)
   const [connectToken, setConnectToken] = useState()
@@ -67,52 +70,63 @@ export const BankAccountWallets = () => {
   }
 
   const onSuccessDefaultConnect = async (itemData) => {
+    const itemId = itemData.item.id;
     const newBankData = {
-      itemId: itemData.item.id,
+      itemId: itemId,
       bankName: itemData.item.connector.name,
       bankImageUrl: itemData.item.connector.imageUrl,
       bankPrimaryColor: '#' + itemData.item.connector.primaryColor,
-      bankCreatedDate: format(
-        new Date(itemData.item.connector.createdAt),
-        'dd/MM/yyyy'
-      ),
-      bankUpdatedDate: format(
-        new Date(itemData.item.connector.updatedAt),
-        'dd/MM/yyyy'
-      )
-    }
+      bankCreatedDate: format(new Date(itemData.item.connector.createdAt), 'dd/MM/yyyy'),
+      bankUpdatedDate: format(new Date(itemData.item.connector.updatedAt), 'dd/MM/yyyy'),
+    };
 
-    const itemId = itemData.item.id
-    setBankData(newBankData)
-    setItemId(itemId)
+    setBankData(newBankData);
+    setItemId(itemId);
 
-    console.log(newBankData, 'BANKDATA')
-    const data = await requestAccountConnect({ itemId, apiKey })
-    console.log(data, 'ACCOUNT DATA')
+    console.log(newBankData, 'BANKDATA');
+    const data = await requestAccountConnect({ itemId, apiKey });
+    console.log(data, 'ACCOUNT DATA');
 
-    const accountId = data.results.map((result) => result.id)
-    const idString = accountId.join(',')
-    setAccountId(idString)
+    const accountId = data.results.map((result) => result.id);
+    const idString = accountId.join(',');
+    setAccountId(idString);
 
-    const balanceCreditCard = data.results.map((result) => result.balance)
-    const availableCreditLimit = data.results.map(
-      (result) => result.creditData.availableCreditLimit
-    )
+    const balanceCreditCard = data.results.map((result) => result.balance);
+    const availableCreditLimit = data.results.map((result) => result.creditData.availableCreditLimit);
 
     const newAccountData = {
       accountId: idString,
-      balanceCreditCard: balanceCreditCard.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2
-      }),
-      availableCreditLimit: availableCreditLimit.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2
-      })
+      balanceCreditCard: parseFloat(balanceCreditCard),
+      availableCreditLimit: parseFloat(availableCreditLimit)
+    };
+    setAccountData(newAccountData);
+
+    const combinedData = {
+      ...newBankData,
+      balance: newAccountData.balanceCreditCard,
+      limit: newAccountData.availableCreditLimit,
+      user: userContext?.id
+    };
+
+    console.log('Dados Combinados:' + combinedData);
+
+    try {
+      const userId = userContext?.id
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(combinedData)
+      };
+
+      const response = await fetch(`http://${IP}:8080/bank-account/create?userId=${userId}`, options); // Atualize com o URL correto da sua API
+      const result = await response.json();
+      console.log('Resposta do servidor:', result);
+    } catch (error) {
+      console.error('Erro ao enviar dados para a API:', error);
     }
-    setAccountData(newAccountData)
 
     try {
       const dataTrans = await requestAccountTransaction({
@@ -125,7 +139,7 @@ export const BankAccountWallets = () => {
     }
   }
 
-  const onSuccessUpdateItem = async (itemData) => {}
+  const onSuccessUpdateItem = async (itemData) => { }
 
   async function handleOpenWidget() {
     try {
@@ -214,7 +228,6 @@ export const BankAccountWallets = () => {
     }
   ]
 
-  console.log(banks, 'BANKS')
 
   return (
     <div className="mx-4 flex h-full w-full sm:mt-8 sm:flex-col">

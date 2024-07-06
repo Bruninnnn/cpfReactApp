@@ -52,9 +52,26 @@ const Goals = () => {
     setOpenModalAddGoals(false)
   }
 
-  const handleOpenEditGoals = (goal) => {
-    setSelectedGoal(goal)
-    setOpenModalEditGoals(true)
+  const handleOpenEditGoals = async (goal) => {
+    const goalsDetailsDeleted = await checkGoalsDetailsDeleted(goal.id)
+
+    if (goalsDetailsDeleted === true) {
+      setSelectedGoal(goal)
+      setOpenModalEditGoals(true)
+    } else {
+      toast.error('Não foi possível editar, pois há dados dentro da meta!', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        style: { background: '#131316' },
+        transition: Bounce
+      })
+    }
   }
 
   const handleCloseEditGoalsModal = () => {
