@@ -16,6 +16,86 @@ function Reports() {
   const [initialized, setInitialized] = useState(false)
   const { userContext } = useContext(Context)
 
+  const dataCreditCard = [
+    {
+      date: '2024-07-04',
+      amount: 19.9,
+      description: 'Taxi and ride-hailing',
+      category: 'Uber',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-03',
+      amount: -1856.25,
+      description: 'Entrepreneurial activities',
+      category: 'Pagamento recebido',
+      type: 'CREDIT'
+    },
+    {
+      date: '2024-07-04',
+      amount: 24.99,
+      description: 'Taxi and ride-hailing',
+      category: 'Uber',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-04',
+      amount: 17.99,
+      description: 'Ec*Melimais',
+      category: '',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-02',
+      amount: -40,
+      description: 'Entrepreneurial activities',
+      category: 'Pagamento recebido',
+      type: 'CREDIT'
+    },
+    {
+      date: '2024-06-22',
+      amount: 19.97,
+      description: 'Taxi and ride-hailing',
+      category: 'Uber',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-01',
+      amount: 24.99,
+      description: 'Eating out',
+      category: 'Ifd*Restaurante e Lanc',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-06-21',
+      amount: 8.5,
+      description: 'Eating out',
+      category: 'Lucca Cantina e Restau',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-04',
+      amount: 142.19,
+      description: 'Food delivery',
+      category: 'Ifd*Click Pizza',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-03',
+      amount: 24.99,
+      description: 'Eating out',
+      category: 'Ifd*Restaurante e Lanc',
+      type: 'DEBIT'
+    },
+    {
+      date: '2024-07-04',
+      amount: 4.95,
+      description: 'Food delivery',
+      category: 'Ifd*Ifood.Com Agncia D',
+      type: 'DEBIT'
+    }
+  ]
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -81,7 +161,7 @@ function Reports() {
           onChange={handleMonthChange}
         />
       </div>
-      <div className="flex w-full flex-row flex-wrap gap-x-4 gap-y-4 mt-6 ">
+      <div className="mt-6 flex w-full flex-row flex-wrap gap-x-4 gap-y-4 ">
         <div className="flex w-full flex-row gap-x-4 gap-y-4 md:flex-col">
           <div className="flex w-1/2 flex-auto px-0 py-0 sm:flex-1 m-sm:w-full">
             <PieChartCategory
@@ -90,7 +170,10 @@ function Reports() {
             />
           </div>
           <div className="flex w-1/2 flex-initial px-0 py-0 sm:flex-1 m-sm:w-full">
-            <PieChartCard baseData={data} title={'Gastos com o cartão:'} />
+            <PieChartCard
+              baseData={dataCreditCard}
+              title={'Gastos com o cartão:'}
+            />
           </div>
         </div>
         <div className="flex w-full flex-row gap-x-4 gap-y-4 md:flex-col">
@@ -100,9 +183,9 @@ function Reports() {
               title={'Distribuição de despesa mensal:'}
             />
           </div>
-          <div className="flex w-1/2 flex-initial px-0 py-0 sm:flex-1 m-sm:w-full">
+          {/*  <div className="flex w-1/2 flex-initial px-0 py-0 sm:flex-1 m-sm:w-full">
             <PieChartBankAccounts baseData={data} title={'Gastos por conta:'} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

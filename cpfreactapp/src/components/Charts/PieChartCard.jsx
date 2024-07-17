@@ -13,10 +13,25 @@ const getRandomColor = () => {
 }
 
 const generateColors = (labels) => {
-  const colors = labels.map(() => getRandomColor())
+  const uniqueLabels = [...new Set(labels)] // Get unique labels
+
+  const colors = uniqueLabels.map(() => getRandomColor())
+
+  const colorMap = {}
+  labels.forEach((label, index) => {
+    if (!colorMap[label]) {
+      colorMap[label] = colors.pop() // Assign unique color to each unique label
+    }
+  })
+
+  const backgroundColor = labels.map((label) => colorMap[label])
+  const hoverBackgroundColor = backgroundColor.map((color) =>
+    color.replace('0.8', '0.5')
+  )
+
   return {
-    backgroundColor: colors,
-    hoverBackgroundColor: colors.map((color) => color.replace('0.8', '0.5'))
+    backgroundColor: backgroundColor,
+    hoverBackgroundColor: hoverBackgroundColor
   }
 }
 
@@ -26,15 +41,24 @@ const PieChartCard = ({ baseData, title }) => {
 
   useEffect(() => {
     if (baseData) {
-      const filterLabel = baseData?.filter(
-        (data) => data.registerType === 'COST'
-      )
-      const formatedLabel = filterLabel?.map((data) => data.description)
+      // Agrupar por descrição e somar os valores
+      const groupedData = baseData.reduce((acc, curr) => {
+        const key = curr.description
+        if (!acc[key]) {
+          acc[key] = {
+            description: curr.description,
+            totalAmount: parseFloat(curr.amount)
+          }
+        } else {
+          acc[key].totalAmount += parseFloat(curr.amount)
+        }
+        return acc
+      }, {})
 
-      const filterValue = filterLabel?.map((data) =>
-        parseFloat(data.registerValue).toFixed(2)
+      const formatedLabel = Object.keys(groupedData)
+      const formattedValue = Object.values(groupedData).map((item) =>
+        item.totalAmount.toFixed(2)
       )
-      const formattedValue = filterValue?.map((value) => parseFloat(value))
 
       const { backgroundColor, hoverBackgroundColor } =
         generateColors(formatedLabel)
@@ -89,7 +113,7 @@ const PieChartCard = ({ baseData, title }) => {
   return (
     <div className="flex w-full flex-col rounded-2xl border border-solid border-color-border bg-color-bgforms p-4">
       <strong className="my-0 font-medium">{title}</strong>
-      <div className="flex justify-center my-4">
+      <div className="my-4 flex justify-center">
         <Chart
           className="w-1/2 sm:w-full md:w-10 lg:w-1/2"
           type="doughnut"

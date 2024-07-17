@@ -17,7 +17,8 @@ import { CardWallet } from '../../components/Card/CardDashBoardWallet'
 function DashBoard() {
   const [modalAddOpen, setModalAddOpen] = useState(false)
   const [modalEditOpen, setModalEditOpen] = useState(false)
-  const { userContext, setContext } = useContext(Context)
+  const [goalsBalance, setGoalsBalance] = useState()
+  const { userContext } = useContext(Context)
   const redirect = useNavigate()
   const { IP } = require('../../env')
 
@@ -89,6 +90,7 @@ function DashBoard() {
   const [receipt, setReceipt] = useState()
   const [balance, setBalance] = useState()
   const [cost, setCost] = useState()
+  const [goalsSum, setGoalsSum] = useState()
   const [selectedMonth, setSelectedMonth] = useState('')
   const [initialized, setInitialized] = useState(false)
 
@@ -129,14 +131,28 @@ function DashBoard() {
 
   async function filterCalendar(calendar) {
     try {
+      setGoalsSum()
       const userId = userContext?.id
       const response = await fetch(
         `http://${IP}:8080/register/filteredRegisters?date=${calendar}&userId=${userId}`,
         options
       )
-
       const responseData = await response.json()
       setRows(responseData)
+
+      const goalsBalance = await fetch(
+        `http://${IP}:8080/goal/sum?date=${calendar}&userId=${userId}`,
+        options
+      )
+      const goalsBalanceData = await goalsBalance.json()
+      setGoalsSum(goalsBalanceData)
+      setGoalsBalance(
+        goalsBalanceData.toLocaleString('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+          minimumFractionDigits: 2
+        })
+      )
     } catch (err) {
       console.log(err)
     }
@@ -157,7 +173,7 @@ function DashBoard() {
       return total
     }, 0)
 
-    const balanceValue = receiptSum - costSum
+    const balanceValue = receiptSum - costSum - (goalsSum || 0)
 
     setReceipt(
       receiptSum.toLocaleString('pt-BR', {
@@ -180,7 +196,7 @@ function DashBoard() {
         minimumFractionDigits: 2
       })
     )
-  }, [rows])
+  }, [rows, goalsSum])
 
   return (
     <div className="relative mx-4 flex w-full flex-col gap-4 sm:mx-0 sm:gap-1">
@@ -198,7 +214,7 @@ function DashBoard() {
         balance={balance}
         cost={cost}
         balanceCard={'R$ 0,00'}
-        balanceGoals={'R$ 0,00'}
+        balanceGoals={goalsBalance}
       />
       {modalAddOpen && (
         <ModalComponent
