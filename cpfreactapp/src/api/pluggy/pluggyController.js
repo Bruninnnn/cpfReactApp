@@ -4,8 +4,8 @@ export async function requestAPIKey() {
     method: 'POST',
     headers: { accept: 'application/json', 'content-type': 'application/json' },
     body: JSON.stringify({
-      clientId: '8f63b6d2-7f03-4384-b27c-d8f52d1509c6',
-      clientSecret: '6f1cf3ff-7079-4f49-a2d2-0a3f4ab228d5'
+      clientId: 'yourClientId',
+      clientSecret: 'yourClientSecret'
     })
   }
 
